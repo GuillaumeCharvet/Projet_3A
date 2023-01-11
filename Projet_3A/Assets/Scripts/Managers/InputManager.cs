@@ -72,7 +72,7 @@ public class InputManager : Manager
                 mouseXInput = 0f;
                 mouseYInput = 0f;
 
-                isSpaceDown = true;
+                isSpaceDown = false;
 
                 break;
 
@@ -120,7 +120,7 @@ public class InputManager : Manager
 
             case ModeInput.Intern:
 
-                isSpaceDown = true;
+                isSpaceDown = false;
 
                 break;
 

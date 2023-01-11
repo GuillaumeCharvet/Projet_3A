@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class IdleBehaviour : StateMachineBehaviour
+public class RunBehaviour : StateMachineBehaviour
 {
     private InputManager inputManager;
     private MovementParameters playerParameters;
@@ -12,7 +11,7 @@ public class IdleBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         inputManager = ManagerManager.Instance.GetManager<InputManager>();
-        Debug.Log("lets go IDLE");
+        Debug.Log("lets go RUN");
         playerParameters = animator.GetComponent<MovementParameters>();
     }
 
@@ -24,7 +23,7 @@ public class IdleBehaviour : StateMachineBehaviour
 
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
         Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
-        
+
         //Debug.Log("transformDirection : " + transformDirection);
 
         Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
