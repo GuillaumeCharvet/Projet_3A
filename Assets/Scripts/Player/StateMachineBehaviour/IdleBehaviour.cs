@@ -7,13 +7,21 @@ public class IdleBehaviour : StateMachineBehaviour
 {
     private InputManager inputManager;
     private MovementParameters playerParameters;
+    private StateMachineParameters sMP;
+
+    private void Awake()
+    {
+        sMP = FindObjectOfType<StateMachineParameters>();
+    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         inputManager = ManagerManager.Instance.GetManager<InputManager>();
-        Debug.Log("lets go IDLE");
+        sMP.currentModeMovement = ModeMovement.Idle;
         playerParameters = animator.GetComponent<MovementParameters>();
+
+        playerParameters.currentClimbStamina = playerParameters.maxClimbStamina;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
