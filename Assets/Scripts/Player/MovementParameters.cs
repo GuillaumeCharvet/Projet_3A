@@ -23,6 +23,9 @@ public class MovementParameters : MonoBehaviour
     [SerializeField] public float jumpHorizontalBoost = 1f;
     [SerializeField] public float gravity = 1.2f;
 
+    [Header("FALL")]
+    [SerializeField] public float airControl = 0.2f;
+
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
     public float maxClimbStamina = 10f;

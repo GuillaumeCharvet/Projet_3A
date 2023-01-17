@@ -39,18 +39,24 @@ public class StateMachineParameters : MonoBehaviour
     void Update()
     {
         animator.SetBool("IsGrounded", CheckIsGrounded() || characterController.isGrounded);
-        animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
+        //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
         animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot());
-        animator.SetBool("CanClimbTop", CheckIfClimbingTopRay());
+        animator.SetBool("CanClimbTopRay", CheckIfClimbingTopRay());
+        animator.SetBool("CanClimbBotRay", CheckIfClimbingBotRay());
         animator.SetBool("CanClimbUp", CheckIfClimbingUp());
 
-        animator.SetFloat("ForwardSpeed", Vector3.Dot(characterController.velocity, transform.forward));
-        Debug.Log("ForwardSpeed : " + Vector3.Dot(characterController.velocity, transform.forward));
+        animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
+        //Debug.Log("ForwardSpeed : " + (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
 
         animator.SetFloat("VerticalInput", inputManager.VerticalInput);
         animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
+    }
+
+    void FixedUpdate()
+    {
+        animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
     }
 
     public bool CheckIsGrounded()
@@ -62,13 +68,20 @@ public class StateMachineParameters : MonoBehaviour
         {
             var angleSolToVertical = Vector3.Angle(Vector3.up, hit.normal);
             var distAB = r * (1f / Mathf.Cos(2f * Mathf.PI * angleSolToVertical / 360f) - 1f);
+
+            //Debug.Log("**************************************************************");
+            //Debug.Log("RAYCAST HIT, hit.distance = " + hit.distance + " distanceDefiningGroundedState + distAB + epsilonCheckGrounded : " + (distanceDefiningGroundedState + distAB + epsilonCheckGrounded));
+
             if (hit.distance < distanceDefiningGroundedState + distAB + epsilonCheckGrounded)
             {
-                //Debug.Log("**************************************************************");
-                //Debug.Log("RAYCAST HIT, hit.distance = " + hit.distance + " distanceDefiningGroundedState + distAB + epsilonCheckGrounded : " + (distanceDefiningGroundedState + distAB + epsilonCheckGrounded));
                 return true;
             }
             //Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.yellow);
+        }
+        else
+        {
+            //Debug.Log("**************************************************************");
+            //Debug.Log("RAYCAST DOESNT HIT");
         }
         return false;
     }
@@ -88,7 +101,7 @@ public class StateMachineParameters : MonoBehaviour
         {
 
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
+            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
@@ -100,7 +113,7 @@ public class StateMachineParameters : MonoBehaviour
                     if (normalHit != currentNormalToClimb)
                     {
                         currentNormalToClimb = normalHit;
-                        Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
+                        //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
                     }
@@ -114,7 +127,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
         }
 
         if (!middleOfClimbing)
@@ -124,7 +137,7 @@ public class StateMachineParameters : MonoBehaviour
             if (Physics.Raycast(transform.position + 0f * transform.up, transform.forward, out hitMid, 5f, layerMask))
             {
                 //Debug.Log("MID RAY HIT");
-                Debug.DrawRay(transform.position + 0f * transform.up, transform.forward * hitMid.distance, Color.red);
+                //Debug.DrawRay(transform.position + 0f * transform.up, transform.forward * hitMid.distance, Color.red);
 
                 if (hitMid.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
@@ -152,7 +165,7 @@ public class StateMachineParameters : MonoBehaviour
             }
             else
             {
-                Debug.DrawRay(transform.position + 0f * transform.up, transform.forward * 5f, Color.yellow);
+                //Debug.DrawRay(transform.position + 0f * transform.up, transform.forward * 5f, Color.yellow);
             }
 
             RaycastHit hitBot;
@@ -160,7 +173,7 @@ public class StateMachineParameters : MonoBehaviour
             if (Physics.Raycast(transform.position + -2.5f * transform.up, transform.forward, out hitBot, 5f, layerMask))
             {
                 //Debug.Log("BOT RAY HIT");
-                Debug.DrawRay(transform.position + -2.5f * transform.up, transform.forward * hitBot.distance, Color.red);
+                //Debug.DrawRay(transform.position + -2.5f * transform.up, transform.forward * hitBot.distance, Color.red);
 
                 if (hitBot.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
@@ -206,7 +219,7 @@ public class StateMachineParameters : MonoBehaviour
         if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMask))
         {
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
+            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
@@ -232,7 +245,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -243,7 +256,7 @@ public class StateMachineParameters : MonoBehaviour
         if (Physics.Raycast(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMask))
         {
             //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * hit.distance, Color.green, 0f);
-            Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
+            //Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
             //if (hit.distance > 2f * grabToClimbDistance) return true;
             if (hit.distance <= grabToHangDistance)
             {
@@ -256,7 +269,47 @@ public class StateMachineParameters : MonoBehaviour
         else
         {
             //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * 10f, Color.green, 0f);
-            Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * 10f, Color.green, 0f);
+            //Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * 10f, Color.green, 0f);
+        }
+        return false;
+    }
+    public bool CheckIfClimbingBotRay()
+    {
+        float correctiveGrabDistance = 0f;
+        if (currentModeMovement == ModeMovement.Climb) correctiveGrabDistance = 1f;
+
+        RaycastHit hitBot;
+
+        if (Physics.Raycast(transform.position + -0.85f * transform.up, transform.forward, out hitBot, 5f, layerMask))
+        {
+            //Debug.Log("BOT RAY HIT");
+            //Debug.DrawRay(transform.position + -0.85f * transform.up, transform.forward * hitBot.distance, Color.red);
+
+            if (hitBot.distance <= grabToClimbDistance + correctiveGrabDistance)
+            {
+                //Debug.Log("BOT RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitBot.distance));
+                var normalHit = hitBot.normal;
+                if (Vector3.Angle(normalHit, Vector3.up) > 50f)
+                {
+                    distanceToGrabbedWall = hitBot.distance;
+                    if (normalHit != currentNormalToClimb)
+                    {
+                        currentNormalToClimb = normalHit;
+                        //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
+                        //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
+                        //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
+                    }
+                    return true;
+                }
+            }
+            else
+            {
+                //Debug.Log("BOT RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitBot.distance));
+            }
+        }
+        else
+        {
+            //Debug.DrawRay(transform.position + -2.5f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }

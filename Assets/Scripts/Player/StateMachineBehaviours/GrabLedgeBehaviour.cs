@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class RunBehaviour : StateMachineBehaviour
+public class GrabLedgeBehaviour : StateMachineBehaviour
 {
     private InputManager inputManager;
     private MovementParameters playerParameters;
@@ -16,44 +17,31 @@ public class RunBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        sMP.currentModeMovement = ModeMovement.Run;
+        sMP.currentModeMovement = ModeMovement.GrabLedge;
         inputManager = ManagerManager.Instance.GetManager<InputManager>();
         playerParameters = animator.GetComponent<MovementParameters>();
-
-        playerParameters.currentClimbStamina = playerParameters.maxClimbStamina;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        float horizontal = inputManager.HorizontalInput;
-        float vertical = inputManager.VerticalInput;
-
-        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
-        Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
-
-        //Debug.Log("transformDirection : " + transformDirection);
-
-        Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
-        playerParameters.moveDirection = new Vector3(flatMovement.x, playerParameters.moveDirection.y, flatMovement.z);
-
-        if (animator.GetBool("PlayerJumped"))
-            playerParameters.moveDirection.y = playerParameters.jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
-            playerParameters.moveDirection.y = 0f;
-        else
-            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
-
-        if (playerParameters.isInWaterNextFixedUpdate)
+        if (sMP.currentModeMovement == ModeMovement.GrabLedge)
         {
-            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
-            playerParameters.moveDirection.y *= 0.99f;
+            float horizontal = inputManager.HorizontalInput;
+            float vertical = inputManager.VerticalInput;
+
+            Vector3 inputDirection = new Vector3(horizontal, vertical, 0f);
+            Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection).normalized;
+
+            Vector3 flatMovement = playerParameters.climbSpeed * Time.deltaTime * transformDirection;
+
+            //transform.rotation = Quaternion.FromToRotation(transform.TransformDirection(Vector3.forward), -modeMovementManagement.currentNormalToClimb) * transform.rotation;
+
+            playerParameters.moveDirection = new Vector3(0f, flatMovement.y, 0f);
+
+            playerParameters.currentClimbStamina -= playerParameters.moveDirection.magnitude;
+            playerParameters.characterController.Move(playerParameters.moveDirection);
         }
-        else playerParameters.moveDirection.y *= 0.999f;
-
-        //Debug.Log("playerParameters.moveDirection : " + playerParameters.moveDirection);
-
-        playerParameters.characterController.Move(playerParameters.moveDirection);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
