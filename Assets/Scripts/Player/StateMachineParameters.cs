@@ -8,6 +8,7 @@ public enum ModeMovement { Idle, Walk, Run, Jump, Swim, Climb, Slide, Glide, Gra
 public class StateMachineParameters : MonoBehaviour
 {
     private Animator animator;
+    private MovementParameters playerParameters;
     private CharacterController characterController;
 
     public ModeMovement currentModeMovement;
@@ -21,10 +22,9 @@ public class StateMachineParameters : MonoBehaviour
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
     private float grabToClimbDistance = 2f;
-    private float grabToHangDistance = 0.7f;
+    private float grabToHangDistance = 0.9f;
     public float distanceToGrabbedWall = 0f;
-    public float distanceToGrabbedWallLimit = 0.2f;
-    public Vector3 currentNormalToClimb;
+    public float distanceToGrabbedWallLimit = 0.5f;
     public bool middleOfClimbing = false;
 
     void Start()
@@ -32,6 +32,7 @@ public class StateMachineParameters : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         inputManager = ManagerManager.Instance.GetManager<InputManager>();
+        playerParameters = GetComponent<MovementParameters>();
 
         radius = GetComponent<CharacterController>().radius;
     }
@@ -42,9 +43,10 @@ public class StateMachineParameters : MonoBehaviour
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
         animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot());
-        animator.SetBool("CanClimbTopRay", CheckIfClimbingTopRay());
         animator.SetBool("CanClimbBotRay", CheckIfClimbingBotRay());
+        animator.SetBool("CanClimbTopRay", CheckIfClimbingTopRay());
         animator.SetBool("CanClimbUp", CheckIfClimbingUp());
+        animator.SetBool("StopHanging", CheckIfStopHanging());
 
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
         //Debug.Log("ForwardSpeed : " + (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);
@@ -110,9 +112,9 @@ public class StateMachineParameters : MonoBehaviour
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
-                    if (normalHit != currentNormalToClimb)
+                    if (normalHit != playerParameters.currentNormalToClimb)
                     {
-                        currentNormalToClimb = normalHit;
+                        playerParameters.currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -148,9 +150,9 @@ public class StateMachineParameters : MonoBehaviour
                         distanceToGrabbedWall = hitMid.distance;
                         //Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
 
-                        if (normalHit != currentNormalToClimb)
+                        if (normalHit != playerParameters.currentNormalToClimb)
                         {
-                            currentNormalToClimb = normalHit;
+                            playerParameters.currentNormalToClimb = normalHit;
                             //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                             //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                             //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -170,10 +172,10 @@ public class StateMachineParameters : MonoBehaviour
 
             RaycastHit hitBot;
 
-            if (Physics.Raycast(transform.position + -2.5f * transform.up, transform.forward, out hitBot, 5f, layerMask))
+            if (Physics.Raycast(transform.position + -0.80f * transform.up, transform.forward, out hitBot, 5f, layerMask))
             {
                 //Debug.Log("BOT RAY HIT");
-                //Debug.DrawRay(transform.position + -2.5f * transform.up, transform.forward * hitBot.distance, Color.red);
+                //Debug.DrawRay(transform.position + -0.80f * transform.up, transform.forward * hitBot.distance, Color.red);
 
                 if (hitBot.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
@@ -182,9 +184,9 @@ public class StateMachineParameters : MonoBehaviour
                     if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                     {
                         distanceToGrabbedWall = hitBot.distance;
-                        if (normalHit != currentNormalToClimb)
+                        if (normalHit != playerParameters.currentNormalToClimb)
                         {
-                            currentNormalToClimb = normalHit;
+                            playerParameters.currentNormalToClimb = normalHit;
                             //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                             //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                             //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -228,9 +230,9 @@ public class StateMachineParameters : MonoBehaviour
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
-                    if (normalHit != currentNormalToClimb)
+                    if (normalHit != playerParameters.currentNormalToClimb)
                     {
-                        currentNormalToClimb = normalHit;
+                        playerParameters.currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -253,7 +255,7 @@ public class StateMachineParameters : MonoBehaviour
     {
         RaycastHit hit;
         //if (Physics.Raycast(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
-        if (Physics.Raycast(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMask))
         {
             //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * hit.distance, Color.green, 0f);
             //Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
@@ -292,9 +294,9 @@ public class StateMachineParameters : MonoBehaviour
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitBot.distance;
-                    if (normalHit != currentNormalToClimb)
+                    if (normalHit != playerParameters.currentNormalToClimb)
                     {
-                        currentNormalToClimb = normalHit;
+                        playerParameters.currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -312,5 +314,33 @@ public class StateMachineParameters : MonoBehaviour
             //Debug.DrawRay(transform.position + -2.5f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
+    }
+    public bool CheckIfStopHanging()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + 1.0f * transform.up, Vector3.up, out hit, Mathf.Infinity, layerMask))
+        {
+            //Debug.DrawRay(transform.position + 1.0f * transform.up, Vector3.up * hit.distance, Color.green, 0f);
+            if (hit.distance <= 2f * grabToHangDistance)
+            {
+                return false;
+            }
+        }
+        //else Debug.DrawRay(transform.position + 1.0f * transform.up, Vector3.up * 10f, Color.green, 0f);
+
+        if (Physics.Raycast(transform.position + 1.0f * transform.up - 0.6f * transform.forward, Vector3.up, out hit, Mathf.Infinity, layerMask))
+        {
+            //Debug.DrawRay(transform.position + 1.0f * transform.up - 0.6f * transform.forward, Vector3.up * hit.distance, Color.green, 0f);
+            if (hit.distance <= 2f * grabToHangDistance)
+            {
+                return false;
+            }
+            else
+            {
+                //Debug.DrawRay(transform.position + 1.0f * transform.up - 0.6f * transform.forward, Vector3.up * 10f, Color.green, 0f);
+                return true;
+            }
+        }
+        return true;
     }
 }

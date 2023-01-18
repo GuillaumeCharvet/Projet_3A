@@ -36,6 +36,7 @@ public class ClimbBehaviour : StateMachineBehaviour
 
             playerParameters.currentClimbStamina -= flatMovement.magnitude;
 
+            Debug.Log("distanceToWall = " + sMP.distanceToGrabbedWall);
             if (sMP.distanceToGrabbedWall > sMP.distanceToGrabbedWallLimit)
             {
                 inputDirection += Vector3.forward;
@@ -46,7 +47,9 @@ public class ClimbBehaviour : StateMachineBehaviour
 
             Debug.DrawRay(animator.transform.position, transformDirection);
 
-            //transform.rotation = Quaternion.FromToRotation(transform.TransformDirection(Vector3.forward), -modeMovementManagement.currentNormalToClimb) * transform.rotation;
+            animator.transform.rotation = Quaternion.FromToRotation(animator.transform.TransformDirection(Vector3.forward), -playerParameters.currentNormalToClimb) * animator.transform.rotation;
+
+            Debug.Log("flatMovement : " + flatMovement);
 
             playerParameters.moveDirection = flatMovement; //new Vector3(flatMovement.x, flatMovement.y, flatMovement.z);
 

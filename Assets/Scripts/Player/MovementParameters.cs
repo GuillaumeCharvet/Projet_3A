@@ -30,6 +30,7 @@ public class MovementParameters : MonoBehaviour
     [SerializeField] public float climbSpeed = 2.5f;
     public float maxClimbStamina = 10f;
     public float currentClimbStamina = 0f;
+    public Vector3 currentNormalToClimb;
 
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
@@ -67,4 +68,10 @@ public class MovementParameters : MonoBehaviour
     [SerializeField] public float frictionParameter = 0.01f;
     public Vector3 liftForce;
     [SerializeField, Range(0f, 108f)] public float liftParameter = 1f;
+
+
+    public void Move(float speed)
+    {
+
+    }
 }

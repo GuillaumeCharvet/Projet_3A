@@ -16,6 +16,7 @@ public class WalkBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.LogWarning("WalkMode");
         sMP.currentModeMovement = ModeMovement.Walk;
         inputManager = ManagerManager.Instance.GetManager<InputManager>();
         playerParameters = animator.GetComponent<MovementParameters>();
