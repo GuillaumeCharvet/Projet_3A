@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public enum ModeMovement { Idle, Walk, Run, Jump, Swim, Climb, Slide, Glide, GrabLedge, Hang, Fall };
@@ -342,5 +343,47 @@ public class StateMachineParameters : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void Move(float speed)
+    {
+        float horizontal = inputManager.HorizontalInput;
+        float vertical = inputManager.VerticalInput;
+
+        /*
+        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
+        Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
+
+        //Debug.Log("transformDirection : " + transformDirection);
+
+        Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
+        playerParameters.moveDirection = new Vector3(flatMovement.x, playerParameters.moveDirection.y, flatMovement.z);
+
+        if (animator.GetBool("PlayerJumped"))
+            playerParameters.moveDirection.y = playerParameters.jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            playerParameters.moveDirection.y = 0f;
+        else
+            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
+
+        if (playerParameters.isInWaterNextFixedUpdate)
+        {
+            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
+            playerParameters.moveDirection.y *= 0.99f;
+        }
+        else playerParameters.moveDirection.y *= 0.999f;
+
+        //Debug.Log("playerParameters.moveDirection : " + playerParameters.moveDirection);
+
+        playerParameters.characterController.Move(playerParameters.moveDirection);
+
+        // Horizontal player rotation
+        animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
+        */
+    }
+
+    public void UpdateIdleTransitionsParameters(float maxSpeedTransition)
+    {
+        animator.SetBool("speedThresholdReached_1", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
     }
 }
