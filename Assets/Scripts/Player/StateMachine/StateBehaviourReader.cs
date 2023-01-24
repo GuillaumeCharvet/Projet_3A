@@ -19,9 +19,9 @@ public class StateBehaviourReader : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        currentState?.Update();   
+        currentState?.Update();
     }
 
     public void ChangeState(StateBehaviourParent newState)

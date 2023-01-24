@@ -11,6 +11,7 @@ public class StateMachineParameters : MonoBehaviour
     private Animator animator;
     private MovementParameters playerParameters;
     private CharacterController characterController;
+    private InputManager inputManager;
 
     public ModeMovement currentModeMovement;
 
@@ -19,7 +20,6 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     public float distanceDefiningGroundedState = 0f;//3f;
     public float epsilonCheckGrounded = 0.001f;
-    private InputManager inputManager;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
     private float grabToClimbDistance = 2f;
@@ -345,10 +345,23 @@ public class StateMachineParameters : MonoBehaviour
         return true;
     }
 
-    public void Move(float speed)
+    public void Move(float maxSpeed, float maxAcceleration)
     {
-        float horizontal = inputManager.HorizontalInput;
-        float vertical = inputManager.VerticalInput;
+        Vector3 velocity = characterController.velocity;
+
+        Vector2 playerInput;
+        playerInput.x = inputManager.HorizontalInput;
+        playerInput.y = inputManager.VerticalInput;
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+        Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+        Vector3 displacement = velocity * Time.deltaTime;
+
+        characterController.Move(transform.TransformDirection(displacement));
+
+        //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
 
         /*
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
@@ -382,8 +395,27 @@ public class StateMachineParameters : MonoBehaviour
         */
     }
 
-    public void UpdateIdleTransitionsParameters(float maxSpeedTransition)
+    public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
-        animator.SetBool("speedThresholdReached_1", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
+        Vector3 velocity = characterController.velocity;
+
+        Vector2 playerInput;
+        playerInput.x = inputManager.HorizontalInput;
+        playerInput.y = inputManager.VerticalInput;
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+        Vector3 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
+        float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+        Vector3 displacement = velocity * Time.deltaTime;
+
+        animator.transform.rotation = Quaternion.FromToRotation(animator.transform.TransformDirection(Vector3.forward), -playerParameters.currentNormalToClimb) * animator.transform.rotation;
+
+        characterController.Move(transform.TransformDirection(displacement));
+    }
+
+    public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
+    {
+        animator.SetBool("" + parameterName, (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
     }
 }

@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7344a34a588d8ec47a6ac7514fc5e6e5, type: 3}
   m_Name: Idle_Walk
   m_EditorClassIdentifier: 
-  maxIdleSpeed: 1
-  maxIdleAcceleration: 20
+  maxAcceleration: 200
+  hasTransitionDown: 0
+  parameterNameDown: 
+  speedDown: 0
+  hasTransitionUp: 1
+  parameterNameUp: speedThresholdReached_1
+  speedUp: 1

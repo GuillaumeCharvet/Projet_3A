@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7344a34a588d8ec47a6ac7514fc5e6e5, type: 3}
   m_Name: NormalWalk
   m_EditorClassIdentifier: 
-  maxIdleSpeed: 4
-  maxIdleAcceleration: 15
+  maxAcceleration: 200
+  hasTransitionDown: 1
+  parameterNameDown: speedThresholdReached_1
+  speedDown: 1
+  hasTransitionUp: 1
+  parameterNameUp: speedThresholdReached_2
+  speedUp: 3
