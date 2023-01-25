@@ -13,6 +13,9 @@ public class StateMachineParameters : MonoBehaviour
     private CharacterController characterController;
     private InputManager inputManager;
 
+    [SerializeField] private Transform camTrsf;
+    private Vector3 displacement = Vector3.zero;
+
     public ModeMovement currentModeMovement;
 
     // PARAMETERS FOR CHECKISGROUNDED
@@ -40,6 +43,7 @@ public class StateMachineParameters : MonoBehaviour
 
     void Update()
     {
+        /*
         animator.SetBool("IsGrounded", CheckIsGrounded() || characterController.isGrounded);
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
@@ -55,6 +59,7 @@ public class StateMachineParameters : MonoBehaviour
 
         animator.SetFloat("VerticalInput", inputManager.VerticalInput);
         animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
+        */
     }
 
     void FixedUpdate()
@@ -345,6 +350,8 @@ public class StateMachineParameters : MonoBehaviour
         return true;
     }
 
+    private float turnSmoothTime = 0.1f;
+    private float turnSmoothVelocity = 0f;
     public void Move(float maxSpeed, float maxAcceleration)
     {
         Vector3 velocity = characterController.velocity;
@@ -357,9 +364,20 @@ public class StateMachineParameters : MonoBehaviour
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-        Vector3 displacement = velocity * Time.deltaTime;
 
-        characterController.Move(transform.TransformDirection(displacement));
+        if (playerInput.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(velocity.x, velocity.z) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            displacement = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            Debug.Log("displacement : " + playerInput);
+            S_Debugger.UpdatableLog("displacement", displacement, Color.magenta);
+
+            //characterController.Move(transform.TransformDirection(displacement));
+            characterController.Move(displacement * velocity.magnitude * Time.deltaTime);
+        }
 
         //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
 
