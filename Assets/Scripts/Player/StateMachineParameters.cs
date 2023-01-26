@@ -31,6 +31,11 @@ public class StateMachineParameters : MonoBehaviour
     public float distanceToGrabbedWallLimit = 0.5f;
     public bool middleOfClimbing = false;
 
+    [Header("RUN/JUMP")]
+
+    [SerializeField] private float maxSpeed = 10f;
+    public float MaxSpeed { get => maxSpeed; }
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -352,32 +357,54 @@ public class StateMachineParameters : MonoBehaviour
 
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity = 0f;
+
+
     public void Move(float maxSpeed, float maxAcceleration)
     {
         Vector3 velocity = characterController.velocity;
 
+        // Check Input to determine direction
         Vector2 playerInput;
         playerInput.x = inputManager.HorizontalInput;
         playerInput.y = inputManager.VerticalInput;
+
+        // Clamp it to disallow strafe walking
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-        Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+
+        // Add camera angle to the input vector so that the player moves where the camera looks
+        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        // Modify the direction the player model is looking
+        if (playerInput.magnitude >= 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        Vector3 targetDirection = playerInput.magnitude * transform.forward;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
-        if (playerInput.magnitude >= 0.1f)
+        // Apply gravity if not grounded
+        if (playerParameters.characterController.isGrounded)
+            playerParameters.moveDirection.y = 0f;
+        else
+            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
+
+        // Apply appropriate friction force depending if in water or not
+        if (playerParameters.isInWaterNextFixedUpdate)
         {
-            float targetAngle = Mathf.Atan2(velocity.x, velocity.z) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            displacement = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            Debug.Log("displacement : " + playerInput);
-            S_Debugger.UpdatableLog("displacement", displacement, Color.magenta);
-
-            //characterController.Move(transform.TransformDirection(displacement));
-            characterController.Move(displacement * velocity.magnitude * Time.deltaTime);
+            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
+            playerParameters.moveDirection.y *= 0.99f;
         }
+        else playerParameters.moveDirection.y *= 0.999f;
+
+        // Move the player through its character controller
+        characterController.Move(velocity * Time.deltaTime);
+
 
         //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
 

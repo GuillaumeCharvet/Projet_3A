@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7344a34a588d8ec47a6ac7514fc5e6e5, type: 3}
-  m_Name: NormalWalk
+  m_Script: {fileID: 11500000, guid: b1029c097c6defa4cb6653a41c0d15ed, type: 3}
+  m_Name: State_Climb_1
   m_EditorClassIdentifier: 
-  maxAcceleration: 200
-  hasTransitionDown: 1
-  parameterNameDown: speedThresholdReached_1
-  speedDown: 1
-  hasTransitionUp: 1
-  parameterNameUp: speedThresholdReached_2
-  speedUp: 3
+  maxclimbSpeed: 10
+  maxClimbAcceleration: 100

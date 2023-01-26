@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "states/walk", fileName = "new_Walk")]
-public class StateWalk : StateBehaviourParent
+[CreateAssetMenu(menuName = "states/idle", fileName = "new_Idle")]
+public class StateIdle : StateBehaviourParent
 {
 
     [Header("RUN/JUMP")]
@@ -11,7 +11,6 @@ public class StateWalk : StateBehaviourParent
     [SerializeField] public float maxAcceleration = 50f;
 
     [SerializeField] public float speedUp = 0f;
-    [SerializeField] public float speedDown = 0f;
 
     /*
     [SerializeField] public float jumpVerticalBoost = 0.4f;
@@ -27,9 +26,8 @@ public class StateWalk : StateBehaviourParent
     public override void Update()
     {
         reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration);
-
-        reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedDown);
-        reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedUp);
+        
+        reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedUp);
 
         base.Update();
     }
