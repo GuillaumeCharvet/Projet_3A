@@ -28,12 +28,14 @@ public class StateRun : StateBehaviourParent
         reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration);
 
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedDown);
+        reader.smp.UpdateCanClimbTopToBot();
 
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetStamina();
         base.OnEnterState();
     }
 }

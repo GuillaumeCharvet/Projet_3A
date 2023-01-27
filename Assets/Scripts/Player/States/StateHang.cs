@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "states/climb", fileName = "new Climb")]
-public class StateClimb : StateBehaviourParent
+[CreateAssetMenu(menuName = "states/hang", fileName = "new Hang")]
+public class StateHang : StateBehaviourParent
 {
 
     [Header("RUN/JUMP")]
@@ -18,9 +18,9 @@ public class StateClimb : StateBehaviourParent
 
     public override void Update()
     {
-        reader.smp.Climb(maxclimbSpeed, maxClimbAcceleration);
-        reader.smp.UpdateCanClimbTopRay();
-        reader.smp.UpdateCanClimbUp();
+        reader.smp.ClimbHanging(maxclimbSpeed, maxClimbAcceleration);
+        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateStopHanging();
 
         base.Update();
     }

@@ -27,12 +27,6 @@ public class MovementParameters : MonoBehaviour
     [SerializeField] public float airControl = 0.2f;
     [SerializeField] public float gravity = 1.2f;
 
-    [Header("CLIMB")]
-    [SerializeField] public float climbSpeed = 2.5f;
-    public float maxClimbStamina = 10f;
-    public float currentClimbStamina = 0f;
-    public Vector3 currentNormalToClimb;
-
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
     public BuoyancyEffect lastWaterVisited;
