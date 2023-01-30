@@ -34,6 +34,7 @@ public class StateIdle : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetStamina();
         base.OnEnterState();
     }
 }

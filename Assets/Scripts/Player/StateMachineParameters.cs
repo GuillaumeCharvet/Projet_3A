@@ -36,6 +36,12 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
+    [Header("CLIMB")]
+    [SerializeField] public float climbSpeed = 2.5f;
+    public float maxClimbStamina = 10f;
+    public float currentClimbStamina = 0f;
+    public Vector3 currentNormalToClimb;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -48,22 +54,17 @@ public class StateMachineParameters : MonoBehaviour
 
     void Update()
     {
-        /*
-        animator.SetBool("IsGrounded", CheckIsGrounded() || characterController.isGrounded);
-        //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
+        UpdateIsGrounded();
 
-        animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot());
-        animator.SetBool("CanClimbBotRay", CheckIfClimbingBotRay());
-        animator.SetBool("CanClimbTopRay", CheckIfClimbingTopRay());
-        animator.SetBool("CanClimbUp", CheckIfClimbingUp());
-        animator.SetBool("StopHanging", CheckIfStopHanging());
+        UpdateInputValue();
+
+        /*
+        //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
         //Debug.Log("ForwardSpeed : " + (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
 
-        animator.SetFloat("VerticalInput", inputManager.VerticalInput);
-        animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
         */
     }
 
@@ -123,9 +124,9 @@ public class StateMachineParameters : MonoBehaviour
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
-                    if (normalHit != playerParameters.currentNormalToClimb)
+                    if (normalHit != currentNormalToClimb)
                     {
-                        playerParameters.currentNormalToClimb = normalHit;
+                        currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -161,9 +162,9 @@ public class StateMachineParameters : MonoBehaviour
                         distanceToGrabbedWall = hitMid.distance;
                         //Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
 
-                        if (normalHit != playerParameters.currentNormalToClimb)
+                        if (normalHit != currentNormalToClimb)
                         {
-                            playerParameters.currentNormalToClimb = normalHit;
+                            currentNormalToClimb = normalHit;
                             //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                             //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                             //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -195,9 +196,9 @@ public class StateMachineParameters : MonoBehaviour
                     if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                     {
                         distanceToGrabbedWall = hitBot.distance;
-                        if (normalHit != playerParameters.currentNormalToClimb)
+                        if (normalHit != currentNormalToClimb)
                         {
-                            playerParameters.currentNormalToClimb = normalHit;
+                            currentNormalToClimb = normalHit;
                             //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                             //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                             //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -241,9 +242,9 @@ public class StateMachineParameters : MonoBehaviour
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
-                    if (normalHit != playerParameters.currentNormalToClimb)
+                    if (normalHit != currentNormalToClimb)
                     {
-                        playerParameters.currentNormalToClimb = normalHit;
+                        currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -268,15 +269,18 @@ public class StateMachineParameters : MonoBehaviour
         //if (Physics.Raycast(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
         if (Physics.Raycast(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMask))
         {
+            Debug.Log($"hit distance = {hit.distance}");
             //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * hit.distance, Color.green, 0f);
             //Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
             //if (hit.distance > 2f * grabToClimbDistance) return true;
             if (hit.distance <= grabToHangDistance)
             {
+                return true;
+                /*
                 if (Physics.Raycast(transform.position + 1.0f * transform.up + 0.25f * Vector3.forward, Vector3.up, out hit, Mathf.Infinity, layerMask))
                 {
                     return true;
-                }
+                }*/
             }
         }
         else
@@ -305,9 +309,9 @@ public class StateMachineParameters : MonoBehaviour
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitBot.distance;
-                    if (normalHit != playerParameters.currentNormalToClimb)
+                    if (normalHit != currentNormalToClimb)
                     {
-                        playerParameters.currentNormalToClimb = normalHit;
+                        currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
                         //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
                         //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
@@ -354,10 +358,13 @@ public class StateMachineParameters : MonoBehaviour
         }
         return true;
     }
+    public void ResetStamina()
+    {
+        currentClimbStamina = maxClimbStamina;
+    }
 
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity = 0f;
-
 
     public void Move(float maxSpeed, float maxAcceleration)
     {
@@ -390,21 +397,20 @@ public class StateMachineParameters : MonoBehaviour
 
         // Apply gravity if not grounded
         if (playerParameters.characterController.isGrounded)
-            playerParameters.moveDirection.y = 0f;
+            velocity.y = 0f;
         else
-            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
+            velocity.y -= playerParameters.gravity;
 
         // Apply appropriate friction force depending if in water or not
         if (playerParameters.isInWaterNextFixedUpdate)
         {
-            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
-            playerParameters.moveDirection.y *= 0.99f;
+            velocity.y += playerParameters.forceOfWater;
+            velocity.y *= 0.99f;
         }
-        else playerParameters.moveDirection.y *= 0.999f;
+        else velocity.y *= 0.999f;
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
-
 
         //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
 
@@ -442,25 +448,81 @@ public class StateMachineParameters : MonoBehaviour
 
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
-        Vector3 velocity = characterController.velocity;
+        if (currentClimbStamina > 0f)
+        {
+            Vector3 velocity = characterController.velocity;
 
-        Vector2 playerInput;
-        playerInput.x = inputManager.HorizontalInput;
-        playerInput.y = inputManager.VerticalInput;
-        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-        Vector3 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
-        float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
-        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-        velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
-        Vector3 displacement = velocity * Time.deltaTime;
+            Vector2 playerInput;
+            playerInput.x = inputManager.HorizontalInput;
+            playerInput.y = inputManager.VerticalInput;
+            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+            Vector3 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
+            float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
+            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+            velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+            Vector3 displacement = velocity * Time.deltaTime;
 
-        animator.transform.rotation = Quaternion.FromToRotation(animator.transform.TransformDirection(Vector3.forward), -playerParameters.currentNormalToClimb) * animator.transform.rotation;
+            animator.transform.rotation = Quaternion.FromToRotation(animator.transform.TransformDirection(Vector3.forward), -currentNormalToClimb) * animator.transform.rotation;
 
-        characterController.Move(transform.TransformDirection(displacement));
+            currentClimbStamina -= displacement.magnitude;
+            characterController.Move(transform.TransformDirection(displacement));
+        }
     }
 
+    public void ClimbHanging(float maxClimbSpeed, float maxClimbAcceleration)
+    {
+        if (currentClimbStamina > 0f)
+        {
+            Vector3 velocity = characterController.velocity;
+
+            Vector2 playerInput;
+            playerInput.x = inputManager.HorizontalInput;
+            playerInput.y = inputManager.VerticalInput;
+            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+            Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, -playerInput.y) * maxClimbSpeed;
+            float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
+            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+            Vector3 displacement = velocity * Time.deltaTime;
+
+            currentClimbStamina -= displacement.magnitude;
+            playerParameters.characterController.Move(displacement);
+        }
+    }
+
+    #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
         animator.SetBool("" + parameterName, (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
     }
+    public void UpdateIsGrounded()
+    {
+        animator.SetBool("IsGrounded", CheckIsGrounded() || characterController.isGrounded);
+    }
+    public void UpdateCanClimbTopToBot()
+    {
+        animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot());
+    }
+    public void UpdateCanClimbTopRay()
+    {
+        animator.SetBool("CanClimbTopRay", CheckIfClimbingTopRay());
+    }
+    public void UpdateCanClimbBotRay()
+    {
+        animator.SetBool("CanClimbBotRay", CheckIfClimbingBotRay());
+    }
+    public void UpdateCanClimbUp()
+    {
+        animator.SetBool("CanClimbUp", CheckIfClimbingUp());
+    }
+    public void UpdateStopHanging()
+    {
+        animator.SetBool("StopHanging", CheckIfStopHanging());
+    }
+    public void UpdateInputValue()
+    {
+        animator.SetFloat("VerticalInput", inputManager.VerticalInput);
+        animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
+    }
+    #endregion
 }

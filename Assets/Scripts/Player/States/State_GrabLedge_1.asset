@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca94319cf800104781a5e98449e6cad, type: 3}
-  m_Name: State_Run_1
+  m_Script: {fileID: 11500000, guid: e5d58ea6efc523740806bccbad7667f7, type: 3}
+  m_Name: State_GrabLedge_1
   m_EditorClassIdentifier: 
-  maxAcceleration: 50
-  speedDown: 1.8
+  maxclimbSpeed: 10
+  maxClimbAcceleration: 80

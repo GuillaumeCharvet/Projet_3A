@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "states/climb", fileName = "new Climb")]
-public class StateClimb : StateBehaviourParent
+[CreateAssetMenu(menuName = "states/grab ledge", fileName = "new Grab Ledge")]
+public class StateGrabLedge : StateBehaviourParent
 {
 
     [Header("RUN/JUMP")]
@@ -20,7 +20,8 @@ public class StateClimb : StateBehaviourParent
     {
         reader.smp.Climb(maxclimbSpeed, maxClimbAcceleration);
         reader.smp.UpdateCanClimbTopRay();
-        reader.smp.UpdateCanClimbUp();
+        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbBotRay();
 
         base.Update();
     }
