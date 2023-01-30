@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class MovementParameters : MonoBehaviour
 {
@@ -17,16 +18,14 @@ public class MovementParameters : MonoBehaviour
     [SerializeField, Range(0f, 10f)]
     public float sensitivityV = 5f;
 
-    [Header("RUN/JUMP")]
     [SerializeField] public float moveSpeed = 10f;
+    
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
-    [SerializeField] public float gravity = 1.2f;
 
-    [Header("CLIMB")]
-    [SerializeField] public float climbSpeed = 2.5f;
-    public float maxClimbStamina = 10f;
-    public float currentClimbStamina = 0f;
+    [Header("FALL")]
+    [SerializeField] public float airControl = 0.2f;
+    [SerializeField] public float gravity = 1.2f;
 
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
@@ -64,4 +63,6 @@ public class MovementParameters : MonoBehaviour
     [SerializeField] public float frictionParameter = 0.01f;
     public Vector3 liftForce;
     [SerializeField, Range(0f, 108f)] public float liftParameter = 1f;
+
+
 }
