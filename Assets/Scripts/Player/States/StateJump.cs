@@ -25,7 +25,7 @@ public class StateJump : StateBehaviourParent
 
     public override void Update()
     {
-        reader.smp.Move(reader.smp.MaxSpeed * fallControl, maxAcceleration);
+        reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, false);
 
         reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateStartGlide();
