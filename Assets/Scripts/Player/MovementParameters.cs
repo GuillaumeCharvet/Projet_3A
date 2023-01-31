@@ -19,9 +19,6 @@ public class MovementParameters : MonoBehaviour
     public float sensitivityV = 5f;
 
     [SerializeField] public float moveSpeed = 10f;
-    
-    [SerializeField] public float jumpVerticalBoost = 0.4f;
-    [SerializeField] public float jumpHorizontalBoost = 1f;
 
     [Header("FALL")]
     [SerializeField] public float airControl = 0.2f;
