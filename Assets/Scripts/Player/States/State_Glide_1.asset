@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 148151ee87812334da8752555cf4ebdc, type: 3}
-  m_Name: State_Hang_1
+  m_Script: {fileID: 11500000, guid: 7eed3a803b3901745a14184f9b280e55, type: 3}
+  m_Name: State_Glide_1
   m_EditorClassIdentifier: 
-  maxclimbSpeed: 2
-  maxClimbAcceleration: 80
+  maxAcceleration: 50
+  fallControl: 0

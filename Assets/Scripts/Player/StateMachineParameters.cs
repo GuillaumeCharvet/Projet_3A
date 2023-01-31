@@ -26,7 +26,7 @@ public class StateMachineParameters : MonoBehaviour
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
     private float grabToClimbDistance = 2f;
-    private float grabToHangDistance = 0.9f;
+    private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
     public bool middleOfClimbing = false;
@@ -35,6 +35,9 @@ public class StateMachineParameters : MonoBehaviour
 
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
+
+    [SerializeField] public float jumpVerticalBoost = 0.4f;
+    [SerializeField] public float jumpHorizontalBoost = 1f;
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
@@ -57,13 +60,13 @@ public class StateMachineParameters : MonoBehaviour
         UpdateIsGrounded();
 
         UpdateInputValue();
+        animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
+        animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
 
         /*
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
-        animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
         //Debug.Log("ForwardSpeed : " + (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);
-        animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
 
         */
     }
@@ -71,6 +74,7 @@ public class StateMachineParameters : MonoBehaviour
     void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
+        animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
     }
 
     public bool CheckIsGrounded()
@@ -184,10 +188,10 @@ public class StateMachineParameters : MonoBehaviour
 
             RaycastHit hitBot;
 
-            if (Physics.Raycast(transform.position + -0.80f * transform.up, transform.forward, out hitBot, 5f, layerMask))
+            if (Physics.Raycast(transform.position + 0.35f * transform.up, transform.forward, out hitBot, 5f, layerMask))
             {
                 //Debug.Log("BOT RAY HIT");
-                //Debug.DrawRay(transform.position + -0.80f * transform.up, transform.forward * hitBot.distance, Color.red);
+                //Debug.DrawRay(transform.position + 0.35f * transform.up, transform.forward * hitBot.distance, Color.red);
 
                 if (hitBot.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
@@ -271,7 +275,7 @@ public class StateMachineParameters : MonoBehaviour
         {
             Debug.Log($"hit distance = {hit.distance}");
             //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * hit.distance, Color.green, 0f);
-            //Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
+            Debug.DrawRay(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
             //if (hit.distance > 2f * grabToClimbDistance) return true;
             if (hit.distance <= grabToHangDistance)
             {
@@ -297,10 +301,10 @@ public class StateMachineParameters : MonoBehaviour
 
         RaycastHit hitBot;
 
-        if (Physics.Raycast(transform.position + -0.85f * transform.up, transform.forward, out hitBot, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 0.35f * transform.up, transform.forward, out hitBot, 5f, layerMask))
         {
             //Debug.Log("BOT RAY HIT");
-            //Debug.DrawRay(transform.position + -0.85f * transform.up, transform.forward * hitBot.distance, Color.red);
+            Debug.DrawRay(transform.position + 0.35f * transform.up, transform.forward * hitBot.distance, Color.red);
 
             if (hitBot.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
@@ -396,7 +400,9 @@ public class StateMachineParameters : MonoBehaviour
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
         // Apply gravity if not grounded
-        if (playerParameters.characterController.isGrounded)
+        if (animator.GetBool("PlayerJumped"))
+            velocity.y = jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
             velocity.y = 0f;
         else
             velocity.y -= playerParameters.gravity;
@@ -489,7 +495,91 @@ public class StateMachineParameters : MonoBehaviour
             playerParameters.characterController.Move(displacement);
         }
     }
+    /*public void ChangeAnimSpeed()
+    {
+        animator.speed = 0.5f;
+    }*/
+    public void Glide(float maxSpeed, float maxAcceleration)
+    {
+        Vector3 velocity = characterController.velocity;
 
+        // Check Input to determine direction
+        Vector2 playerInput;
+        playerInput.x = inputManager.HorizontalInput;
+        playerInput.y = inputManager.VerticalInput;
+
+        // Clamp it to disallow strafe walking
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+        // Add camera angle to the input vector so that the player moves where the camera looks
+        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        // Modify the direction the player model is looking
+        if (playerInput.magnitude >= 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        Vector3 targetDirection = playerInput.magnitude * transform.forward;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+        // Apply gravity if not grounded
+        if (animator.GetBool("PlayerJumped"))
+            velocity.y = jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            velocity.y = 0f;
+        else
+            velocity.y -= playerParameters.gravity;
+
+        // Apply appropriate friction force depending if in water or not
+        if (playerParameters.isInWaterNextFixedUpdate)
+        {
+            velocity.y += playerParameters.forceOfWater;
+            velocity.y *= 0.99f;
+        }
+        else velocity.y *= 0.999f;
+
+        // Move the player through its character controller
+        characterController.Move(velocity * Time.deltaTime);
+
+        //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
+
+        /*
+        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
+        Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
+
+        //Debug.Log("transformDirection : " + transformDirection);
+
+        Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
+        playerParameters.moveDirection = new Vector3(flatMovement.x, playerParameters.moveDirection.y, flatMovement.z);
+
+        if (animator.GetBool("PlayerJumped"))
+            playerParameters.moveDirection.y = playerParameters.jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            playerParameters.moveDirection.y = 0f;
+        else
+            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
+
+        if (playerParameters.isInWaterNextFixedUpdate)
+        {
+            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
+            playerParameters.moveDirection.y *= 0.99f;
+        }
+        else playerParameters.moveDirection.y *= 0.999f;
+
+        //Debug.Log("playerParameters.moveDirection : " + playerParameters.moveDirection);
+
+        playerParameters.characterController.Move(playerParameters.moveDirection);
+
+        // Horizontal player rotation
+        animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
+        */
+    }
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
@@ -523,6 +613,10 @@ public class StateMachineParameters : MonoBehaviour
     {
         animator.SetFloat("VerticalInput", inputManager.VerticalInput);
         animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
+    }
+    public void UpdateStartGlide()
+    {
+        animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
     }
     #endregion
 }
