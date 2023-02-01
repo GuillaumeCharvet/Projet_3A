@@ -26,7 +26,7 @@ public class StateWalk : StateBehaviourParent
 
     public override void Update()
     {
-        reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration);
+        reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, true);
 
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedDown);
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedUp);
