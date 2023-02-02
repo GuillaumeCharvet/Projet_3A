@@ -20,10 +20,6 @@ public class MovementParameters : MonoBehaviour
 
     [SerializeField] public float moveSpeed = 10f;
 
-    [Header("FALL")]
-    [SerializeField] public float airControl = 0.2f;
-    [SerializeField] public float gravity = 1.2f;
-
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
     public BuoyancyEffect lastWaterVisited;
