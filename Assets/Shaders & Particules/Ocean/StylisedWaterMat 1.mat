@@ -10,7 +10,7 @@ Material:
   m_Name: StylisedWaterMat 1
   m_Shader: {fileID: -6465566751694194690, guid: 3420b979bcfafed4a8585809b7b299d1,
     type: 3}
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 2100000, guid: 5892b9ddda6fdaa45af184505df3f616, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -23,44 +23,10 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _Amplitude: 0.5
-    - _Edge_Blend: 0.828
-    - _Effect_Radius: 760
-    - _FoamAmount: 8.8
-    - _FoamCutOff: 1.27
-    - _FoamScale: 321.8
-    - _FoamSpeed: 0
-    - _Frequency: 0.55
-    - _NoiseScale: 2
-    - _PI: 6.28
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _RefractionScale: 25
-    - _RefractionSpeed: 0.2
-    - _RefractionStrenght: 10
-    - _RippleDensity: 10
-    - _WaterDepth: 21.4
-    m_Colors:
-    - _DeepWater: {r: 0.10426309, g: 0.36675, b: 0.6698113, a: 1}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 0.65882355}
-    - _RippleOrigin: {r: 0, g: 0, b: 0, a: 0}
-    - _ShallowWater: {r: 0, g: 0.9348423, b: 0.9622641, a: 0.50980395}
-    - _TestDisplacement: {r: 4.85, g: 4.25, b: 12.98, a: 0}
+    m_Floats: []
+    m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &5056879499096688681
 MonoBehaviour:
