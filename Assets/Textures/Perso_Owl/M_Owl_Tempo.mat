@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material #3
+  m_Name: M_Owl_Tempo
   m_Shader: {fileID: -6465566751694194690, guid: e10dfa12fe243454ca0442dcd500a734,
     type: 3}
   m_Parent: {fileID: 0}
@@ -108,7 +108,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.14142135
     - _GlossyReflections: 1
+    - _MaxDistance: 2
     - _Metallic: 0
+    - _MinDistance: 0.3
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Opacity: 1
