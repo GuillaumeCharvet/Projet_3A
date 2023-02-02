@@ -23,7 +23,7 @@ Material:
   m_Name: Shader_petite_cascade
   m_Shader: {fileID: -6465566751694194690, guid: 248a4e57ef9c52c4bbda516f7fbea08f,
     type: 3}
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 2100000, guid: 69e4793ea544500429f36b92d6067d93, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -36,33 +36,15 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _BottomBrightness: 0
     - _BottomStrength: 0
     - _CellDensity: 10
-    - _QueueControl: 0
-    - _QueueOffset: 0
     - _RippleAmount: 3.3
     - _VertexOffsetAmount: 0
     - _VoronoiSpeed: 3.75
     m_Colors:
-    - _RippleColor: {r: 0.33245158, g: 0.93011117, b: 1, a: 0}
     - _RipplesSpeed: {r: 0, g: 0.4, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &949517041780184944
