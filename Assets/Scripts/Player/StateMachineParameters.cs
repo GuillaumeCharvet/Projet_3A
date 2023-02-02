@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+//using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public enum ModeMovement { Idle, Walk, Run, Jump, Swim, Climb, Slide, Glide, GrabLedge, Hang, Fall };
 
@@ -30,6 +30,10 @@ public class StateMachineParameters : MonoBehaviour
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
     public bool middleOfClimbing = false;
+
+    [Header("FALL")]
+    [SerializeField] public float airControl = 0.2f;
+    [SerializeField] public float gravity = 1.2f;
 
     [Header("RUN/JUMP")]
 
@@ -74,7 +78,7 @@ public class StateMachineParameters : MonoBehaviour
     void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
-        animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
+        animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
     }
 
     public bool CheckIsGrounded()
@@ -300,11 +304,11 @@ public class StateMachineParameters : MonoBehaviour
         if (currentModeMovement == ModeMovement.Climb) correctiveGrabDistance = 1f;
 
         RaycastHit hitBot;
+        Debug.DrawRay(transform.position + 0.35f * transform.up, transform.forward * 10, Color.red);
 
         if (Physics.Raycast(transform.position + 0.35f * transform.up, transform.forward, out hitBot, 5f, layerMask))
         {
             //Debug.Log("BOT RAY HIT");
-            Debug.DrawRay(transform.position + 0.35f * transform.up, transform.forward * hitBot.distance, Color.red);
 
             if (hitBot.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
@@ -370,14 +374,21 @@ public class StateMachineParameters : MonoBehaviour
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity = 0f;
 
-    public void Move(float maxSpeed, float maxAcceleration)
+    public void Move(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
 
         // Check Input to determine direction
         Vector2 playerInput;
-        playerInput.x = inputManager.HorizontalInput;
-        playerInput.y = inputManager.VerticalInput;
+        if (true)
+        {
+            playerInput.x = inputManager.HorizontalInput;
+            playerInput.y = inputManager.VerticalInput;
+        }
+        else
+        {
+            playerInput = Vector2.zero;
+        }
 
         // Clamp it to disallow strafe walking
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
@@ -401,19 +412,20 @@ public class StateMachineParameters : MonoBehaviour
 
         // Apply gravity if not grounded
         if (animator.GetBool("PlayerJumped"))
-            velocity.y = jumpVerticalBoost;
+            velocity.y += jumpVerticalBoost;
         else if (playerParameters.characterController.isGrounded)
             velocity.y = 0f;
         else
-            velocity.y -= playerParameters.gravity;
+            velocity.y -= gravity * Time.deltaTime;
 
         // Apply appropriate friction force depending if in water or not
+        /*
         if (playerParameters.isInWaterNextFixedUpdate)
         {
             velocity.y += playerParameters.forceOfWater;
             velocity.y *= 0.99f;
         }
-        else velocity.y *= 0.999f;
+        else velocity.y *= 0.999f;*/
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
@@ -534,7 +546,7 @@ public class StateMachineParameters : MonoBehaviour
         else if (playerParameters.characterController.isGrounded)
             velocity.y = 0f;
         else
-            velocity.y -= playerParameters.gravity;
+            velocity.y -= gravity;
 
         // Apply appropriate friction force depending if in water or not
         if (playerParameters.isInWaterNextFixedUpdate)
