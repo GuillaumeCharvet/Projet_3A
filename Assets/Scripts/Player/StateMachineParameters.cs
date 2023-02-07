@@ -513,6 +513,10 @@ public class StateMachineParameters : MonoBehaviour
     }*/
     public void Glide(float maxSpeed, float maxAcceleration)
     {
+        // ******************************************************************
+        // ******************    FIRST VERSION    ***************************
+        // ******************************************************************
+        /*
         Vector3 velocity = characterController.velocity;
 
         // Check Input to determine direction
@@ -558,6 +562,11 @@ public class StateMachineParameters : MonoBehaviour
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
+        */
+        // ******************************************************************
+        // ******************************************************************
+        // ******************************************************************
+
 
         //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
 
@@ -591,6 +600,89 @@ public class StateMachineParameters : MonoBehaviour
         // Horizontal player rotation
         animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
         */
+
+        // ************************************************************************
+        // *******************    LAST VERSION    *********************************
+        // ************************************************************************
+
+
+        float horizontal = inputManager.HorizontalInput;
+        float vertical = inputManager.VerticalInput;
+
+        if (horizontal > 0.1f)
+        {
+            playerParameters.gliderTurnSpeed = Mathf.Min(playerParameters.gliderTurnSpeed + playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, playerParameters.maxGliderTurnSpeed);
+        }
+        else if (horizontal < -0.1f)
+        {
+            playerParameters.gliderTurnSpeed = Mathf.Max(playerParameters.gliderTurnSpeed - playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, -playerParameters.maxGliderTurnSpeed);
+        }
+        else if (playerParameters.gliderTurnSpeed <= 0f)
+        {
+            playerParameters.gliderTurnSpeed = Mathf.Min(playerParameters.gliderTurnSpeed + 0.5f * playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
+        }
+        else if (playerParameters.gliderTurnSpeed >= 0f)
+        {
+            playerParameters.gliderTurnSpeed = Mathf.Max(playerParameters.gliderTurnSpeed - 0.5f * playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
+        }
+
+        if (horizontal > 0.1f)
+        {
+            playerParameters.gliderCameraTurnSpeed = Mathf.Min(playerParameters.gliderCameraTurnSpeed + 0.2f * playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, 3f * playerParameters.maxGliderTurnSpeed);
+        }
+        else if (horizontal < -0.1f)
+        {
+            playerParameters.gliderCameraTurnSpeed = Mathf.Max(playerParameters.gliderCameraTurnSpeed - 0.2f * playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, 3f * -playerParameters.maxGliderTurnSpeed);
+        }
+        else if (playerParameters.gliderCameraTurnSpeed <= 0f)
+        {
+            playerParameters.gliderCameraTurnSpeed = Mathf.Min(playerParameters.gliderCameraTurnSpeed + 0.5f * 0.2f * playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
+        }
+        else if (playerParameters.gliderCameraTurnSpeed >= 0f)
+        {
+            playerParameters.gliderCameraTurnSpeed = Mathf.Max(playerParameters.gliderCameraTurnSpeed - 0.5f * 0.2f * playerParameters.gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
+        }
+
+        Debug.Log("transform.localRotation.eulerAngles.z = " + playerParameters.transform.localRotation.eulerAngles.z);
+
+        var eulerZ = playerParameters.transform.localRotation.eulerAngles.z > 180 ? playerParameters.transform.localRotation.eulerAngles.z - 360 : playerParameters.transform.localRotation.eulerAngles.z;
+        if (horizontal > 0.1f)
+        {
+            playerParameters.transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x, playerParameters.transform.localRotation.eulerAngles.y + 1.4f, Mathf.Max(eulerZ - 0.4f, -15f));
+        }
+        else if (horizontal < -0.1f)
+        {
+            playerParameters.transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x, playerParameters.transform.localRotation.eulerAngles.y - 1.4f, Mathf.Min(eulerZ + 0.4f, +15f));
+        }
+        else if (eulerZ > 0.2f)
+        {
+            playerParameters.transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x, playerParameters.transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
+        }
+        else if (eulerZ < -0.2f)
+        {
+            playerParameters.transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x, playerParameters.transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
+        }
+
+        if (vertical > 0.1f && playerParameters.speed > 1f)
+        {
+            var eulerX = playerParameters.transform.localRotation.eulerAngles.x > 180 ? playerParameters.transform.localRotation.eulerAngles.x - 360 : playerParameters.transform.localRotation.eulerAngles.x;
+            playerParameters.transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f, 45f), playerParameters.transform.localRotation.eulerAngles.y, playerParameters.transform.localRotation.eulerAngles.z);
+        }
+        else if (vertical < -0.1f)
+        {
+            var eulerX = playerParameters.transform.localRotation.eulerAngles.x > 180 ? playerParameters.transform.localRotation.eulerAngles.x - 360 : playerParameters.transform.localRotation.eulerAngles.x;
+            playerParameters.transform.localRotation = Quaternion.Euler(Mathf.Max(eulerX - 0.8f, -45f), playerParameters.transform.localRotation.eulerAngles.y, playerParameters.transform.localRotation.eulerAngles.z);
+        }
+
+        var acceleration = 2f * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right));
+        Debug.Log("acceleration = " + acceleration);
+
+        playerParameters.speed = Mathf.Max(Mathf.Min(playerParameters.speed + acceleration, 40f), 0f);
+
+        playerParameters.transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x + (1f / (1f + playerParameters.speed * playerParameters.speed)) * 3f, playerParameters.transform.localRotation.eulerAngles.y, playerParameters.transform.localRotation.eulerAngles.z);
+
+        playerParameters.moveDirection = playerParameters.speed * (playerParameters.transform.forward + 0.1f * Vector3.down) * Time.deltaTime;
+        playerParameters.characterController.Move(playerParameters.moveDirection);
     }
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
