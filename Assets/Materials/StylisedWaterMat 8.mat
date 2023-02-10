@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,10 +45,10 @@ Material:
     - _Amplitude: 0
     - _Edge_Blend: 0.289
     - _Effect_Radius: 540
-    - _FoamAmount: 8.8
-    - _FoamCutOff: 1.27
-    - _FoamScale: 1966.2
-    - _FoamSpeed: 0
+    - _FoamAmount: 8.29
+    - _FoamCutOff: 1.1
+    - _FoamScale: 293.03
+    - _FoamSpeed: 0.62
     - _Frequency: 0.24
     - _NoiseScale: 2
     - _PI: 6.28
@@ -58,9 +62,12 @@ Material:
     m_Colors:
     - _DeepWater: {r: 0.10426309, g: 0.36675, b: 0.6698113, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.65882355}
+    - _MainTexColor: {r: 0.055535804, g: 0.21037455, b: 0.9056604, a: 0}
+    - _OceanColor: {r: 0.12549019, g: 0.54750884, b: 0.5647059, a: 0}
     - _RippleOrigin: {r: 0, g: 0, b: 0, a: 0}
     - _ShallowWater: {r: 0, g: 0.9348423, b: 0.9622641, a: 0.50980395}
     - _TestDisplacement: {r: 4.85, g: 4.25, b: 12.98, a: 0}
+    - _TextSpeed: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5056879499096688681
 MonoBehaviour:
