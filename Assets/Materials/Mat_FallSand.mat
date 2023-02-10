@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StylisedWaterMat 8
-  m_Shader: {fileID: -6465566751694194690, guid: 3420b979bcfafed4a8585809b7b299d1,
+  m_Name: Mat_FallSand
+  m_Shader: {fileID: -6465566751694194690, guid: 4da93497ffb78fe4e97c5659065361c0,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,10 +24,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -42,34 +38,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 0.5
-    - _Edge_Blend: 0.289
-    - _Effect_Radius: 540
-    - _FoamAmount: 8.29
-    - _FoamCutOff: 1.1
-    - _FoamScale: 293.03
-    - _FoamSpeed: 0.62
-    - _Frequency: 0.24
-    - _NoiseScale: 2
-    - _PI: 6.28
+    - _Dissolve: 0.369
+    - _NoisePower: 0.8
+    - _NoiseScale: 15.07
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionScale: 25
-    - _RefractionSpeed: 0.2
-    - _RefractionStrenght: 10
-    - _RippleDensity: 1.9
-    - _WaterDepth: 21.4
+    - _TwirlAmount: 2
     m_Colors:
-    - _DeepWater: {r: 0.10426309, g: 0.36675, b: 0.6698113, a: 1}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 0.65882355}
-    - _MainTexColor: {r: 0.055535804, g: 0.21037455, b: 0.9056604, a: 0}
-    - _OceanColor: {r: 0.12549019, g: 0.54750884, b: 0.5647059, a: 0}
-    - _RippleOrigin: {r: 0, g: 0, b: 0, a: 0}
-    - _ShallowWater: {r: 0, g: 0.9348423, b: 0.9622641, a: 0.50980395}
-    - _TestDisplacement: {r: 4.85, g: 4.25, b: 12.98, a: 0}
-    - _TextSpeed: {r: 0, g: 0.5, b: 0, a: 0}
+    - _Color: {r: 0.9433962, g: 0.7860528, b: 0.48504806, a: 1}
+    - _NoiseSpeed: {r: 0.5, g: 1, b: 0, a: 0}
+    - _TwirlCenter: {r: 3.12, g: 0, b: 0, a: 0}
+    - _TwirlSpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &5056879499096688681
+--- !u!114 &6296620395001030920
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
