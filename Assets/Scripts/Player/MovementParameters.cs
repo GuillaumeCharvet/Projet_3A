@@ -30,25 +30,6 @@ public class MovementParameters : MonoBehaviour
     public float accelOnRope = 0.05f;
     public float maxSpeedOnRope = 1.5f;
 
-    [Header("GLIDE")]
-    public float gliderRotationSpeed = 0f;
-    public float gliderRotationAcceleration = 0.5f;
-    public float maxGliderRotationSpeed = 40f;
-
-    public float gliderTurnSpeed = 0f;
-    public float gliderCameraTurnSpeed = 0f;
-    public float gliderTurnAcceleration = 0.1f;
-    public float maxGliderTurnSpeed = 1f;
-
-    public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
-
-    public float currentHeightDiff = 0f;
-    public float currentHeightRef = 0f;
-
-    public float currentEnergy = 0f;
-    public float speed = 0f;
-    public float angleDiff = 0f;
-
     public Vector3 direction;
     public Vector3 weightForce;
     [SerializeField] public float mass = 10f;
