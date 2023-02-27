@@ -88,6 +88,7 @@ public class StateMachineParameters : MonoBehaviour
         UpdateInputValue();
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
+        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot((inputManager.HorizontalInput * transform.right + inputManager.VerticalInput * transform.forward).normalized, currentNormalToClimb));
 
         /*
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);

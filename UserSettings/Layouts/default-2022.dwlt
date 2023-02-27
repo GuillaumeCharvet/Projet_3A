@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1718
     height: 1341
   m_ShowMode: 4
-  m_Title: Animator
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 18813
+  controlID: 166
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 150}
   m_MaxSize: {x: 16192, y: 24288}
   vertical: 1
-  controlID: 18853
+  controlID: 55
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 18854
+  controlID: 31
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 18814
+  controlID: 167
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -320,8 +320,8 @@ MonoBehaviour:
     y: 0
     width: 428
     height: 792
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -846,9 +846,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.829438, y: 9.507, z: -1.461328}
+    m_Target: {x: -0.7554002, y: 12.36277, z: -8.335617}
     speed: 2
-    m_Value: {x: 5.829438, y: 9.507, z: -1.461328}
+    m_Value: {x: -0.7554002, y: 12.36277, z: -8.335617}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -894,13 +894,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.18491542, y: 0.012965465, z: -0.0024477832, w: -0.98267883}
+    m_Target: {x: -0.10797877, y: 0.4711815, z: -0.05825669, w: -0.8734765}
     speed: 2
-    m_Value: {x: -0.18491307, y: 0.012965299, z: -0.002447752, w: -0.9826663}
+    m_Value: {x: -0.10797734, y: 0.47117528, z: -0.05825592, w: -0.87346494}
   m_Size:
-    m_Target: 6.742662
+    m_Target: 10.081465
     speed: 2
-    m_Value: 6.742662
+    m_Value: 10.081465
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1014,14 +1014,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.7332804
+    - e00: 0.88538647
       e01: 0
       e02: 0
-      e03: 117.969315
+      e03: 188.20532
       e10: 0
-      e11: 0.7332804
+      e11: 0.88538647
       e12: 0
-      e13: 185.10103
+      e13: -26.5616
       e20: 0
       e21: 0
       e22: 1
@@ -1095,23 +1095,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets/Scripts/Player
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Scripts/Player
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Guillaume_Charvet\github_repositories\Projet_3A
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 120}
-    m_SelectedIDs: a6890000
-    m_LastClickedID: 35238
-    m_ExpandedIDs: 0000000086890000888900008a8900008c890000b28900003cec000000ca9a3b
+    scrollPos: {x: 0, y: 194}
+    m_SelectedIDs: 3c8a0000
+    m_LastClickedID: 35388
+    m_ExpandedIDs: 00000000368a0000388a00003a8a00003c8a00003e8a0000408a0000788a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1139,7 +1139,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000086890000888900008a8900008c89000000ca9a3b
+    m_ExpandedIDs: 00000000368a0000388a00003a8a00003c8a00003e8a0000408a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1313,9 +1313,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7c630000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 32f8ffff34f8ffff9c82000054830000be830000f0840000
+      m_ExpandedIDs: 34f7ffff5a820000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: Owl_Idle
@@ -1326,7 +1326,7 @@ MonoBehaviour:
           y: 0
           width: 0
           height: 0
-        m_UserData: -1998
+        m_UserData: -2488
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
