@@ -25,7 +25,7 @@ public class StateMachineParameters : MonoBehaviour
     public float epsilonCheckGrounded = 0.001f;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
-    private float grabToClimbDistance = 2f;
+    private float grabToClimbDistance = 0.6f;
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
@@ -88,7 +88,8 @@ public class StateMachineParameters : MonoBehaviour
         UpdateInputValue();
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
-        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot((inputManager.HorizontalInput * transform.right + inputManager.VerticalInput * transform.forward).normalized, currentNormalToClimb));
+
+        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb));
 
         /*
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
@@ -497,13 +498,13 @@ public class StateMachineParameters : MonoBehaviour
             playerInput.x = inputManager.HorizontalInput;
             playerInput.y = inputManager.VerticalInput;
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-            Vector3 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
+            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;//new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
             float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
             Vector3 displacement = velocity * Time.deltaTime;
 
-            animator.transform.rotation = Quaternion.FromToRotation(animator.transform.TransformDirection(Vector3.forward), -currentNormalToClimb) * animator.transform.rotation;
+            transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
 
             currentClimbStamina -= displacement.magnitude;
             characterController.Move(transform.TransformDirection(displacement));
