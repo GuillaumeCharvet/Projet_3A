@@ -234,7 +234,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: CanClimbTopToBot
+    m_ConditionEvent: CanClimbTopRay
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3490216485333395043}
@@ -361,7 +361,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GrabLedge
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1440391234647509669}
@@ -376,7 +376,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4a368c1b2ada1794db10f428f0dd0545, type: 2}
+  m_Motion: {fileID: 7400000, guid: 56708c960d8fbaf47a1aaacfdc73817c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -996,7 +996,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.05
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -1318,7 +1318,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.05
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -1817,13 +1817,13 @@ AnimatorStateMachine:
     m_Position: {x: 500, y: 580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8833229182122543462}
-    m_Position: {x: -80, y: 460, z: 0}
+    m_Position: {x: -120, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3151746168081102964}
     m_Position: {x: -100, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3459415673505865853}
-    m_Position: {x: -100, y: 150, z: 0}
+    m_Position: {x: -120, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6327520689562475203}
     m_Position: {x: 480, y: -70, z: 0}

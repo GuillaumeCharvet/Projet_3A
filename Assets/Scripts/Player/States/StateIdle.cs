@@ -29,6 +29,8 @@ public class StateIdle : StateBehaviourParent
         
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedUp);
 
+        reader.smp.currentModeMovement = ModeMovement.Idle;
+
         base.Update();
     }
 

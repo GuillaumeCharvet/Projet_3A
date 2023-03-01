@@ -22,7 +22,7 @@ public class StateClimb : StateBehaviourParent
         reader.smp.UpdateCanClimbTopRay();
         reader.smp.UpdateCanClimbUp();
 
-        //reader.smp.ChangeAnimSpeed();
+        reader.smp.currentModeMovement = ModeMovement.Climb;
 
         base.Update();
     }
