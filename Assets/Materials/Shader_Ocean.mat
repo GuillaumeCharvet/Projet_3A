@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-313753515776504598
+--- !u!114 &-6261593612158538934
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,14 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Interractive
-  m_Shader: {fileID: -6465566751694194690, guid: 3a4ec0e3d846b764aba8d2e59e3c1bb6,
+  m_Name: Shader_Ocean
+  m_Shader: {fileID: -6465566751694194690, guid: 248a4e57ef9c52c4bbda516f7fbea08f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -51,9 +51,30 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BottomBrightness: 0
+    - _BottomStrength: 2.2
+    - _CellDensity: 453.66
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Radius: 1.09
+    - _RippleAmount: 6.56
+    - _VertexOffsetAmount: 0
+    - _VoronoiSpeed: 6.44
     m_Colors:
-    - _ObjectPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _RippleColor: {r: 0.04801533, g: 0.29800165, b: 0.7830189, a: 0}
+    - _RipplesSpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &949517041780184944
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
