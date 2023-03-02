@@ -25,7 +25,7 @@ public class StateMachineParameters : MonoBehaviour
     public float epsilonCheckGrounded = 0.001f;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
-    private float grabToClimbDistance = 2f;
+    private float grabToClimbDistance = 1.2f;
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
@@ -48,7 +48,9 @@ public class StateMachineParameters : MonoBehaviour
     public float maxClimbStamina = 10f;
     public float currentClimbStamina = 0f;
     public Vector3 currentNormalToClimb;
-    
+    private float stickingToSurfaceSpeed = 0.7f;
+    private float maxPlayerRotation = 0.2f;
+
     [Header("GLIDE")]
     public float gliderRotationSpeed = 0f;
     public float gliderRotationAcceleration = 0.5f;
@@ -89,6 +91,8 @@ public class StateMachineParameters : MonoBehaviour
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
 
+        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb));
+
         /*
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
@@ -110,6 +114,8 @@ public class StateMachineParameters : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + 0f * transform.up, -transform.up, out hit, Mathf.Infinity, layerMask))
         {
+            Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.yellow);
+
             var angleSolToVertical = Vector3.Angle(Vector3.up, hit.normal);
             var distAB = r * (1f / Mathf.Cos(2f * Mathf.PI * angleSolToVertical / 360f) - 1f);
 
@@ -120,7 +126,6 @@ public class StateMachineParameters : MonoBehaviour
             {
                 return true;
             }
-            //Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.yellow);
         }
         else
         {
@@ -263,11 +268,11 @@ public class StateMachineParameters : MonoBehaviour
         if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMask))
         {
             //Debug.Log("TOP RAY HIT");
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
+            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.blue);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
-                //Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
+                Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
@@ -284,12 +289,12 @@ public class StateMachineParameters : MonoBehaviour
             }
             else
             {
-                //Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
+                Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
             }
         }
         else
         {
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -490,22 +495,30 @@ public class StateMachineParameters : MonoBehaviour
     {
         if (currentClimbStamina > 0f)
         {
+            transform.rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, transform.forward), Quaternion.FromToRotation(Vector3.forward, -currentNormalToClimb) , maxPlayerRotation) * transform.rotation;
+            //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
             Vector3 velocity = characterController.velocity;
 
             Vector2 playerInput;
             playerInput.x = inputManager.HorizontalInput;
             playerInput.y = inputManager.VerticalInput;
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-            Vector3 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
+            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right + ((distanceToGrabbedWall > distanceToGrabbedWallLimit)? stickingToSurfaceSpeed : 0f) * transform.forward) * maxClimbSpeed;//new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
+
+            Debug.Log("desiredVelocity " + desiredVelocity);
+
             float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
             Vector3 displacement = velocity * Time.deltaTime;
 
-            animator.transform.rotation = Quaternion.FromToRotation(animator.transform.TransformDirection(Vector3.forward), -currentNormalToClimb) * animator.transform.rotation;
+            Debug.Log("displacement " + displacement);
 
             currentClimbStamina -= displacement.magnitude;
-            characterController.Move(transform.TransformDirection(displacement));
+            characterController.Move(displacement);
         }
     }
 

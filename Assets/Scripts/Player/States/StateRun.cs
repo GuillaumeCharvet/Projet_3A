@@ -30,6 +30,8 @@ public class StateRun : StateBehaviourParent
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedDown);
         reader.smp.UpdateCanClimbTopToBot();
 
+        reader.smp.currentModeMovement = ModeMovement.Run;
+
         base.Update();
     }
 

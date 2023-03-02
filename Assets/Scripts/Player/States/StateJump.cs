@@ -30,6 +30,8 @@ public class StateJump : StateBehaviourParent
         reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateStartGlide();
 
+        reader.smp.currentModeMovement = ModeMovement.Jump;
+
         base.Update();
     }
 
