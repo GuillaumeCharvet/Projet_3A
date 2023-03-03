@@ -20,11 +20,6 @@ public class MovementParameters : MonoBehaviour
 
     [SerializeField] public float moveSpeed = 10f;
 
-    [Header("SWIM")]
-    public bool isInWaterNextFixedUpdate = false;
-    public BuoyancyEffect lastWaterVisited;
-    public float forceOfWater;
-
     [Header("SLIDE")]
     public float speedOnRope = 0f;
     public float accelOnRope = 0.05f;
