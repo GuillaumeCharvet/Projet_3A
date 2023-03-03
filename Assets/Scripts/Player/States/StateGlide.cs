@@ -29,6 +29,8 @@ public class StateGlide : StateBehaviourParent
 
         reader.smp.UpdateCanClimbTopToBot();
 
+        reader.smp.currentModeMovement = ModeMovement.Glide;
+
         base.Update();
     }
 
