@@ -22,6 +22,8 @@ public class StateHang : StateBehaviourParent
         reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateStopHanging();
 
+        reader.smp.currentModeMovement = ModeMovement.Hang;
+
         base.Update();
     }
 
