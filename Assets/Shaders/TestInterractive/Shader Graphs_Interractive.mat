@@ -51,9 +51,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Blur: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Radius: 1.09
+    - _Radius: 1
+    - _TopDownRadius: 1
     m_Colors:
     - _ObjectPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
