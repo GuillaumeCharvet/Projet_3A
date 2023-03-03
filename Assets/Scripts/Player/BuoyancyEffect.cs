@@ -14,7 +14,8 @@ public class BuoyancyEffect : MonoBehaviour
     private void Start()
     {
         colliderBox = GetComponent<BoxCollider>();
-        waterHeight = colliderBox.center.y + 0.5f * colliderBox.size.y;
+        waterHeight = transform.position.y + transform.localScale.y / 2f + colliderBox.center.y + 0.5f * colliderBox.size.y;
+        Debug.Log("waterHeight" + waterHeight);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +39,9 @@ public class BuoyancyEffect : MonoBehaviour
             Debug.Log("GROS PLOUF");
             var playerTop = capsule.transform.position.y + capsule.center.y + 0.5f * capsule.height;
             var playerBot = capsule.transform.position.y + capsule.center.y - 0.5f * capsule.height;
+
+            Debug.Log("playerTop" + playerTop);
+            Debug.Log("playerBot" + playerBot);
             if (playerTop <= waterHeight)
             {
                 //ApplyBuoyancyForce(cc, waterDensity * capsule.height);
