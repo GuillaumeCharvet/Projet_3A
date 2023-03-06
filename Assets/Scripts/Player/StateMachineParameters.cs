@@ -61,6 +61,11 @@ public class StateMachineParameters : MonoBehaviour
     public float gliderTurnAcceleration = 0.1f;
     public float maxGliderTurnSpeed = 1f;
 
+    [Header("SWIM")]
+    public bool isInWaterNextFixedUpdate = false;
+    public BuoyancyEffect lastWaterVisited;
+    public float forceOfWater;
+
     public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
 
     [SerializeField] private float currentHeightDiff = 0f;
@@ -92,6 +97,7 @@ public class StateMachineParameters : MonoBehaviour
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
 
         animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb));
+        animator.SetBool("IsInWater", isInWaterNextFixedUpdate);
 
         /*
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
@@ -446,13 +452,14 @@ public class StateMachineParameters : MonoBehaviour
             velocity.y -= gravity * Time.deltaTime;
 
         // Apply appropriate friction force depending if in water or not
-        /*
-        if (playerParameters.isInWaterNextFixedUpdate)
+        
+        if (isInWaterNextFixedUpdate)
         {
-            velocity.y += playerParameters.forceOfWater;
-            velocity.y *= 0.99f;
+            Debug.Log("forceOfWater" + forceOfWater);
+            velocity.y += forceOfWater;
+            velocity.y *= 0.98f;
         }
-        else velocity.y *= 0.999f;*/
+        else velocity.y *= 0.999f;
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
@@ -495,8 +502,8 @@ public class StateMachineParameters : MonoBehaviour
     {
         if (currentClimbStamina > 0f)
         {
-            transform.rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, transform.forward), Quaternion.FromToRotation(Vector3.forward, -currentNormalToClimb) , maxPlayerRotation) * transform.rotation;
-            //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+            //transform.rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, transform.forward), Quaternion.FromToRotation(Vector3.forward, -currentNormalToClimb) , maxPlayerRotation) * transform.rotation;
+            transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
 
             Vector3 velocity = characterController.velocity;
 
