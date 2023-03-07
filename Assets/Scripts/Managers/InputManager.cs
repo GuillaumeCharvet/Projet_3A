@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ModeInput { Keyboard, Controller, Intern };
 public class InputManager : Manager
@@ -45,6 +46,11 @@ public class InputManager : Manager
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     isSpaceDown = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
                 }
 
                 break;

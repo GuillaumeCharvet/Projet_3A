@@ -49,7 +49,7 @@ public class StateMachineParameters : MonoBehaviour
     public float currentClimbStamina = 0f;
     public Vector3 currentNormalToClimb;
     private float stickingToSurfaceSpeed = 0.7f;
-    private float maxPlayerRotation = 0.2f;
+    private float maxPlayerRotation = 10f;
 
     [Header("GLIDE")]
     public float gliderRotationSpeed = 0f;
@@ -71,7 +71,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
 
-    [SerializeField] private float gliderSpeed = 0f;
+    [SerializeField] public float gliderSpeed = 0f;
     [SerializeField] private float maxGliderSpeed = 50f;
     [SerializeField] private float accelerationMaxGlider = 30f;
     [SerializeField] private float gliderDescentFactor = 0.1f;
@@ -502,7 +502,7 @@ public class StateMachineParameters : MonoBehaviour
     {
         if (currentClimbStamina > 0f)
         {
-            //transform.rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, transform.forward), Quaternion.FromToRotation(Vector3.forward, -currentNormalToClimb) , maxPlayerRotation) * transform.rotation;
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
             transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
 
             Vector3 velocity = characterController.velocity;
