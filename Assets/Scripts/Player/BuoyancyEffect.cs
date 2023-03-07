@@ -37,8 +37,8 @@ public class BuoyancyEffect : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("GROS PLOUF");
-            var playerTop = capsule.transform.position.y + capsule.center.y + 0.5f * capsule.height;
-            var playerBot = capsule.transform.position.y + capsule.center.y - 0.5f * capsule.height;
+            var playerTop = capsule.transform.position.y + capsule.center.y + 0.5f * capsule.height + 0.7f;
+            var playerBot = capsule.transform.position.y + capsule.center.y - 0.5f * capsule.height + 0.7f;
 
             Debug.Log("playerTop" + playerTop);
             Debug.Log("playerBot" + playerBot);
