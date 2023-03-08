@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2907342000264570245
+--- !u!114 &-313753515776504598
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Autre_eau 1
-  m_Shader: {fileID: -6465566751694194690, guid: 248a4e57ef9c52c4bbda516f7fbea08f,
+  m_Name: Shader Graphs_Interractive
+  m_Shader: {fileID: -6465566751694194690, guid: 3a4ec0e3d846b764aba8d2e59e3c1bb6,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -51,15 +51,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomBrightness: 0
-    - _BottomStrength: 2
-    - _CellDensity: 0
+    - _Blur: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleAmount: 2
-    - _VertexOffsetAmount: 0.2
-    - _VoronoiSpeed: 2
+    - _Radius: 1
+    - _TopDownRadius: 1
     m_Colors:
-    - _RippleColor: {r: 0.118948, g: 0.5513614, b: 0.764151, a: 0}
-    - _RipplesSpeed: {r: 0, g: 0.2, b: 0, a: 0}
+    - _ObjectPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

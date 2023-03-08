@@ -36,6 +36,7 @@ public class StateGlide : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.gliderSpeed = 1f;
         base.OnEnterState();
     }
 }
