@@ -20,6 +20,13 @@ public class StateGlide : StateBehaviourParent
 
     public override void OnExitState()
     {
+        var anim = reader.GetComponent<Animator>();
+        Debug.Log("EXIT GLIDE STATE :" + " PlayerJumped = " + anim.GetBool("PlayerJumped")
+                                        + " IsInWater = " + anim.GetBool("IsInWater")
+                                        + " IsGrounded = " + anim.GetBool("IsGrounded")
+                                        + " HasGroundBelow = " + anim.GetBool("HasGroundBelow")
+                                        + " CanClimbTopToBot = " + anim.GetBool("CanClimbTopToBot")); 
+
         base.OnExitState();
     }
 

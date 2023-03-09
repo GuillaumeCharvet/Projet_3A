@@ -36,12 +36,12 @@ public class BuoyancyEffect : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("GROS PLOUF");
+            //Debug.Log("GROS PLOUF");
             var playerTop = capsule.transform.position.y + capsule.center.y + 0.5f * capsule.height + 0.7f;
             var playerBot = capsule.transform.position.y + capsule.center.y - 0.5f * capsule.height + 0.7f;
 
-            Debug.Log("playerTop" + playerTop);
-            Debug.Log("playerBot" + playerBot);
+            //Debug.Log("playerTop" + playerTop);
+            //Debug.Log("playerBot" + playerBot);
             if (playerTop <= waterHeight)
             {
                 //ApplyBuoyancyForce(cc, waterDensity * capsule.height);
@@ -49,7 +49,7 @@ public class BuoyancyEffect : MonoBehaviour
             }
             else
             {
-                Debug.Log("PAS FULL IMMERGE");
+                //Debug.Log("PAS FULL IMMERGE");
                 //ApplyBuoyancyForce(cc, waterDensity * (waterHeight - playerBot));
                 moveOther.forceOfWater = waterDensity * (waterHeight - playerBot);
             }
