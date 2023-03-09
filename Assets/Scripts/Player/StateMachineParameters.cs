@@ -49,7 +49,7 @@ public class StateMachineParameters : MonoBehaviour
     public float currentClimbStamina = 0f;
     public Vector3 currentNormalToClimb;
     private float stickingToSurfaceSpeed = 0.7f;
-    private float maxPlayerRotation = 10f;
+    private float maxPlayerRotation = 1f;
 
     [Header("GRAB LEDGE")]
 
@@ -125,7 +125,7 @@ public class StateMachineParameters : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + 0f * transform.up, -transform.up, out hit, Mathf.Infinity, layerMask))
         {
-            Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.yellow);
+            //Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.yellow);
 
             var angleSolToVertical = Vector3.Angle(Vector3.up, hit.normal);
             var distAB = r * (Mathf.Min(1f / Mathf.Cos(2f * Mathf.PI * angleSolToVertical / 360f), 3f) - 1f);
@@ -136,7 +136,7 @@ public class StateMachineParameters : MonoBehaviour
             if (hit.distance < distanceDefiningGroundedState + distAB + epsilonCheckGrounded)
             {
 
-                Debug.Log("distance to ground = " + hit.distance + ", distance AB : " + distAB);
+                //Debug.Log("distance to ground = " + hit.distance + ", distance AB : " + distAB);
                 return true;
             }
         }
@@ -505,14 +505,16 @@ public class StateMachineParameters : MonoBehaviour
         animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
         */
     }
-
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
         if (currentClimbStamina > 0f)
         {
-            transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.forward), Quaternion.Euler(-currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
             //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+            var quatFrom = transform.rotation;
+            var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+            transform.rotation = Quaternion.Lerp(quatFrom, quatTo, maxPlayerRotation * Time.deltaTime);
+
 
             Vector3 velocity = characterController.velocity;
 
@@ -534,10 +536,11 @@ public class StateMachineParameters : MonoBehaviour
             //Debug.Log("displacement " + displacement);
 
             currentClimbStamina -= displacement.magnitude;
+
+            //transform.position += displacement;
             characterController.Move(displacement);
         }
     }
-
     public void ClimbHanging(float maxClimbSpeed, float maxClimbAcceleration)
     {
         if (currentClimbStamina > 0f)
@@ -558,10 +561,6 @@ public class StateMachineParameters : MonoBehaviour
             playerParameters.characterController.Move(displacement);
         }
     }
-    /*public void ChangeAnimSpeed()
-    {
-        animator.speed = 0.5f;
-    }*/
     public void Glide(float maxSpeed, float maxAcceleration)
     {
         // ******************************************************************
