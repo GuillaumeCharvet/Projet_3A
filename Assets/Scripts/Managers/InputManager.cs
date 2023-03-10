@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public enum ModeInput { Keyboard, Controller, Intern };
 public class InputManager : Manager
 {
     public ModeInput currentModeInput;
+
+    [SerializeField] private Transform trsfCams;
 
     private float horizontalInput;
     private float verticalInput;
@@ -29,6 +32,50 @@ public class InputManager : Manager
     private void Awake()
     {
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+    }
+
+    private void Start()
+    {
+        switch (currentModeInput)
+        {
+            case ModeInput.Keyboard:
+
+                Transform[] allChildren = trsfCams.GetComponentsInChildren<Transform>();
+                foreach (Transform child in allChildren)
+                {
+                    var cineFree = child.GetComponent<CinemachineFreeLook>();
+                    if (cineFree != null)
+                    {
+                        child.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Mouse Y";
+                        child.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Mouse X";
+                    }
+                }
+
+                break;
+
+            case ModeInput.Controller:
+
+                Transform[] allChildren2 = trsfCams.GetComponentsInChildren<Transform>();
+                foreach (Transform child in allChildren2)
+                {
+                    var cineFree = child.GetComponent<CinemachineFreeLook>();
+                    if (cineFree != null)
+                    {
+                        child.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "HorizontalR";
+                        child.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "VerticalR";
+                    }
+                }
+
+                break;
+
+            case ModeInput.Intern:
+
+                break;
+
+            default:
+
+                break;
+        }
     }
 
     void Update()
@@ -57,11 +104,11 @@ public class InputManager : Manager
 
             case ModeInput.Controller:
 
-                horizontalInput = Input.GetAxis("Horizontal");
-                verticalInput = Input.GetAxis("Vertical");
+                horizontalInput = Input.GetAxis("HorizontalL");
+                verticalInput = Input.GetAxis("VerticalL");
 
-                mouseXInput = Input.GetAxis("Mouse X");
-                mouseYInput = Input.GetAxis("Mouse Y");
+                mouseXInput = Input.GetAxis("HorizontalR");
+                mouseYInput = Input.GetAxis("VerticalR");
 
                 if (Input.GetButtonDown("XboxA"))
                 {
