@@ -50,6 +50,7 @@ public class StateMachineParameters : MonoBehaviour
     public Vector3 currentNormalToClimb;
     private float stickingToSurfaceSpeed = 0.7f;
     private float maxPlayerRotation = 1f;
+    public float characterControlerHeightResetValue = 1.8f;
 
     [Header("GRAB LEDGE")]
 
@@ -163,7 +164,7 @@ public class StateMachineParameters : MonoBehaviour
         {
 
             //Debug.Log("TOP RAY HIT");
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
+            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
@@ -189,7 +190,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
         }
 
         if (!middleOfClimbing)
@@ -199,7 +200,7 @@ public class StateMachineParameters : MonoBehaviour
             if (Physics.Raycast(transform.position + 1.5f * transform.up, transform.forward, out hitMid, 5f, layerMask))
             {
                 //Debug.Log("MID RAY HIT");
-                //Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * hitMid.distance, Color.red);
+                Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * hitMid.distance, Color.red);
 
                 if (hitMid.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
@@ -227,7 +228,7 @@ public class StateMachineParameters : MonoBehaviour
             }
             else
             {
-                //Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * 5f, Color.yellow);
+                Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * 5f, Color.yellow);
             }
 
             /*
@@ -419,6 +420,12 @@ public class StateMachineParameters : MonoBehaviour
     public void Move(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
+
+        if (isInWaterNextFixedUpdate)
+        {
+            velocity.x *= 0.98f;
+            velocity.z *= 0.98f;
+        }
 
         // Check Input to determine direction
         Vector2 playerInput;
