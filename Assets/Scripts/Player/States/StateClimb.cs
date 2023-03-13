@@ -13,6 +13,9 @@ public class StateClimb : StateBehaviourParent
 
     public override void OnExitState()
     {
+
+        reader.cc.height = reader.smp.characterControlerHeightResetValue;
+        reader.cc.center = 0.85f * Vector3.up;
         /*
         reader.GetComponent<CharacterController>().enabled = true;
         reader.GetComponent<CapsuleCollider>().enabled = false;
@@ -27,19 +30,23 @@ public class StateClimb : StateBehaviourParent
         reader.smp.UpdateCanClimbTopRay();
         reader.smp.UpdateCanClimbUp();
 
-
         base.Update();
     }
 
     protected override void OnEnterState()
     {
         reader.smp.currentModeMovement = ModeMovement.Climb;
+
         /*
         reader.GetComponent<CharacterController>().enabled = false;
         reader.GetComponent<CapsuleCollider>().enabled = true;
         var rgbd = reader.gameObject.AddComponent<Rigidbody>();
         rgbd.isKinematic = true;
         */
+
+        reader.cc.height = 0;
+        reader.cc.center = 0.5f * Vector3.up;
+
         base.OnEnterState();
     }
 }
