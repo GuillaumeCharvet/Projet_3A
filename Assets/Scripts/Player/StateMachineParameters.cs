@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Analytics;
 //using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
@@ -119,8 +120,19 @@ public class StateMachineParameters : MonoBehaviour
         animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
     }
 
+    private void OnDrawGizmos()
+    {
+        var cc = GetComponent<CharacterController>();
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position + (cc.radius - 0.05f) * transform.up, cc.radius + epsilonCheckGrounded);
+        Gizmos.DrawSphere(transform.position + ((characterControlerHeightResetValue - 0.1f) / 2f) * transform.up, cc.radius + epsilonCheckGrounded);
+        Gizmos.DrawSphere(transform.position + (characterControlerHeightResetValue - (cc.radius + 0.05f)) * transform.up, cc.radius + epsilonCheckGrounded);
+    }
+
     public bool CheckIsGrounded()
     {
+        // VERSION 1
+        /*
         //if(characterController.isGrounded) { Debug.Log("mais pourquoi :(((((((((((((((((((((((((((((((((((((((((("); }
         var r = radius;
         RaycastHit hit;
@@ -146,6 +158,38 @@ public class StateMachineParameters : MonoBehaviour
             //Debug.Log("**************************************************************");
             //Debug.Log("RAYCAST DOESNT HIT");
         }
+        return false;
+        */
+
+        // VERSION 2
+        /*
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position + (characterController.radius - 0.05f) * transform.up, characterController.radius, Vector3.zero, out hit, characterController.radius + epsilonCheckGrounded, layerMask))
+        {
+            Debug.Log("SPHERECAST 1");
+            return true;
+        }
+        else if(Physics.SphereCast(transform.position + ((characterController.height - 0.1f) / 2f) * transform.up, characterController.radius, Vector3.zero, out hit, characterController.radius + epsilonCheckGrounded, layerMask))
+        {
+            Debug.Log("SPHERECAST 2");
+            return true;
+        }
+        else if (Physics.SphereCast(transform.position + (characterController.height - (characterController.radius + 0.05f)) * transform.up, characterController.radius, Vector3.zero, out hit, characterController.radius + epsilonCheckGrounded, layerMask))
+        {
+            Debug.Log("SPHERECAST 3");
+            return true;
+        }
+        Debug.Log("SPHERECAST 4");
+        return false;
+        */
+        // VERSION 3
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMask))
+        {
+            Debug.Log("SPHERECAST 1");
+            return true;
+        }
+        Debug.Log("SPHERECAST 2");
         return false;
     }
     public bool CheckIfClimbingTopToBot()
@@ -472,7 +516,7 @@ public class StateMachineParameters : MonoBehaviour
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
-            velocity.y *= 0.98f;
+            velocity.y *= 0.96f;
         }
         else velocity.y *= 0.999f;
 
@@ -744,7 +788,7 @@ public class StateMachineParameters : MonoBehaviour
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
-        animator.SetBool("" + parameterName, (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
+        animator.SetBool(parameterName, (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
     }
     public void UpdateIsGrounded()
     {
