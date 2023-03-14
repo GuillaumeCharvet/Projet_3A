@@ -7,6 +7,7 @@ public class StateBehaviourReader : MonoBehaviour
 
     public MovementParameters mp;
     public StateMachineParameters smp;
+    public CharacterController cc;
 
     private StateBehaviourParent currentState;
 
