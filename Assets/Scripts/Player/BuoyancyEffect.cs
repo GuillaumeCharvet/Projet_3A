@@ -15,7 +15,7 @@ public class BuoyancyEffect : MonoBehaviour
     {
         colliderBox = GetComponent<BoxCollider>();
         waterHeight = transform.position.y + transform.localScale.y / 2f + colliderBox.center.y + 0.5f * colliderBox.size.y;
-        Debug.Log("waterHeight" + waterHeight);
+        //Debug.Log("waterHeight" + waterHeight);
     }
 
     private void OnTriggerEnter(Collider other)

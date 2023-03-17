@@ -25,7 +25,9 @@ public class StateGlide : StateBehaviourParent
                                         + " IsInWater = " + anim.GetBool("IsInWater")
                                         + " IsGrounded = " + anim.GetBool("IsGrounded")
                                         + " HasGroundBelow = " + anim.GetBool("HasGroundBelow")
-                                        + " CanClimbTopToBot = " + anim.GetBool("CanClimbTopToBot")); 
+                                        + " CanClimbTopToBot = " + anim.GetBool("CanClimbTopToBot"));
+
+        reader.transform.rotation = Quaternion.Euler(0f, reader.transform.rotation.eulerAngles.y, 0f);
 
         base.OnExitState();
     }
