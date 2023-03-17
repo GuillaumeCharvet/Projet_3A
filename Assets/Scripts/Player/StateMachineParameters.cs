@@ -53,6 +53,7 @@ public class StateMachineParameters : MonoBehaviour
     private float stickingToSurfaceEpsilon = 0.0005f;
     private float maxPlayerRotation = 8f;
     public float characterControlerHeightResetValue = 1.8f;
+    public bool isDuringFirst2SecondsOfClimbing = false;
 
     [Header("GRAB LEDGE")]
 
@@ -333,10 +334,10 @@ public class StateMachineParameters : MonoBehaviour
 
         }*/
 
-        if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMask))
         {
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.blue);
+            Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * hitTop.distance, Color.blue);
 
             if (hitTop.distance <= grabLedgeDistance + correctiveGrabDistance)
             {
@@ -362,7 +363,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            //Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -571,15 +572,18 @@ public class StateMachineParameters : MonoBehaviour
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
             //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
 
-            var quatFrom = transform.rotation;
             //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+            var quatFrom = transform.rotation;
+            var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
             var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, Mathf.Abs(inputManager.VerticalInput) * maxPlayerRotation * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
 
             quatFrom = transform.rotation;
+            var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
             var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, Mathf.Abs(inputManager.HorizontalInput) * maxPlayerRotation * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
 
 
@@ -592,6 +596,9 @@ public class StateMachineParameters : MonoBehaviour
 
             var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
             var normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+            
+            //TODO : sticking to surface potential bug
+            Debug.Log("");
 
             Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
 
@@ -795,6 +802,13 @@ public class StateMachineParameters : MonoBehaviour
 
         moveNormalToDirection *= 0.97f;
     }
+    public IEnumerator ChangeBoolValueFor2Seconds()
+    {
+        isDuringFirst2SecondsOfClimbing = true;
+        yield return new WaitForSeconds(2f);
+        isDuringFirst2SecondsOfClimbing = false;
+    }
+
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {

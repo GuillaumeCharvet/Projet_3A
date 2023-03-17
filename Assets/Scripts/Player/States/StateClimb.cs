@@ -45,6 +45,8 @@ public class StateClimb : StateBehaviourParent
         rgbd.isKinematic = true;
         */
 
+        reader.smp.StartCoroutine("ChangeBoolValueFor2Seconds");
+
         reader.cc.height = 0;
         reader.cc.center = 0.5f * Vector3.up;
 
