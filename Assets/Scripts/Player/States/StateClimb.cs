@@ -16,6 +16,7 @@ public class StateClimb : StateBehaviourParent
 
         reader.cc.height = reader.smp.characterControlerHeightResetValue;
         reader.cc.center = 0.85f * Vector3.up;
+
         /*
         reader.GetComponent<CharacterController>().enabled = true;
         reader.GetComponent<CapsuleCollider>().enabled = false;
