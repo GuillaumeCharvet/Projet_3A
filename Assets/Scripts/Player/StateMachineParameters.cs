@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -26,7 +27,7 @@ public class StateMachineParameters : MonoBehaviour
     public float epsilonCheckGrounded = 0.001f;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
-    private float grabToClimbDistance = 1.2f;
+    private float grabToClimbDistance = 1.0f;
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
@@ -37,7 +38,6 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] public float gravity = 1.2f;
 
     [Header("RUN/JUMP")]
-
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
@@ -49,9 +49,11 @@ public class StateMachineParameters : MonoBehaviour
     public float maxClimbStamina = 10f;
     public float currentClimbStamina = 0f;
     public Vector3 currentNormalToClimb;
-    private float stickingToSurfaceSpeed = 1.2f;
-    private float maxPlayerRotation = 2f;
+    private float stickingToSurfaceSpeed = 300f;
+    private float stickingToSurfaceEpsilon = 0.0005f;
+    private float maxPlayerRotation = 8f;
     public float characterControlerHeightResetValue = 1.8f;
+    public bool isDuringFirst2SecondsOfClimbing = false;
 
     [Header("GRAB LEDGE")]
 
@@ -69,6 +71,16 @@ public class StateMachineParameters : MonoBehaviour
 
     public Vector3 windEffect = Vector3.zero;
 
+    private Vector3 moveDirection = Vector3.zero;
+    private Vector3 moveNormalToDirection = Vector3.zero;
+
+    [SerializeField] public float gliderSpeed = 0f;
+    [SerializeField] private float gliderNormalSpeed = 0f;
+
+    [SerializeField] private float maxGliderSpeed = 50f;
+    [SerializeField] private float accelerationMaxGlider = 30f;
+    [SerializeField] private float gliderDescentFactor = 0.1f;
+
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
     public BuoyancyEffect lastWaterVisited;
@@ -78,11 +90,6 @@ public class StateMachineParameters : MonoBehaviour
 
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
-
-    [SerializeField] public float gliderSpeed = 0f;
-    [SerializeField] private float maxGliderSpeed = 50f;
-    [SerializeField] private float accelerationMaxGlider = 30f;
-    [SerializeField] private float gliderDescentFactor = 0.1f;
 
     public float angleDiff = 0f;
 
@@ -327,10 +334,10 @@ public class StateMachineParameters : MonoBehaviour
 
         }*/
 
-        if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMask))
         {
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.blue);
+            Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * hitTop.distance, Color.blue);
 
             if (hitTop.distance <= grabLedgeDistance + correctiveGrabDistance)
             {
@@ -356,7 +363,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            //Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -564,9 +571,20 @@ public class StateMachineParameters : MonoBehaviour
         {
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
             //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+            //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
             var quatFrom = transform.rotation;
-            var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
-            transform.rotation = Quaternion.Lerp(quatFrom, quatTo, maxPlayerRotation * Time.deltaTime);
+            var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
+            var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
+            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+            quatFrom = transform.rotation;
+            var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
+            var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
+            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
 
 
             Vector3 velocity = characterController.velocity;
@@ -575,22 +593,24 @@ public class StateMachineParameters : MonoBehaviour
             playerInput.x = inputManager.HorizontalInput;
             playerInput.y = inputManager.VerticalInput;
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right + ((distanceToGrabbedWall > distanceToGrabbedWallLimit)? stickingToSurfaceSpeed : 0f) * transform.forward) * maxClimbSpeed;//new Vector3(playerInput.x, playerInput.y, 0f) * maxClimbSpeed;
 
-            //Debug.Log("desiredVelocity " + desiredVelocity);
+            var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
+            var normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+            
+            //TODO : sticking to surface potential bug
+            Debug.Log("");
+
+            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
 
             float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
             velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
-            Vector3 displacement = velocity * Time.deltaTime;
-
-            //Debug.Log("displacement " + displacement);
+            Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
 
             currentClimbStamina -= displacement.magnitude;
 
-            //transform.position += displacement;
             characterController.Move(displacement);
         }
     }
@@ -765,17 +785,30 @@ public class StateMachineParameters : MonoBehaviour
             transform.localRotation = Quaternion.Euler(Mathf.Max(eulerX - 0.8f, -45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
 
-        var acceleration = accelerationMaxGlider * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right)) ;
+        var windBoost = Vector3.Dot(windEffect, moveDirection.normalized);
+        var windNormalToMovement = windEffect - windBoost * moveDirection.normalized;
+
+        var acceleration = accelerationMaxGlider * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right)) + windBoost;
         //Debug.Log("acceleration = " + acceleration);
 
+        moveNormalToDirection += windNormalToMovement * Time.deltaTime;
 
         gliderSpeed = Mathf.Max(Mathf.Min(gliderSpeed + acceleration * Time.deltaTime, maxGliderSpeed), 0f);
 
-        playerParameters.transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x + (1f / (1f + gliderSpeed * gliderSpeed)) * 3f, playerParameters.transform.localRotation.eulerAngles.y, playerParameters.transform.localRotation.eulerAngles.z);
+        transform.localRotation = Quaternion.Euler(playerParameters.transform.localRotation.eulerAngles.x + (1f / (1f + gliderSpeed * gliderSpeed)) * 3f, playerParameters.transform.localRotation.eulerAngles.y, playerParameters.transform.localRotation.eulerAngles.z);
 
-        playerParameters.moveDirection = gliderSpeed * (playerParameters.transform.forward + gliderDescentFactor * Vector3.down) * Time.deltaTime + windEffect * Time.deltaTime;
-        playerParameters.characterController.Move(playerParameters.moveDirection);
+        moveDirection = gliderSpeed * (playerParameters.transform.forward + gliderDescentFactor * Vector3.down) * Time.deltaTime + moveNormalToDirection;
+        characterController.Move(moveDirection);
+
+        moveNormalToDirection *= 0.97f;
     }
+    public IEnumerator ChangeBoolValueFor2Seconds()
+    {
+        isDuringFirst2SecondsOfClimbing = true;
+        yield return new WaitForSeconds(2f);
+        isDuringFirst2SecondsOfClimbing = false;
+    }
+
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
