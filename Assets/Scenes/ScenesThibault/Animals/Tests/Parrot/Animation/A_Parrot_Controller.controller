@@ -33,16 +33,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -1346559564727349784}
-    m_Position: {x: 580, y: 220, z: 0}
+    m_Position: {x: 540, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5633336566495133983}
-    m_Position: {x: 340, y: 220, z: 0}
+    m_Position: {x: 300, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 583315542008537007}
-    m_Position: {x: 820, y: 220, z: 0}
+    m_Position: {x: 780, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1374183066535507840}
-    m_Position: {x: 580, y: 280, z: 0}
+    m_Position: {x: 540, y: 180, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -142,12 +142,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 3
+    m_ConditionEvent: ParrotFlyRandom
+    m_EventTreshold: 33
   - m_ConditionMode: 1
     m_ConditionEvent: BoolParrotFly
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: ParrotFlyRandom
-    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1374183066535507840}
   m_Solo: 0
@@ -236,12 +236,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: ParrotFlyRandom
+    m_EventTreshold: 34
   - m_ConditionMode: 1
     m_ConditionEvent: BoolParrotFly
     m_EventTreshold: 0
-  - m_ConditionMode: 4
-    m_ConditionEvent: ParrotFlyRandom
-    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1346559564727349784}
   m_Solo: 0
