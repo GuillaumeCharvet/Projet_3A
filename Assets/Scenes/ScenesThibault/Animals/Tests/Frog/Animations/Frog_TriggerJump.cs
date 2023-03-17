@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Driller_TriggerFly : MonoBehaviour
+public class Frog_TriggerFrogJump : MonoBehaviour
 {
-    public bool BoolFly;
-    public GameObject TriggerZoneFly;
+    public bool BoolFrogJump;
+    public GameObject Frog_TriggerZoneJump;
     public Animator animator;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolFly", true);
+            animator.SetBool("BoolFrogJump", true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolFly", false);
+            animator.SetBool("BoolFrogJump", false);
     }
 
 }

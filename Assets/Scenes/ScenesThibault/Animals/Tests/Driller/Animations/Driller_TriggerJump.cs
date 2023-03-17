@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Driller_TriggerJump : MonoBehaviour
 {
-    public bool BoolJump;
-    public GameObject TriggerZoneJump;
+    public bool BoolDrillerJump;
+    public GameObject Driller_TriggerZoneJump;
     public Animator animator;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolJump", true);
+            animator.SetBool("BoolDrillerJump", true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolJump", false);
+            animator.SetBool("BoolDrillerJump", false);
     }
 
 }

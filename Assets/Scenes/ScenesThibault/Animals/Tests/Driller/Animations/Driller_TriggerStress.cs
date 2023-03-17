@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Driller_TriggerStress : MonoBehaviour
 {
-    public bool BoolStress;
-    public GameObject TriggerZoneStress;
+    public bool BoolDrillerStress;
+    public GameObject Driller_TriggerZoneStress;
     public Animator animator;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolStress", true);
+            animator.SetBool("BoolDrillerStress", true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolStress", false);
+            animator.SetBool("BoolDrillerStress", false);
     }
 
 }
