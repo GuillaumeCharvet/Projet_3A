@@ -27,7 +27,7 @@ public class StateMachineParameters : MonoBehaviour
     public float epsilonCheckGrounded = 0.001f;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
-    private float grabToClimbDistance = 1.0f;
+    private float grabToClimbDistance = 0.7f;
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
@@ -53,6 +53,7 @@ public class StateMachineParameters : MonoBehaviour
     private float stickingToSurfaceEpsilon = 0.0005f;
     private float maxPlayerRotation = 8f;
     public float characterControlerHeightResetValue = 1.8f;
+    public bool isDuringFirst2SecondsOfClimbing = false;
 
     [Header("GRAB LEDGE")]
 
@@ -109,9 +110,9 @@ public class StateMachineParameters : MonoBehaviour
 
         UpdateInputValue();
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
-        animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);//Vector3.Dot(characterController.velocity, transform.forward));
+        animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude); //Vector3.Dot(characterController.velocity, transform.forward));
 
-        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb));
+        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb.x * Vector3.right + currentNormalToClimb.z * Vector3.forward));
         animator.SetBool("IsInWater", isInWaterNextFixedUpdate);
 
         /*
@@ -333,10 +334,10 @@ public class StateMachineParameters : MonoBehaviour
 
         }*/
 
-        if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMask))
         {
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.blue);
+            Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * hitTop.distance, Color.blue);
 
             if (hitTop.distance <= grabLedgeDistance + correctiveGrabDistance)
             {
@@ -362,7 +363,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            //Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -571,17 +572,19 @@ public class StateMachineParameters : MonoBehaviour
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
             //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
 
-            var quatFrom = transform.rotation;
             //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+            var quatFrom = transform.rotation;
+            var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
             var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, Mathf.Abs(inputManager.VerticalInput) * maxPlayerRotation * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
 
             quatFrom = transform.rotation;
+            var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
             var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, Mathf.Abs(inputManager.HorizontalInput) * maxPlayerRotation * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
 
             Vector3 velocity = characterController.velocity;
 
@@ -590,8 +593,18 @@ public class StateMachineParameters : MonoBehaviour
             playerInput.y = inputManager.VerticalInput;
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-            var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
-            var normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+            float normalToWallVelocity;
+            if (distanceToGrabbedWall < grabToClimbDistance)
+            {
+                var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
+                normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+            }
+            else
+            {
+                normalToWallVelocity = 0f;
+            }
+
+            //TODO : sticking to surface potential bug
 
             Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
 
@@ -607,6 +620,63 @@ public class StateMachineParameters : MonoBehaviour
             characterController.Move(displacement);
         }
     }
+    public void Fall(float maxSpeed, float maxAcceleration, bool onGround)
+    {
+        Vector3 velocity = characterController.velocity;
+
+        // Check Input to determine direction
+        Vector2 playerInput;
+        if (true)
+        {
+            playerInput.x = inputManager.HorizontalInput;
+            playerInput.y = inputManager.VerticalInput;
+        }
+        else
+        {
+            playerInput = Vector2.zero;
+        }
+
+        // Clamp it to disallow strafe walking
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+        // Add camera angle to the input vector so that the player moves where the camera looks
+        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        // Modify the direction the player model is looking
+        if (playerInput.magnitude >= 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        Vector3 targetDirection = playerInput.magnitude * transform.forward;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+        // Apply gravity if not grounded
+        if (animator.GetBool("PlayerJumped"))
+            velocity.y += jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            velocity.y = 0f;
+        else
+            velocity.y -= gravity * Time.deltaTime;
+
+        // Apply appropriate friction force depending if in water or not
+
+        if (isInWaterNextFixedUpdate)
+        {
+            velocity.y += forceOfWater;
+            velocity.y *= 0.96f;
+        }
+        else velocity.y *= 0.999f;
+
+        // Move the player through its character controller
+        characterController.Move(velocity * Time.deltaTime);
+    }
+
     public void ClimbHanging(float maxClimbSpeed, float maxClimbAcceleration)
     {
         if (currentClimbStamina > 0f)
@@ -795,6 +865,13 @@ public class StateMachineParameters : MonoBehaviour
 
         moveNormalToDirection *= 0.97f;
     }
+    public IEnumerator ChangeBoolValueFor2Seconds()
+    {
+        isDuringFirst2SecondsOfClimbing = true;
+        yield return new WaitForSeconds(2f);
+        isDuringFirst2SecondsOfClimbing = false;
+    }
+
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
