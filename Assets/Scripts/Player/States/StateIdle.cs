@@ -36,6 +36,8 @@ public class StateIdle : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetPlayerCollider();
+
         reader.transform.rotation = Quaternion.Euler(0f, reader.transform.rotation.eulerAngles.y, 0f);
         reader.smp.ResetStamina();
         base.OnEnterState();

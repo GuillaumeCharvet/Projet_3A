@@ -37,6 +37,8 @@ public class StateJump : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetPlayerCollider();
+
         base.OnEnterState();
     }
 }

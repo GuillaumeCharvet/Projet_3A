@@ -39,6 +39,8 @@ public class StateWalk : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetPlayerCollider();
+
         reader.smp.ResetStamina();
         base.OnEnterState();
     }

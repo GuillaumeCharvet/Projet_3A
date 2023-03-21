@@ -23,13 +23,15 @@ public class StateGrabLedge : StateBehaviourParent
         reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateCanClimbBotRay();
 
-        reader.smp.currentModeMovement = ModeMovement.GrabLedge;
-
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.currentModeMovement = ModeMovement.GrabLedge;
+
+        reader.smp.SetPlayerColliderToClimb();
+
         base.OnEnterState();
     }
 }

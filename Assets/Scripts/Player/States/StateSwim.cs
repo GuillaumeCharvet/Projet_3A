@@ -31,6 +31,8 @@ public class StateSwim : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetPlayerCollider();
+
         reader.smp.ResetStamina();
         base.OnEnterState();
     }
