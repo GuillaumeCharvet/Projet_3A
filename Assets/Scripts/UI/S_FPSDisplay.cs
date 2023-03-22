@@ -11,6 +11,9 @@ public class S_FPSDisplay : MonoBehaviour
 
     void Update()
     {
+        if (S_Debugger.instance.toogle)
+            return;
+
         time += Time.deltaTime;
 
         frameCount++;
@@ -22,7 +25,6 @@ public class S_FPSDisplay : MonoBehaviour
 
             time -= pollingTime;
             frameCount = 0;
-        }
-        //S_Debugger.instance.toogle;        
+        }        
     }
 }

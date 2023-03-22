@@ -905,14 +905,14 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
-        //Debug.Log("transform.localRotation.eulerAngles.z = " + transform.localRotation.eulerAngles.z);
-
+        // Rotate the player around the z axis to go along the change of direction
         var eulerZ = transform.localRotation.eulerAngles.z > 180 ? transform.localRotation.eulerAngles.z - 360 : transform.localRotation.eulerAngles.z;
         if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 1.4f, Mathf.Max(eulerZ - 0.4f, -15f));
         else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y - 1.4f, Mathf.Min(eulerZ + 0.4f, +15f));
         else if (eulerZ > 0.2f)         transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
         else if (eulerZ < -0.2f)        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
 
+        // Rotate the player around the x axis to go along acceleration and deceleration
         if (vertical > 0.1f && gliderSpeed > 1f)
         {
             var eulerX = transform.localRotation.eulerAngles.x > 180 ? transform.localRotation.eulerAngles.x - 360 : transform.localRotation.eulerAngles.x;
@@ -924,11 +924,11 @@ public class StateMachineParameters : MonoBehaviour
             transform.localRotation = Quaternion.Euler(Mathf.Max(eulerX - 0.8f, -45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
 
+        // Apply effect of the wind force
         var windBoost = Vector3.Dot(windEffect, moveDirection.normalized);
         var windNormalToMovement = windEffect - windBoost * moveDirection.normalized;
 
         var acceleration = accelerationMaxGlider * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right)) + windBoost;
-        //Debug.Log("acceleration = " + acceleration);
 
         moveNormalToDirection += windNormalToMovement * Time.deltaTime;
 
