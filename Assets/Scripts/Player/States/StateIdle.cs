@@ -29,13 +29,13 @@ public class StateIdle : StateBehaviourParent
         
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedUp);
 
-        reader.smp.currentModeMovement = ModeMovement.Idle;
-
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.currentModeMovement = ModeMovement.Idle;
+
         reader.smp.ResetPlayerCollider();
 
         reader.transform.rotation = Quaternion.Euler(0f, reader.transform.rotation.eulerAngles.y, 0f);

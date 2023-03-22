@@ -22,13 +22,13 @@ public class StateHang : StateBehaviourParent
         reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateStopHanging();
 
-        reader.smp.currentModeMovement = ModeMovement.Hang;
-
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.currentModeMovement = ModeMovement.Hang;
+
         reader.smp.ResetPlayerCollider();
 
         base.OnEnterState();

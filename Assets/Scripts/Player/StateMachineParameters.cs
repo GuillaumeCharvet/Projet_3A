@@ -44,6 +44,7 @@ public class StateMachineParameters : MonoBehaviour
 
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
+    public Vector3 currentGroundNormal;
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
@@ -197,6 +198,7 @@ public class StateMachineParameters : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMask))
         {
+            currentGroundNormal = hit.normal;
             //Debug.Log("SPHERECAST 1");
             return true;
         }
@@ -510,6 +512,13 @@ public class StateMachineParameters : MonoBehaviour
         // Give the movement inertia by changing the velocity from its previous value to its desired value 
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
         Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+
+        // Take into account ground angle to slow down speed the bigger the slope
+        var groundAngleFromHorizontal = Vector3.Angle(Vector3.up, currentGroundNormal);
+        var playerInputNormalized = playerInput.normalized;
+        var groundAngleInfluence = Vector3.Dot(currentGroundNormal, new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.y));
+        desiredVelocity *= (1f + 0.8f * groundAngleInfluence);
+
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
@@ -522,8 +531,7 @@ public class StateMachineParameters : MonoBehaviour
         else
             velocity.y -= gravity * Time.deltaTime;
 
-        // Apply appropriate friction force depending if in water or not
-        
+        // Apply appropriate friction force depending if in water or not        
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
@@ -566,6 +574,68 @@ public class StateMachineParameters : MonoBehaviour
         // Horizontal player rotation
         animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
         */
+    }
+    public void Swim(float maxSpeed, float maxAcceleration, bool onGround)
+    {
+        Vector3 velocity = characterController.velocity;
+
+        if (isInWaterNextFixedUpdate)
+        {
+            velocity.x *= 0.98f;
+            velocity.z *= 0.98f;
+        }
+
+        // Check Input to determine direction
+        Vector2 playerInput;
+        if (true)
+        {
+            playerInput.x = inputManager.HorizontalInput;
+            playerInput.y = inputManager.VerticalInput;
+        }
+        else
+        {
+            playerInput = Vector2.zero;
+        }
+
+        // Clamp it to disallow strafe walking
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+        // Add camera angle to the input vector so that the player moves where the camera looks
+        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        // Modify the direction the player model is looking
+        if (playerInput.magnitude >= 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        Vector3 targetDirection = playerInput.magnitude * transform.forward;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+
+        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+        // Apply gravity if not grounded
+        if (animator.GetBool("PlayerJumped"))
+            velocity.y += jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            velocity.y = 0f;
+        else
+            velocity.y -= gravity * Time.deltaTime;
+
+        // Apply appropriate friction force depending if in water or not        
+        if (isInWaterNextFixedUpdate)
+        {
+            velocity.y += forceOfWater;
+            velocity.y *= 0.96f;
+        }
+        else velocity.y *= 0.999f;
+
+        // Move the player through its character controller
+        characterController.Move(velocity * Time.deltaTime);
     }
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
