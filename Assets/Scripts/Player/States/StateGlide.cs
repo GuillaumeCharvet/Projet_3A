@@ -38,13 +38,15 @@ public class StateGlide : StateBehaviourParent
 
         reader.smp.UpdateCanClimbTopToBot();
 
-        reader.smp.currentModeMovement = ModeMovement.Glide;
-
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.currentModeMovement = ModeMovement.Glide;
+
+        reader.smp.ResetPlayerCollider();
+
         reader.smp.gliderSpeed = 1f;
         base.OnEnterState();
     }

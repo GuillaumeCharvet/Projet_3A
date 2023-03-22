@@ -29,13 +29,16 @@ public class StateFall : StateBehaviourParent
 
         reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateStartGlide();
-        reader.smp.currentModeMovement = ModeMovement.Fall;
 
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.currentModeMovement = ModeMovement.Fall;
+
+        reader.smp.ResetPlayerCollider();
+
         base.OnEnterState();
     }
 }

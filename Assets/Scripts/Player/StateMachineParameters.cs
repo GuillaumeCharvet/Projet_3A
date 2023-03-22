@@ -13,6 +13,7 @@ public class StateMachineParameters : MonoBehaviour
     private Animator animator;
     private MovementParameters playerParameters;
     private CharacterController characterController;
+    private Rigidbody rigidBodyPlayer;
     private InputManager inputManager;
 
     [SerializeField] private Transform camTrsf;
@@ -97,6 +98,7 @@ public class StateMachineParameters : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        rigidBodyPlayer = GetComponent<Rigidbody>();
         inputManager = ManagerManager.Instance.GetManager<InputManager>();
         playerParameters = GetComponent<MovementParameters>();
 
@@ -594,7 +596,7 @@ public class StateMachineParameters : MonoBehaviour
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
             float normalToWallVelocity;
-            if (distanceToGrabbedWall < grabToClimbDistance)
+            if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
             {
                 var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
                 normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
@@ -617,6 +619,10 @@ public class StateMachineParameters : MonoBehaviour
 
             currentClimbStamina -= displacement.magnitude;
 
+            /*if (GetComponent<Rigidbody>() != null)
+            {
+                rigidBodyPlayer.MovePosition(transform.position + displacement);
+            }*/
             characterController.Move(displacement);
         }
     }
@@ -871,7 +877,20 @@ public class StateMachineParameters : MonoBehaviour
         yield return new WaitForSeconds(2f);
         isDuringFirst2SecondsOfClimbing = false;
     }
+    public void ResetPlayerCollider()
+    {
+        characterController.height = characterControlerHeightResetValue;
+        characterController.center = 0.85f * Vector3.up;
 
+        GetComponent<CapsuleCollider>().enabled = false;
+    }
+    public void SetPlayerColliderToClimb()
+    {
+        GetComponent<CapsuleCollider>().enabled = true;
+
+        characterController.height = 0;
+        characterController.center = 0.5f * Vector3.up;
+    }
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {

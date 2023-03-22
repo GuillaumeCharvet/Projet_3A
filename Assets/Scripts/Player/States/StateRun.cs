@@ -37,6 +37,8 @@ public class StateRun : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetPlayerCollider();
+
         reader.smp.ResetStamina();
         base.OnEnterState();
     }

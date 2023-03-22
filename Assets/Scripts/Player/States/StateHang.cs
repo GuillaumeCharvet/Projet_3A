@@ -29,6 +29,8 @@ public class StateHang : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.ResetPlayerCollider();
+
         base.OnEnterState();
     }
 }
