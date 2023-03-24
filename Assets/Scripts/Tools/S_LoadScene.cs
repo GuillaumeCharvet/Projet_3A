@@ -13,6 +13,7 @@ public class S_LoadScene : MonoBehaviour
         SceneManager.LoadScene("Scene_Pierre_Deco", LoadSceneMode.Additive);
         SceneManager.LoadScene("Scene_Shader2", LoadSceneMode.Additive);
         SceneManager.LoadScene("ThibaultDecoverticalSlice", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scene_Ocean", LoadSceneMode.Additive);
         */
     }
 }
