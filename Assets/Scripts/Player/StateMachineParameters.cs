@@ -56,6 +56,7 @@ public class StateMachineParameters : MonoBehaviour
     private float maxPlayerRotation = 8f;
     public float characterControlerHeightResetValue = 1.8f;
     public bool isDuringFirst2SecondsOfClimbing = false;
+    private float wallJumpVelocity = 16f;
 
     [Header("GRAB LEDGE")]
 
@@ -129,7 +130,8 @@ public class StateMachineParameters : MonoBehaviour
     void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
-        animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+        //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+        animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
     }
 
     private void OnDrawGizmos()
@@ -639,61 +641,74 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
-        if (currentClimbStamina > 0f)
+
+        if (inputManager.IsSpaceJump && inputManager.VerticalInput > -0.1f)
         {
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
-            //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+            Debug.Log("DECOLLE DU MUR WESH");
+            transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
 
-            //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
-
-            var quatFrom = transform.rotation;
-            var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
-            var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
-            quatFrom = transform.rotation;
-            var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
-            var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
-            Vector3 velocity = characterController.velocity;
-
-            Vector2 playerInput;
-            playerInput.x = inputManager.HorizontalInput;
-            playerInput.y = inputManager.VerticalInput;
-            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-
-            float normalToWallVelocity;
-            if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
-            {
-                var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
-                normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
-            }
-            else
-            {
-                normalToWallVelocity = 0f;
-            }
-
-            //TODO : sticking to surface potential bug
-
-            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
-
-            float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
-            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
-            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-
-            Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
-
-            currentClimbStamina -= displacement.magnitude;
-
-            /*if (GetComponent<Rigidbody>() != null)
-            {
-                rigidBodyPlayer.MovePosition(transform.position + displacement);
-            }*/
+            var velocity = wallJumpVelocity * transform.forward;
+            Vector3 displacement = velocity * Time.deltaTime;
             characterController.Move(displacement);
+        }
+        else
+        {
+            if (currentClimbStamina > 0f)
+            {
+                //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
+                //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+                //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+                var quatFrom = transform.rotation;
+                var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
+                var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
+                transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+                quatFrom = transform.rotation;
+                var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
+                var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
+                transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+                Vector3 velocity = characterController.velocity;
+
+                Vector2 playerInput;
+                playerInput.x = inputManager.HorizontalInput;
+                playerInput.y = inputManager.VerticalInput;
+                playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+                float normalToWallVelocity;
+                if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
+                {
+                    var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
+                    normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+                }
+                else
+                {
+                    normalToWallVelocity = 0f;
+                }
+
+                //TODO : sticking to surface potential bug
+
+                Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
+
+                float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
+                velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+                velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+                velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+                Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
+
+                currentClimbStamina -= displacement.magnitude;
+
+                /*if (GetComponent<Rigidbody>() != null)
+                {
+                    rigidBodyPlayer.MovePosition(transform.position + displacement);
+                }*/
+                characterController.Move(displacement);
+            }
         }
     }
     public void Fall(float maxSpeed, float maxAcceleration, bool onGround)
