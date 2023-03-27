@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(Collider))]
 public class WindEffectOnGlider : MonoBehaviour

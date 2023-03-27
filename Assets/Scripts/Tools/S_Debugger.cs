@@ -5,12 +5,12 @@ using UnityEngine.Events;
 
 public class S_Debugger : MonoBehaviour
 {
-    private static S_Debugger instance;
+    public static S_Debugger instance;
     private List<DEBUG_MESSAGE> messageStack;
     private Dictionary<string, DEBUG_MESSAGE> objectStack;
     private Dictionary<string, UnityAction> actionStack;
     public Color defaultColor = Color.white;
-    private bool toogle = false;
+    public bool toogle = false;
 
     public bool GetToogle()
     {

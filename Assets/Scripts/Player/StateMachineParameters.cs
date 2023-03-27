@@ -44,6 +44,7 @@ public class StateMachineParameters : MonoBehaviour
 
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
+    public Vector3 currentGroundNormal;
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
@@ -55,6 +56,7 @@ public class StateMachineParameters : MonoBehaviour
     private float maxPlayerRotation = 8f;
     public float characterControlerHeightResetValue = 1.8f;
     public bool isDuringFirst2SecondsOfClimbing = false;
+    private float wallJumpVelocity = 16f;
 
     [Header("GRAB LEDGE")]
 
@@ -128,7 +130,8 @@ public class StateMachineParameters : MonoBehaviour
     void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
-        animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+        //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+        animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
     }
 
     private void OnDrawGizmos()
@@ -197,6 +200,7 @@ public class StateMachineParameters : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMask))
         {
+            currentGroundNormal = hit.normal;
             //Debug.Log("SPHERECAST 1");
             return true;
         }
@@ -510,6 +514,13 @@ public class StateMachineParameters : MonoBehaviour
         // Give the movement inertia by changing the velocity from its previous value to its desired value 
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
         Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+
+        // Take into account ground angle to slow down speed the bigger the slope
+        var groundAngleFromHorizontal = Vector3.Angle(Vector3.up, currentGroundNormal);
+        var playerInputNormalized = playerInput.normalized;
+        var groundAngleInfluence = Vector3.Dot(currentGroundNormal, new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.y));
+        desiredVelocity *= (1f + 0.8f * groundAngleInfluence);
+
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
@@ -522,8 +533,7 @@ public class StateMachineParameters : MonoBehaviour
         else
             velocity.y -= gravity * Time.deltaTime;
 
-        // Apply appropriate friction force depending if in water or not
-        
+        // Apply appropriate friction force depending if in water or not        
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
@@ -567,63 +577,138 @@ public class StateMachineParameters : MonoBehaviour
         animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
         */
     }
-    public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
+    public void Swim(float maxSpeed, float maxAcceleration, bool onGround)
     {
-        if (currentClimbStamina > 0f)
+        Vector3 velocity = characterController.velocity;
+
+        if (isInWaterNextFixedUpdate)
         {
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
-            //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+            velocity.x *= 0.98f;
+            velocity.z *= 0.98f;
+        }
 
-            //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
-
-            var quatFrom = transform.rotation;
-            var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
-            var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
-            quatFrom = transform.rotation;
-            var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
-            var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
-            Vector3 velocity = characterController.velocity;
-
-            Vector2 playerInput;
+        // Check Input to determine direction
+        Vector2 playerInput;
+        if (true)
+        {
             playerInput.x = inputManager.HorizontalInput;
             playerInput.y = inputManager.VerticalInput;
-            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+        }
+        else
+        {
+            playerInput = Vector2.zero;
+        }
 
-            float normalToWallVelocity;
-            if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
-            {
-                var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
-                normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
-            }
-            else
-            {
-                normalToWallVelocity = 0f;
-            }
+        // Clamp it to disallow strafe walking
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-            //TODO : sticking to surface potential bug
+        // Add camera angle to the input vector so that the player moves where the camera looks
+        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
+        // Modify the direction the player model is looking
+        if (playerInput.magnitude >= 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
-            float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
-            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
-            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        Vector3 targetDirection = playerInput.magnitude * transform.forward;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
 
-            Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
+        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
-            currentClimbStamina -= displacement.magnitude;
+        // Apply gravity if not grounded
+        if (animator.GetBool("PlayerJumped"))
+            velocity.y += jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            velocity.y = 0f;
+        else
+            velocity.y -= gravity * Time.deltaTime;
 
-            /*if (GetComponent<Rigidbody>() != null)
-            {
-                rigidBodyPlayer.MovePosition(transform.position + displacement);
-            }*/
+        // Apply appropriate friction force depending if in water or not        
+        if (isInWaterNextFixedUpdate)
+        {
+            velocity.y += forceOfWater;
+            velocity.y *= 0.96f;
+        }
+        else velocity.y *= 0.999f;
+
+        // Move the player through its character controller
+        characterController.Move(velocity * Time.deltaTime);
+    }
+    public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
+    {
+
+        if (inputManager.IsSpaceJump && inputManager.VerticalInput > -0.1f)
+        {
+            Debug.Log("DECOLLE DU MUR WESH");
+            transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
+
+            var velocity = wallJumpVelocity * transform.forward;
+            Vector3 displacement = velocity * Time.deltaTime;
             characterController.Move(displacement);
+        }
+        else
+        {
+            if (currentClimbStamina > 0f)
+            {
+                //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
+                //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+                //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+                var quatFrom = transform.rotation;
+                var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
+                var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
+                transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+                quatFrom = transform.rotation;
+                var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
+                var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
+                transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+                Vector3 velocity = characterController.velocity;
+
+                Vector2 playerInput;
+                playerInput.x = inputManager.HorizontalInput;
+                playerInput.y = inputManager.VerticalInput;
+                playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+                float normalToWallVelocity;
+                if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
+                {
+                    var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
+                    normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+                }
+                else
+                {
+                    normalToWallVelocity = 0f;
+                }
+
+                //TODO : sticking to surface potential bug
+
+                Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
+
+                float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
+                velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+                velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+                velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+                Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
+
+                currentClimbStamina -= displacement.magnitude;
+
+                /*if (GetComponent<Rigidbody>() != null)
+                {
+                    rigidBodyPlayer.MovePosition(transform.position + displacement);
+                }*/
+                characterController.Move(displacement);
+            }
         }
     }
     public void Fall(float maxSpeed, float maxAcceleration, bool onGround)
@@ -835,14 +920,14 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
-        //Debug.Log("transform.localRotation.eulerAngles.z = " + transform.localRotation.eulerAngles.z);
-
+        // Rotate the player around the z axis to go along the change of direction
         var eulerZ = transform.localRotation.eulerAngles.z > 180 ? transform.localRotation.eulerAngles.z - 360 : transform.localRotation.eulerAngles.z;
         if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 1.4f, Mathf.Max(eulerZ - 0.4f, -15f));
         else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y - 1.4f, Mathf.Min(eulerZ + 0.4f, +15f));
         else if (eulerZ > 0.2f)         transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
         else if (eulerZ < -0.2f)        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
 
+        // Rotate the player around the x axis to go along acceleration and deceleration
         if (vertical > 0.1f && gliderSpeed > 1f)
         {
             var eulerX = transform.localRotation.eulerAngles.x > 180 ? transform.localRotation.eulerAngles.x - 360 : transform.localRotation.eulerAngles.x;
@@ -854,11 +939,11 @@ public class StateMachineParameters : MonoBehaviour
             transform.localRotation = Quaternion.Euler(Mathf.Max(eulerX - 0.8f, -45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
 
+        // Apply effect of the wind force
         var windBoost = Vector3.Dot(windEffect, moveDirection.normalized);
         var windNormalToMovement = windEffect - windBoost * moveDirection.normalized;
 
         var acceleration = accelerationMaxGlider * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right)) + windBoost;
-        //Debug.Log("acceleration = " + acceleration);
 
         moveNormalToDirection += windNormalToMovement * Time.deltaTime;
 
