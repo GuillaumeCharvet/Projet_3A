@@ -24,6 +24,7 @@ public class StateClimb : StateBehaviourParent
     {
         reader.smp.Climb(maxclimbSpeed, maxClimbAcceleration);
         reader.smp.UpdateCanClimbTopRay();
+        reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateCanClimbUp();
 
         base.Update();
