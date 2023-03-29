@@ -920,6 +920,8 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
+
+        //TODO: Glider rotation smoothness
         // Rotate the player around the z axis to go along the change of direction
         var eulerZ = transform.localRotation.eulerAngles.z > 180 ? transform.localRotation.eulerAngles.z - 360 : transform.localRotation.eulerAngles.z;
         if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 1.4f, Mathf.Max(eulerZ - 0.4f, -15f));
