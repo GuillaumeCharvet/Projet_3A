@@ -45,6 +45,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
     public Vector3 currentGroundNormal;
+    [SerializeField] private AnimationCurve plotGroundAngleInfluence = new AnimationCurve();
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
@@ -116,7 +117,9 @@ public class StateMachineParameters : MonoBehaviour
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude); //Vector3.Dot(characterController.velocity, transform.forward));
 
-        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb.x * Vector3.right + currentNormalToClimb.z * Vector3.forward));
+        //animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb.x * Vector3.right + currentNormalToClimb.z * Vector3.forward));
+        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(transform.forward, Vector3.ProjectOnPlane(currentNormalToClimb, Vector3.up)));
+
         animator.SetBool("IsInWater", isInWaterNextFixedUpdate);
 
         /*
@@ -517,9 +520,14 @@ public class StateMachineParameters : MonoBehaviour
 
         // Take into account ground angle to slow down speed the bigger the slope
         var groundAngleFromHorizontal = Vector3.Angle(Vector3.up, currentGroundNormal);
-        var playerInputNormalized = playerInput.normalized;
-        var groundAngleInfluence = Vector3.Dot(currentGroundNormal, new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.y));
-        desiredVelocity *= (1f + 0.8f * groundAngleInfluence);
+
+        // Change the velocity depending on the slope angle the player is walking on
+        var playerInputNormalized = transform.forward;
+        var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
+        desiredVelocity *= (1f + 0.8f * (groundAngleInfluence - 0.3f));
+
+        plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
+        //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
 
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
