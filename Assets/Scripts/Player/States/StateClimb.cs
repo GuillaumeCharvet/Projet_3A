@@ -23,8 +23,8 @@ public class StateClimb : StateBehaviourParent
     public override void Update()
     {
         reader.smp.Climb(maxclimbSpeed, maxClimbAcceleration);
+        reader.smp.UpdateCanClimbTopToBot(false);
         reader.smp.UpdateCanClimbTopRay();
-        reader.smp.UpdateCanClimbTopToBot();
         reader.smp.UpdateCanClimbUp();
 
         base.Update();

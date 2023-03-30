@@ -19,7 +19,7 @@ public class StateHang : StateBehaviourParent
     public override void Update()
     {
         reader.smp.ClimbHanging(maxclimbSpeed, maxClimbAcceleration);
-        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbTopToBot(true);
         reader.smp.UpdateStopHanging();
 
         base.Update();

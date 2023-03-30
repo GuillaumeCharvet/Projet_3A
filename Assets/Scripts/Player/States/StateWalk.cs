@@ -30,7 +30,7 @@ public class StateWalk : StateBehaviourParent
 
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedDown);
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedUp);
-        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbTopToBot(true);
 
         base.Update();
     }

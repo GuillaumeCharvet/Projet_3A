@@ -12,6 +12,7 @@ public class WindEffectOnGlider : MonoBehaviour
     private CapsuleCollider capsCollider;
     private Vector3 pointOfCapsule1, pointOfCapsule2;
     private StateMachineParameters stateMachineParameters;
+    [SerializeField] private AnimationCurve distanceEffectOnWindStrength;
 
     private void Start()
     {
@@ -35,11 +36,14 @@ public class WindEffectOnGlider : MonoBehaviour
             
             var dist = DistanceFromPointToCapsule(other.transform.position);
             var windAttenuation = Mathf.Max(0f, (rescaledRadiusMax - dist) / rescaledRadiusMax);
+
+            var windAttenuationCurved = distanceEffectOnWindStrength.Evaluate(windAttenuation);
+
             /*
             var windAttenuation = Vector3.Distance(other.transform.position, capsCollider.ClosestPoint(other.transform.position)) / rescaledRadiusMax;
             */
             Debug.Log("dist : " + dist);
-            stateMachineParameters.windEffect = windAttenuation * windStrength * (transform.rotation * Vector3.up);
+            stateMachineParameters.windEffect = windAttenuationCurved * windStrength * (transform.rotation * Vector3.up);
         }
     }
     private void OnTriggerExit(Collider other)

@@ -27,7 +27,7 @@ public class StateFall : StateBehaviourParent
     {
         reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, false);
 
-        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbTopToBot(true);
         reader.smp.UpdateStartGlide();
 
         base.Update();
