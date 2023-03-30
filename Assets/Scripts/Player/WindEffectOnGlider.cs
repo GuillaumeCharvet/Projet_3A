@@ -11,6 +11,7 @@ public class WindEffectOnGlider : MonoBehaviour
     private float rescaledRadiusMax;
     private CapsuleCollider capsCollider;
     private Vector3 pointOfCapsule1, pointOfCapsule2;
+    private StateMachineParameters stateMachineParameters;
 
     private void Start()
     {
@@ -18,6 +19,13 @@ public class WindEffectOnGlider : MonoBehaviour
         pointOfCapsule1 = transform.position - transform.localScale.y * (capsCollider.height / 2f - capsCollider.radius) * transform.up;
         pointOfCapsule2 = transform.position + transform.localScale.y * (capsCollider.height / 2f - capsCollider.radius) * transform.up;
         rescaledRadiusMax = capsCollider.radius * Mathf.Max(transform.localScale.x, transform.localScale.z);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            stateMachineParameters = other.GetComponent<StateMachineParameters>();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -31,14 +39,14 @@ public class WindEffectOnGlider : MonoBehaviour
             var windAttenuation = Vector3.Distance(other.transform.position, capsCollider.ClosestPoint(other.transform.position)) / rescaledRadiusMax;
             */
             Debug.Log("dist : " + dist);
-            other.GetComponent<StateMachineParameters>().windEffect = windAttenuation * windStrength * (transform.rotation * Vector3.up);
+            stateMachineParameters.windEffect = windAttenuation * windStrength * (transform.rotation * Vector3.up);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<StateMachineParameters>().windEffect = Vector3.zero;
+            stateMachineParameters.windEffect = Vector3.zero;
         }
     }
 
