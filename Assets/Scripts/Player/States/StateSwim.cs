@@ -22,7 +22,7 @@ public class StateSwim : StateBehaviourParent
         reader.smp.Swim(reader.smp.MaxSpeed, maxAcceleration, true);
 
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedDown);
-        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbTopToBot(true);
 
         base.Update();
     }

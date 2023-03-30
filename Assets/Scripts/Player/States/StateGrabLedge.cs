@@ -13,6 +13,8 @@ public class StateGrabLedge : StateBehaviourParent
 
     public override void OnExitState()
     {
+        reader.cc.Move(Vector3.zero);
+
         base.OnExitState();
     }
 
@@ -20,7 +22,7 @@ public class StateGrabLedge : StateBehaviourParent
     {
         reader.smp.Climb(maxclimbSpeed, maxClimbAcceleration);
         reader.smp.UpdateCanClimbTopRay();
-        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbTopToBot(false);
         reader.smp.UpdateCanClimbBotRay();
 
         base.Update();

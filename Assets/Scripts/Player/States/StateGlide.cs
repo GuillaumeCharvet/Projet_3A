@@ -20,6 +20,8 @@ public class StateGlide : StateBehaviourParent
 
     public override void OnExitState()
     {
+        reader.smp.gliderTransform.gameObject.SetActive(false);
+
         var anim = reader.GetComponent<Animator>();
         Debug.Log("EXIT GLIDE STATE :" + " PlayerJumped = " + anim.GetBool("PlayerJumped")
                                         + " IsInWater = " + anim.GetBool("IsInWater")
@@ -36,13 +38,15 @@ public class StateGlide : StateBehaviourParent
     {
         reader.smp.Glide(reader.smp.MaxSpeed, maxAcceleration);
 
-        reader.smp.UpdateCanClimbTopToBot();
+        reader.smp.UpdateCanClimbTopToBot(true);
 
         base.Update();
     }
 
     protected override void OnEnterState()
     {
+        reader.smp.gliderTransform.gameObject.SetActive(true);
+
         reader.smp.currentModeMovement = ModeMovement.Glide;
 
         reader.smp.ResetPlayerCollider();
