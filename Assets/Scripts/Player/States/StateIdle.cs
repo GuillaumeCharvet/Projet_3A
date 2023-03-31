@@ -28,6 +28,7 @@ public class StateIdle : StateBehaviourParent
         reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, true);
         
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedUp);
+        reader.smp.UpdateCanClimbTopToBot(true);
 
         base.Update();
     }

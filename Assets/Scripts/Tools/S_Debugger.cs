@@ -11,6 +11,7 @@ public class S_Debugger : MonoBehaviour
     private Dictionary<string, UnityAction> actionStack;
     public Color defaultColor = Color.white;
     public bool toogle = false;
+    public bool buildReady = false;
 
     public bool GetToogle()
     {
