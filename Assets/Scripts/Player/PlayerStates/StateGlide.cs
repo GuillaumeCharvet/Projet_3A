@@ -45,11 +45,11 @@ public class StateGlide : StateBehaviourParent
 
     protected override void OnEnterState()
     {
-        reader.smp.gliderTransform.gameObject.SetActive(true);
-
         reader.smp.currentModeMovement = ModeMovement.Glide;
 
-        reader.smp.ResetPlayerCollider();
+        reader.smp.gliderTransform.gameObject.SetActive(true);
+
+        reader.smp.SetPlayerColliderToClimb();
 
         reader.smp.gliderSpeed = 1f;
         base.OnEnterState();
