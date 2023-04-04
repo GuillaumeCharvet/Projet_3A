@@ -891,6 +891,10 @@ public class StateMachineParameters : MonoBehaviour
 
         moveNormalToDirection *= 0.97f;
     }
+    public void ChargeThrow()
+    {
+
+    }
 
     #endregion
 
