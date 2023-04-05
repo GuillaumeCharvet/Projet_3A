@@ -23,12 +23,13 @@ public class StateMachineParameters : MonoBehaviour
 
     // PARAMETERS FOR CHECKISGROUNDED
     private float radius;
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask layerMaskClimb;
+    [SerializeField] private LayerMask layerMaskIsGrounded;
     public float distanceDefiningGroundedState = 0f;//3f;
     public float epsilonCheckGrounded = 0.001f;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
-    private float grabToClimbDistance = 0.7f;
+    private float grabToClimbDistance = 0.9f;
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
@@ -39,11 +40,14 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] public float gravity = 1.2f;
 
     [Header("RUN/JUMP")]
+    [SerializeField] private float influenceOfSlopeOnSpeed = 0.5f;
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
+    public Vector3 currentGroundNormal;
+    [SerializeField] private AnimationCurve plotGroundAngleInfluence = new AnimationCurve();
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
@@ -55,12 +59,14 @@ public class StateMachineParameters : MonoBehaviour
     private float maxPlayerRotation = 8f;
     public float characterControlerHeightResetValue = 1.8f;
     public bool isDuringFirst2SecondsOfClimbing = false;
+    private float wallJumpVelocity = 16f;
 
     [Header("GRAB LEDGE")]
 
     private float grabLedgeDistance = 3.2f;
 
     [Header("GLIDE")]
+    public Transform gliderTransform;
     public float gliderRotationSpeed = 0f;
     public float gliderRotationAcceleration = 0.5f;
     public float maxGliderRotationSpeed = 40f;
@@ -114,7 +120,9 @@ public class StateMachineParameters : MonoBehaviour
         animator.SetFloat("VerticalSpeed", Vector3.Dot(characterController.velocity, Vector3.up));
         animator.SetFloat("ForwardSpeed", (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude); //Vector3.Dot(characterController.velocity, transform.forward));
 
-        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb.x * Vector3.right + currentNormalToClimb.z * Vector3.forward));
+        //animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb.x * Vector3.right + currentNormalToClimb.z * Vector3.forward));
+        animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(transform.forward, Vector3.ProjectOnPlane(currentNormalToClimb, Vector3.up)));
+
         animator.SetBool("IsInWater", isInWaterNextFixedUpdate);
 
         /*
@@ -128,7 +136,8 @@ public class StateMachineParameters : MonoBehaviour
     void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
-        animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+        //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+        animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
     }
 
     private void OnDrawGizmos()
@@ -139,6 +148,8 @@ public class StateMachineParameters : MonoBehaviour
         Gizmos.DrawSphere(transform.position + ((characterControlerHeightResetValue - 0.1f) / 2f) * transform.up, cc.radius + epsilonCheckGrounded);
         Gizmos.DrawSphere(transform.position + (characterControlerHeightResetValue - (cc.radius + 0.05f)) * transform.up, cc.radius + epsilonCheckGrounded);
     }
+
+    #region CLIMB CHECKS
 
     public bool CheckIsGrounded()
     {
@@ -195,15 +206,16 @@ public class StateMachineParameters : MonoBehaviour
         */
         // VERSION 3
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMask))
+        if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMaskIsGrounded))
         {
+            currentGroundNormal = hit.normal;
             //Debug.Log("SPHERECAST 1");
             return true;
         }
         //Debug.Log("SPHERECAST 2");
         return false;
     }
-    public bool CheckIfClimbingTopToBot()
+    public bool CheckIfClimbingTopToBot(bool updateCurrentNormal)
     {
         float correctiveGrabDistance = 0f;
         if (currentModeMovement == ModeMovement.Climb) correctiveGrabDistance = 1f;
@@ -215,20 +227,20 @@ public class StateMachineParameters : MonoBehaviour
 
         }*/
 
-        if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
 
-            //Debug.Log("TOP RAY HIT");
+            Debug.Log("TOP RAY HIT");
             Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
-                //Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
+                Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
                 if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
-                    if (normalHit != currentNormalToClimb)
+                    if (normalHit != currentNormalToClimb && updateCurrentNormal)
                     {
                         currentNormalToClimb = normalHit;
                         //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
@@ -240,7 +252,7 @@ public class StateMachineParameters : MonoBehaviour
             }
             else
             {
-                //Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
+                Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
             }
         }
         else
@@ -252,21 +264,21 @@ public class StateMachineParameters : MonoBehaviour
         {
             RaycastHit hitMid;
 
-            if (Physics.Raycast(transform.position + 1.5f * transform.up, transform.forward, out hitMid, 5f, layerMask))
+            if (Physics.Raycast(transform.position + 1.5f * transform.up, transform.forward, out hitMid, 5f, layerMaskClimb))
             {
-                //Debug.Log("MID RAY HIT");
+                Debug.Log("MID RAY HIT");
                 Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * hitMid.distance, Color.red);
 
                 if (hitMid.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
-                    //Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
+                    Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                     var normalHit = hitMid.normal;
                     if (Vector3.Angle(normalHit, Vector3.up) > 50f)
                     {
                         distanceToGrabbedWall = hitMid.distance;
-                        //Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
+                        Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
 
-                        if (normalHit != currentNormalToClimb)
+                        if (normalHit != currentNormalToClimb && updateCurrentNormal)
                         {
                             currentNormalToClimb = normalHit;
                             //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
@@ -278,7 +290,7 @@ public class StateMachineParameters : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("MID RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
+                    Debug.Log("MID RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                 }
             }
             else
@@ -336,7 +348,7 @@ public class StateMachineParameters : MonoBehaviour
 
         }*/
 
-        if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
             //Debug.Log("TOP RAY HIT");
             Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * hitTop.distance, Color.blue);
@@ -373,7 +385,7 @@ public class StateMachineParameters : MonoBehaviour
     {
         RaycastHit hit;
         //if (Physics.Raycast(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
-        if (Physics.Raycast(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMaskClimb))
         {
             //Debug.Log($"hit distance = {hit.distance}");
             //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * hit.distance, Color.green, 0f);
@@ -404,7 +416,7 @@ public class StateMachineParameters : MonoBehaviour
         RaycastHit hitBot;
         Debug.DrawRay(transform.position + 0.0f * transform.up, transform.forward * 10, Color.red);
 
-        if (Physics.Raycast(transform.position + 0.0f * transform.up, transform.forward, out hitBot, 5f, layerMask))
+        if (Physics.Raycast(transform.position + 0.0f * transform.up, transform.forward, out hitBot, 5f, layerMaskClimb))
         {
             //Debug.Log("BOT RAY HIT");
 
@@ -439,7 +451,7 @@ public class StateMachineParameters : MonoBehaviour
     public bool CheckIfStopHanging()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + 1.0f * transform.up, Vector3.up, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position + 1.0f * transform.up, Vector3.up, out hit, Mathf.Infinity, layerMaskClimb))
         {
             //Debug.DrawRay(transform.position + 1.0f * transform.up, Vector3.up * hit.distance, Color.green, 0f);
             if (hit.distance <= 2f * grabToHangDistance)
@@ -449,7 +461,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         //else Debug.DrawRay(transform.position + 1.0f * transform.up, Vector3.up * 10f, Color.green, 0f);
 
-        if (Physics.Raycast(transform.position + 1.0f * transform.up - 0.6f * transform.forward, Vector3.up, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position + 1.0f * transform.up - 0.6f * transform.forward, Vector3.up, out hit, Mathf.Infinity, layerMaskClimb))
         {
             //Debug.DrawRay(transform.position + 1.0f * transform.up - 0.6f * transform.forward, Vector3.up * hit.distance, Color.green, 0f);
             if (hit.distance <= 2f * grabToHangDistance)
@@ -469,7 +481,11 @@ public class StateMachineParameters : MonoBehaviour
         currentClimbStamina = maxClimbStamina;
     }
 
-    private float turnSmoothTime = 0.1f;
+    #endregion
+
+    #region MOVEMENT
+
+    private float turnSmoothTime = 0.15f;
     private float turnSmoothVelocity = 0f;
 
     public void Move(float maxSpeed, float maxAcceleration, bool onGround)
@@ -510,6 +526,18 @@ public class StateMachineParameters : MonoBehaviour
         // Give the movement inertia by changing the velocity from its previous value to its desired value 
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
         Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+
+        // Take into account ground angle to slow down speed the bigger the slope
+        var groundAngleFromHorizontal = Vector3.Angle(Vector3.up, currentGroundNormal);
+
+        // Change the velocity depending on the slope angle the player is walking on
+        var playerInputNormalized = transform.forward;
+        var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
+        desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
+
+        plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
+        //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
+
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
@@ -522,8 +550,7 @@ public class StateMachineParameters : MonoBehaviour
         else
             velocity.y -= gravity * Time.deltaTime;
 
-        // Apply appropriate friction force depending if in water or not
-        
+        // Apply appropriate friction force depending if in water or not        
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
@@ -567,63 +594,138 @@ public class StateMachineParameters : MonoBehaviour
         animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
         */
     }
-    public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
+    public void Swim(float maxSpeed, float maxAcceleration, bool onGround)
     {
-        if (currentClimbStamina > 0f)
+        Vector3 velocity = characterController.velocity;
+
+        if (isInWaterNextFixedUpdate)
         {
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
-            //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+            velocity.x *= 0.98f;
+            velocity.z *= 0.98f;
+        }
 
-            //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
-
-            var quatFrom = transform.rotation;
-            var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
-            var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
-            quatFrom = transform.rotation;
-            var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
-            var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
-            transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-
-            Vector3 velocity = characterController.velocity;
-
-            Vector2 playerInput;
+        // Check Input to determine direction
+        Vector2 playerInput;
+        if (true)
+        {
             playerInput.x = inputManager.HorizontalInput;
             playerInput.y = inputManager.VerticalInput;
-            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+        }
+        else
+        {
+            playerInput = Vector2.zero;
+        }
 
-            float normalToWallVelocity;
-            if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
-            {
-                var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
-                normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
-            }
-            else
-            {
-                normalToWallVelocity = 0f;
-            }
+        // Clamp it to disallow strafe walking
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-            //TODO : sticking to surface potential bug
+        // Add camera angle to the input vector so that the player moves where the camera looks
+        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-            Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
+        // Modify the direction the player model is looking
+        if (playerInput.magnitude >= 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
-            float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
-            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
-            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        Vector3 targetDirection = playerInput.magnitude * transform.forward;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
 
-            Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
+        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
-            currentClimbStamina -= displacement.magnitude;
+        // Apply gravity if not grounded
+        if (animator.GetBool("PlayerJumped"))
+            velocity.y += jumpVerticalBoost;
+        else if (playerParameters.characterController.isGrounded)
+            velocity.y = 0f;
+        else
+            velocity.y -= gravity * Time.deltaTime;
 
-            /*if (GetComponent<Rigidbody>() != null)
-            {
-                rigidBodyPlayer.MovePosition(transform.position + displacement);
-            }*/
+        // Apply appropriate friction force depending if in water or not        
+        if (isInWaterNextFixedUpdate)
+        {
+            velocity.y += forceOfWater;
+            velocity.y *= 0.96f;
+        }
+        else velocity.y *= 0.999f;
+
+        // Move the player through its character controller
+        characterController.Move(velocity * Time.deltaTime);
+    }
+    public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
+    {
+
+        if (inputManager.IsSpaceJump && inputManager.VerticalInput > -0.1f)
+        {
+            Debug.Log("DECOLLE DU MUR WESH");
+            transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
+
+            var velocity = wallJumpVelocity * transform.forward;
+            Vector3 displacement = velocity * Time.deltaTime;
             characterController.Move(displacement);
+        }
+        else
+        {
+            if (currentClimbStamina > 0f)
+            {
+                //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
+                //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+                //var quatTo = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
+
+                var quatFrom = transform.rotation;
+                var rotationTowardNormalLockX = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.VerticalInput);
+                var quatToX = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.right));
+                transform.rotation = Quaternion.Lerp(quatFrom, quatToX * transform.rotation, rotationTowardNormalLockX * maxPlayerRotation * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+                quatFrom = transform.rotation;
+                var rotationTowardNormalLockY = isDuringFirst2SecondsOfClimbing ? 1f : Mathf.Abs(inputManager.HorizontalInput);
+                var quatToY = Quaternion.FromToRotation(transform.forward, Vector3.ProjectOnPlane(-currentNormalToClimb, transform.up));
+                transform.rotation = Quaternion.Lerp(quatFrom, quatToY * transform.rotation, rotationTowardNormalLockY * maxPlayerRotation * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+
+                Vector3 velocity = characterController.velocity;
+
+                Vector2 playerInput;
+                playerInput.x = inputManager.HorizontalInput;
+                playerInput.y = inputManager.VerticalInput;
+                playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+                float normalToWallVelocity;
+                if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
+                {
+                    var diffToWall = distanceToGrabbedWall - distanceToGrabbedWallLimit;
+                    normalToWallVelocity = diffToWall > stickingToSurfaceEpsilon ? Mathf.Min(stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : diffToWall < -stickingToSurfaceEpsilon ? Mathf.Max(-stickingToSurfaceSpeed * Time.deltaTime, diffToWall) : 0f;
+                }
+                else
+                {
+                    normalToWallVelocity = 0f;
+                }
+
+                //TODO : sticking to surface potential bug
+
+                Vector3 desiredVelocity = (playerInput.y * transform.up + playerInput.x * transform.right) * maxClimbSpeed;
+
+                float maxSpeedChange = maxClimbAcceleration * Time.deltaTime;
+                velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+                velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+                velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+                Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
+
+                currentClimbStamina -= displacement.magnitude;
+
+                /*if (GetComponent<Rigidbody>() != null)
+                {
+                    rigidBodyPlayer.MovePosition(transform.position + displacement);
+                }*/
+                characterController.Move(displacement);
+            }
         }
     }
     public void Fall(float maxSpeed, float maxAcceleration, bool onGround)
@@ -705,99 +807,6 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void Glide(float maxSpeed, float maxAcceleration)
     {
-        // ******************************************************************
-        // ******************    FIRST VERSION    ***************************
-        // ******************************************************************
-        /*
-        Vector3 velocity = characterController.velocity;
-
-        // Check Input to determine direction
-        Vector2 playerInput;
-        playerInput.x = inputManager.HorizontalInput;
-        playerInput.y = inputManager.VerticalInput;
-
-        // Clamp it to disallow strafe walking
-        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-
-        // Add camera angle to the input vector so that the player moves where the camera looks
-        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-        // Modify the direction the player model is looking
-        if (playerInput.magnitude >= 0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        }
-
-        // Give the movement inertia by changing the velocity from its previous value to its desired value 
-        Vector3 targetDirection = playerInput.magnitude * transform.forward;
-        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
-        float maxSpeedChange = maxAcceleration * Time.deltaTime;
-        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-
-        // Apply gravity if not grounded
-        if (animator.GetBool("PlayerJumped"))
-            velocity.y = jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
-            velocity.y = 0f;
-        else
-            velocity.y -= gravity;
-
-        // Apply appropriate friction force depending if in water or not
-        if (playerParameters.isInWaterNextFixedUpdate)
-        {
-            velocity.y += playerParameters.forceOfWater;
-            velocity.y *= 0.99f;
-        }
-        else velocity.y *= 0.999f;
-
-        // Move the player through its character controller
-        characterController.Move(velocity * Time.deltaTime);
-        */
-        // ******************************************************************
-        // ******************************************************************
-        // ******************************************************************
-
-
-        //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
-
-        /*
-        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
-        Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
-
-        //Debug.Log("transformDirection : " + transformDirection);
-
-        Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
-        playerParameters.moveDirection = new Vector3(flatMovement.x, playerParameters.moveDirection.y, flatMovement.z);
-
-        if (animator.GetBool("PlayerJumped"))
-            playerParameters.moveDirection.y = playerParameters.jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
-            playerParameters.moveDirection.y = 0f;
-        else
-            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
-
-        if (playerParameters.isInWaterNextFixedUpdate)
-        {
-            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
-            playerParameters.moveDirection.y *= 0.99f;
-        }
-        else playerParameters.moveDirection.y *= 0.999f;
-
-        //Debug.Log("playerParameters.moveDirection : " + playerParameters.moveDirection);
-
-        playerParameters.characterController.Move(playerParameters.moveDirection);
-
-        // Horizontal player rotation
-        animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
-        */
-
-        // ************************************************************************
-        // *******************    LAST VERSION    *********************************
-        // ************************************************************************
-
-
         float horizontal = inputManager.HorizontalInput;
         float vertical = inputManager.VerticalInput;
 
@@ -835,30 +844,41 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
-        //Debug.Log("transform.localRotation.eulerAngles.z = " + transform.localRotation.eulerAngles.z);
+        S_Debugger.UpdatableLog("gliderTurnSpeed", gliderTurnSpeed);
 
+        //TODO: Glider rotation smoothness
+        // Rotate the player around the z axis to go along the change of direction
         var eulerZ = transform.localRotation.eulerAngles.z > 180 ? transform.localRotation.eulerAngles.z - 360 : transform.localRotation.eulerAngles.z;
-        if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 1.4f, Mathf.Max(eulerZ - 0.4f, -15f));
-        else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y - 1.4f, Mathf.Min(eulerZ + 0.4f, +15f));
+
+        if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, -15f));
+        else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Min(eulerZ - 0.4f * gliderTurnSpeed, +15f));
+        
+        /*if (horizontal > 0.1f || horizontal < -0.1f)
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, Mathf.Sign(horizontal) * 15f));
+        */
+        
         else if (eulerZ > 0.2f)         transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
         else if (eulerZ < -0.2f)        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
+        
+        
 
-        if (vertical > 0.1f && gliderSpeed > 1f)
+        // Rotate the player around the x axis to go along acceleration and deceleration
+        if (vertical > 0.1f) // && gliderSpeed > 1f)
         {
-            var eulerX = transform.localRotation.eulerAngles.x > 180 ? transform.localRotation.eulerAngles.x - 360 : transform.localRotation.eulerAngles.x;
-            transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f, 45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
+            var eulerX = transform.localRotation.eulerAngles.x > 180f ? transform.localRotation.eulerAngles.x - 360f : transform.localRotation.eulerAngles.x;
+            transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f *  Mathf.Min(1f, 0.2f * Mathf.Pow(gliderSpeed, 2f)), 45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
         else if (vertical < -0.1f)
         {
-            var eulerX = transform.localRotation.eulerAngles.x > 180 ? transform.localRotation.eulerAngles.x - 360 : transform.localRotation.eulerAngles.x;
+            var eulerX = transform.localRotation.eulerAngles.x > 180f ? transform.localRotation.eulerAngles.x - 360f : transform.localRotation.eulerAngles.x;
             transform.localRotation = Quaternion.Euler(Mathf.Max(eulerX - 0.8f, -45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
 
+        // Apply effect of the wind force
         var windBoost = Vector3.Dot(windEffect, moveDirection.normalized);
         var windNormalToMovement = windEffect - windBoost * moveDirection.normalized;
 
         var acceleration = accelerationMaxGlider * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right)) + windBoost;
-        //Debug.Log("acceleration = " + acceleration);
 
         moveNormalToDirection += windNormalToMovement * Time.deltaTime;
 
@@ -871,6 +891,13 @@ public class StateMachineParameters : MonoBehaviour
 
         moveNormalToDirection *= 0.97f;
     }
+    public void ChargeThrow()
+    {
+
+    }
+
+    #endregion
+
     public IEnumerator ChangeBoolValueFor2Seconds()
     {
         isDuringFirst2SecondsOfClimbing = true;
@@ -891,6 +918,7 @@ public class StateMachineParameters : MonoBehaviour
         characterController.height = 0;
         characterController.center = 0.5f * Vector3.up;
     }
+
     #region PARAMETERS UPDATER
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
@@ -904,9 +932,9 @@ public class StateMachineParameters : MonoBehaviour
     {
         animator.SetBool("HasGroundBelow", CheckIsGrounded());
     }
-    public void UpdateCanClimbTopToBot()
+    public void UpdateCanClimbTopToBot(bool updateCurrentNormal)
     {
-        animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot());
+        animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot(updateCurrentNormal));
     }
     public void UpdateCanClimbTopRay()
     {
