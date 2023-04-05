@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "states/glider/deploy", fileName = "new_GliderDeploy")]
-public class State_GliderDeploy : StateBehaviourParent
+[CreateAssetMenu(menuName = "states/glider/off", fileName = "new_GliderOff")]
+public class State_GliderOff : StateBehaviourParent
 {
-    [Header("RUN/JUMP")]
-
-    [SerializeField] public float maxAcceleration = 50f;
-
-    [SerializeField] public float fallControl = 0f;
 
     public override void OnExitState()
     {
@@ -24,7 +19,6 @@ public class State_GliderDeploy : StateBehaviourParent
 
     public override void Update()
     {
-        reader.smp.Glide(reader.smp.MaxSpeed, maxAcceleration);
 
         reader.smp.UpdateCanClimbTopToBot(true);
 
