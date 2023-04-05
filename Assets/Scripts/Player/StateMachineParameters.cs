@@ -40,6 +40,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] public float gravity = 1.2f;
 
     [Header("RUN/JUMP")]
+    [SerializeField] private float influenceOfSlopeOnSpeed = 0.5f;
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
@@ -532,7 +533,7 @@ public class StateMachineParameters : MonoBehaviour
         // Change the velocity depending on the slope angle the player is walking on
         var playerInputNormalized = transform.forward;
         var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
-        desiredVelocity *= (1f + 0.8f * (groundAngleInfluence - 0.3f));
+        desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
 
         plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
         //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
@@ -843,20 +844,29 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
+        S_Debugger.UpdatableLog("gliderTurnSpeed", gliderTurnSpeed);
 
         //TODO: Glider rotation smoothness
         // Rotate the player around the z axis to go along the change of direction
         var eulerZ = transform.localRotation.eulerAngles.z > 180 ? transform.localRotation.eulerAngles.z - 360 : transform.localRotation.eulerAngles.z;
-        if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 1.4f, Mathf.Max(eulerZ - 0.4f, -15f));
-        else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y - 1.4f, Mathf.Min(eulerZ + 0.4f, +15f));
+
+        if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, -15f));
+        else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Min(eulerZ - 0.4f * gliderTurnSpeed, +15f));
+        
+        /*if (horizontal > 0.1f || horizontal < -0.1f)
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, Mathf.Sign(horizontal) * 15f));
+        */
+        
         else if (eulerZ > 0.2f)         transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
         else if (eulerZ < -0.2f)        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
+        
+        
 
         // Rotate the player around the x axis to go along acceleration and deceleration
         if (vertical > 0.1f) // && gliderSpeed > 1f)
         {
             var eulerX = transform.localRotation.eulerAngles.x > 180f ? transform.localRotation.eulerAngles.x - 360f : transform.localRotation.eulerAngles.x;
-            transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f * Mathf.Pow(gliderSpeed, 3f), 45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
+            transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f *  Mathf.Min(1f, 0.2f * Mathf.Pow(gliderSpeed, 2f)), 45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
         else if (vertical < -0.1f)
         {
@@ -880,6 +890,10 @@ public class StateMachineParameters : MonoBehaviour
         characterController.Move(moveDirection);
 
         moveNormalToDirection *= 0.97f;
+    }
+    public void ChargeThrow()
+    {
+
     }
 
     #endregion
