@@ -9,6 +9,8 @@ public class S_Tuto_Canvas : MonoBehaviour
     // TUTO CLIMB //
     public GameObject canvaTuto;
     public GameObject triggerTuto;
+    public GameObject playerMovement;
+    public GameObject cameraMovement;
 
     private bool tutoClimbOpen = false;
 
@@ -17,9 +19,11 @@ public class S_Tuto_Canvas : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             {
-            canvaTuto.SetActive(true); 
-               //  Debug.Log("444");
-                tutoClimbOpen = true;
+            canvaTuto.SetActive(true);
+            tutoClimbOpen = true;
+            //playerMovement.SetActive(false);
+            //cameraMovement.SetActive(false);
+            //  Debug.Log("444");
             }
     }
     private void Update()
@@ -31,6 +35,8 @@ public class S_Tuto_Canvas : MonoBehaviour
             {
                 canvaTuto.SetActive(false);
                 triggerTuto.SetActive(false);
+                //playerMovement.SetActive(true);
+                //cameraMovement.SetActive(false);
                 //Debug.Log("Click gauche");
             }
         }
