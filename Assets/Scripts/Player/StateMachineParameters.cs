@@ -966,8 +966,11 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void UpdateInputValue()
     {
-        animator.SetFloat("VerticalInput", inputManager.VerticalInput);
-        animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
+        var x = inputManager.VerticalInput;
+        var y = inputManager.HorizontalInput;
+        animator.SetFloat("VerticalInput", x);
+        animator.SetFloat("HorizontalInput", y);
+        animator.SetFloat("Input",  Vector2.ClampMagnitude(new Vector2(x, y), 1f).magnitude);
     }
     public void UpdateStartGlide()
     {
