@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "states/glider/off", fileName = "new_GliderOff")]
-public class State_GliderOff : StateBehaviourParent
+[CreateAssetMenu(menuName = "states/glider/fly", fileName = "new_GliderFly")]
+public class State_GliderFly : StateBehaviourParent
 {
     public override void OnExitState()
     {
@@ -17,11 +17,6 @@ public class State_GliderOff : StateBehaviourParent
 
     protected override void OnEnterState()
     {
-        foreach (var item in reader.gliderParts)
-        {
-            item.SetActive(false);
-        }
-
         base.OnEnterState();
     }
 }
