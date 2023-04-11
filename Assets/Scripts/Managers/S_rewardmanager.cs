@@ -44,7 +44,7 @@ public class S_rewardmanager : MonoBehaviour
     public GameObject dialogue3;
     public GameObject dialogue4;
     public GameObject dialogue1ET2;
-    public GameObject repeat;
+    
 
     ////////////// booleans //////////////////////
 
@@ -56,7 +56,7 @@ public class S_rewardmanager : MonoBehaviour
     private bool phraseThree = false;
     private bool phraseFour = false;
     private bool phraseOneAndTwo = false;
-    private bool repeatinfo = false;
+    
 
     private bool dialogueActif = false;
     private bool isIn = false;
@@ -66,7 +66,7 @@ public class S_rewardmanager : MonoBehaviour
     public bool p2hbs = false;
     public bool p3hbs = false;
     public bool p4hbs = false;
-    public bool p1and2hbs = false;
+    
 
     //// existe encore /////////
     private bool s1exist = true;
@@ -99,26 +99,6 @@ public class S_rewardmanager : MonoBehaviour
 
         }
     }
-
-    /*void ReChekText()
-    {
-        if (p1hbs)
-        {
-            dialogue1.SetActive(true);
-            if (p2hbs && Input.GetKeyDown(KeyCode.E))
-            {
-                dialogue1.SetActive(false);
-                dialogue2.SetActive(true);
-                if (p3hbs && Input.GetKeyDown(KeyCode.E))
-                {
-                    dialogue2.SetActive(false);
-                    dialogue3.SetActive(true);
-
-                }
-            }
-        }
-    }*/
-
 
     // Update is called once per frame
     void Update()
@@ -168,21 +148,7 @@ public class S_rewardmanager : MonoBehaviour
         }
         */
 
-        if (!phraseZero && !phraseOne && !phraseTwo && !phraseThree && !phraseFour)
-        {
-            repeatinfo = true;
-            Debug.Log("aucune phrase à ajouter");
-            if (phraseOne || phraseTwo || phraseThree || phraseFour)
-            {
-                Debug.Log("le repeat redevient impossible");
-                repeatinfo = false;
-            }
-        }
-        /*if (!repeatinfo)
-        {
-            Debug.Log("Reapeat impossible");
-        }
-        */
+
         // active le dialogue // 
         if (isIn && Input.GetKeyDown(KeyCode.F))
         {
@@ -272,17 +238,7 @@ public class S_rewardmanager : MonoBehaviour
                 }
             }
             */
-            if (repeatinfo)
-            {
-                Debug.Log("on revois les info");
-                repeat.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    repeat.SetActive(false);
-                    dialogueActif = false;
-                    dialogueCanva.SetActive(false);
-                }
-            }
+           
         }
     }
 }
