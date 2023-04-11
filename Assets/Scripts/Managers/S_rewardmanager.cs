@@ -61,12 +61,20 @@ public class S_rewardmanager : MonoBehaviour
     private bool dialogueActif = false;
     private bool isIn = false;
 
-    /// ha sbeen said ///
-    private bool p1hbs = false;
-    private bool p2hbs = false;
-    private bool p3hbs = false;
-    private bool p4hbs = false;
-    private bool p1and2hbs = false;
+    /// has been said ///
+    public bool p1hbs = false;
+    public bool p2hbs = false;
+    public bool p3hbs = false;
+    public bool p4hbs = false;
+    public bool p1and2hbs = false;
+
+    //// existe encore /////////
+    private bool s1exist = true;
+    private bool s2exist = true;
+    private bool s3exist = true;
+    private bool s4exist = true;
+
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -92,7 +100,7 @@ public class S_rewardmanager : MonoBehaviour
         }
     }
 
-    void ReChekText()
+    /*void ReChekText()
     {
         if (p1hbs)
         {
@@ -109,42 +117,48 @@ public class S_rewardmanager : MonoBehaviour
                 }
             }
         }
-    }
-    
+    }*/
+
 
     // Update is called once per frame
     void Update()
     {
+        //
+
         //stèles présentent dans la scène //
-        if (Ile2_stele_1.activeInHierarchy == false && Ile2_stele_2.activeInHierarchy == true)
+        if (Ile2_stele_1.activeInHierarchy == false && s1exist )
         {
             Debug.Log("stele 1 a disparut");
             phraseZero = false;
             phraseOne = true;
+            s1exist = false;
         }
-        if (Ile2_stele_2.activeInHierarchy == false && Ile2_stele_1.activeInHierarchy == true)
+        if (Ile2_stele_2.activeInHierarchy == false && s2exist)
         {
             Debug.Log("stele 2 a disparut");
             phraseZero = false;
             phraseTwo = true;
+            s2exist = false;
         }
 
-        if (Ile2_stele_3.activeInHierarchy == false && Ile2_stele_1.activeInHierarchy == true)
+        if (Ile2_stele_3.activeInHierarchy == false && s3exist)
         {
             Debug.Log("le morceau 3 est prit");
             phraseZero = false;
             phraseThree = true;
+            s3exist = false;
         }
-        if (Ile2_stele_4.activeInHierarchy == false && Ile2_stele_1.activeInHierarchy == true)
+        if (Ile2_stele_4.activeInHierarchy == false && s4exist)
         {
             Debug.Log("yes bébé, la 4ème stèle est ramassé");
             phraseZero = false;
             phraseFour = true;
+            s4exist = false;
         }
 
         ////// combinaisons ////////
 
-        if (Ile2_stele_2.activeInHierarchy == false && Ile2_stele_1.activeInHierarchy == false)
+        /*if (Ile2_stele_2.activeInHierarchy == false && Ile2_stele_1.activeInHierarchy == false)
         {
             Debug.Log("stele 1 et 2 ont disparut");
             phraseZero = false;
@@ -152,8 +166,23 @@ public class S_rewardmanager : MonoBehaviour
             phraseTwo = false;
             phraseOneAndTwo = true;
         }
+        */
 
-
+        if (!phraseZero && !phraseOne && !phraseTwo && !phraseThree && !phraseFour)
+        {
+            repeatinfo = true;
+            Debug.Log("aucune phrase à ajouter");
+            if (phraseOne || phraseTwo || phraseThree || phraseFour)
+            {
+                Debug.Log("le repeat redevient impossible");
+                repeatinfo = false;
+            }
+        }
+        /*if (!repeatinfo)
+        {
+            Debug.Log("Reapeat impossible");
+        }
+        */
         // active le dialogue // 
         if (isIn && Input.GetKeyDown(KeyCode.F))
         {
@@ -189,6 +218,7 @@ public class S_rewardmanager : MonoBehaviour
                     dialogueActif = false;
                     dialogueCanva.SetActive(false);
                     p1hbs = true;
+                    phraseOne = false;
                 }
             }
             if (phraseTwo && !p2hbs)
@@ -201,6 +231,7 @@ public class S_rewardmanager : MonoBehaviour
                     dialogueActif = false;
                     dialogueCanva.SetActive(false);
                     p2hbs = true;
+                    phraseTwo = false;
                 }
             }
             if (phraseThree && !p3hbs)
@@ -212,7 +243,8 @@ public class S_rewardmanager : MonoBehaviour
                      dialogue3.SetActive(false);
                      dialogueActif = false;
                      dialogueCanva.SetActive(false);
-                    p3hbs = true;
+                     p3hbs = true;
+                     phraseThree = false;
                 }
             }
             if (phraseFour && !p4hbs)
@@ -225,9 +257,10 @@ public class S_rewardmanager : MonoBehaviour
                      dialogueActif = false;
                      dialogueCanva.SetActive(false);
                      p4hbs = true;
+                     phraseFour = false;
                  }
             }
-            if (phraseOneAndTwo)
+            /*if (phraseOneAndTwo)
             {
                 Debug.Log("okay 2 partie");
                 dialogue1ET2.SetActive(true);
@@ -238,13 +271,14 @@ public class S_rewardmanager : MonoBehaviour
                     dialogueCanva.SetActive(false);
                 }
             }
+            */
             if (repeatinfo)
             {
                 Debug.Log("on revois les info");
-                dialogue1ET2.SetActive(true);
+                repeat.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    dialogue1ET2.SetActive(false);
+                    repeat.SetActive(false);
                     dialogueActif = false;
                     dialogueCanva.SetActive(false);
                 }
