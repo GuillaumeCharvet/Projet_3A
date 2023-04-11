@@ -66,6 +66,8 @@ public class StateMachineParameters : MonoBehaviour
     private float grabLedgeDistance = 3.2f;
 
     [Header("GLIDE")]
+
+    public Animator animatorGlider;
     public Transform gliderTransform;
     public float gliderRotationSpeed = 0f;
     public float gliderRotationAcceleration = 0.5f;
@@ -98,7 +100,11 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
 
+    [Header("THROW")]
+    private float timeChargingThrow = 0f;
+
     public float angleDiff = 0f;
+
 
     void Start()
     {
@@ -125,6 +131,10 @@ public class StateMachineParameters : MonoBehaviour
 
         animator.SetBool("IsInWater", isInWaterNextFixedUpdate);
 
+        // Check if player is charging the throw
+        UpdateTimeChargingThrow();
+        animator.SetFloat("ThrowCharge", timeChargingThrow);
+
         /*
         //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
 
@@ -138,6 +148,7 @@ public class StateMachineParameters : MonoBehaviour
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
         //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
+        animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
     }
 
     private void OnDrawGizmos()
@@ -535,7 +546,8 @@ public class StateMachineParameters : MonoBehaviour
         var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
         desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
 
-        plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
+        var listLength = plotGroundAngleInfluence.keys.Length;
+        if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != groundAngleInfluence) plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
         //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
 
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
@@ -659,7 +671,7 @@ public class StateMachineParameters : MonoBehaviour
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
 
-        if (inputManager.IsSpaceJump && inputManager.VerticalInput > -0.1f)
+        if (inputManager.IsSpaceDownFixed && inputManager.VerticalInput > -0.1f)
         {
             Debug.Log("DECOLLE DU MUR WESH");
             transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
@@ -954,12 +966,26 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void UpdateInputValue()
     {
-        animator.SetFloat("VerticalInput", inputManager.VerticalInput);
-        animator.SetFloat("HorizontalInput", inputManager.HorizontalInput);
+        var x = inputManager.VerticalInput;
+        var y = inputManager.HorizontalInput;
+        animator.SetFloat("VerticalInput", x);
+        animator.SetFloat("HorizontalInput", y);
+        animator.SetFloat("Input",  Vector2.ClampMagnitude(new Vector2(x, y), 1f).magnitude);
     }
     public void UpdateStartGlide()
     {
         animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
+    }
+    public void UpdateTimeChargingThrow()
+    {
+        if (inputManager.IsChargingThrow)
+        {
+            timeChargingThrow += Time.deltaTime;
+        }
+        else
+        {
+            timeChargingThrow= 0f;
+        }
     }
     #endregion
 }
