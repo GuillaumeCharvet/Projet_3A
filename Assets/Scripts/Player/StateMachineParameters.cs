@@ -103,6 +103,10 @@ public class StateMachineParameters : MonoBehaviour
 
     [Header("THROW")]
     private float timeChargingThrow = 0f;
+    private float timeBeforeThrow = 1.5f;
+    [SerializeField] private GameObject prefabSpear;
+    [SerializeField] private Vector3 spearPositionOffset;
+    private Vector3 spearInitialRotationEulerAngle;
 
     public float angleDiff = 0f;
 
@@ -907,6 +911,17 @@ public class StateMachineParameters : MonoBehaviour
 
     #endregion
 
+    public IEnumerator WaitBeforeThrow()
+    {
+        yield return new WaitForSeconds(timeBeforeThrow);
+        ThrowSpear();
+    }
+    public void ThrowSpear()
+    {
+        var spear = Instantiate(prefabSpear, transform.position + spearPositionOffset, Quaternion.Euler(spearInitialRotationEulerAngle));
+
+    }
+
     public IEnumerator ChangeBoolValueFor2Seconds()
     {
         isDuringFirst2SecondsOfClimbing = true;
@@ -935,7 +950,7 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void UpdateIsGrounded()
     {
-        animator.SetBool("IsGrounded", (CheckIsGrounded() || characterController.isGrounded) && Vector3.Angle(Vector3.up, currentGroundNormal) < 50f);
+        animator.SetBool("IsGrounded", (CheckIsGrounded() || characterController.isGrounded)); //&& Vector3.Angle(Vector3.up, currentGroundNormal) < 50f);
     }
     public void UpdateHasGroundBelow()
     {
