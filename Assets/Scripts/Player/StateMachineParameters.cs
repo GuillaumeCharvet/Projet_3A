@@ -675,6 +675,7 @@ public class StateMachineParameters : MonoBehaviour
         {
             Debug.Log("DECOLLE DU MUR WESH");
             transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
+            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
             var velocity = wallJumpVelocity * transform.forward;
             Vector3 displacement = velocity * Time.deltaTime;
@@ -938,7 +939,7 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void UpdateIsGrounded()
     {
-        animator.SetBool("IsGrounded", CheckIsGrounded() || characterController.isGrounded);
+        animator.SetBool("IsGrounded", (CheckIsGrounded() || characterController.isGrounded) && Vector3.Angle(Vector3.up, currentGroundNormal) < 50f);
     }
     public void UpdateHasGroundBelow()
     {
@@ -984,7 +985,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            timeChargingThrow= 0f;
+            timeChargingThrow = 0f;
         }
     }
     #endregion
