@@ -92,6 +92,7 @@ public class StateMachineParameters : MonoBehaviour
 
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
+    public bool isInNoWaterZone = false;
     public BuoyancyEffect lastWaterVisited;
     public float forceOfWater;
 
@@ -129,7 +130,7 @@ public class StateMachineParameters : MonoBehaviour
         //animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(Quaternion.Euler(0f, camTrsf.rotation.eulerAngles.y, 0f) * (inputManager.HorizontalInput * Vector3.right + inputManager.VerticalInput * Vector3.forward).normalized, currentNormalToClimb.x * Vector3.right + currentNormalToClimb.z * Vector3.forward));
         animator.SetFloat("InputDotSurfaceNormal", Vector3.Dot(transform.forward, Vector3.ProjectOnPlane(currentNormalToClimb, Vector3.up)));
 
-        animator.SetBool("IsInWater", isInWaterNextFixedUpdate);
+        animator.SetBool("IsInWater", isInWaterNextFixedUpdate && !isInNoWaterZone);
 
         // Check if player is charging the throw
         UpdateTimeChargingThrow();
@@ -563,12 +564,7 @@ public class StateMachineParameters : MonoBehaviour
             velocity.y -= gravity * Time.deltaTime;
 
         // Apply appropriate friction force depending if in water or not        
-        if (isInWaterNextFixedUpdate)
-        {
-            velocity.y += forceOfWater;
-            velocity.y *= 0.96f;
-        }
-        else velocity.y *= 0.999f;
+        velocity.y *= 0.999f;
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
@@ -675,6 +671,7 @@ public class StateMachineParameters : MonoBehaviour
         {
             Debug.Log("DECOLLE DU MUR WESH");
             transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
+            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
             var velocity = wallJumpVelocity * transform.forward;
             Vector3 displacement = velocity * Time.deltaTime;
@@ -938,7 +935,7 @@ public class StateMachineParameters : MonoBehaviour
     }
     public void UpdateIsGrounded()
     {
-        animator.SetBool("IsGrounded", CheckIsGrounded() || characterController.isGrounded);
+        animator.SetBool("IsGrounded", (CheckIsGrounded() || characterController.isGrounded) && Vector3.Angle(Vector3.up, currentGroundNormal) < 50f);
     }
     public void UpdateHasGroundBelow()
     {
@@ -984,7 +981,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            timeChargingThrow= 0f;
+            timeChargingThrow = 0f;
         }
     }
     #endregion
