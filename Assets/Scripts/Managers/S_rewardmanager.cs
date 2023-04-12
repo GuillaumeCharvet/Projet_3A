@@ -9,23 +9,23 @@ public class S_rewardmanager : MonoBehaviour
     // REWARDS TECHNOS //
     //ile 1 //
 
-    public GameObject Ile1_stele_1;
-    public GameObject Ile1_stele_2;
-    public GameObject Ile1_stele_3;
-    public GameObject Ile1_stele_4;
+    public GameObject Ile1_reward_1;
+    public GameObject Ile1_reward_2;
+    public GameObject Ile1_reward_3;
+    public GameObject Ile1_reward_4;
     
     //ile 2 //
 
-    public GameObject Ile2_stele_1;
-    public GameObject Ile2_stele_2;
-    public GameObject Ile2_stele_3;
-    public GameObject Ile2_stele_4;
+    public GameObject Ile2_reward_1;
+    public GameObject Ile2_reward_2;
+    public GameObject Ile2_reward_3;
+    public GameObject Ile2_reward_4;
 
     //ile 3 //
-    public GameObject Ile3_stele_1;
-    public GameObject Ile3_stele_2;
-    public GameObject Ile3_stele_3;
-    public GameObject Ile3_stele_4;
+    public GameObject Ile3_reward_1;
+    public GameObject Ile3_reward_2;
+    public GameObject Ile3_reward_3;
+    public GameObject Ile3_reward_4;
 
     // REWARDS NATURE //
     /*
@@ -113,22 +113,22 @@ public class S_rewardmanager : MonoBehaviour
     ////////////////////// existe encore /////////////////////////
 
     // ile 1 rewards technos // 
-    private bool s1_1exist = true;
-    private bool s1_2exist = true;
-    private bool s1_3exist = true;
-    private bool s1_4exist = true;
+    private bool r1_1exist = true;
+    private bool r1_2exist = true;
+    private bool r1_3exist = true;
+    private bool r1_4exist = true;
 
     // ile 2 rewards technos // 
-    private bool s2_1exist = true;
-    private bool s2_2exist = true;
-    private bool s2_3exist = true;
-    private bool s2_4exist = true;
+    private bool r2_1exist = true;
+    private bool r2_2exist = true;
+    private bool r2_3exist = true;
+    private bool r2_4exist = true;
 
     // ile 3 rewards technos // 
-    private bool s3_1exist = true;
-    private bool s3_2exist = true;
-    private bool s3_3exist = true;
-    private bool s3_4exist = true;
+    private bool r3_1exist = true;
+    private bool r3_2exist = true;
+    private bool r3_3exist = true;
+    private bool r3_4exist = true;
 
 
 
@@ -161,93 +161,93 @@ public class S_rewardmanager : MonoBehaviour
 
         /// île 1 //////
 
-        if (Ile1_stele_1.activeInHierarchy == false && s1_1exist)
+        if (Ile1_reward_1.activeInHierarchy == false && r1_1exist)
         {
             //Debug.Log("stele 1 a disparut");
             phraseZero = false;
             phraseOne = true;
-            s1_1exist = false;
+            r1_1exist = false;
         }
-        if (Ile1_stele_2.activeInHierarchy == false && s1_2exist)
+        if (Ile1_reward_2.activeInHierarchy == false && r1_2exist)
         {          
             phraseZero = false;
             phraseTwo = true;
-            s1_2exist = false;
+            r1_2exist = false;
         }
 
-        if (Ile1_stele_3.activeInHierarchy == false && s1_3exist)
+        if (Ile1_reward_3.activeInHierarchy == false && r1_3exist)
         {
             phraseZero = false;
             phraseThree = true;
-            s1_3exist = false;
+            r1_3exist = false;
         }
-        if (Ile1_stele_4.activeInHierarchy == false && s1_4exist)
+        if (Ile1_reward_4.activeInHierarchy == false && r1_4exist)
         {
             phraseZero = false;
             phraseFour = true;
-            s1_4exist = false;
+            r1_4exist = false;
         }
 
 
         /// île 2 //////
 
-        if (Ile2_stele_1.activeInHierarchy == false && s2_1exist )
+        if (Ile2_reward_1.activeInHierarchy == false && r2_1exist )
         {
             Debug.Log("stele 1 a disparut");
             phraseZero = false;
             phraseFive = true;
-            s2_1exist = false;
+            r2_1exist = false;
         }
-        if (Ile2_stele_2.activeInHierarchy == false && s2_2exist)
+        if (Ile2_reward_2.activeInHierarchy == false && r2_2exist)
         {
             Debug.Log("stele 2 a disparut");
             phraseZero = false;
             phraseSix = true;
-            s2_2exist = false;
+            r2_2exist = false;
         }
 
-        if (Ile2_stele_3.activeInHierarchy == false && s2_3exist)
+        if (Ile2_reward_3.activeInHierarchy == false && r2_3exist)
         {
             Debug.Log("le morceau 3 est prit");
             phraseZero = false;
             phraseSeven = true;
-            s2_3exist = false;
+            r2_3exist = false;
         }
-        if (Ile2_stele_4.activeInHierarchy == false && s2_4exist)
+        if (Ile2_reward_4.activeInHierarchy == false && r2_4exist)
         {
             Debug.Log("yes bébé, la 4ème stèle est ramassé");
             phraseZero = false;
             phraseEight = true;
-            s2_4exist = false;
+            r2_4exist = false;
         }
 
         /// île 3 //////
 
-        if (Ile3_stele_1.activeInHierarchy == false && s3_1exist)
+        if (Ile3_reward_1.activeInHierarchy == false && r3_1exist)
         {
             //Debug.Log("stele 1 a disparut");
             phraseZero = false;
             phraseNine = true;
-            s3_1exist = false;
+            r3_1exist = false;
         }
-        if (Ile3_stele_2.activeInHierarchy == false && s3_2exist)
+        if (Ile3_reward_2.activeInHierarchy == false && r3_2exist)
         {
             phraseZero = false;
             phraseTen = true;
-            s3_2exist = false;
+            r3_2exist = false;
         }
 
-        if (Ile3_stele_3.activeInHierarchy == false && s3_3exist)
+        if (Ile3_reward_3.activeInHierarchy == false && r3_3exist)
         {
             phraseZero = false;
             phraseEleven = true;
-            s3_3exist = false;
+            r3_3exist = false;
         }
-        if (Ile3_stele_4.activeInHierarchy == false && s3_4exist)
+        if (Ile3_reward_4.activeInHierarchy == false && r3_4exist)
         {
             phraseZero = false;
             phraseTwelve = true;
-            s3_4exist = false;
+            r3_4exist = false;
         }
 
         ////// combinaisons ////////
