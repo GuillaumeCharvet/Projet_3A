@@ -12,7 +12,7 @@ public class S_Tuto_Canvas : MonoBehaviour
     public GameObject playerMovement;
     public GameObject cameraMovement;
 
-    private bool tutoClimbOpen = false;
+    private bool tutoOpen = false;
 
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
@@ -20,7 +20,7 @@ public class S_Tuto_Canvas : MonoBehaviour
         if (other.CompareTag("Player"))
             {
             canvaTuto.SetActive(true);
-            tutoClimbOpen = true;
+            tutoOpen = true;
             //playerMovement.SetActive(false);
             //cameraMovement.SetActive(false);
             //  Debug.Log("444");
@@ -28,10 +28,10 @@ public class S_Tuto_Canvas : MonoBehaviour
     }
     private void Update()
     {
-        if (tutoClimbOpen)
+        if (tutoOpen)
         {
             //Debug.Log("Le tuto est open");
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 canvaTuto.SetActive(false);
                 triggerTuto.SetActive(false);
