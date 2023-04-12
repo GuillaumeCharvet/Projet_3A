@@ -99,7 +99,7 @@ public class InputManager : Manager
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+                    //Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
                 }
 
                 isChargingThrow = Input.GetMouseButton(0);
@@ -118,6 +118,8 @@ public class InputManager : Manager
                 {
                     isSpaceDown = true;
                 }
+
+                isChargingThrow = Input.GetAxis("Trigger") > 0.1 || Input.GetAxis("Trigger") < -0.1;
 
                 break;
 
