@@ -138,6 +138,7 @@ public class S_Dialogue : MonoBehaviour
         {
             index = 0;
         }
+        else
         //index = 0;
         StartCoroutine(Typeline());
 
