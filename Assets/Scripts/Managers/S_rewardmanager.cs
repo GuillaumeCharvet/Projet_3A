@@ -9,23 +9,23 @@ public class S_rewardmanager : MonoBehaviour
     // REWARDS TECHNOS //
     //ile 1 //
 
-    public GameObject Ile1_stele_1;
-    public GameObject Ile1_stele_2;
-    public GameObject Ile1_stele_3;
-    public GameObject Ile1_stele_4;
+    public GameObject Ile1_reward_1;
+    public GameObject Ile1_reward_2;
+    public GameObject Ile1_reward_3;
+    public GameObject Ile1_reward_4;
     
     //ile 2 //
 
-    public GameObject Ile2_stele_1;
-    public GameObject Ile2_stele_2;
-    public GameObject Ile2_stele_3;
-    public GameObject Ile2_stele_4;
+    public GameObject Ile2_reward_1;
+    public GameObject Ile2_reward_2;
+    public GameObject Ile2_reward_3;
+    public GameObject Ile2_reward_4;
 
     //ile 3 //
-    public GameObject Ile3_stele_1;
-    public GameObject Ile3_stele_2;
-    public GameObject Ile3_stele_3;
-    public GameObject Ile3_stele_4;
+    public GameObject Ile3_reward_1;
+    public GameObject Ile3_reward_2;
+    public GameObject Ile3_reward_3;
+    public GameObject Ile3_reward_4;
 
     // REWARDS NATURE //
     /*
@@ -113,22 +113,22 @@ public class S_rewardmanager : MonoBehaviour
     ////////////////////// existe encore /////////////////////////
 
     // ile 1 rewards technos // 
-    private bool s1_1exist = true;
-    private bool s1_2exist = true;
-    private bool s1_3exist = true;
-    private bool s1_4exist = true;
+    private bool r1_1exist = true;
+    private bool r1_2exist = true;
+    private bool r1_3exist = true;
+    private bool r1_4exist = true;
 
     // ile 2 rewards technos // 
-    private bool s2_1exist = true;
-    private bool s2_2exist = true;
-    private bool s2_3exist = true;
-    private bool s2_4exist = true;
+    private bool r2_1exist = true;
+    private bool r2_2exist = true;
+    private bool r2_3exist = true;
+    private bool r2_4exist = true;
 
     // ile 3 rewards technos // 
-    private bool s3_1exist = true;
-    private bool s3_2exist = true;
-    private bool s3_3exist = true;
-    private bool s3_4exist = true;
+    private bool r3_1exist = true;
+    private bool r3_2exist = true;
+    private bool r3_3exist = true;
+    private bool r3_4exist = true;
 
 
 
@@ -157,34 +157,97 @@ public class S_rewardmanager : MonoBehaviour
     void Update()
     {
         //stèles présentent dans la scène //
-        if (Ile2_stele_1.activeInHierarchy == false && s2_1exist )
+
+
+        /// île 1 //////
+
+        if (Ile1_reward_1.activeInHierarchy == false && r1_1exist)
+        {
+            //Debug.Log("stele 1 a disparut");
+            phraseZero = false;
+            phraseOne = true;
+            r1_1exist = false;
+        }
+        if (Ile1_reward_2.activeInHierarchy == false && r1_2exist)
+        {          
+            phraseZero = false;
+            phraseTwo = true;
+            r1_2exist = false;
+        }
+
+        if (Ile1_reward_3.activeInHierarchy == false && r1_3exist)
+        {
+            phraseZero = false;
+            phraseThree = true;
+            r1_3exist = false;
+        }
+        if (Ile1_reward_4.activeInHierarchy == false && r1_4exist)
+        {
+            phraseZero = false;
+            phraseFour = true;
+            r1_4exist = false;
+        }
+
+
+        /// île 2 //////
+
+        if (Ile2_reward_1.activeInHierarchy == false && r2_1exist )
         {
             Debug.Log("stele 1 a disparut");
             phraseZero = false;
             phraseFive = true;
-            s2_1exist = false;
+            r2_1exist = false;
         }
-        if (Ile2_stele_2.activeInHierarchy == false && s2_2exist)
+        if (Ile2_reward_2.activeInHierarchy == false && r2_2exist)
         {
             Debug.Log("stele 2 a disparut");
             phraseZero = false;
             phraseSix = true;
-            s2_2exist = false;
+            r2_2exist = false;
         }
 
-        if (Ile2_stele_3.activeInHierarchy == false && s2_3exist)
+        if (Ile2_reward_3.activeInHierarchy == false && r2_3exist)
         {
             Debug.Log("le morceau 3 est prit");
             phraseZero = false;
             phraseSeven = true;
-            s2_3exist = false;
+            r2_3exist = false;
         }
-        if (Ile2_stele_4.activeInHierarchy == false && s2_4exist)
+        if (Ile2_reward_4.activeInHierarchy == false && r2_4exist)
         {
             Debug.Log("yes bébé, la 4ème stèle est ramassé");
             phraseZero = false;
             phraseEight = true;
-            s2_4exist = false;
+            r2_4exist = false;
+        }
+
+        /// île 3 //////
+
+        if (Ile3_reward_1.activeInHierarchy == false && r3_1exist)
+        {
+            //Debug.Log("stele 1 a disparut");
+            phraseZero = false;
+            phraseNine = true;
+            r3_1exist = false;
+        }
+        if (Ile3_reward_2.activeInHierarchy == false && r3_2exist)
+        {
+            phraseZero = false;
+            phraseTen = true;
+            r3_2exist = false;
+        }
+
+        if (Ile3_reward_3.activeInHierarchy == false && r3_3exist)
+        {
+            phraseZero = false;
+            phraseEleven = true;
+            r3_3exist = false;
+        }
+        if (Ile3_reward_4.activeInHierarchy == false && r3_4exist)
+        {
+            phraseZero = false;
+            phraseTwelve = true;
+            r3_4exist = false;
         }
 
         ////// combinaisons ////////
@@ -224,10 +287,67 @@ public class S_rewardmanager : MonoBehaviour
                     dialogueCanva.SetActive(false);
                 }
             }
+            //île 1 //
+
+            if (phraseOne && !p1_1hbs)
+            {
+                //Debug.Log("okay 1 partie");
+                dialogue1.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue1.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p1_1hbs = true;
+                    phraseOne = false;
+                }
+            }
+            if (phraseTwo && !p1_2hbs)
+            {
+                //Debug.Log("okay 1 partie");
+                dialogue2.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue2.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p1_2hbs = true;
+                    phraseTwo = false;
+                }
+            }
+            if (phraseThree && !p1_3hbs)
+            {
+                //Debug.Log("okay 1 partie");
+                dialogue3.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue3.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p1_3hbs = true;
+                    phraseThree = false;
+                }
+            }
+
+            if (phraseFour && !p1_4hbs)
+            {
+                //Debug.Log("okay 1 partie");
+                dialogue4.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue4.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p1_4hbs = true;
+                    phraseFour = false;
+                }
+            }
+
+            // île 2 //
 
             if (phraseFive && !p2_1hbs)
             {
-                Debug.Log("okay 1 partie");
+                //Debug.Log("okay 1 partie");
                 dialogue5.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -277,6 +397,60 @@ public class S_rewardmanager : MonoBehaviour
                      phraseEight = false;
                  }
             }
+
+            //île 3 //
+
+            if (phraseNine && !p3_1hbs)
+            {
+                dialogue9.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue9.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p3_1hbs = true;
+                    phraseNine = false;
+                }
+            }
+
+            if (phraseTen && !p3_2hbs)
+            {
+                dialogue10.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue10.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p3_2hbs = true;
+                    phraseTen = false;
+                }
+            }
+
+            if (phraseEleven && !p3_3hbs)
+            {
+                dialogue11.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue11.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p3_3hbs = true;
+                    phraseEleven = false;
+                }
+            }
+
+            if (phraseTwelve && !p3_4hbs)
+            {
+                dialogue12.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    dialogue12.SetActive(false);
+                    dialogueActif = false;
+                    dialogueCanva.SetActive(false);
+                    p3_4hbs = true;
+                    phraseTwelve = false;
+                }
+            }
             /*if (phraseOneAndTwo)
             {
                 Debug.Log("okay 2 partie");
@@ -288,7 +462,7 @@ public class S_rewardmanager : MonoBehaviour
                     dialogueCanva.SetActive(false);
                 }
             }
-            */  
+            */
         }
     }
 }

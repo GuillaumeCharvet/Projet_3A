@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BuoyancyEffect : MonoBehaviour
 {
+    public GameObject WontSwim1;
+    public GameObject WontSwim2;
+
     private BoxCollider colliderBox;
     private float waterHeight;
     private float waterDensity = 1.35f / 3.5f;
     private Collider playerNextFixedUpdate;
     private StateMachineParameters moveOther;
     private CharacterController capsule;
+
 
     private void Start()
     {
@@ -29,6 +33,9 @@ public class BuoyancyEffect : MonoBehaviour
             moveOther.isInWaterNextFixedUpdate = true;
 
             capsule = playerNextFixedUpdate.gameObject.GetComponent<CharacterController>();
+
+
+
         }
     }
 
