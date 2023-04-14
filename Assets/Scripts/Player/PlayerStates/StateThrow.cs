@@ -17,6 +17,7 @@ public class StateThrow : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+
         base.OnEnterState();
     }
 }
