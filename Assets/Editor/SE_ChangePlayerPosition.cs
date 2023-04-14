@@ -8,7 +8,7 @@ public class SE_ChangePlayerPosition : Editor
 {
     private S_ChangePlayerPosition cpp;
 
-    void OnEnable()
+    private void OnEnable()
     {
         cpp = (S_ChangePlayerPosition)target;
     }
@@ -34,15 +34,7 @@ public class SE_ChangePlayerPosition : Editor
                 cpp.transform.position = item.position;
                 cpp.transform.rotation = Quaternion.Euler(item.rotation);
 
-                /*
-                var view = SceneView.currentDrawingSceneView;
-                if (view != null)
-                {
-                    Selection.activeGameObject = cpp.gameObject;
-                    SceneView.FrameLastActiveSceneView();
-                    //view.AlignViewToObject(cpp.transform);
-                }
-                */
+                SceneView.FrameLastActiveSceneView();
             }
         }
 

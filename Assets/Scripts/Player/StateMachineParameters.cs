@@ -146,6 +146,11 @@ public class StateMachineParameters : MonoBehaviour
         //Debug.Log("ForwardSpeed : " + (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);
 
         */
+
+        // Plot evolution of the forward speed
+        var forwardSpeed = (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude;
+        var listLength = plotGroundAngleInfluence.keys.Length;
+        if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != forwardSpeed) plotGroundAngleInfluence.AddKey(Time.time, forwardSpeed);
     }
 
     void FixedUpdate()
@@ -551,9 +556,11 @@ public class StateMachineParameters : MonoBehaviour
         var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
         desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
 
+        /*
         var listLength = plotGroundAngleInfluence.keys.Length;
         if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != groundAngleInfluence) plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
         //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
+        */
 
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
@@ -797,7 +804,7 @@ public class StateMachineParameters : MonoBehaviour
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
     }
-    public void Roll(float maxSpeed, float maxAcceleration, bool onGround)
+    public void Roll(float maxSpeed, float maxSpeedIdle, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
 
@@ -816,7 +823,7 @@ public class StateMachineParameters : MonoBehaviour
         // Force the player to go forward during a roll even if he doesn't press any input
         if (playerInput.sqrMagnitude < 0.1f)
         {
-            velocity = transform.forward * maxSpeed;
+            velocity = transform.forward * maxSpeedIdle;
 
             if (playerParameters.characterController.isGrounded)
                 velocity.y = 0f;
