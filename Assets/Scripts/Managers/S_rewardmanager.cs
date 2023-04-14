@@ -278,7 +278,7 @@ public class S_rewardmanager : MonoBehaviour
         {
             if (phraseZero)
             {
-                Debug.Log("tu n'as pas d'objet je parle pas");
+                //Debug.Log("tu n'as pas d'objet je parle pas");
                 dialogue0.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
