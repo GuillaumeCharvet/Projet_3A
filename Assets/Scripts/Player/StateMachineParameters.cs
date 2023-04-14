@@ -813,57 +813,59 @@ public class StateMachineParameters : MonoBehaviour
         playerInput.x = inputManager.HorizontalInput;
         playerInput.y = inputManager.VerticalInput;
 
-        /*
         // Force the player to go forward during a roll even if he doesn't press any input
         if (playerInput.sqrMagnitude < 0.1f)
         {
-            float ang = Mathf.Atan2(transform.forward.x, transform.forward.z) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
-            var vec = Quaternion.Euler(0f, ang, 0f) * transform.forward;
-            playerInput.x = vec.x;
-            playerInput.y = vec.z;
+            velocity = transform.forward * maxSpeed;
+
+            if (playerParameters.characterController.isGrounded)
+                velocity.y = 0f;
+            else
+                velocity.y -= gravity * Time.deltaTime;
         }
-        */
-
-        // Clamp it to disallow strafe walking
-        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-
-        // Add camera angle to the input vector so that the player moves where the camera looks
-        float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-        // Modify the direction the player model is looking
-        if (playerInput.magnitude >= 0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        }
-
-        // Give the movement inertia by changing the velocity from its previous value to its desired value 
-        Vector3 targetDirection = playerInput.magnitude * transform.forward;
-        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
-
-        // Take into account ground angle to slow down speed the bigger the slope
-        var groundAngleFromHorizontal = Vector3.Angle(Vector3.up, currentGroundNormal);
-
-        // Change the velocity depending on the slope angle the player is walking on
-        var playerInputNormalized = transform.forward;
-        var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
-        desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
-
-        var listLength = plotGroundAngleInfluence.keys.Length;
-        if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != groundAngleInfluence) plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
-        //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
-
-        float maxSpeedChange = maxAcceleration * Time.deltaTime;
-        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-
-        // Apply gravity if not grounded
-        if (animator.GetBool("PlayerJumped"))
-            velocity.y += jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
-            velocity.y = 0f;
         else
-            velocity.y -= gravity * Time.deltaTime;
+        {
+            // Clamp it to disallow strafe walking
+            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+            // Add camera angle to the input vector so that the player moves where the camera looks
+            float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+            // Modify the direction the player model is looking
+            if (playerInput.magnitude >= 0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+
+            // Give the movement inertia by changing the velocity from its previous value to its desired value 
+            Vector3 targetDirection = playerInput.magnitude * transform.forward;
+            Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+
+            // Take into account ground angle to slow down speed the bigger the slope
+            var groundAngleFromHorizontal = Vector3.Angle(Vector3.up, currentGroundNormal);
+
+            // Change the velocity depending on the slope angle the player is walking on
+            var playerInputNormalized = transform.forward;
+            var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
+            desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
+
+            // Plot the angle of the ground when detected by the avatar
+            var listLength = plotGroundAngleInfluence.keys.Length;
+            if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != groundAngleInfluence) plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
+
+            float maxSpeedChange = maxAcceleration * Time.deltaTime;
+            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+            // Apply gravity if not grounded
+            if (animator.GetBool("PlayerJumped"))
+                velocity.y += jumpVerticalBoost;
+            else if (playerParameters.characterController.isGrounded)
+                velocity.y = 0f;
+            else
+                velocity.y -= gravity * Time.deltaTime;
+        }
 
         // Apply appropriate friction force depending if in water or not        
         velocity.y *= 0.999f;
