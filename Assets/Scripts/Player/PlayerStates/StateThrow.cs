@@ -17,6 +17,9 @@ public class StateThrow : StateBehaviourParent
 
     protected override void OnEnterState()
     {
+        reader.smp.currentModeMovement = ModeMovement.Throw;
+
+        reader.smp.StartCoroutine("WaitBeforeThrow");
 
         base.OnEnterState();
     }

@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Harpon
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cb6d973fcb3056648b8c2edf568655b5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -100,6 +105,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8626158009414663281}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb6d973fcb3056648b8c2edf568655b5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9158484334528404208}
   m_SourcePrefab: {fileID: 100100000, guid: cb6d973fcb3056648b8c2edf568655b5, type: 3}
 --- !u!1 &2438142048222109482 stripped
 GameObject:
@@ -156,3 +165,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9158484334528404208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438142048222109482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d486d8f31ac906943b7738d8dea07f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
