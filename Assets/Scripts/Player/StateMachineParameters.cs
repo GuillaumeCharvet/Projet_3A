@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Analytics;
+
 //using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
-public enum ModeMovement { Idle, Walk, Run, Jump, Swim, Climb, Slide, Glide, GrabLedge, Hang, Fall };
+public enum ModeMovement
+{ Idle, Walk, Run, Jump, Swim, Climb, Slide, Glide, GrabLedge, Hang, Fall, ChargeThrow, Throw };
 
 public class StateMachineParameters : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class StateMachineParameters : MonoBehaviour
 
     // PARAMETERS FOR CHECKISGROUNDED
     private float radius;
+
     [SerializeField] private LayerMask layerMaskClimb;
     [SerializeField] private LayerMask layerMaskIsGrounded;
     public float distanceDefiningGroundedState = 0f;//3f;
@@ -30,6 +33,7 @@ public class StateMachineParameters : MonoBehaviour
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
     private float grabToClimbDistance = 0.9f;
+
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
     public float distanceToGrabbedWallLimit = 0.5f;
@@ -37,10 +41,12 @@ public class StateMachineParameters : MonoBehaviour
 
     [Header("FALL")]
     [SerializeField] public float airControl = 0.2f;
+
     [SerializeField] public float gravity = 1.2f;
 
     [Header("RUN/JUMP")]
     [SerializeField] private float influenceOfSlopeOnSpeed = 0.5f;
+
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
@@ -51,6 +57,7 @@ public class StateMachineParameters : MonoBehaviour
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
+
     public float maxClimbStamina = 10f;
     public float currentClimbStamina = 0f;
     public Vector3 currentNormalToClimb;
@@ -62,12 +69,11 @@ public class StateMachineParameters : MonoBehaviour
     private float wallJumpVelocity = 16f;
 
     [Header("GRAB LEDGE")]
-
-    private float grabLedgeDistance = 3.2f;
+    [SerializeField] private float grabLedgeDistance = 3.2f;
 
     [Header("GLIDE")]
-
     public Animator animatorGlider;
+
     public Transform gliderTransform;
     public float gliderRotationSpeed = 0f;
     public float gliderRotationAcceleration = 0.5f;
@@ -92,26 +98,28 @@ public class StateMachineParameters : MonoBehaviour
 
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
+
     public bool isInNoWaterZone = false;
     public BuoyancyEffect lastWaterVisited;
     public float forceOfWater;
-
-    public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
 
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
 
     [Header("THROW")]
-    private float timeChargingThrow = 0f;
-    private float timeBeforeThrow = 1.5f;
-    [SerializeField] private GameObject prefabSpear;
-    [SerializeField] private Vector3 spearPositionOffset;
-    private Vector3 spearInitialRotationEulerAngle;
+    [SerializeField] private float throwPower = 200f;
 
+    [SerializeField] private GameObject prefabSpear;
+    [SerializeField] private Transform spearTransform;
+    [SerializeField] private Vector3 spearPositionOffset;
+    [SerializeField] private Vector3 spearInitialRotationEulerAngle;
+
+    private float timeChargingThrow = 0f;
+    private float timeBeforeThrow = 0.5f;
+    public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
     public float angleDiff = 0f;
 
-
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
@@ -122,7 +130,7 @@ public class StateMachineParameters : MonoBehaviour
         radius = GetComponent<CharacterController>().radius;
     }
 
-    void Update()
+    private void Update()
     {
         UpdateIsGrounded();
         UpdateHasGroundBelow();
@@ -153,7 +161,7 @@ public class StateMachineParameters : MonoBehaviour
         if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != forwardSpeed) plotGroundAngleInfluence.AddKey(Time.time, forwardSpeed);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
         //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
@@ -191,7 +199,6 @@ public class StateMachineParameters : MonoBehaviour
 
             if (hit.distance < distanceDefiningGroundedState + distAB + epsilonCheckGrounded)
             {
-
                 //Debug.Log("distance to ground = " + hit.distance + ", distance AB : " + distAB);
                 return true;
             }
@@ -236,6 +243,7 @@ public class StateMachineParameters : MonoBehaviour
         //Debug.Log("SPHERECAST 2");
         return false;
     }
+
     public bool CheckIfClimbingTopToBot(bool updateCurrentNormal)
     {
         float correctiveGrabDistance = 0f;
@@ -245,12 +253,10 @@ public class StateMachineParameters : MonoBehaviour
 
         /*if (Physics.SphereCast(player.transform.position, grabToClimbDistance, player.transform.forward, out hitTop, 10f, layerMask))
         {
-
         }*/
 
         if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
-
             Debug.Log("TOP RAY HIT");
             Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
 
@@ -357,6 +363,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         return false;
     }
+
     public bool CheckIfClimbingTopRay()
     {
         float correctiveGrabDistance = 0f;
@@ -366,7 +373,6 @@ public class StateMachineParameters : MonoBehaviour
 
         /*if (Physics.SphereCast(player.transform.position, grabToClimbDistance, player.transform.forward, out hitTop, 10f, layerMask))
         {
-
         }*/
 
         if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
@@ -402,6 +408,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         return false;
     }
+
     public bool CheckIfClimbingUp()
     {
         RaycastHit hit;
@@ -429,6 +436,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         return false;
     }
+
     public bool CheckIfClimbingBotRay()
     {
         float correctiveGrabDistance = 0f;
@@ -469,6 +477,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         return false;
     }
+
     public bool CheckIfStopHanging()
     {
         RaycastHit hit;
@@ -497,12 +506,13 @@ public class StateMachineParameters : MonoBehaviour
         }
         return true;
     }
+
     public void ResetStamina()
     {
         currentClimbStamina = maxClimbStamina;
     }
 
-    #endregion
+    #endregion CLIMB CHECKS
 
     #region MOVEMENT
 
@@ -544,7 +554,7 @@ public class StateMachineParameters : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        // Give the movement inertia by changing the velocity from its previous value to its desired value
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
         Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
 
@@ -574,7 +584,7 @@ public class StateMachineParameters : MonoBehaviour
         else
             velocity.y -= gravity * Time.deltaTime;
 
-        // Apply appropriate friction force depending if in water or not        
+        // Apply appropriate friction force depending if in water or not
         velocity.y *= 0.999f;
 
         // Move the player through its character controller
@@ -613,6 +623,7 @@ public class StateMachineParameters : MonoBehaviour
         animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
         */
     }
+
     public void Swim(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
@@ -648,7 +659,7 @@ public class StateMachineParameters : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        // Give the movement inertia by changing the velocity from its previous value to its desired value
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
         Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
 
@@ -664,7 +675,7 @@ public class StateMachineParameters : MonoBehaviour
         else
             velocity.y -= gravity * Time.deltaTime;
 
-        // Apply appropriate friction force depending if in water or not        
+        // Apply appropriate friction force depending if in water or not
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
@@ -675,9 +686,9 @@ public class StateMachineParameters : MonoBehaviour
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
     }
+
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
-
         if (inputManager.IsSpaceDownFixed && inputManager.VerticalInput > -0.1f)
         {
             Debug.Log("DECOLLE DU MUR WESH");
@@ -748,6 +759,7 @@ public class StateMachineParameters : MonoBehaviour
             }
         }
     }
+
     public void Fall(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
@@ -777,7 +789,7 @@ public class StateMachineParameters : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-        // Give the movement inertia by changing the velocity from its previous value to its desired value 
+        // Give the movement inertia by changing the velocity from its previous value to its desired value
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
         Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
@@ -804,6 +816,7 @@ public class StateMachineParameters : MonoBehaviour
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
     }
+
     public void Roll(float maxSpeed, float maxSpeedIdle, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
@@ -845,7 +858,7 @@ public class StateMachineParameters : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
 
-            // Give the movement inertia by changing the velocity from its previous value to its desired value 
+            // Give the movement inertia by changing the velocity from its previous value to its desired value
             Vector3 targetDirection = playerInput.magnitude * transform.forward;
             Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
 
@@ -874,7 +887,7 @@ public class StateMachineParameters : MonoBehaviour
                 velocity.y -= gravity * Time.deltaTime;
         }
 
-        // Apply appropriate friction force depending if in water or not        
+        // Apply appropriate friction force depending if in water or not
         velocity.y *= 0.999f;
 
         // Move the player through its character controller
@@ -934,6 +947,7 @@ public class StateMachineParameters : MonoBehaviour
             playerParameters.characterController.Move(displacement);
         }
     }
+
     public void Glide(float maxSpeed, float maxAcceleration)
     {
         float horizontal = inputManager.HorizontalInput;
@@ -979,23 +993,20 @@ public class StateMachineParameters : MonoBehaviour
         // Rotate the player around the z axis to go along the change of direction
         var eulerZ = transform.localRotation.eulerAngles.z > 180 ? transform.localRotation.eulerAngles.z - 360 : transform.localRotation.eulerAngles.z;
 
-        if (horizontal > 0.1f)          transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, -15f));
-        else if (horizontal < -0.1f)    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Min(eulerZ - 0.4f * gliderTurnSpeed, +15f));
-        
+        if (horizontal > 0.1f) transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, -15f));
+        else if (horizontal < -0.1f) transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Min(eulerZ - 0.4f * gliderTurnSpeed, +15f));
+
         /*if (horizontal > 0.1f || horizontal < -0.1f)
             transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + gliderTurnSpeed, Mathf.Max(eulerZ - 0.4f * gliderTurnSpeed, Mathf.Sign(horizontal) * 15f));
         */
-        
-        else if (eulerZ > 0.2f)         transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
-        else if (eulerZ < -0.2f)        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
-        
-        
+        else if (eulerZ > 0.2f) transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ - 0.4f);
+        else if (eulerZ < -0.2f) transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, eulerZ + 0.4f);
 
         // Rotate the player around the x axis to go along acceleration and deceleration
         if (vertical > 0.1f) // && gliderSpeed > 1f)
         {
             var eulerX = transform.localRotation.eulerAngles.x > 180f ? transform.localRotation.eulerAngles.x - 360f : transform.localRotation.eulerAngles.x;
-            transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f *  Mathf.Min(1f, 0.2f * Mathf.Pow(gliderSpeed, 2f)), 45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
+            transform.localRotation = Quaternion.Euler(Mathf.Min(eulerX + 0.8f * Mathf.Min(1f, 0.2f * Mathf.Pow(gliderSpeed, 2f)), 45f), transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
         else if (vertical < -0.1f)
         {
@@ -1020,22 +1031,24 @@ public class StateMachineParameters : MonoBehaviour
 
         moveNormalToDirection *= 0.97f;
     }
+
     public void ChargeThrow()
     {
-
     }
 
-    #endregion
+    #endregion MOVEMENT
 
     public IEnumerator WaitBeforeThrow()
     {
         yield return new WaitForSeconds(timeBeforeThrow);
         ThrowSpear();
     }
+
     public void ThrowSpear()
     {
-        var spear = Instantiate(prefabSpear, transform.position + spearPositionOffset, Quaternion.Euler(spearInitialRotationEulerAngle));
-
+        var spear = Instantiate(prefabSpear, spearTransform.position, spearTransform.localRotation, transform.parent);
+        //var spear = Instantiate(prefabSpear, transform.position + transform.TransformDirection(spearPositionOffset), Quaternion.Euler(spearInitialRotationEulerAngle), transform.parent);
+        spear.GetComponent<Rigidbody>().AddForce(throwPower * transform.forward);
     }
 
     public IEnumerator ChangeBoolValueFor2Seconds()
@@ -1044,6 +1057,7 @@ public class StateMachineParameters : MonoBehaviour
         yield return new WaitForSeconds(2f);
         isDuringFirst2SecondsOfClimbing = false;
     }
+
     public void ResetPlayerCollider()
     {
         characterController.height = characterControlerHeightResetValue;
@@ -1051,6 +1065,7 @@ public class StateMachineParameters : MonoBehaviour
 
         GetComponent<CapsuleCollider>().enabled = false;
     }
+
     public void SetPlayerColliderToClimb()
     {
         GetComponent<CapsuleCollider>().enabled = true;
@@ -1060,50 +1075,61 @@ public class StateMachineParameters : MonoBehaviour
     }
 
     #region PARAMETERS UPDATER
+
     public void UpdateIdleTransitionsParameters(string parameterName, float maxSpeedTransition)
     {
         animator.SetBool(parameterName, (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude > maxSpeedTransition);
     }
+
     public void UpdateIsGrounded()
     {
         animator.SetBool("IsGrounded", (CheckIsGrounded() || characterController.isGrounded)); //&& Vector3.Angle(Vector3.up, currentGroundNormal) < 50f);
     }
+
     public void UpdateHasGroundBelow()
     {
         animator.SetBool("HasGroundBelow", CheckIsGrounded());
     }
+
     public void UpdateCanClimbTopToBot(bool updateCurrentNormal)
     {
         animator.SetBool("CanClimbTopToBot", CheckIfClimbingTopToBot(updateCurrentNormal));
     }
+
     public void UpdateCanClimbTopRay()
     {
         animator.SetBool("CanClimbTopRay", CheckIfClimbingTopRay());
     }
+
     public void UpdateCanClimbBotRay()
     {
         animator.SetBool("CanClimbBotRay", CheckIfClimbingBotRay());
     }
+
     public void UpdateCanClimbUp()
     {
         animator.SetBool("CanClimbUp", CheckIfClimbingUp());
     }
+
     public void UpdateStopHanging()
     {
         animator.SetBool("StopHanging", CheckIfStopHanging());
     }
+
     public void UpdateInputValue()
     {
         var x = inputManager.VerticalInput;
         var y = inputManager.HorizontalInput;
         animator.SetFloat("VerticalInput", x);
         animator.SetFloat("HorizontalInput", y);
-        animator.SetFloat("Input",  Vector2.ClampMagnitude(new Vector2(x, y), 1f).magnitude);
+        animator.SetFloat("Input", Vector2.ClampMagnitude(new Vector2(x, y), 1f).magnitude);
     }
+
     public void UpdateStartGlide()
     {
         animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
     }
+
     public void UpdateTimeChargingThrow()
     {
         if (inputManager.IsChargingThrow)
@@ -1115,5 +1141,6 @@ public class StateMachineParameters : MonoBehaviour
             timeChargingThrow = 0f;
         }
     }
-    #endregion
+
+    #endregion PARAMETERS UPDATER
 }
