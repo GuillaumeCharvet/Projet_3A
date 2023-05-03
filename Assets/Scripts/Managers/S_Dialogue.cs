@@ -124,7 +124,7 @@ public class S_Dialogue : MonoBehaviour
 
         if (dialoguebools[0])
         {
-            Debug.Log("inex revient à 0");
+          //  Debug.Log("index revient à 0");
         }
 
 
