@@ -115,7 +115,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private Vector3 spearInitialRotationEulerAngle;
 
     private float timeChargingThrow = 0f;
-    private float timeBeforeThrow = 0.5f;
+    private float timeBeforeThrow = 0.58f * 1.3f / 1.6f;
     public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
     public float angleDiff = 0f;
 
@@ -1046,7 +1046,9 @@ public class StateMachineParameters : MonoBehaviour
 
     public void ThrowSpear()
     {
-        var spear = Instantiate(prefabSpear, spearTransform.position, spearTransform.localRotation, transform.parent);
+        var spear = Instantiate(prefabSpear, transform.position + transform.TransformDirection(spearPositionOffset), Quaternion.identity, transform.parent);
+        //spear.transform.localPosition = spearTransform.position + transform.TransformDirection(spearPositionOffset);
+        spear.transform.rotation = transform.rotation * Quaternion.Euler(spearInitialRotationEulerAngle);
         //var spear = Instantiate(prefabSpear, transform.position + transform.TransformDirection(spearPositionOffset), Quaternion.Euler(spearInitialRotationEulerAngle), transform.parent);
         spear.GetComponent<Rigidbody>().AddForce(throwPower * transform.forward);
     }

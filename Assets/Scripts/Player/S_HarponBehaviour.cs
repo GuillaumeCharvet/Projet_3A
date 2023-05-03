@@ -5,15 +5,27 @@ using UnityEngine;
 
 public class S_HarponBehaviour : MonoBehaviour
 {
+    private Vector3 velocity;
     private Rigidbody rgbdSpear;
     public GameObject spearHookPrefab;
 
+    private float scaleFactor = 1;
     //public RopeManager ropeManager;
     //public PlayerActions playerActions;
 
     private void Start()
     {
         rgbdSpear = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        velocity += -10f * Time.deltaTime * Vector3.up;
+        velocity *= 0.99f;
+
+        transform.rotation = Quaternion.LookRotation(Vector3.Cross(Vector3.Cross(velocity, Vector3.forward), Vector3.up));
+
+        scaleFactor = Mathf.Min(scaleFactor + 0.1f * Time.deltaTime, 1.5f);
     }
 
     private void OnCollisionEnter(Collision collision)
