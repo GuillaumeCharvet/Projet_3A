@@ -27,6 +27,7 @@ public class S_Play_Sound : MonoBehaviour
         source2.pitch = Random.Range(0.8f, 1.2f);
         source2.PlayOneShot(sound2);
         Debug.Log("le son de pied se joue");
+
     }
 
 
