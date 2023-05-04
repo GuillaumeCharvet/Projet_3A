@@ -107,7 +107,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float currentHeightRef = 0f;
 
     [Header("THROW")]
-    [SerializeField] private float throwPower = 200f;
+    [SerializeField] private float throwPower = 2f;
 
     [SerializeField] private GameObject prefabSpear;
     [SerializeField] private Transform spearTransform;
@@ -1050,7 +1050,10 @@ public class StateMachineParameters : MonoBehaviour
         //spear.transform.localPosition = spearTransform.position + transform.TransformDirection(spearPositionOffset);
         spear.transform.rotation = transform.rotation * Quaternion.Euler(spearInitialRotationEulerAngle);
         //var spear = Instantiate(prefabSpear, transform.position + transform.TransformDirection(spearPositionOffset), Quaternion.Euler(spearInitialRotationEulerAngle), transform.parent);
+
         spear.GetComponent<Rigidbody>().AddForce(throwPower * transform.forward);
+        var spearBehaviour = spear.GetComponent<S_HarponBehaviour>();
+        spearBehaviour.velocity = throwPower * transform.forward;
     }
 
     public IEnumerator ChangeBoolValueFor2Seconds()
