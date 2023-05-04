@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Audio;
 
 
 public class S_Dialogue : MonoBehaviour
@@ -22,6 +23,12 @@ public class S_Dialogue : MonoBehaviour
     public GameObject reward1_2;
     public GameObject reward1_3;
     public GameObject reward1_4;
+
+    public AudioClip nextTextSound;
+    public AudioSource soundsource;
+
+    public AudioClip blablaSound;
+
 
     
 
@@ -195,6 +202,7 @@ public class S_Dialogue : MonoBehaviour
                     textComponentTechno.text = string.Empty;
                     StartCoroutine(Typeline());
                     nextLineFound = true;
+                    soundsource.PlayOneShot(nextTextSound);
                 }
                 else
                 {

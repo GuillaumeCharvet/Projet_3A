@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class S_GetRewards : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class S_GetRewards : MonoBehaviour
     public GameObject buttonGet;
     private bool pickable = false;
     private bool picked = false;
+
+    public AudioClip popupSound;
+    public AudioSource popupSource;
+
+    public AudioClip getSound;
+
+
+
     // Start is called before the first frame update
    
         void OnTriggerEnter(Collider other )
@@ -20,6 +29,7 @@ public class S_GetRewards : MonoBehaviour
             Debug.Log("est rentré dans le collider");
             buttonGet.SetActive(true);
                 pickable = true;
+            popupSource.PlayOneShot(popupSound);
             }
         }
 
@@ -38,10 +48,13 @@ public class S_GetRewards : MonoBehaviour
     {
         if(pickable && Input.GetKeyDown(KeyCode.F))
         {
+            popupSource.PlayOneShot(getSound);
+            Debug.Log("le son se joue");
             pickableObject.SetActive(false);
             buttonGet.SetActive(false);
             picked = true;
             pickable = false;
+            
         }
     }
 }

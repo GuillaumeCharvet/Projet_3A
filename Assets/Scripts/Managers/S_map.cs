@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 public class S_map : MonoBehaviour
     
 {
@@ -122,6 +123,16 @@ public class S_map : MonoBehaviour
 
 
 
+    //sons //
+
+    public AudioClip bookOpen;
+    public AudioClip pageTurn;
+    public AudioClip closeBook;
+
+    public AudioSource owl;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,6 +148,7 @@ public class S_map : MonoBehaviour
         {
             canvaMap.SetActive(true);
             carnetIsOpen = true;
+            owl.PlayOneShot(bookOpen);
             Debug.Log("Hop on ouvre le carnet");
 
 
@@ -159,6 +171,7 @@ public class S_map : MonoBehaviour
         {
             canvaMap.SetActive(false);
             canvaC1.SetActive(true);
+            owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 1 ");
         }
 
@@ -168,12 +181,14 @@ public class S_map : MonoBehaviour
         {
             canvaC1.SetActive(false);
             canvaMap.SetActive(true);
+            owl.PlayOneShot(pageTurn);
         }
 
         if (canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC1.SetActive(false);
             canvaC2.SetActive(true);
+            owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 2 ");
         }
 
@@ -183,12 +198,14 @@ public class S_map : MonoBehaviour
         {
             canvaC2.SetActive(false);
             canvaC1.SetActive(true);
+            owl.PlayOneShot(pageTurn);
         }
         
         if (canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC2.SetActive(false);
-            canvaC3.SetActive(true);
+            canvaC3.SetActive(true); 
+            owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 3 ");
         }
         // Transitions depuis Double Page 3 //////
@@ -197,12 +214,14 @@ public class S_map : MonoBehaviour
         {
             canvaC3.SetActive(false);
             canvaC2.SetActive(true);
+            owl.PlayOneShot(pageTurn);
         }     
         
         if (canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC3.SetActive(false);
             canvaC4.SetActive(true);
+            owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 4 ");
         }
         // Transitions depuis Double Page 4 //////
@@ -211,12 +230,14 @@ public class S_map : MonoBehaviour
         {
             canvaC4.SetActive(false);
             canvaC3.SetActive(true);
+            owl.PlayOneShot(pageTurn);
         }
 
         if (canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC4.SetActive(false);
             canvaC5.SetActive(true);
+            owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 5 ");
         }
         // Transitions depuis Double Page 5 //////
@@ -225,12 +246,14 @@ public class S_map : MonoBehaviour
         {
             canvaC5.SetActive(false);
             canvaC4.SetActive(true);
+            owl.PlayOneShot(pageTurn);
         }
 
         if (canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC5.SetActive(false);
             canvaC6.SetActive(true);
+            owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 6 ");
         }
         // Transitions depuis Double Page 6 //////
@@ -239,6 +262,7 @@ public class S_map : MonoBehaviour
         {
             canvaC6.SetActive(false);
             canvaC5.SetActive(true);
+            owl.PlayOneShot(pageTurn);
         }
         
 
@@ -252,7 +276,7 @@ public class S_map : MonoBehaviour
             || canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape)
             || canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            owl.PlayOneShot(closeBook);
             canvaMap.SetActive(false);
             canvaC1.SetActive(false);
             canvaC2.SetActive(false);
