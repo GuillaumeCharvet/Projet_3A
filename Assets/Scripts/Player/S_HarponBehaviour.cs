@@ -9,6 +9,8 @@ public class S_HarponBehaviour : MonoBehaviour
     private Rigidbody rgbdSpear;
     public GameObject spearHookPrefab;
 
+    [SerializeField] public Transform ropeStartTrsf;
+
     private bool firstCollision = false;
 
     private float scaleFactor = 1;

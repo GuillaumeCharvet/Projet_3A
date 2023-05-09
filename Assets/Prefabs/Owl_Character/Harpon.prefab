@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &972782823103094292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2453046204888083078}
+  m_Layer: 9
+  m_Name: ropeStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2453046204888083078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972782823103094292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3070845726004643216}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3201662363771200634
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +103,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.000040568415, y: -0.0399986, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -182,6 +213,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RopeSection_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2271205535099870338, guid: a6b337b829428644685eb7b906107840,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -250,7 +286,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.0000000117332, y: 0.10995943, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -428,7 +464,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00003883033, y: 0.0000005364418, z: -0.000009242562}
+  m_ConnectedAnchor: {x: -0.000040568415, y: -0.04000134, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -606,7 +642,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.000040560964, y: -0.040000536, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -784,7 +820,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 1.7763568e-15, y: -0.039001513, z: 0.005}
+  m_ConnectedAnchor: {x: -0.000040568415, y: -0.040000804, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -962,7 +998,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.00004055724, y: -0.04000026, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1140,7 +1176,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0009611697, y: -0.042999465, z: -0.0010092426}
+  m_ConnectedAnchor: {x: -0.000040553514, y: -0.040001087, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1267,6 +1303,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1499454352612356673}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cb6d973fcb3056648b8c2edf568655b5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2453046204888083078}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb6d973fcb3056648b8c2edf568655b5,
         type: 3}
@@ -1280,6 +1320,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9158484334528404208}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb6d973fcb3056648b8c2edf568655b5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5400887340018958118}
   m_SourcePrefab: {fileID: 100100000, guid: cb6d973fcb3056648b8c2edf568655b5, type: 3}
 --- !u!1 &2438142048222109482 stripped
 GameObject:
@@ -1350,6 +1394,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
   spearHookPrefab: {fileID: 0}
+  ropeStartTrsf: {fileID: 2453046204888083078}
+--- !u!114 &5400887340018958118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438142048222109482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c558c537d1b28c4eabdb2952c149f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3070845726004643216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cb6d973fcb3056648b8c2edf568655b5,

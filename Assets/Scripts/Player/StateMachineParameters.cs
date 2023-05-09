@@ -114,6 +114,9 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private Vector3 spearPositionOffset;
     [SerializeField] private Vector3 spearInitialRotationEulerAngle;
 
+    [SerializeField] public Transform ropeEndOnPlayer;
+    public GameObject ropeExtremityPrefab;
+
     private float timeChargingThrow = 0f;
     private float timeBeforeThrow = 0.58f * 1.3f / 1.6f;
     public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
