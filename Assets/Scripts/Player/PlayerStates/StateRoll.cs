@@ -9,13 +9,9 @@ public class StateRoll : StateBehaviourParent
 
     [SerializeField] public float maxAcceleration = 50f;
 
-    [SerializeField] public float speedDown = 0f;
+    [SerializeField] public float rollSpeedIdle = 6f;
 
-    /*
-    [SerializeField] public float jumpVerticalBoost = 0.4f;
-    [SerializeField] public float jumpHorizontalBoost = 1f;
-    public float speed;
-    */
+    [SerializeField] public float rollSpeed = 12f;
 
     public override void OnExitState()
     {
@@ -24,9 +20,8 @@ public class StateRoll : StateBehaviourParent
 
     public override void Update()
     {
-        reader.smp.Roll(reader.smp.MaxSpeed, maxAcceleration, true);
+        reader.smp.Roll(rollSpeed, rollSpeedIdle, maxAcceleration, true);
 
-        reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedDown);
         reader.smp.UpdateCanClimbTopToBot(true);
 
         base.Update();

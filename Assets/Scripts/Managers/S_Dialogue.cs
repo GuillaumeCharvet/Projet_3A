@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Audio;
 
 
 public class S_Dialogue : MonoBehaviour
@@ -22,6 +23,12 @@ public class S_Dialogue : MonoBehaviour
     public GameObject reward1_2;
     public GameObject reward1_3;
     public GameObject reward1_4;
+
+    public AudioClip nextTextSound;
+    public AudioSource soundsource;
+
+    public AudioClip blablaSound;
+
 
     
 
@@ -109,7 +116,7 @@ public class S_Dialogue : MonoBehaviour
             StartDialogue();
             //dialogueIsActive = true;
         }
-        if(Input.GetMouseButtonDown(0) )
+        if (Input.GetMouseButtonDown(0))
         {
             if (textComponentTechno.text == dialoguelines[index])
             {
@@ -121,36 +128,65 @@ public class S_Dialogue : MonoBehaviour
                 textComponentTechno.text = dialoguelines[index];
             }
         }
-        
 
+        if (dialoguebools[0])
+        {
+          //  Debug.Log("index revient à 0");
+        }
+
+
+        
     }
+
 
     void StartDialogue()
     {
-        var orNTM = false;
-        for (int i = 1; i < 9; i++)
+        //var orNTM = false;
+        for (int i = 0; i < 9; i++)
         {
-            orNTM = orNTM || dialoguebools[i];
-        }
-
-        
-        if (!orNTM)
-        {
+            /* if (dialoguebools[index])
+             {
+                 index[index] = i;
+             }
+             if (!dialoguebools[i])
+             {
+                 index++;
+             }
+            */
+            /*orNTM = orNTM || dialoguebools[i];
+            if (!orNTM)
+            {
+                index = 0;
+                dialoguebools[0] = true;
+            }
+            if (orNTM)
+            {
+                dialoguebools[0] = false;
+            }
+            */
             index = 0;
         }
-        else
-        //index = 0;
         StartCoroutine(Typeline());
-
     }
     IEnumerator Typeline()
     {
+        Debug.Log("attend 1 second mon djo");
+        yield return new WaitForSeconds(1);
+        Debug.Log("c'est bon ça fait 1 sec");
         foreach (char c in dialoguelines[index].ToCharArray())
         {
+
             textComponentTechno.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
     }
+    /*IEnumerator waiter()
+    {
+        Debug.Log("attend 5 second mon djo");
+        yield return new WaitForSeconds(5);
+        Debug.Log("c'est bon ça fait 5 sec");
+    }
+    */
     void NextLine()
     {
         bool nextLineFound = false;
@@ -161,14 +197,16 @@ public class S_Dialogue : MonoBehaviour
                 if (dialoguebools[index + 1] && !dialogueHBS[index + 1])
                 {
                     dialogueHBS[index + 1] =true;
-                    dialoguebools[index + 1] = false;
                     index++;
+                    dialoguebools[index - 1] = false;
                     textComponentTechno.text = string.Empty;
                     StartCoroutine(Typeline());
                     nextLineFound = true;
+                    soundsource.PlayOneShot(nextTextSound);
                 }
                 else
                 {
+                    dialoguebools[index] = false;
                     index++;
                 }
             }
@@ -178,7 +216,8 @@ public class S_Dialogue : MonoBehaviour
                 nextLineFound = true;
                 dialogueIsActive = false;
                 Debug.Log("okay le dialogue est désactivé");
-                
+                dialoguebools[0] = true;
+
             }
         }        
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class S_rewardmanager : MonoBehaviour
@@ -129,6 +130,10 @@ public class S_rewardmanager : MonoBehaviour
     private bool r3_2exist = true;
     private bool r3_3exist = true;
     private bool r3_4exist = true;
+
+    // sons // 
+    public AudioClip talkedSound;
+    public AudioSource talksource;
 
 
 
@@ -268,6 +273,7 @@ public class S_rewardmanager : MonoBehaviour
         {
             Debug.Log("je veux te parler");
             talkCanva.SetActive(false);
+            talksource.PlayOneShot(talkedSound);
             dialogueCanva.SetActive(true);
             dialogueActif = true;
         }
@@ -278,7 +284,7 @@ public class S_rewardmanager : MonoBehaviour
         {
             if (phraseZero)
             {
-                Debug.Log("tu n'as pas d'objet je parle pas");
+                //Debug.Log("tu n'as pas d'objet je parle pas");
                 dialogue0.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {

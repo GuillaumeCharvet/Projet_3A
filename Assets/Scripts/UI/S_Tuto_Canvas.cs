@@ -31,7 +31,7 @@ public class S_Tuto_Canvas : MonoBehaviour
         if (tutoOpen)
         {
             //Debug.Log("Le tuto est open");
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
                 canvaTuto.SetActive(false);
                 triggerTuto.SetActive(false);
