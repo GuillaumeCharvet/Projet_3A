@@ -48,10 +48,19 @@ public class S_Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        var orNTM = false;
+        for (int i = 1; i < dialoguebools.Length; i++)
+        {
+            orNTM = orNTM || dialoguebools[i];
+        }
+        dialoguebools[0] = !orNTM;
+
+
         ///// activation de phrases //
         if (!reward1_1.activeInHierarchy && !r1_1HBS)
         {
-            Debug.Log("tu as dégagé le booléen mon pote");
+           // Debug.Log("tu as dégagé le booléen mon pote");
             dialoguebools[1] = true;
         }
         if (!reward1_2.activeInHierarchy && !r1_2HBS)
@@ -65,6 +74,7 @@ public class S_Dialogue : MonoBehaviour
         if (!reward1_4.activeInHierarchy && !r1_4HBS)
         {
             dialoguebools[4] = true;
+            //Debug.Log("phrase 4 activé");
         }
 
         //// desactivation de phrases ///////////
@@ -116,23 +126,25 @@ public class S_Dialogue : MonoBehaviour
             StartDialogue();
             //dialogueIsActive = true;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && dialogueIsActive)
         {
             if (textComponentTechno.text == dialoguelines[index])
             {
                 NextLine();
+
+                
             }
             else
             {
                 StopAllCoroutines();
                 textComponentTechno.text = dialoguelines[index];
+               
+                
+                
             }
         }
 
-        if (dialoguebools[0])
-        {
-          //  Debug.Log("index revient à 0");
-        }
+       
 
 
         
@@ -141,32 +153,45 @@ public class S_Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
-        //var orNTM = false;
-        for (int i = 0; i < 9; i++)
+
+        var nextBoolFound = false;
+        while (!nextBoolFound)
         {
-            /* if (dialoguebools[index])
-             {
-                 index[index] = i;
-             }
+            if (index < dialoguebools.Length - 1)
+            {
+
+                Debug.Log("ducoup le bool passe faux là");
+                if (!dialoguebools[index])
+                {
+                    index++;
+                }
+                else
+                {
+                    nextBoolFound = true;
+                }
+
+            }
+        }
+        /* for (int i = 0; i < dialoguebools.Length; i++)
+         {
+
+
+             Debug.Log("i = " + i);
              if (!dialoguebools[i])
              {
                  index++;
              }
-            */
-            /*orNTM = orNTM || dialoguebools[i];
-            if (!orNTM)
-            {
-                index = 0;
-                dialoguebools[0] = true;
-            }
-            if (orNTM)
-            {
-                dialoguebools[0] = false;
-            }
-            */
-            index = 0;
-        }
+             if (dialoguebools[i])
+             {
+                 index = i;
+                 Debug.Log("indexe donné");
+                 break;
+             }
+         }   
+        */
+       
         StartCoroutine(Typeline());
+        
     }
     IEnumerator Typeline()
     {
@@ -175,9 +200,14 @@ public class S_Dialogue : MonoBehaviour
         Debug.Log("c'est bon ça fait 1 sec");
         foreach (char c in dialoguelines[index].ToCharArray())
         {
-
+            //dialoguebools[index] = false;
+            
             textComponentTechno.text += c;
             yield return new WaitForSeconds(textSpeed);
+            Debug.Log("le premier message apparait");
+            
+            
+
         }
     }
     /*IEnumerator waiter()
@@ -189,34 +219,46 @@ public class S_Dialogue : MonoBehaviour
     */
     void NextLine()
     {
+        //index = 0;
+        //dialoguebools[index] = false;
+        
         bool nextLineFound = false;
         while (!nextLineFound)
         {
             if (index < dialoguelines.Length - 1)
             {
+                
+                Debug.Log("ducoup le bool passe faux là");
                 if (dialoguebools[index + 1] && !dialogueHBS[index + 1])
                 {
-                    dialogueHBS[index + 1] =true;
+                    dialoguebools[index] = false;
+                    dialogueHBS[index + 1] = true;
                     index++;
-                    dialoguebools[index - 1] = false;
+                   
                     textComponentTechno.text = string.Empty;
                     StartCoroutine(Typeline());
                     nextLineFound = true;
+                    //index = 0;
                     soundsource.PlayOneShot(nextTextSound);
                 }
                 else
                 {
+                    //Debug.Log("l'index grimpe mon pote");
                     dialoguebools[index] = false;
                     index++;
                 }
             }
             else
             {
-                dialogueCanva.SetActive(false);
+                dialoguebools[index] = false;
+                textComponentTechno.text = string.Empty;
+                
                 nextLineFound = true;
                 dialogueIsActive = false;
-                Debug.Log("okay le dialogue est désactivé");
                 dialoguebools[0] = true;
+                index = 0;
+                Debug.Log("index à 0");
+                dialogueCanva.SetActive(false);
 
             }
         }        
