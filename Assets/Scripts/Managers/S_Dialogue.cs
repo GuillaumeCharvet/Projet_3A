@@ -67,7 +67,7 @@ public class S_Dialogue : MonoBehaviour
     {
         
 
-        Debug.Log("******* BOOL 1 : " + dialoguebools[1]);
+        //Debug.Log("******* BOOL 1 : " + dialoguebools[1]);
         var orNTM = false;
         for (int i = 1; i < dialoguebools.Length; i++)
         {
