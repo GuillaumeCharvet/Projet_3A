@@ -20,6 +20,7 @@ public class InputManager : Manager
     private bool isSpaceDownFixed;
 
     private bool isSpaceJump;
+    private bool isChargingThrow;
 
     public float HorizontalInput { get => horizontalInput; }
     public float VerticalInput { get => verticalInput; }
@@ -28,6 +29,7 @@ public class InputManager : Manager
     public bool IsSpaceDown { get => isSpaceDown; }
     public bool IsSpaceDownFixed { get => isSpaceDownFixed; }
     public bool IsSpaceJump { get => isSpaceJump; }
+    public bool IsChargingThrow { get => isChargingThrow;}
 
     private void Awake()
     {
@@ -97,8 +99,10 @@ public class InputManager : Manager
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+                    //Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
                 }
+
+                isChargingThrow = Input.GetMouseButton(0);
 
                 break;
 
@@ -114,6 +118,8 @@ public class InputManager : Manager
                 {
                     isSpaceDown = true;
                 }
+
+                isChargingThrow = Input.GetAxis("Trigger") > 0.1 || Input.GetAxis("Trigger") < -0.1;
 
                 break;
 

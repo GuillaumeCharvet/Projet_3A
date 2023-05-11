@@ -14,6 +14,8 @@ public class StateBehaviourReader : MonoBehaviour
 
     public InputManager inputManager;
 
+    public List<GameObject> gliderParts;
+
     // Start is called before the first frame update
     void Start()
     {
