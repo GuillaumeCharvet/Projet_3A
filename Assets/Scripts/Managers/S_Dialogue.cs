@@ -19,10 +19,27 @@ public class S_Dialogue : MonoBehaviour
     private bool r1_4HBS = false;
 
     public GameObject dialogueCanva;
+
+    // ile 1 reward //s
     public GameObject reward1_1;
     public GameObject reward1_2;
     public GameObject reward1_3;
     public GameObject reward1_4;
+
+    //ile 2 rewards //
+    public GameObject reward2_1;
+    public GameObject reward2_2;
+    public GameObject reward2_3;
+    public GameObject reward2_4;
+
+
+    // ile 3 rewards //
+    public GameObject reward3_1;
+    public GameObject reward3_2;
+    public GameObject reward3_3;
+    public GameObject reward3_4;
+
+    // sounds //
 
     public AudioClip nextTextSound;
     public AudioSource soundsource;
@@ -48,7 +65,9 @@ public class S_Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
+        Debug.Log("******* BOOL 1 : " + dialoguebools[1]);
         var orNTM = false;
         for (int i = 1; i < dialoguebools.Length; i++)
         {
@@ -58,24 +77,110 @@ public class S_Dialogue : MonoBehaviour
 
 
         ///// activation de phrases //
-        if (!reward1_1.activeInHierarchy && !r1_1HBS)
+        
+
+        //phrases de l'ile 1 //
+
+        if (!reward1_1.activeInHierarchy && !dialogueHBS[1] && !dialogueHBS[2])
         {
            // Debug.Log("tu as dégagé le booléen mon pote");
             dialoguebools[1] = true;
-        }
-        if (!reward1_2.activeInHierarchy && !r1_2HBS)
-        {
             dialoguebools[2] = true;
+            // Debug.Log("FDPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
         }
-        if (!reward1_3.activeInHierarchy && !r1_3HBS)
+        if (!reward1_2.activeInHierarchy && !dialogueHBS[3] && !dialogueHBS[4])
         {
             dialoguebools[3] = true;
-        }
-        if (!reward1_4.activeInHierarchy && !r1_4HBS)
-        {
             dialoguebools[4] = true;
+        }
+        if (!reward1_3.activeInHierarchy && !dialogueHBS[5] && !dialogueHBS[6])
+        {
+            dialoguebools[5] = true;
+            dialoguebools[6] = true;
+        }
+        if (!reward1_4.activeInHierarchy && !dialogueHBS[7] && !dialogueHBS[8])
+        {
+            dialoguebools[7] = true;
+            dialoguebools[8] = true;
             //Debug.Log("phrase 4 activé");
         }
+
+        //phrases de l'ile 2 //
+
+        if (!reward2_1.activeInHierarchy && !dialogueHBS[9] && !dialogueHBS[10])
+        {
+            dialoguebools[9] = true;
+            dialoguebools[10] = true;
+        }
+        if (!reward2_2.activeInHierarchy && !dialogueHBS[11] && !dialogueHBS[12])
+        {
+            dialoguebools[11] = true;
+            dialoguebools[12] = true;
+        }
+        if (!reward2_3.activeInHierarchy && !dialogueHBS[13] && !dialogueHBS[14])
+        {
+            dialoguebools[13] = true;
+            dialoguebools[14] = true;
+        }
+        if (!reward2_4.activeInHierarchy && !dialogueHBS[15] && !dialogueHBS[16])
+        {
+            dialoguebools[15] = true;
+            dialoguebools[16] = true;
+        }
+
+        //phrases de l'ile 3 //
+
+        if (!reward3_1.activeInHierarchy && !dialogueHBS[17] && !dialogueHBS[18])
+        {
+            dialoguebools[17] = true;
+            dialoguebools[18] = true;
+        }
+        if (!reward3_2.activeInHierarchy && !dialogueHBS[19] && !dialogueHBS[20])
+        {
+            dialoguebools[19] = true;
+            dialoguebools[20] = true;
+        }
+        if (!reward3_3.activeInHierarchy && !dialogueHBS[21] && !dialogueHBS[22])
+        {
+            dialoguebools[21] = true;
+            dialoguebools[22] = true;
+        }
+        if (!reward3_4.activeInHierarchy && !dialogueHBS[23] && !dialogueHBS[24])
+        {
+            dialoguebools[23] = true;
+            dialoguebools[24] = true;
+        }
+
+
+        // dialogues bonus // 
+        
+        // phrase 1 / ile  1  ///
+        if (dialogueHBS[2] && dialogueHBS[4] && dialogueHBS[6] && dialogueHBS[8] && !dialogueHBS[25])
+        {
+            dialoguebools[25] = true;
+        }
+
+        // phrase 2 / ile  2 ///
+        if (dialogueHBS[10] && dialogueHBS[12] && dialogueHBS[14] && dialogueHBS[16] && !dialogueHBS[26])
+        {
+            dialoguebools[26] = true;
+        }
+
+        // phrase 3 / ile  3  ///
+        if (dialogueHBS[18] && dialogueHBS[20] && dialogueHBS[22] && dialogueHBS[24] && !dialogueHBS[27])
+        {
+            dialoguebools[27] = true;
+        }
+
+
+        // phrase final //
+
+        if (dialogueHBS[25] && dialogueHBS[26] && dialogueHBS[27] && !dialogueHBS[28])
+        {
+            dialoguebools[28] = true;
+        }
+
+
 
         //// desactivation de phrases ///////////
         /*
@@ -97,25 +202,6 @@ public class S_Dialogue : MonoBehaviour
         }
         */
 
-        if (dialogueHBS[1])
-        {
-            r1_1HBS = true;
-        }
-
-        if (dialogueHBS[2])
-        {
-            r1_2HBS = true;
-        }
-
-        if (dialogueHBS[3])
-        {
-            r1_3HBS = true;
-        }
-
-        if (dialogueHBS[4])
-        {
-            r1_4HBS = true;
-        }
 
         ////////////// dialogue ////////////
 
@@ -153,7 +239,7 @@ public class S_Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
-
+        index = 0;
         var nextBoolFound = false;
         while (!nextBoolFound)
         {
@@ -221,17 +307,16 @@ public class S_Dialogue : MonoBehaviour
     {
         //index = 0;
         //dialoguebools[index] = false;
-        
+        dialogueHBS[index] = true;
         bool nextLineFound = false;
         while (!nextLineFound)
         {
+            dialoguebools[index] = false;
             if (index < dialoguelines.Length - 1)
             {
-                
                 Debug.Log("ducoup le bool passe faux là");
                 if (dialoguebools[index + 1] && !dialogueHBS[index + 1])
                 {
-                    dialoguebools[index] = false;
                     dialogueHBS[index + 1] = true;
                     index++;
                    
@@ -244,13 +329,11 @@ public class S_Dialogue : MonoBehaviour
                 else
                 {
                     //Debug.Log("l'index grimpe mon pote");
-                    dialoguebools[index] = false;
                     index++;
                 }
             }
             else
             {
-                dialoguebools[index] = false;
                 textComponentTechno.text = string.Empty;
                 
                 nextLineFound = true;
