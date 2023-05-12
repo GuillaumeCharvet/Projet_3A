@@ -50,6 +50,9 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
+    private float turnSmoothTime = 0.15f;
+    private float turnSmoothVelocity = 0f;
+
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
     public Vector3 currentGroundNormal;
@@ -102,6 +105,8 @@ public class StateMachineParameters : MonoBehaviour
     public bool isInNoWaterZone = false;
     public BuoyancyEffect lastWaterVisited;
     public float forceOfWater;
+
+    private float turnSmoothTimeSwim = 0.05f;
 
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
@@ -519,9 +524,6 @@ public class StateMachineParameters : MonoBehaviour
 
     #region MOVEMENT
 
-    private float turnSmoothTime = 0.15f;
-    private float turnSmoothVelocity = 0f;
-
     public void Move(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
@@ -654,7 +656,7 @@ public class StateMachineParameters : MonoBehaviour
 
         // Add camera angle to the input vector so that the player moves where the camera looks
         float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTimeSwim);
 
         // Modify the direction the player model is looking
         if (playerInput.magnitude >= 0.1f)

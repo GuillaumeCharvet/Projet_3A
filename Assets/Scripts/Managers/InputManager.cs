@@ -137,7 +137,9 @@ public class InputManager : Manager
 
     public void OnGUI()
     {
-        CheckCurrentModeInput();
+        //TODO: Fix the switch between input mode
+
+        //CheckCurrentModeInput();
     }
 
     public void CheckCurrentModeInput()
