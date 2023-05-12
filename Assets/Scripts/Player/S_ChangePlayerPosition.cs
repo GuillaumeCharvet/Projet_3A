@@ -26,6 +26,11 @@ public class S_ChangePlayerPosition : MonoBehaviour
 
     public UnityAction RespawnActionFromPosition(Vector3 pos)
     {
-        return () => { transform.position = pos; };
+        return () =>
+        {
+            transform.position = pos;
+            var cc = transform.GetComponent<CharacterController>();
+            //cc.Move(Vector3.zero);
+        };
     }
 }
