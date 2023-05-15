@@ -992,7 +992,7 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
-        S_Debugger.UpdatableLog("gliderTurnSpeed", gliderTurnSpeed);
+        //S_Debugger.UpdatableLog("gliderTurnSpeed", gliderTurnSpeed);
 
         //TODO: Glider rotation smoothness
         // Rotate the player around the z axis to go along the change of direction
