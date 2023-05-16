@@ -146,37 +146,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 700
+    m_Value: 600
   gaussianEnd:
-    m_OverrideState: 1
-    m_Value: 1000
-  gaussianMaxRadius:
-    m_OverrideState: 1
-    m_Value: 0.854
-  highQualitySampling:
     m_OverrideState: 0
+    m_Value: 800
+  gaussianMaxRadius:
+    m_OverrideState: 0
+    m_Value: 1.5
+  highQualitySampling:
+    m_OverrideState: 1
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
     m_Value: 100
   aperture:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3.88
   focalLength:
     m_OverrideState: 1
-    m_Value: 182
+    m_Value: 132.6
   bladeCount:
     m_OverrideState: 1
-    m_Value: 9
+    m_Value: 3
   bladeCurvature:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.062
   bladeRotation:
     m_OverrideState: 1
-    m_Value: 180
+    m_Value: -180
