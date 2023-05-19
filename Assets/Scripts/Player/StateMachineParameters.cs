@@ -278,7 +278,7 @@ public class StateMachineParameters : MonoBehaviour
             {
                 Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
-                if (Vector3.Angle(normalHit, Vector3.up) > 50f)
+                if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
                     if (normalHit != currentNormalToClimb && updateCurrentNormal)
@@ -314,7 +314,7 @@ public class StateMachineParameters : MonoBehaviour
                 {
                     Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                     var normalHit = hitMid.normal;
-                    if (Vector3.Angle(normalHit, Vector3.up) > 50f)
+                    if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                     {
                         distanceToGrabbedWall = hitMid.distance;
                         Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
