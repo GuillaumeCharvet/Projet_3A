@@ -8,7 +8,6 @@ public class StateBehaviourReader : MonoBehaviour
     public MovementParameters mp;
     public StateMachineParameters smp;
     public CharacterController cc;
-    public S_GliderBehaviour gliderBehaviour;
 
     private StateBehaviourParent currentState;
 
