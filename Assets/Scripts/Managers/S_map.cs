@@ -120,6 +120,7 @@ public class S_map : MonoBehaviour
     public GameObject dp6TB;
 
     private bool carnetIsOpen = false;
+    private bool keyIUp = true;
 
 
 
@@ -147,7 +148,7 @@ public class S_map : MonoBehaviour
             owl.PlayOneShot(bookOpen);
             Debug.Log("Hop on ouvre le carnet");
 
-
+            keyIUp = false;
             /*if (s_Rewardmanager.p1hbs)
             {
 
@@ -159,6 +160,23 @@ public class S_map : MonoBehaviour
                  canvaMap.SetActive(false);
              }*/
         }
+
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            keyIUp = true;
+        }
+
+        /*
+        if (Input.GetKeyDown(KeyCode.I) && carnetHBS)
+        {
+            canvaMap.SetActive(false);
+            carnetHBS = false;
+            owl.PlayOneShot(bookOpen);
+            //Debug.Log("Hop on ferme le carnet");
+
+
+        }
+        */
         //////////// LES TRANSITIONS DE PAGES DE CARNET //////////
         ///
 
@@ -264,13 +282,13 @@ public class S_map : MonoBehaviour
 
         // Transition quitte le carnet ////////
 
-        if (canvaMap.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape) 
-            || canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape)
-            || canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape)
-            || canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape)
-            || canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape)
-            || canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape)
-            || canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.Escape))
+        if (canvaMap.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp 
+            || canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
         {
             owl.PlayOneShot(closeBook);
             canvaMap.SetActive(false);
