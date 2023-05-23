@@ -140,7 +140,34 @@ public class S_map : MonoBehaviour
     void Update()
     {
 
-        
+
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            keyIUp = true;
+        }
+
+        // Transition quitte le carnet ////////
+
+        if (canvaMap.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
+            || canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+        {
+            owl.PlayOneShot(closeBook);
+            canvaMap.SetActive(false);
+            canvaC1.SetActive(false);
+            canvaC2.SetActive(false);
+            canvaC3.SetActive(false);
+            canvaC4.SetActive(false);
+            canvaC5.SetActive(false);
+            canvaC6.SetActive(false);
+            carnetIsOpen = false;
+            Debug.Log("le carnet vient de se fermer");
+        }
+
         if (Input.GetKeyDown(KeyCode.I) && !carnetIsOpen)
         {
             canvaMap.SetActive(true);
@@ -161,22 +188,9 @@ public class S_map : MonoBehaviour
              }*/
         }
 
-        if (Input.GetKeyUp(KeyCode.I))
-        {
-            keyIUp = true;
-        }
+       
 
-        /*
-        if (Input.GetKeyDown(KeyCode.I) && carnetHBS)
-        {
-            canvaMap.SetActive(false);
-            carnetHBS = false;
-            owl.PlayOneShot(bookOpen);
-            //Debug.Log("Hop on ferme le carnet");
-
-
-        }
-        */
+     
         //////////// LES TRANSITIONS DE PAGES DE CARNET //////////
         ///
 
@@ -280,27 +294,7 @@ public class S_map : MonoBehaviour
         }
         
 
-        // Transition quitte le carnet ////////
-
-        if (canvaMap.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp 
-            || canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
-        {
-            owl.PlayOneShot(closeBook);
-            canvaMap.SetActive(false);
-            canvaC1.SetActive(false);
-            canvaC2.SetActive(false);
-            canvaC3.SetActive(false);
-            canvaC4.SetActive(false);
-            canvaC5.SetActive(false);
-            canvaC6.SetActive(false);
-            carnetIsOpen = false;
-            Debug.Log("le carnet vient de se fermer");
-        }
+        
 
 
         // ajout d'informations Double page 1 ////
