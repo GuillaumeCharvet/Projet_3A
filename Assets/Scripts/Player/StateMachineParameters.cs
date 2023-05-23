@@ -99,6 +99,8 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float accelerationMaxGlider = 30f;
     [SerializeField] private float gliderDescentFactor = 0.1f;
 
+    private bool initialGlideDiveBlock = false;
+
     [Header("SWIM")]
     public bool isInWaterNextFixedUpdate = false;
 
@@ -125,6 +127,8 @@ public class StateMachineParameters : MonoBehaviour
     private float timeChargingThrow = 0f;
     private float timeBeforeThrow = 0.58f * 1.3f / 1.6f;
     public float GliderRotationSpeed { get => gliderRotationSpeed; set => gliderRotationSpeed = value; }
+    public bool InitialGlideDiveBlock { get => initialGlideDiveBlock; set => initialGlideDiveBlock = value; }
+
     public float angleDiff = 0f;
 
     private void Start()
@@ -167,6 +171,9 @@ public class StateMachineParameters : MonoBehaviour
         var forwardSpeed = (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude;
         var listLength = plotGroundAngleInfluence.keys.Length;
         if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != forwardSpeed) plotGroundAngleInfluence.AddKey(Time.time, forwardSpeed);
+
+        // Deblock capacity to dive in glider
+        CheckBlockGliderDive();
     }
 
     private void FixedUpdate()
@@ -961,7 +968,7 @@ public class StateMachineParameters : MonoBehaviour
     public void Glide(float maxSpeed, float maxAcceleration)
     {
         float horizontal = inputManager.HorizontalInput;
-        float vertical = inputManager.VerticalInput;
+        float vertical = initialGlideDiveBlock ? 0f : inputManager.VerticalInput;
 
         if (horizontal > 0.1f)
         {
@@ -1048,6 +1055,13 @@ public class StateMachineParameters : MonoBehaviour
 
     #endregion MOVEMENT
 
+    #region GAME LOGIC
+
+    private void CheckBlockGliderDive()
+    {
+        if (inputManager.VerticalInput < 0.1f) initialGlideDiveBlock = false;
+    }
+
     public IEnumerator WaitBeforeThrow()
     {
         yield return new WaitForSeconds(timeBeforeThrow);
@@ -1088,6 +1102,8 @@ public class StateMachineParameters : MonoBehaviour
         characterController.height = 0;
         characterController.center = 0.5f * Vector3.up;
     }
+
+    #endregion GAME LOGIC
 
     #region PARAMETERS UPDATER
 
