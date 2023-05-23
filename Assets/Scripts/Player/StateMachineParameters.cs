@@ -88,7 +88,6 @@ public class StateMachineParameters : MonoBehaviour
     public float maxGliderTurnSpeed = 1f;
 
     public Vector3 windEffect = Vector3.zero;
-
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 moveNormalToDirection = Vector3.zero;
 
