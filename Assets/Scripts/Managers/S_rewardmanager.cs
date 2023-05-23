@@ -28,46 +28,33 @@ public class S_rewardmanager : MonoBehaviour
     public GameObject Ile3_reward_3;
     public GameObject Ile3_reward_4;
 
-    // REWARDS NATURE //
-    /*
-    public GameObject Ile1_nature_1;
-    public GameObject Ile1_nature_2;
-    public GameObject Ile1_nature_3;
-    public GameObject Ile1_nature_4;
-
-    public GameObject Ile2_nature_1;
-    public GameObject Ile2_nature_2;
-    public GameObject Ile2_nature_3;
-    public GameObject Ile2_nature_4;
-    */
+    
     //Canva // 
 
     public GameObject talkCanva;
     public GameObject dialogueCanva;
 
 
-     /*     annulé  car changement de méthode 
+         
     // texte //
     //dialogue techno //
-    public GameObject dialogue0;
+   
 
-    public GameObject dialogue1;
-    public GameObject dialogue2;
-    public GameObject dialogue3;
-    public GameObject dialogue4;
+    public GameObject image1;
+    public GameObject image2;
+    public GameObject image3;
+    public GameObject image4;
 
-    public GameObject dialogue5;
-    public GameObject dialogue6;
-    public GameObject dialogue7;
-    public GameObject dialogue8;
+    public GameObject image5;
+    public GameObject image6;
+    public GameObject image7;
+    public GameObject image8;
 
-    public GameObject dialogue9;
-    public GameObject dialogue10;
-    public GameObject dialogue11;
-    public GameObject dialogue12;
-    //public GameObject dialogue1ET2;
+    public GameObject image9;
+    public GameObject image10;
+    public GameObject image11;
+    public GameObject image12;
 
-    */
 
 
     ////////////// booleans //////////////////////
@@ -135,6 +122,12 @@ public class S_rewardmanager : MonoBehaviour
     private bool r3_3exist = true;
     private bool r3_4exist = true;
 
+
+
+
+
+
+
     // sons // 
     public AudioClip talkedSound;
     public AudioSource talksource;
@@ -176,12 +169,14 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseOne = true;
             r1_1exist = false;
+            image1.SetActive(true);
         }
         if (Ile1_reward_2.activeInHierarchy == false && r1_2exist)
         {          
             phraseZero = false;
             phraseTwo = true;
             r1_2exist = false;
+            image2.SetActive(true);
         }
 
         if (Ile1_reward_3.activeInHierarchy == false && r1_3exist)
@@ -189,12 +184,14 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseThree = true;
             r1_3exist = false;
+            image3.SetActive(true);
         }
         if (Ile1_reward_4.activeInHierarchy == false && r1_4exist)
         {
             phraseZero = false;
             phraseFour = true;
             r1_4exist = false;
+            image4.SetActive(true);
         }
 
 
@@ -206,6 +203,7 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseFive = true;
             r2_1exist = false;
+            image5.SetActive(true);
         }
         if (Ile2_reward_2.activeInHierarchy == false && r2_2exist)
         {
@@ -213,6 +211,7 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseSix = true;
             r2_2exist = false;
+            image6.SetActive(true);
         }
 
         if (Ile2_reward_3.activeInHierarchy == false && r2_3exist)
@@ -221,6 +220,7 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseSeven = true;
             r2_3exist = false;
+            image7.SetActive(true);
         }
         if (Ile2_reward_4.activeInHierarchy == false && r2_4exist)
         {
@@ -228,6 +228,7 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseEight = true;
             r2_4exist = false;
+            image8.SetActive(true);
         }
 
         /// île 3 //////
@@ -238,12 +239,14 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseNine = true;
             r3_1exist = false;
+            image9.SetActive(true);
         }
         if (Ile3_reward_2.activeInHierarchy == false && r3_2exist)
         {
             phraseZero = false;
             phraseTen = true;
             r3_2exist = false;
+            image10.SetActive(true);
         }
 
         if (Ile3_reward_3.activeInHierarchy == false && r3_3exist)
@@ -251,13 +254,23 @@ public class S_rewardmanager : MonoBehaviour
             phraseZero = false;
             phraseEleven = true;
             r3_3exist = false;
+            image11.SetActive(true);
         }
         if (Ile3_reward_4.activeInHierarchy == false && r3_4exist)
         {
             phraseZero = false;
             phraseTwelve = true;
             r3_4exist = false;
+            image12.SetActive(true);
         }
+
+
+
+
+
+
+
+
 
         ////// combinaisons ////////
 

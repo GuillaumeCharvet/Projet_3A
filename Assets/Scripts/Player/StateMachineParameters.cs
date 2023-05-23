@@ -50,6 +50,9 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float maxSpeed = 10f;
     public float MaxSpeed { get => maxSpeed; }
 
+    private float turnSmoothTime = 0.15f;
+    private float turnSmoothVelocity = 0f;
+
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
     public Vector3 currentGroundNormal;
@@ -102,6 +105,8 @@ public class StateMachineParameters : MonoBehaviour
     public bool isInNoWaterZone = false;
     public BuoyancyEffect lastWaterVisited;
     public float forceOfWater;
+
+    private float turnSmoothTimeSwim = 0.05f;
 
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
@@ -162,16 +167,21 @@ public class StateMachineParameters : MonoBehaviour
         var forwardSpeed = (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude;
         var listLength = plotGroundAngleInfluence.keys.Length;
         if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != forwardSpeed) plotGroundAngleInfluence.AddKey(Time.time, forwardSpeed);
+
     }
 
     private void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
         //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
-        animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
         animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
+
+        Debug.Log("smp !CheckIsGrounded():  " + !CheckIsGrounded());
+        Debug.Log("smp inputManager.IsSpaceDownFixed:  " + inputManager.IsSpaceDownFixed);
+        animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
     }
 
+    /*
     private void OnDrawGizmos()
     {
         var cc = GetComponent<CharacterController>();
@@ -180,6 +190,7 @@ public class StateMachineParameters : MonoBehaviour
         Gizmos.DrawSphere(transform.position + ((characterControlerHeightResetValue - 0.1f) / 2f) * transform.up, cc.radius + epsilonCheckGrounded);
         Gizmos.DrawSphere(transform.position + (characterControlerHeightResetValue - (cc.radius + 0.05f)) * transform.up, cc.radius + epsilonCheckGrounded);
     }
+    */
 
     #region CLIMB CHECKS
 
@@ -240,10 +251,10 @@ public class StateMachineParameters : MonoBehaviour
         if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMaskIsGrounded))
         {
             currentGroundNormal = hit.normal;
-            //Debug.Log("SPHERECAST 1");
+            Debug.Log("SPHERECAST 1");
             return true;
         }
-        //Debug.Log("SPHERECAST 2");
+        Debug.Log("SPHERECAST 2");
         return false;
     }
 
@@ -267,7 +278,7 @@ public class StateMachineParameters : MonoBehaviour
             {
                 Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
-                if (Vector3.Angle(normalHit, Vector3.up) > 50f)
+                if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
                     if (normalHit != currentNormalToClimb && updateCurrentNormal)
@@ -303,7 +314,7 @@ public class StateMachineParameters : MonoBehaviour
                 {
                     Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                     var normalHit = hitMid.normal;
-                    if (Vector3.Angle(normalHit, Vector3.up) > 50f)
+                    if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                     {
                         distanceToGrabbedWall = hitMid.distance;
                         Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
@@ -519,9 +530,6 @@ public class StateMachineParameters : MonoBehaviour
 
     #region MOVEMENT
 
-    private float turnSmoothTime = 0.15f;
-    private float turnSmoothVelocity = 0f;
-
     public void Move(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
@@ -654,7 +662,7 @@ public class StateMachineParameters : MonoBehaviour
 
         // Add camera angle to the input vector so that the player moves where the camera looks
         float targetAngle = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg + camTrsf.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTimeSwim);
 
         // Modify the direction the player model is looking
         if (playerInput.magnitude >= 0.1f)
@@ -990,7 +998,7 @@ public class StateMachineParameters : MonoBehaviour
             gliderCameraTurnSpeed = Mathf.Max(gliderCameraTurnSpeed - 0.5f * 0.2f * gliderTurnAcceleration * Time.deltaTime * 60f, 0f);
         }
 
-        S_Debugger.UpdatableLog("gliderTurnSpeed", gliderTurnSpeed);
+        //S_Debugger.UpdatableLog("gliderTurnSpeed", gliderTurnSpeed);
 
         //TODO: Glider rotation smoothness
         // Rotate the player around the z axis to go along the change of direction

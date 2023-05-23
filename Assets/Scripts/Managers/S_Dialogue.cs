@@ -39,12 +39,36 @@ public class S_Dialogue : MonoBehaviour
     public GameObject reward3_3;
     public GameObject reward3_4;
 
+
+    // pages carnet //
+
+    public GameObject carnetTXT1;
+    public GameObject carnetTXT2;
+    public GameObject carnetTXT3;
+    public GameObject carnetTXT4;
+
+    public GameObject carnetTXT5;
+    public GameObject carnetTXT6;
+    public GameObject carnetTXT7;
+    public GameObject carnetTXT8;
+
+    public GameObject carnetTXT9;
+    public GameObject carnetTXT10;
+    public GameObject carnetTXT11;
+    public GameObject carnetTXT12;
+
+    public GameObject carnetTXT13;
+    public GameObject carnetTXT14;
+    public GameObject carnetTXT15;
+
     // sounds //
 
     public AudioClip nextTextSound;
     public AudioSource soundsource;
 
     public AudioClip blablaSound;
+
+
 
 
     
@@ -203,6 +227,79 @@ public class S_Dialogue : MonoBehaviour
         */
 
 
+        // affichage dalogues dans le carnet //
+
+        // ile  //
+        if (dialogueHBS[2])
+        {
+            carnetTXT1.SetActive(true);
+        }
+        if (dialogueHBS[4])
+        {
+            carnetTXT2.SetActive(true);
+        }
+        if (dialogueHBS[6])
+        {
+            carnetTXT3.SetActive(true);
+        }
+        if (dialogueHBS[8])
+        {
+            carnetTXT4.SetActive(true);
+        }
+
+        // ile 2 //
+
+        if (dialogueHBS[10])
+        {
+            carnetTXT5.SetActive(true);
+        }
+        if (dialogueHBS[12])
+        {
+            carnetTXT6.SetActive(true);
+        }
+        if (dialogueHBS[14])
+        {
+            carnetTXT7.SetActive(true);
+        }
+        if (dialogueHBS[16])
+        {
+            carnetTXT8.SetActive(true);
+        }
+
+        // ile 3 //
+
+        if (dialogueHBS[18])
+        {
+            carnetTXT9.SetActive(true);
+        }
+       if (dialogueHBS[20])
+            {
+            carnetTXT10.SetActive(true);
+        }
+        if (dialogueHBS[22])
+        {
+            carnetTXT11.SetActive(true);
+        }
+        if (dialogueHBS[24])
+        {
+            carnetTXT12.SetActive(true);
+        }
+
+
+        // pharse bonus //
+
+        if (dialogueHBS[25])
+        {
+            carnetTXT13.SetActive(true);
+        }
+        if (dialogueHBS[26])
+        {
+            carnetTXT14.SetActive(true);
+        }
+        if (dialogueHBS[27])
+        {
+            carnetTXT15.SetActive(true);
+        }
         ////////////// dialogue ////////////
 
         if (dialogueCanva.activeInHierarchy && !dialogueIsActive)

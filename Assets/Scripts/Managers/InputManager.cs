@@ -97,6 +97,7 @@ public class InputManager : Manager
                 {
                     isSpaceDownFixed = true;
                     isSpaceDown = false;
+                    Debug.Log("FixedUpdate : isSpaceDownFixed = " + isSpaceDownFixed);
                 }
                 else
                 {
@@ -137,7 +138,9 @@ public class InputManager : Manager
 
     public void OnGUI()
     {
-        CheckCurrentModeInput();
+        //TODO: Fix the switch between input mode
+
+        //CheckCurrentModeInput();
     }
 
     public void CheckCurrentModeInput()
@@ -195,6 +198,7 @@ public class InputManager : Manager
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     isSpaceDown = true;
+                    Debug.Log("Update : isSpaceDown = " + isSpaceDown);
                 }
 
                 if (Input.GetKeyDown(KeyCode.R))
