@@ -167,7 +167,6 @@ public class StateMachineParameters : MonoBehaviour
         var forwardSpeed = (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude;
         var listLength = plotGroundAngleInfluence.keys.Length;
         if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != forwardSpeed) plotGroundAngleInfluence.AddKey(Time.time, forwardSpeed);
-
     }
 
     private void FixedUpdate()
@@ -176,8 +175,8 @@ public class StateMachineParameters : MonoBehaviour
         //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
         animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
 
-        Debug.Log("smp !CheckIsGrounded():  " + !CheckIsGrounded());
-        Debug.Log("smp inputManager.IsSpaceDownFixed:  " + inputManager.IsSpaceDownFixed);
+        //Debug.Log("smp !CheckIsGrounded():  " + !CheckIsGrounded());
+        //Debug.Log("smp inputManager.IsSpaceDownFixed:  " + inputManager.IsSpaceDownFixed);
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
     }
 
@@ -251,10 +250,10 @@ public class StateMachineParameters : MonoBehaviour
         if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMaskIsGrounded))
         {
             currentGroundNormal = hit.normal;
-            Debug.Log("SPHERECAST 1");
+            //Debug.Log("SPHERECAST 1");
             return true;
         }
-        Debug.Log("SPHERECAST 2");
+        //Debug.Log("SPHERECAST 2");
         return false;
     }
 

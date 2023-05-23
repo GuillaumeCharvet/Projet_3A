@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+
 public class S_map : MonoBehaviour
-    
+
 {
     [SerializeField]
-
-
-    // appel au scipt des dialogues pour ses booleans ////
-
     public S_rewardmanager s_RewardmanagerTechno;
+
     public S_rewardmanager s_RewardmanagerNature;
 
     // canvas fonds //////
@@ -30,22 +28,24 @@ public class S_map : MonoBehaviour
 
     // textes //   nomenclature: dp1T1 = Double Page 1 Texte 1
     public GameObject dp1T1;
+
     public GameObject dp1T2;
     public GameObject dp1T3;
     public GameObject dp1T4;
 
     //images //  nomenclature: dp1I1 = Double Page 1 Image 1
     public GameObject dp1I1;
+
     public GameObject dp1I2;
     public GameObject dp1I3;
     public GameObject dp1I4;
     public GameObject dp1TB; // nomenclature: double page 1 texte bonus
 
-
     // double page 2 //////
 
     // textes //   nomenclature: dp2T1 = Double Page 2 Texte 1
     public GameObject dp2T1;
+
     public GameObject dp2T2;
     public GameObject dp2T3;
     public GameObject dp2T4;
@@ -53,37 +53,40 @@ public class S_map : MonoBehaviour
 
     //images //  nomenclature: dp2I1 = Double Page 21 Image 1
     public GameObject dp2I1;
+
     public GameObject dp2I2;
     public GameObject dp2I3;
     public GameObject dp2I4;
-
 
     // double page 3 //////
 
     // textes //   nomenclature: dp2T1 = Double Page 2 Texte 1
     public GameObject dp3T1;
+
     public GameObject dp3T2;
     public GameObject dp3T3;
     public GameObject dp3T4;
 
     //images //  nomenclature: dp2I1 = Double Page 21 Image 1
     public GameObject dp3I1;
+
     public GameObject dp3I2;
     public GameObject dp3I3;
     public GameObject dp3I4;
     public GameObject dp3TB; // nomenclature: double page 3 texte bonus
 
-
     // double page 4 //////
 
-    // textes //  
+    // textes //
     public GameObject dp4T1;
+
     public GameObject dp4T2;
     public GameObject dp4T3;
     public GameObject dp4T4;
 
-    //images //  
+    //images //
     public GameObject dp4I1;
+
     public GameObject dp4I2;
     public GameObject dp4I3;
     public GameObject dp4I4;
@@ -91,14 +94,16 @@ public class S_map : MonoBehaviour
 
     // double page 5 //////
 
-    // textes //  
+    // textes //
     public GameObject dp5T1;
+
     public GameObject dp5T2;
     public GameObject dp5T3;
     public GameObject dp5T4;
 
-    //images //  
+    //images //
     public GameObject dp5I1;
+
     public GameObject dp5I2;
     public GameObject dp5I3;
     public GameObject dp5I4;
@@ -106,14 +111,16 @@ public class S_map : MonoBehaviour
 
     // double page 6 //////
 
-    // textes //  
+    // textes //
     public GameObject dp6T1;
+
     public GameObject dp6T2;
     public GameObject dp6T3;
     public GameObject dp6T4;
 
-    //images //  
+    //images //
     public GameObject dp6I1;
+
     public GameObject dp6I2;
     public GameObject dp6I3;
     public GameObject dp6I4;
@@ -121,8 +128,6 @@ public class S_map : MonoBehaviour
 
     private bool carnetIsOpen = false;
     private bool keyIUp = true;
-
-
 
     //sons //
 
@@ -132,15 +137,9 @@ public class S_map : MonoBehaviour
 
     public AudioSource owl;
 
-
-
-    
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        
         if (Input.GetKeyDown(KeyCode.I) && !carnetIsOpen)
         {
             canvaMap.SetActive(true);
@@ -149,9 +148,10 @@ public class S_map : MonoBehaviour
             Debug.Log("Hop on ouvre le carnet");
 
             keyIUp = false;
+
+            Debug.Log("******* I : KEY DOWN - OPEN INVENTORY ******* " + keyIUp);
             /*if (s_Rewardmanager.p1hbs)
             {
-
             }
             */
 
@@ -164,6 +164,7 @@ public class S_map : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.I))
         {
             keyIUp = true;
+            Debug.Log("******* I : KEY UP ******* " + keyIUp);
         }
 
         /*
@@ -173,8 +174,6 @@ public class S_map : MonoBehaviour
             carnetHBS = false;
             owl.PlayOneShot(bookOpen);
             //Debug.Log("Hop on ferme le carnet");
-
-
         }
         */
         //////////// LES TRANSITIONS DE PAGES DE CARNET //////////
@@ -214,11 +213,11 @@ public class S_map : MonoBehaviour
             canvaC1.SetActive(true);
             owl.PlayOneShot(pageTurn);
         }
-        
+
         if (canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC2.SetActive(false);
-            canvaC3.SetActive(true); 
+            canvaC3.SetActive(true);
             owl.PlayOneShot(pageTurn);
             Debug.Log("Double page 3 ");
         }
@@ -229,8 +228,8 @@ public class S_map : MonoBehaviour
             canvaC3.SetActive(false);
             canvaC2.SetActive(true);
             owl.PlayOneShot(pageTurn);
-        }     
-        
+        }
+
         if (canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.D))
         {
             canvaC3.SetActive(false);
@@ -278,17 +277,16 @@ public class S_map : MonoBehaviour
             canvaC5.SetActive(true);
             owl.PlayOneShot(pageTurn);
         }
-        
 
         // Transition quitte le carnet ////////
 
-        if (canvaMap.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp 
-            || canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp
-            || canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+        if ((canvaMap.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+            || (canvaC1.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+            || (canvaC2.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+            || (canvaC3.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+            || (canvaC4.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+            || (canvaC5.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp)
+            || (canvaC6.activeInHierarchy == true && Input.GetKeyDown(KeyCode.I) && keyIUp))
         {
             owl.PlayOneShot(closeBook);
             canvaMap.SetActive(false);
@@ -299,9 +297,11 @@ public class S_map : MonoBehaviour
             canvaC5.SetActive(false);
             canvaC6.SetActive(false);
             carnetIsOpen = false;
+
+            Debug.Log("******* I : KEY DOWN - CLOSE INVENTORY ******* " + keyIUp);
+
             Debug.Log("le carnet vient de se fermer");
         }
-
 
         // ajout d'informations Double page 1 ////
 
@@ -332,7 +332,7 @@ public class S_map : MonoBehaviour
 
         // ajout d'informations Double page 2 ////
 
-        if (s_RewardmanagerTechno.p2_1hbs) 
+        if (s_RewardmanagerTechno.p2_1hbs)
         {
             dp2T1.SetActive(true);
             dp2I1.SetActive(true);
@@ -465,5 +465,4 @@ public class S_map : MonoBehaviour
             dp6TB.SetActive(true);
         }
     }
-    
 }
