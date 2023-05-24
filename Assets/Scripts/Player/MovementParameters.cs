@@ -8,8 +8,6 @@ public class MovementParameters : MonoBehaviour
 {
     public CharacterController characterController;
 
-    [NonSerialized] public Vector3 moveDirection = Vector3.zero;
-
     public Transform trsfCamera;
 
     [Header("SENSIBILITY")]
@@ -19,11 +17,6 @@ public class MovementParameters : MonoBehaviour
     public float sensitivityV = 5f;
 
     [SerializeField] public float moveSpeed = 10f;
-
-    [Header("SWIM")]
-    public bool isInWaterNextFixedUpdate = false;
-    public BuoyancyEffect lastWaterVisited;
-    public float forceOfWater;
 
     [Header("SLIDE")]
     public float speedOnRope = 0f;

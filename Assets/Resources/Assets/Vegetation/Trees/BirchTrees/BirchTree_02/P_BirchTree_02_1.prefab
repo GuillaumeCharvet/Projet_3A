@@ -1,0 +1,230 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5636547201112931306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5669972198193109144}
+  m_Layer: 0
+  m_Name: P_BirchTree_02_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5669972198193109144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636547201112931306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2140.8457, y: -17.49, z: 1184.9595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1945336050942770903}
+  - {fileID: 1945336050203065111}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2122745364968184124
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5669972198193109144}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_Name
+      value: Fbx_BirchTree_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1765a108774de343b3d8bbfcd2465ff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2122745365282753717}
+  m_SourcePrefab: {fileID: 100100000, guid: e1765a108774de343b3d8bbfcd2465ff, type: 3}
+--- !u!1 &1275900197746254957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e1765a108774de343b3d8bbfcd2465ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122745364968184124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2122745365282753717
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275900197746254957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2917139543862549506, guid: e1765a108774de343b3d8bbfcd2465ff, type: 3}
+--- !u!4 &1945336050942770903 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e1765a108774de343b3d8bbfcd2465ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122745364968184124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2122745365707889916
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5669972198193109144}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6843262
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0300007
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5205078
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd870293f3c9e6c40988a7066343c155,
+        type: 3}
+      propertyPath: m_Name
+      value: Fbx_BirchTree_02_Foliage01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dd870293f3c9e6c40988a7066343c155, type: 3}
+--- !u!4 &1945336050203065111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dd870293f3c9e6c40988a7066343c155,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122745365707889916}
+  m_PrefabAsset: {fileID: 0}

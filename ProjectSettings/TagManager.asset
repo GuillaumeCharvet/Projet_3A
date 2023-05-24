@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Water
+  - Cant_swim
+  - Video1
+  - Camera_Record
+  - Projectiles
   layers:
   - Default
   - TransparentFX
@@ -12,11 +17,11 @@ TagManager:
   - Water
   - UI
   - Terrain
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Walkable
+  - PostProcess_Main
+  - Projectile
+  - Player
+  - CameraOnly
   - 
   - 
   - 

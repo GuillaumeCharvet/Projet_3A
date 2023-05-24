@@ -5,17 +5,19 @@ using UnityEngine.Events;
 
 public class S_Debugger : MonoBehaviour
 {
-    private static S_Debugger instance;
+    public static S_Debugger instance;
     private List<DEBUG_MESSAGE> messageStack;
     private Dictionary<string, DEBUG_MESSAGE> objectStack;
     private Dictionary<string, UnityAction> actionStack;
     public Color defaultColor = Color.white;
-    private bool toogle = false;
+    public bool toogle = true;
+    public bool buildReady = false;
 
     public bool GetToogle()
     {
         return toogle;
     }
+
     private void Awake()
     {
         if (instance == null)
@@ -30,6 +32,7 @@ public class S_Debugger : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -55,10 +58,12 @@ public class S_Debugger : MonoBehaviour
         instance.StartCoroutine(instance.DestroyMessage(debugMessage, time));
         Debug.Log(message);
     }
+
     public static void Log(string message, float time = 2f)
     {
         S_Debugger.Log(message, instance.defaultColor, time);
     }
+
     public static void UpdatableLog(string id, object message, Color color)
     {
         var debugMessage = new DEBUG_MESSAGE(id + ": " + message.ToString(), color);
@@ -68,6 +73,7 @@ public class S_Debugger : MonoBehaviour
         }
         instance.objectStack[id] = debugMessage;
     }
+
     public static void UpdatableLog(string id, object message)
     {
         S_Debugger.UpdatableLog(id, message, instance.defaultColor);
@@ -119,6 +125,7 @@ public class S_Debugger : MonoBehaviour
         messageStack.Remove(message);
     }
 }
+
 public struct DEBUG_MESSAGE
 {
     public string message;
