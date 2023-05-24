@@ -5,9 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "states/glide", fileName = "new_Glide")]
 public class StateGlide : StateBehaviourParent
 {
-
     [Header("RUN/JUMP")]
-
     [SerializeField] public float maxAcceleration = 50f;
 
     [SerializeField] public float fallControl = 0f;
@@ -51,6 +49,7 @@ public class StateGlide : StateBehaviourParent
 
         reader.smp.SetPlayerColliderToClimb();
 
+        reader.smp.InitialGlideDiveBlock = true;
         reader.smp.gliderSpeed = 1f;
         base.OnEnterState();
     }
