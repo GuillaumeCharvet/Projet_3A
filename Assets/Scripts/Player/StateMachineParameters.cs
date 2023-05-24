@@ -107,7 +107,7 @@ public class StateMachineParameters : MonoBehaviour
     public BuoyancyEffect lastWaterVisited;
     public float forceOfWater;
 
-    private float turnSmoothTimeSwim = 0.05f;
+    private float turnSmoothTimeSwim = 0.005f;
 
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
@@ -1036,7 +1036,7 @@ public class StateMachineParameters : MonoBehaviour
 
         var acceleration = accelerationMaxGlider * Mathf.Cos(Mathf.Deg2Rad * Vector3.SignedAngle(playerParameters.transform.forward, Vector3.down, playerParameters.transform.right)) + windBoost;
 
-        moveNormalToDirection += windNormalToMovement * Time.deltaTime;
+        moveNormalToDirection += 0.1f * windNormalToMovement * Time.deltaTime;
 
         gliderSpeed = Mathf.Max(Mathf.Min(gliderSpeed + acceleration * Time.deltaTime, maxGliderSpeed), 0f);
 
