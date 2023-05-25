@@ -8,10 +8,15 @@ public class Driller_TriggerJump : MonoBehaviour
     public GameObject Driller_TriggerZoneJump;
     public Animator animator;
 
+    private Vector3 targetRotation;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-            animator.SetBool("BoolDrillerJump", true);
+        {
+            targetRotation = Vector3.zero;
+        }
+        animator.SetBool("BoolDrillerJump", true);
     }
 
     private void OnTriggerExit(Collider other)
@@ -20,4 +25,12 @@ public class Driller_TriggerJump : MonoBehaviour
             animator.SetBool("BoolDrillerJump", false);
     }
 
+    private IEnumerator StartRotating()
+    {
+        var t = 0f;
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }
