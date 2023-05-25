@@ -14,5 +14,6 @@ public class S_LoadScene : MonoBehaviour
         SceneManager.LoadScene("ThibaultDecoverticalSlice", LoadSceneMode.Additive);
         SceneManager.LoadScene("Scene_Ocean", LoadSceneMode.Additive);
         SceneManager.LoadScene("Scene_Assets_Léo", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scene_Vignes_Signals", LoadSceneMode.Additive);
     }
 }
