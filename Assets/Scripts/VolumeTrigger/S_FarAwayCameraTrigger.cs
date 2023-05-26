@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class S_FarAwayCameraTrigger : MonoBehaviour
 {
-    [SerializeField] private CinemachineFreeLook cam;
+    private CinemachineFreeLook cam;
     [SerializeField] private float dezoomAmplify = 1f;
+
+    private void Start()
+    {
+        cam = transform.parent.GetComponent<CinemachineFreeLook>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
