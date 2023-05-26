@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Localization", fileName = "New Localization", order = 0)]
