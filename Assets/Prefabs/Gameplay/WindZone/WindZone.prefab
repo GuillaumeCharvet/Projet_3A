@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1872860210023382344}
   m_LocalRotation: {x: 0, y: -0.09964106, z: 0, w: 0.9950235}
   m_LocalPosition: {x: 1757.5, y: 15.5, z: 897.3}
-  m_LocalScale: {x: 100, y: 94.38, z: 100}
+  m_LocalScale: {x: 70, y: 120, z: 70}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1040935642433872998}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02f69669dc4a5440b982dd744c8fb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windStrength: 20
+  windStrength: 40
   windDirection: 0
   distanceEffectOnWindStrength:
     serializedVersion: 2
@@ -138,8 +138,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -316,7 +316,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -434,7 +434,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1017,7 +1017,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
