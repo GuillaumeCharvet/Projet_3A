@@ -6,9 +6,12 @@ public class FlockBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject leaderPrefab;
     [SerializeField] private GameObject animalPrefab;
+    [SerializeField] private Transform kidsRoom;
     [SerializeField] private int numberOfAnimals;
+    private float flockSpread = 5f;
     private List<FlockAnimal> animals = new List<FlockAnimal>();
     [SerializeField] public List<Vector3> positions = new List<Vector3>();
+    [SerializeField] public List<Vector3> controlPoints = new List<Vector3>();
 
     private int currentIndex = 1;
     private float currentPosition = 0f;
@@ -17,12 +20,16 @@ public class FlockBehaviour : MonoBehaviour
 
     void Start()
     {
-        /*
         for (int i = 0; i < numberOfAnimals; i++)
         {
-
+            var animal = Instantiate(animalPrefab, transform.position, Quaternion.identity, kidsRoom).GetComponent<FlockAnimal>();
+            animal.flock = this;
+            animals.Add(animal);
+            for (int j = 0; j < positions.Count; j++)
+            {
+                animal.positionsDelta.Add(positions[j] + new Vector3(flockSpread * Random.Range(-1f, 1f), flockSpread * Random.Range(-1f, 1f), flockSpread * Random.Range(-1f, 1f)));
+            }
         }
-        */
     }
 
     void Update()
@@ -41,25 +48,16 @@ public class FlockBehaviour : MonoBehaviour
 
         foreach (var animal in animals)
         {
-            animal.Move();
+            animal.MoveSmooth();
         }
     }
 
-    public class FlockAnimal
+    public void ResetControlPoints()
     {
-        public void Move()
+        controlPoints = new List<Vector3>();
+        for (int i = 1; i < positions.Count + 1; i++)
         {
-
+            controlPoints.Add(0.5f * (positions[i - 1] + positions[i % positions.Count]));
         }
     }
-    /*
-    public void OnDrawGizmos()
-    {
-        foreach (var position in positions)
-        {
-            // Draw a yellow sphere at the transform's position
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(position, 1);
-        }
-    }*/
 }
