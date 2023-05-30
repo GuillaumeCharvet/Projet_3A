@@ -25,12 +25,8 @@ public class S_Dialogue : MonoBehaviour
     public GameObject reward1_2;
     public GameObject reward1_3;
     public GameObject reward1_4;
-
-    //ile 2 rewards //
-    public GameObject reward2_1;
-    public GameObject reward2_2;
-    public GameObject reward2_3;
-    public GameObject reward2_4;
+    public GameObject reward1_5;
+    public GameObject reward1_6;
 
 
     // ile 3 rewards //
@@ -38,6 +34,9 @@ public class S_Dialogue : MonoBehaviour
     public GameObject reward3_2;
     public GameObject reward3_3;
     public GameObject reward3_4;
+    public GameObject reward3_5;
+    public GameObject reward3_6;
+
 
 
     // pages carnet //
@@ -46,12 +45,11 @@ public class S_Dialogue : MonoBehaviour
     public GameObject carnetTXT2;
     public GameObject carnetTXT3;
     public GameObject carnetTXT4;
-
     public GameObject carnetTXT5;
     public GameObject carnetTXT6;
+
     public GameObject carnetTXT7;
     public GameObject carnetTXT8;
-
     public GameObject carnetTXT9;
     public GameObject carnetTXT10;
     public GameObject carnetTXT11;
@@ -59,7 +57,6 @@ public class S_Dialogue : MonoBehaviour
 
     public GameObject carnetTXT13;
     public GameObject carnetTXT14;
-    public GameObject carnetTXT15;
 
     // sounds //
 
@@ -107,10 +104,10 @@ public class S_Dialogue : MonoBehaviour
 
         if (!reward1_1.activeInHierarchy && !dialogueHBS[1] && !dialogueHBS[2])
         {
-           // Debug.Log("tu as dégagé le booléen mon pote");
+         
             dialoguebools[1] = true;
             dialoguebools[2] = true;
-            // Debug.Log("FDPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+           
         }
         if (!reward1_2.activeInHierarchy && !dialogueHBS[3] && !dialogueHBS[4])
         {
@@ -126,50 +123,47 @@ public class S_Dialogue : MonoBehaviour
         {
             dialoguebools[7] = true;
             dialoguebools[8] = true;
-            //Debug.Log("phrase 4 activé");
+           
         }
-
-        //phrases de l'ile 2 //
-
-        if (!reward2_1.activeInHierarchy && !dialogueHBS[9] && !dialogueHBS[10])
+        if (!reward1_5.activeInHierarchy && !dialogueHBS[9] && !dialogueHBS[10])
         {
             dialoguebools[9] = true;
             dialoguebools[10] = true;
         }
-        if (!reward2_2.activeInHierarchy && !dialogueHBS[11] && !dialogueHBS[12])
+        if (!reward1_6.activeInHierarchy && !dialogueHBS[11] && !dialogueHBS[12])
         {
             dialoguebools[11] = true;
             dialoguebools[12] = true;
         }
-        if (!reward2_3.activeInHierarchy && !dialogueHBS[13] && !dialogueHBS[14])
+
+        //phrases de l'ile 3 //
+
+        if (!reward3_1.activeInHierarchy && !dialogueHBS[13] && !dialogueHBS[14])
         {
             dialoguebools[13] = true;
             dialoguebools[14] = true;
         }
-        if (!reward2_4.activeInHierarchy && !dialogueHBS[15] && !dialogueHBS[16])
+        if (!reward3_2.activeInHierarchy && !dialogueHBS[15] && !dialogueHBS[16])
         {
             dialoguebools[15] = true;
             dialoguebools[16] = true;
         }
-
-        //phrases de l'ile 3 //
-
-        if (!reward3_1.activeInHierarchy && !dialogueHBS[17] && !dialogueHBS[18])
+        if (!reward3_3.activeInHierarchy && !dialogueHBS[17] && !dialogueHBS[18])
         {
             dialoguebools[17] = true;
             dialoguebools[18] = true;
         }
-        if (!reward3_2.activeInHierarchy && !dialogueHBS[19] && !dialogueHBS[20])
+        if (!reward3_4.activeInHierarchy && !dialogueHBS[19] && !dialogueHBS[20])
         {
             dialoguebools[19] = true;
             dialoguebools[20] = true;
         }
-        if (!reward3_3.activeInHierarchy && !dialogueHBS[21] && !dialogueHBS[22])
+        if (!reward3_5.activeInHierarchy && !dialogueHBS[21] && !dialogueHBS[22])
         {
             dialoguebools[21] = true;
             dialoguebools[22] = true;
         }
-        if (!reward3_4.activeInHierarchy && !dialogueHBS[23] && !dialogueHBS[24])
+        if (!reward3_6.activeInHierarchy && !dialogueHBS[23] && !dialogueHBS[24])
         {
             dialoguebools[23] = true;
             dialoguebools[24] = true;
@@ -177,31 +171,26 @@ public class S_Dialogue : MonoBehaviour
 
 
         // dialogues bonus // 
-        
+
         // phrase 1 / ile  1  ///
-        if (dialogueHBS[2] && dialogueHBS[4] && dialogueHBS[6] && dialogueHBS[8] && !dialogueHBS[25])
+        if (dialogueHBS[2] && dialogueHBS[4] && dialogueHBS[6] && dialogueHBS[8] && dialogueHBS[10] && dialogueHBS[12] && !dialogueHBS[25])
         {
             dialoguebools[25] = true;
         }
 
-        // phrase 2 / ile  2 ///
-        if (dialogueHBS[10] && dialogueHBS[12] && dialogueHBS[14] && dialogueHBS[16] && !dialogueHBS[26])
-        {
-            dialoguebools[26] = true;
-        }
 
         // phrase 3 / ile  3  ///
-        if (dialogueHBS[18] && dialogueHBS[20] && dialogueHBS[22] && dialogueHBS[24] && !dialogueHBS[27])
+        if (dialogueHBS[14] && dialogueHBS[16] && dialogueHBS[18] && dialogueHBS[20] && dialogueHBS[22] && dialogueHBS[24] && !dialogueHBS[26])
         {
-            dialoguebools[27] = true;
+            dialoguebools[26] = true;
         }
 
 
         // phrase final //
 
-        if (dialogueHBS[25] && dialogueHBS[26] && dialogueHBS[27] && !dialogueHBS[28])
+        if (dialogueHBS[25] && dialogueHBS[26] && !dialogueHBS[27])
         {
-            dialoguebools[28] = true;
+            dialoguebools[27] = true;
         }
 
 
@@ -296,10 +285,7 @@ public class S_Dialogue : MonoBehaviour
         {
             carnetTXT14.SetActive(true);
         }
-        if (dialogueHBS[27])
-        {
-            carnetTXT15.SetActive(true);
-        }
+        
         ////////////// dialogue ////////////
 
         if (dialogueCanva.activeInHierarchy && !dialogueIsActive)
