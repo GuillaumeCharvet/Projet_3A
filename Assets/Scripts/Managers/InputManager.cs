@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum ModeInput { Keyboard, Controller, Intern };
+public enum ModeInput
+{ Keyboard, Controller, Intern };
+
 public class InputManager : Manager
 {
     public ModeInput currentModeInput;
@@ -29,7 +31,7 @@ public class InputManager : Manager
     public bool IsSpaceDown { get => isSpaceDown; }
     public bool IsSpaceDownFixed { get => isSpaceDownFixed; }
     public bool IsSpaceJump { get => isSpaceJump; }
-    public bool IsChargingThrow { get => isChargingThrow;}
+    public bool IsChargingThrow { get => isChargingThrow; }
 
     private void Awake()
     {
@@ -80,65 +82,9 @@ public class InputManager : Manager
         }
     }
 
-    void Update()
+    private void Update()
     {
-        switch (currentModeInput)
-        {
-            case ModeInput.Keyboard:
-
-                horizontalInput = Input.GetAxis("Horizontal");
-                verticalInput = Input.GetAxis("Vertical");
-
-                mouseXInput = Input.GetAxis("Mouse X");
-                mouseYInput = Input.GetAxis("Mouse Y");
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    isSpaceDown = true;
-                }
-
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    //Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
-                }
-
-                isChargingThrow = Input.GetMouseButton(0);
-
-                break;
-
-            case ModeInput.Controller:
-
-                horizontalInput = Input.GetAxis("HorizontalL");
-                verticalInput = Input.GetAxis("VerticalL");
-
-                mouseXInput = Input.GetAxis("HorizontalR");
-                mouseYInput = Input.GetAxis("VerticalR");
-
-                if (Input.GetButtonDown("XboxA"))
-                {
-                    isSpaceDown = true;
-                }
-
-                isChargingThrow = Input.GetAxis("Trigger") > 0.1 || Input.GetAxis("Trigger") < -0.1;
-
-                break;
-
-            case ModeInput.Intern:
-
-                horizontalInput = 0f;
-                verticalInput = 1f;
-
-                mouseXInput = 0f;
-                mouseYInput = 0f;
-
-                isSpaceDown = false;
-
-                break;
-
-            default:
-
-                break;
-        }
+        ReadInput();
     }
 
     private void FixedUpdate()
@@ -151,6 +97,7 @@ public class InputManager : Manager
                 {
                     isSpaceDownFixed = true;
                     isSpaceDown = false;
+                    Debug.Log("FixedUpdate : isSpaceDownFixed = " + isSpaceDownFixed);
                 }
                 else
                 {
@@ -178,6 +125,115 @@ public class InputManager : Manager
                 break;
 
             case ModeInput.Intern:
+
+                isSpaceDown = false;
+
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
+    public void OnGUI()
+    {
+        //TODO: Fix the switch between input mode
+
+        //CheckCurrentModeInput();
+    }
+
+    public void CheckCurrentModeInput()
+    {
+        if (Input.anyKeyDown)
+        {
+            Event e = Event.current;
+            if ((e.isKey || e.isMouse) && currentModeInput == ModeInput.Controller)
+            {
+                Debug.Log("pouet 1 : " + e.isKey + e.isMouse + e.isScrollWheel);
+                currentModeInput = ModeInput.Keyboard;
+
+                Transform[] allChildren = trsfCams.GetComponentsInChildren<Transform>();
+                foreach (Transform child in allChildren)
+                {
+                    var cineFree = child.GetComponent<CinemachineFreeLook>();
+                    if (cineFree != null)
+                    {
+                        child.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Mouse Y";
+                        child.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Mouse X";
+                    }
+                }
+            }
+            if (!e.isKey && !e.isMouse && !e.isScrollWheel && currentModeInput == ModeInput.Keyboard)
+            {
+                Debug.Log("pouet 2 : " + e.isKey + e.isMouse + e.isScrollWheel);
+                currentModeInput = ModeInput.Controller;
+
+                Transform[] allChildren2 = trsfCams.GetComponentsInChildren<Transform>();
+                foreach (Transform child in allChildren2)
+                {
+                    var cineFree = child.GetComponent<CinemachineFreeLook>();
+                    if (cineFree != null)
+                    {
+                        child.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "HorizontalR";
+                        child.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "VerticalR";
+                    }
+                }
+            }
+        }
+    }
+
+    public void ReadInput()
+    {
+        switch (currentModeInput)
+        {
+            case ModeInput.Keyboard:
+
+                horizontalInput = Input.GetAxis("Horizontal");
+                verticalInput = Input.GetAxis("Vertical");
+
+                mouseXInput = Input.GetAxis("Mouse X");
+                mouseYInput = Input.GetAxis("Mouse Y");
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    isSpaceDown = true;
+                    Debug.Log("Update : isSpaceDown = " + isSpaceDown);
+                }
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    //Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+                }
+
+                isChargingThrow = Input.GetMouseButton(0) && S_Debugger.instance.toogle;
+
+                break;
+
+            case ModeInput.Controller:
+
+                horizontalInput = Input.GetAxis("HorizontalL");
+                verticalInput = Input.GetAxis("VerticalL");
+
+                mouseXInput = Input.GetAxis("HorizontalR");
+                mouseYInput = Input.GetAxis("VerticalR");
+
+                if (Input.GetButtonDown("XboxA"))
+                {
+                    isSpaceDown = true;
+                }
+
+                isChargingThrow = Input.GetAxis("Trigger") > 0.1 || Input.GetAxis("Trigger") < -0.1;
+
+                break;
+
+            case ModeInput.Intern:
+
+                horizontalInput = 0f;
+                verticalInput = 1f;
+
+                mouseXInput = 0f;
+                mouseYInput = 0f;
 
                 isSpaceDown = false;
 

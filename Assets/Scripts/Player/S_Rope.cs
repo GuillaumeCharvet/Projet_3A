@@ -30,7 +30,7 @@ public class S_Rope : MonoBehaviour
         transformParentProjectiles = GameObject.FindGameObjectWithTag("Projectiles").transform;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Debug.Log("section rope : " + Vector3.Distance(ropeEnd.position, ropeSection[ropeSection.Count - 1].position));
         if (Vector3.Distance(ropeEnd.position, ropeSection[ropeSection.Count - 1].position) > sectionMaxLength)

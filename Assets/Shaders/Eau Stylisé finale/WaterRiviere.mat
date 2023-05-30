@@ -20,7 +20,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _DeepColor
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -42,10 +42,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distance: 6.34
+    - _Distance: 1.04
     - _FoamAmount: 2
     - _FoamScale: -2.9
-    - _FoamSpeed: -0.1
+    - _FoamSpeed: 0.1
     - _FoamTiling: 10
     - _HeightFrequency: 0
     - _NormalStrenght: 10
@@ -54,6 +54,7 @@ Material:
     - _RefractionStrenght: 2
     - _TilingFoam: 68.1
     - _WaterSpeed: 0.1
+    - _WaveFreq: 6.28
     - _WavesAmplitude: 0
     - _WavesSpeed: 3.58
     m_Colors:
@@ -61,7 +62,7 @@ Material:
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _FoamTiling: {r: -3.2, g: 50, b: 0, a: 0}
     - _SurfaceColor: {r: 0.14978641, g: 0.9133197, b: 0.9622642, a: 0}
-    - _WaterTiling: {r: 1, g: 5, b: 0, a: 0}
+    - _WaterTiling: {r: 20, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3441476824889386067
 MonoBehaviour:

@@ -13,11 +13,33 @@ MonoBehaviour:
   m_Name: CinemachineStateDriven Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: Glide
-    m_To: '**ANY CAMERA**'
+  - m_From: '**ANY CAMERA**'
+    m_To: Glide
     m_Blend:
       m_Style: 1
-      m_Time: 2
+      m_Time: 4
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: '**ANY CAMERA**'
+    m_To: Run
+    m_Blend:
+      m_Style: 6
+      m_Time: 0.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: '**ANY CAMERA**'
+    m_To: Climb
+    m_Blend:
+      m_Style: 6
+      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -28,6 +50,17 @@ MonoBehaviour:
     m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 6
+      m_Time: 0.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: '**ANY CAMERA**'
+    m_To: Swim
+    m_Blend:
+      m_Style: 1
       m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2

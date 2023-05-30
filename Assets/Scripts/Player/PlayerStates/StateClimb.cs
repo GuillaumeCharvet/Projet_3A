@@ -5,10 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "states/climb", fileName = "new Climb")]
 public class StateClimb : StateBehaviourParent
 {
-
     [Header("RUN/JUMP")]
-
     [SerializeField] public float maxclimbSpeed = 10f;
+
     [SerializeField] public float maxClimbAcceleration = 10f;
 
     public override void OnExitState()
@@ -17,6 +16,8 @@ public class StateClimb : StateBehaviourParent
         Destroy(reader.gameObject.GetComponent<Rigidbody>());
         reader.GetComponent<CharacterController>().enabled = true;
         */
+        reader.cc.Move(Vector3.zero);
+
         base.OnExitState();
     }
 
