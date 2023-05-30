@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &28745706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28745707}
+  m_Layer: 6
+  m_Name: Animals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28745707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28745706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 829711549}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &215566106 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3070845726004643216, guid: 2ed0227138a937a4da9106cedf99f1d2,
@@ -226,6 +257,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862913555573447329, guid: 9fb14abe717337f458b606e076b93b8a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5442785985357064136, guid: 9fb14abe717337f458b606e076b93b8a,
         type: 3}
@@ -334,6 +370,7 @@ Transform:
   - {fileID: 966504499}
   - {fileID: 215566106}
   - {fileID: 1447032012}
+  - {fileID: 28745707}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1173,7 +1210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447032011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2366.3, y: 139.3, z: 1373.5}
+  m_LocalPosition: {x: 2369.1, y: 139.3, z: 1381.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1195,16 +1232,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderPrefab: {fileID: 1862913555573447329, guid: 9fb14abe717337f458b606e076b93b8a,
     type: 3}
-  animalPrefab: {fileID: 0}
-  numberOfAnimals: 0
+  animalPrefab: {fileID: 2434448975014120023, guid: a2a795062f64363438bdc32b4f521646,
+    type: 3}
+  kidsRoom: {fileID: 28745707}
+  numberOfAnimals: 40
+  flockSpread: 10
+  meanVelocity: 0.045
   positions:
-  - {x: 2368.638, y: 139.3, z: 1345.9664}
-  - {x: 2397.2668, y: 156.02187, z: 1366.0016}
-  - {x: 2395.0725, y: 151.64621, z: 1391.5085}
-  - {x: 2384.1724, y: 153.53905, z: 1370.2987}
-  - {x: 2354.0703, y: 153.53905, z: 1359.2603}
-  - {x: 2329.2097, y: 153.53905, z: 1359.0527}
-  - {x: 2337.6968, y: 140.3483, z: 1344.1416}
+  - {x: 2222.5542, y: -56.54899, z: 1593.4833}
+  - {x: 2236.521, y: -56.54899, z: 1705.5115}
+  - {x: 2135.058, y: -56.54899, z: 1717.0856}
+  - {x: 2095.227, y: -56.54899, z: 1618.0198}
+  controlPoints:
+  - {x: 2259.235, y: -56.54899, z: 1690.9291}
+  - {x: 2172.8872, y: -56.54899, z: 1749.3868}
+  - {x: 2052.7983, y: -56.54899, z: 1645.3097}
+  - {x: 2205.6633, y: -56.54899, z: 1562.5249}
 --- !u!1001 &1536764168
 PrefabInstance:
   m_ObjectHideFlags: 0
