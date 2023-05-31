@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[CustomEditor(typeof(FlockBehaviour))]
-public class SE_DrawFlockPathHandles : Editor
+[CustomEditor(typeof(FlockBehaviour2))]
+public class SE_DrawFlockPathHandles2 : Editor
 {
-    private FlockBehaviour flock;
+    private FlockBehaviour2 flock;
     private GUIStyle style = new GUIStyle();
 
     public void OnEnable()
     {
-        flock = (FlockBehaviour)target;
+        flock = (FlockBehaviour2)target;
         style.normal.textColor = Color.black;
         style.fontSize = 18;
     }
@@ -40,7 +40,8 @@ public class SE_DrawFlockPathHandles : Editor
     public void OnSceneGUI()
     {
         var positions = flock.positions;
-        var controlPoints = flock.controlPoints;
+        var controlPoints1 = flock.controlPoints1;
+        var controlPoints2 = flock.controlPoints2;
 
         Handles.color = Color.red;
 
@@ -65,17 +66,19 @@ public class SE_DrawFlockPathHandles : Editor
         for (int i = 1; i < positions.Count + 1; i++)
         {
             var previousPoint = positions[i - 1];
-            var currentPoint = controlPoints[i - 1];
+            var currentPoint1 = controlPoints1[i - 1];
+            var currentPoint2 = controlPoints2[i - 1];
             var nextPoint = positions[i % positions.Count];
 
-            Handles.DrawDottedLine(previousPoint, currentPoint, 4f);
-            Handles.DrawDottedLine(currentPoint, nextPoint, 4f);
-            Handles.DrawBezier(previousPoint, nextPoint, currentPoint, currentPoint, Color.yellow, null, 3f);
+            Handles.DrawDottedLine(previousPoint, currentPoint1, 4f);
+            Handles.DrawBezier(previousPoint, nextPoint, currentPoint1, currentPoint2, Color.yellow, null, 3f);
+            Handles.DrawDottedLine(currentPoint2, nextPoint, 4f);
         }
 
         for (int i = 0; i < positions.Count; i++)
         {
-            controlPoints[i] = Handles.PositionHandle(controlPoints[i], Quaternion.identity);
+            controlPoints1[i] = Handles.PositionHandle(controlPoints1[i], Quaternion.identity);
+            controlPoints2[i] = Handles.PositionHandle(controlPoints2[i], Quaternion.identity);
         }
 
         if (GUI.changed)

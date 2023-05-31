@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockAnimal : MonoBehaviour
+public class FlockAnimal2 : MonoBehaviour
 {
-    public FlockBehaviour flock;
+    public FlockBehaviour2 flock;
     private int currentIndex = 1;
     private float currentPosition = 0f;
     private float speed = 10f;
     private float smoothSpeed;
-    private float targetSmoothSpeed = 0.1f;
+    public float targetSmoothSpeed = 0.1f;
     private float referenceDistance = 100f;
-    private float maxAcceleration = 0.05f;
+    private float maxAcceleration = 0.01f;
     private Vector3 lastMovement = Vector3.zero;
     public List<Vector3> positionsDelta = new List<Vector3>();
     public bool debug = false;
@@ -20,12 +20,10 @@ public class FlockAnimal : MonoBehaviour
 
     public Animator anim;
 
-    public float TargetSmoothSpeed { get => targetSmoothSpeed; set => targetSmoothSpeed = value; }
-
     public void Start()
     {
         anim = GetComponent<Animator>();
-        smoothSpeed = TargetSmoothSpeed;
+        smoothSpeed = targetSmoothSpeed;
 
         anim.Play("Base Layer.MovePlease", 0, Random.Range(0f, 1f));
     }
@@ -52,10 +50,10 @@ public class FlockAnimal : MonoBehaviour
         var normalizedDistance = smoothSpeed * Time.deltaTime / referenceDistance;
         currentPosition += normalizedDistance;
         float t = currentPosition;
-        var potentialPos = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
+        var potentialPos = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints1[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
 
         var potentialDist = (potentialPos - previousPos).magnitude;
-        var quotient = (TargetSmoothSpeed * Time.deltaTime) / potentialDist;
+        var quotient = (targetSmoothSpeed * Time.deltaTime) / potentialDist;
         //Debug.Log("QUOTIENT = " + quotient);
 
         currentPosition -= normalizedDistance;
@@ -63,7 +61,7 @@ public class FlockAnimal : MonoBehaviour
         currentPosition += distance;
         t = currentPosition;
 
-        transform.position = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
+        transform.position = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints1[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
 
         if (currentPosition >= 1f)
         {
