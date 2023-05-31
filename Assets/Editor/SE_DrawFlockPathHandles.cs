@@ -8,20 +8,28 @@ using UnityEditor.SceneManagement;
 public class SE_DrawFlockPathHandles : Editor
 {
     private FlockBehaviour flock;
+    private GUIStyle style = new GUIStyle();
 
     public void OnEnable()
     {
-        flock = (FlockBehaviour)target;        
+        flock = (FlockBehaviour)target;
+        style.normal.textColor = Color.black;
+        style.fontSize = 18;
     }
 
     public override void OnInspectorGUI()
     {
+        base.DrawDefaultInspector();
+
+        if (GUILayout.Button("Add point", GUILayout.Width(150), GUILayout.Height(40)))
+        {
+            flock.AddPoint();
+        }
+
         if (GUILayout.Button("Reset control points", GUILayout.Width(150), GUILayout.Height(40)))
         {
             flock.ResetControlPoints();
         }
-
-        base.DrawDefaultInspector();
     }
 
     public void OnSceneGUI()
@@ -35,10 +43,14 @@ public class SE_DrawFlockPathHandles : Editor
             var previousPoint = positions[i - 1];
             var currentPoint = positions[i % positions.Count];
 
+            Handles.color = Color.red;
             Handles.DrawLine(previousPoint, currentPoint, 4f);
+
+            Handles.Label(positions[i % positions.Count] + Vector3.right, (i % positions.Count).ToString(), style);
         }
         for (int i = 0; i < positions.Count; i++)
         {
+            Handles.color = Color.red;
             positions[i] = Handles.PositionHandle(positions[i], Quaternion.identity);
         }
 
@@ -63,4 +75,11 @@ public class SE_DrawFlockPathHandles : Editor
             EditorSceneManager.MarkSceneDirty(flock.gameObject.scene);
         }
     }
+
+    /*
+    [DrawGizmo(GizmoType.Active)]
+    private static void MyDick(FlockBehaviour fl, GizmoType fj)
+    {
+    }
+    */
 }
