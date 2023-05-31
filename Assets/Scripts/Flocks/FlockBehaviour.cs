@@ -8,7 +8,8 @@ public class FlockBehaviour : MonoBehaviour
     [SerializeField] private GameObject animalPrefab;
     [SerializeField] private Transform kidsRoom;
     [SerializeField] private int numberOfAnimals;
-    private float flockSpread = 5f;
+    public float flockSpread = 0f;
+    public float meanVelocity;
     private List<FlockAnimal> animals = new List<FlockAnimal>();
     [SerializeField] public List<Vector3> positions = new List<Vector3>();
     [SerializeField] public List<Vector3> controlPoints = new List<Vector3>();
@@ -18,21 +19,22 @@ public class FlockBehaviour : MonoBehaviour
     private float speed = 10f;
     private Vector3 velocity = Vector3.zero;
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < numberOfAnimals; i++)
         {
             var animal = Instantiate(animalPrefab, transform.position, Quaternion.identity, kidsRoom).GetComponent<FlockAnimal>();
             animal.flock = this;
+            animal.targetSmoothSpeed = meanVelocity;
             animals.Add(animal);
             for (int j = 0; j < positions.Count; j++)
             {
-                animal.positionsDelta.Add(positions[j] + new Vector3(flockSpread * Random.Range(-1f, 1f), flockSpread * Random.Range(-1f, 1f), flockSpread * Random.Range(-1f, 1f)));
+                animal.positionsDelta.Add(positions[j] + new Vector3(flockSpread * Random.Range(-1f, 1f), 0.1f * flockSpread * Random.Range(-1f, 1f), flockSpread * Random.Range(-1f, 1f)));
             }
         }
     }
 
-    void Update()
+    private void Update()
     {
         var previousPos = transform.position;
         var distance = speed * Time.deltaTime;
@@ -59,5 +61,13 @@ public class FlockBehaviour : MonoBehaviour
         {
             controlPoints.Add(0.5f * (positions[i - 1] + positions[i % positions.Count]));
         }
+    }
+
+    public void AddPoint()
+    {
+        var newPoint = 0.5f * (positions[0] + positions[positions.Count - 1]);
+        positions.Add(newPoint);
+        var newControlPoint = 0.5f * (positions[positions.Count - 1] + positions[0]);
+        controlPoints.Add(newControlPoint);
     }
 }
