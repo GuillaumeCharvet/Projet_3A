@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5519436855148595406}
   - component: {fileID: 1051863163936101853}
   - component: {fileID: 8466192236694880290}
+  - component: {fileID: 6560867165658796267}
   m_Layer: 0
   m_Name: er
   m_TagString: Untagged
@@ -105,6 +106,21 @@ MonoBehaviour:
   blendDistance: 1
   weight: 1
   sharedProfile: {fileID: 0}
+--- !u!114 &6560867165658796267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4563501180341866774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f515fea0a8f7cb4ba688e8576556802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshrendererTree: {fileID: 4104616744275441986}
+  materialBase: {fileID: 2100000, guid: b940c076c60374e489fe7e55940a310c, type: 2}
+  materialDithered: {fileID: 2100000, guid: 73e5353af047c8149852522a0cd99132, type: 2}
 --- !u!1001 &3402208450351654342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,6 +197,12 @@ PrefabInstance:
 --- !u!4 &2935691588685759021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 131cf543e2120ab4b815a9926a3e503f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3402208450351654342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4104616744275441986 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 131cf543e2120ab4b815a9926a3e503f,
     type: 3}
   m_PrefabInstance: {fileID: 3402208450351654342}
   m_PrefabAsset: {fileID: 0}

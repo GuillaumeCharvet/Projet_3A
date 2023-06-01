@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7611085874684060650}
   - component: {fileID: 8208575429334292129}
   - component: {fileID: 6387169644832454206}
+  - component: {fileID: 6117563738213870972}
   m_Layer: 0
   m_Name: Box Volume
   m_TagString: Untagged
@@ -71,6 +72,21 @@ MonoBehaviour:
   blendDistance: 1
   weight: 1
   sharedProfile: {fileID: 0}
+--- !u!114 &6117563738213870972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197338805781222909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f515fea0a8f7cb4ba688e8576556802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshrendererTree: {fileID: 2249056187452120658}
+  materialBase: {fileID: 2100000, guid: b940c076c60374e489fe7e55940a310c, type: 2}
+  materialDithered: {fileID: 2100000, guid: 73e5353af047c8149852522a0cd99132, type: 2}
 --- !u!1 &2801413298478557589
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +276,12 @@ PrefabInstance:
 --- !u!4 &1116167524118275389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b48aab05b408f1047bc4c813a92d89ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 646219329508524758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2249056187452120658 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: b48aab05b408f1047bc4c813a92d89ca,
     type: 3}
   m_PrefabInstance: {fileID: 646219329508524758}
   m_PrefabAsset: {fileID: 0}
