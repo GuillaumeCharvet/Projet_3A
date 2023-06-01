@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_80a3301700f44e8488d6be7b9acd2859_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 2db844303d534a644afac0dd1b833273, type: 3}
+        m_Texture: {fileID: 2800000, guid: cc3ac75b63fed714e9a2a234b1a19517, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -60,6 +60,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dither_Size: 1
+    - _MaxDistance: 2
+    - _MinDistance: 0.3
     - _Opacity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
