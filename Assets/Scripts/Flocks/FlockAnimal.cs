@@ -9,9 +9,9 @@ public class FlockAnimal : MonoBehaviour
     private float currentPosition = 0f;
     private float speed = 10f;
     private float smoothSpeed;
-    public float targetSmoothSpeed = 0.1f;
+    private float targetSmoothSpeed = 0.1f;
     private float referenceDistance = 100f;
-    private float maxAcceleration = 0.01f;
+    private float maxAcceleration = 0.05f;
     private Vector3 lastMovement = Vector3.zero;
     public List<Vector3> positionsDelta = new List<Vector3>();
     public bool debug = false;
@@ -20,12 +20,14 @@ public class FlockAnimal : MonoBehaviour
 
     public Animator anim;
 
+    public float TargetSmoothSpeed { get => targetSmoothSpeed; set => targetSmoothSpeed = value; }
+
     public void Start()
     {
         anim = GetComponent<Animator>();
-        smoothSpeed = targetSmoothSpeed;
+        smoothSpeed = TargetSmoothSpeed;
 
-        //anim. ["MovePlease"].time = Random.Range(0f, 10f);
+        anim.Play("Base Layer.MovePlease", 0, Random.Range(0f, 1f));
     }
 
     public void Move()
@@ -53,7 +55,7 @@ public class FlockAnimal : MonoBehaviour
         var potentialPos = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
 
         var potentialDist = (potentialPos - previousPos).magnitude;
-        var quotient = (targetSmoothSpeed * Time.deltaTime) / potentialDist;
+        var quotient = (TargetSmoothSpeed * Time.deltaTime) / potentialDist;
         //Debug.Log("QUOTIENT = " + quotient);
 
         currentPosition -= normalizedDistance;
@@ -78,14 +80,3 @@ public class FlockAnimal : MonoBehaviour
         else if (velocityMag < targetSmoothSpeed) smoothSpeed += maxAcceleration * Time.deltaTime;*/
     }
 }
-
-/*
-public void OnDrawGizmos()
-{
-    foreach (var position in positions)
-    {
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(position, 1);
-    }
-}*/

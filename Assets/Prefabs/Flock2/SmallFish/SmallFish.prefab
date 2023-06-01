@@ -165,15 +165,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 060c7e9f0eb842c4a954ede39f833d66,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -880492318780811192}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 060c7e9f0eb842c4a954ede39f833d66,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1721671266}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 060c7e9f0eb842c4a954ede39f833d66,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3027446460798609459}
+      addedObject: {fileID: -472030460337805850}
   m_SourcePrefab: {fileID: 100100000, guid: 060c7e9f0eb842c4a954ede39f833d66, type: 3}
 --- !u!1 &2434448975014120023 stripped
 GameObject:
@@ -181,22 +177,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3245282924652328710}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &-880492318780811192
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2434448975014120023}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 51cacaf71abab044ea1207c81c599a0a, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 0ec96fe1aa52d9b4a83f10a16aad2ed1, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &1721671266
 Animator:
   serializedVersion: 5
@@ -217,7 +197,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &3027446460798609459
+--- !u!114 &-472030460337805850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,13 +206,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2434448975014120023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fc9292bcf355446bcb2db36cfdf376, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f506330579894a4aa6dce7e2508c0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flock: {fileID: 0}
   targetSmoothSpeed: 0.1
   positionsDelta: []
-  debug: 1
+  debug: 0
   velocityCurve:
     serializedVersion: 2
     m_Curve: []
