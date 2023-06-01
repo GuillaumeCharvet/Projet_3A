@@ -26,6 +26,11 @@ public class SE_DrawFlockPathHandles : Editor
             flock.AddPoint();
         }
 
+        if (GUILayout.Button("Remove point", GUILayout.Width(150), GUILayout.Height(40)))
+        {
+            flock.RemovePoint();
+        }
+
         if (GUILayout.Button("Reset control points", GUILayout.Width(150), GUILayout.Height(40)))
         {
             flock.ResetControlPoints();
@@ -38,6 +43,7 @@ public class SE_DrawFlockPathHandles : Editor
         var controlPoints = flock.controlPoints;
 
         Handles.color = Color.red;
+
         for (int i = 1; i < positions.Count + 1; i++)
         {
             var previousPoint = positions[i - 1];
@@ -48,6 +54,7 @@ public class SE_DrawFlockPathHandles : Editor
 
             Handles.Label(positions[i % positions.Count] + Vector3.right, (i % positions.Count).ToString(), style);
         }
+
         for (int i = 0; i < positions.Count; i++)
         {
             Handles.color = Color.red;
@@ -63,7 +70,9 @@ public class SE_DrawFlockPathHandles : Editor
 
             Handles.DrawDottedLine(previousPoint, currentPoint, 4f);
             Handles.DrawDottedLine(currentPoint, nextPoint, 4f);
+            Handles.DrawBezier(previousPoint, nextPoint, currentPoint, currentPoint, Color.yellow, null, 3f);
         }
+
         for (int i = 0; i < positions.Count; i++)
         {
             controlPoints[i] = Handles.PositionHandle(controlPoints[i], Quaternion.identity);
