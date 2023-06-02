@@ -539,12 +539,6 @@ public class StateMachineParameters : MonoBehaviour
     {
         Vector3 velocity = characterController.velocity;
 
-        if (isInWaterNextFixedUpdate)
-        {
-            velocity.x *= 0.98f;
-            velocity.z *= 0.98f;
-        }
-
         // Check Input to determine direction
         Vector2 playerInput;
         if (true)
