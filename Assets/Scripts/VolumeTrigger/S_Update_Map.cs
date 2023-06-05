@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 public class S_Update_Map : MonoBehaviour
 {
-    public GameObject secteurMap;
+    public GameObject secteurMapAffiche;
+    public GameObject cacheSecteur;
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {      
-            secteurMap.SetActive(true);  
+            secteurMapAffiche.SetActive(true);
+            cacheSecteur.SetActive(false);
         }
     }
 }
