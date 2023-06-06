@@ -35,6 +35,11 @@ public class SE_DrawFlockPathHandles2 : Editor
         {
             flock.ResetControlPoints();
         }
+
+        if (GUILayout.Button("Recenter points", GUILayout.Width(150), GUILayout.Height(40)))
+        {
+            flock.RecenterPathPoints();
+        }
     }
 
     public void OnSceneGUI()
