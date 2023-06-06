@@ -107,8 +107,13 @@ public class S_map : MonoBehaviour
     public GameObject dp4I5;
     public GameObject dp4I6;
     public GameObject dp4TB;
-  
 
+    // profondeur de champ//
+
+    public GameObject depthVolume;
+
+  
+    //
 
     private bool carnetIsOpen = false;
     private bool keyIUp = true;
@@ -127,6 +132,7 @@ public class S_map : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && !carnetIsOpen)
         {
             Time.timeScale = 0;
+            depthVolume.SetActive(true);
             canvaMap.SetActive(true);
             carnetIsOpen = true;
             owl.PlayOneShot(bookOpen);
@@ -250,6 +256,7 @@ public class S_map : MonoBehaviour
             canvaC3.SetActive(false);
             canvaC4.SetActive(false);
             carnetIsOpen = false;
+            depthVolume.SetActive(false);
             Time.timeScale = 1;
 
             //Debug.Log("******* I : KEY DOWN - CLOSE INVENTORY ******* " + keyIUp);
