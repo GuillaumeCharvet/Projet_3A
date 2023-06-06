@@ -126,6 +126,7 @@ public class S_map : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I) && !carnetIsOpen)
         {
+            Time.timeScale = 0;
             canvaMap.SetActive(true);
             carnetIsOpen = true;
             owl.PlayOneShot(bookOpen);
@@ -145,11 +146,18 @@ public class S_map : MonoBehaviour
              }*/
         }
 
+
+
+      
         if (Input.GetKeyUp(KeyCode.I))
         {
             keyIUp = true;
             Debug.Log("******* I : KEY UP ******* " + keyIUp);
         }
+        
+
+
+
 
         /*
         if (Input.GetKeyDown(KeyCode.I) && carnetHBS)
@@ -242,6 +250,7 @@ public class S_map : MonoBehaviour
             canvaC3.SetActive(false);
             canvaC4.SetActive(false);
             carnetIsOpen = false;
+            Time.timeScale = 1;
 
             //Debug.Log("******* I : KEY DOWN - CLOSE INVENTORY ******* " + keyIUp);
 
