@@ -5,15 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "states/swim", fileName = "new Swim")]
 public class StateSwim : StateBehaviourParent
 {
-
     [Header("RUN/JUMP")]
-
     [SerializeField] public float maxAcceleration = 50f;
 
     [SerializeField] public float speedDown = 0f;
 
     public override void OnExitState()
     {
+        reader.cc.slopeLimit = reader.smp.slopeLimitOnGround;
         base.OnExitState();
     }
 
@@ -30,6 +29,7 @@ public class StateSwim : StateBehaviourParent
     protected override void OnEnterState()
     {
         reader.smp.currentModeMovement = ModeMovement.Swim;
+        reader.cc.slopeLimit = reader.smp.slopeLimitInWater;
 
         reader.smp.ResetPlayerCollider();
 
