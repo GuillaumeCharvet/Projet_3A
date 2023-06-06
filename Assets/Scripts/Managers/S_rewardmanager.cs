@@ -147,7 +147,7 @@ public class S_rewardmanager : MonoBehaviour
             dialogueActif = false;
             isIn = false;
         }
-
+        /*
         if (other.CompareTag("Player") && dialogueActif)
         {
             
@@ -155,6 +155,7 @@ public class S_rewardmanager : MonoBehaviour
             
             
         }
+        */
 
     }
 
@@ -292,200 +293,10 @@ public class S_rewardmanager : MonoBehaviour
             talksource.PlayOneShot(talkedSound);
             dialogueCanva.SetActive(true);
             dialogueActif = true;
+            //Time.timeScale = 0;
+            ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
 
-         /*               annulé  car changement de méthode 
-
-       // choix du dialogue selon les stèles ramassées//
-       if ( dialogueActif  )
-       {
-           if (phraseZero)
-           {
-               //Debug.Log("tu n'as pas d'objet je parle pas");
-               dialogue0.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue0.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-               }
-           }
-           //île 1 //
-
-           if (phraseOne && !p1_1hbs)
-           {
-               //Debug.Log("okay 1 partie");
-               dialogue1.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue1.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p1_1hbs = true;
-                   phraseOne = false;
-               }
-           }
-           if (phraseTwo && !p1_2hbs)
-           {
-               //Debug.Log("okay 1 partie");
-               dialogue2.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue2.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p1_2hbs = true;
-                   phraseTwo = false;
-               }
-           }
-           if (phraseThree && !p1_3hbs)
-           {
-               //Debug.Log("okay 1 partie");
-               dialogue3.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue3.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p1_3hbs = true;
-                   phraseThree = false;
-               }
-           }
-
-           if (phraseFour && !p1_4hbs)
-           {
-               //Debug.Log("okay 1 partie");
-               dialogue4.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue4.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p1_4hbs = true;
-                   phraseFour = false;
-               }
-           }
-
-           // île 2 //
-
-           if (phraseFive && !p2_1hbs)
-           {
-               //Debug.Log("okay 1 partie");
-               dialogue5.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue5.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p2_1hbs = true;
-                   phraseFive = false;
-               }
-           }
-           if (phraseSix && !p2_2hbs)
-           {
-               Debug.Log("okay 2 partie");
-               dialogue6.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue6.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p2_2hbs = true;
-                   phraseSix = false;
-               }
-           }
-           if (phraseSeven && !p2_3hbs)
-           {
-                Debug.Log("okay 3 partie");
-                dialogue7.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    dialogue7.SetActive(false);
-                    dialogueActif = false;
-                    dialogueCanva.SetActive(false);
-                    p2_3hbs = true;
-                    phraseSeven = false;
-               }
-           }
-           if (phraseEight && !p2_4hbs)
-           {
-                Debug.Log("okay 4 partie");
-                dialogue8.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    dialogue8.SetActive(false);
-                    dialogueActif = false;
-                    dialogueCanva.SetActive(false);
-                    p2_4hbs = true;
-                    phraseEight = false;
-                }
-           }
-
-           //île 3 //
-
-           if (phraseNine && !p3_1hbs)
-           {
-               dialogue9.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue9.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p3_1hbs = true;
-                   phraseNine = false;
-               }
-           }
-
-           if (phraseTen && !p3_2hbs)
-           {
-               dialogue10.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue10.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p3_2hbs = true;
-                   phraseTen = false;
-               }
-           }
-
-           if (phraseEleven && !p3_3hbs)
-           {
-               dialogue11.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue11.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p3_3hbs = true;
-                   phraseEleven = false;
-               }
-           }
-
-           if (phraseTwelve && !p3_4hbs)
-           {
-               dialogue12.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue12.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-                   p3_4hbs = true;
-                   phraseTwelve = false;
-               }
-           }
-           /*if (phraseOneAndTwo)
-           {
-               Debug.Log("okay 2 partie");
-               dialogue1ET2.SetActive(true);
-               if (Input.GetKeyDown(KeyCode.E))
-               {
-                   dialogue1ET2.SetActive(false);
-                   dialogueActif = false;
-                   dialogueCanva.SetActive(false);
-               }
-           }
-           */
-           
+    
     }
 }

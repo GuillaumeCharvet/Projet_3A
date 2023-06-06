@@ -66,6 +66,11 @@ public class S_Dialogue : MonoBehaviour
     public AudioClip blablaSound;
 
 
+    // player movement //
+
+    public GameObject movementPlayer;
+
+
 
 
     
@@ -365,14 +370,14 @@ public class S_Dialogue : MonoBehaviour
     IEnumerator Typeline()
     {
         Debug.Log("attend 1 second mon djo");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         Debug.Log("c'est bon ça fait 1 sec");
         foreach (char c in dialoguelines[index].ToCharArray())
         {
             //dialoguebools[index] = false;
             
             textComponentTechno.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
             Debug.Log("le premier message apparait");
             
             
@@ -425,6 +430,9 @@ public class S_Dialogue : MonoBehaviour
                 index = 0;
                 Debug.Log("index à 0");
                 dialogueCanva.SetActive(false);
+                //Time.timeScale = 1;
+                ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true ;
+
 
             }
         }        
