@@ -1,33 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class FlockAnimal2 : MonoBehaviour
 {
     public FlockBehaviour2 flock;
-    private int currentIndex = 1;
-    private float currentPosition = 0f;
-    private float speed = 10f;
-    private float smoothSpeed;
-    public float targetSmoothSpeed = 0.1f;
-    private float referenceDistance = 100f;
-    private float maxAcceleration = 0.01f;
+    private Vector3 lastPosition;
     private Vector3 lastMovement = Vector3.zero;
     public List<Vector3> positionsDelta = new List<Vector3>();
     public bool debug = false;
 
     public AnimationCurve velocityCurve = new AnimationCurve();
 
+    public List<FlockAnimal2> animals = new List<FlockAnimal2>();
+
     public Animator anim;
+
+    // FLOCK
+
+    private float inertiaFactor = 1f;
+    private float repelDistance = 3f;
+    private float repelFactor = 200f;
+    private float attractFactor = 20f;
+
+    private float randomPhaseShift;
 
     public void Start()
     {
         anim = GetComponent<Animator>();
-        smoothSpeed = targetSmoothSpeed;
+        lastPosition = transform.position;
 
         anim.Play("Base Layer.MovePlease", 0, Random.Range(0f, 1f));
+        randomPhaseShift = Random.Range(0f, 2f * Mathf.PI);
     }
 
+    /*
     public void Move()
     {
         var previousPos = transform.position;
@@ -73,8 +81,39 @@ public class FlockAnimal2 : MonoBehaviour
         velocityCurve.AddKey(Time.time, velocityMag);
         if (debug) Debug.Log(velocityMag / Time.deltaTime);
         if (velocityMag > Mathf.Epsilon) transform.rotation = Quaternion.LookRotation(lastMovement, Vector3.up);
-        /*
-        if (velocityMag > targetSmoothSpeed) smoothSpeed -= maxAcceleration * Time.deltaTime;
-        else if (velocityMag < targetSmoothSpeed) smoothSpeed += maxAcceleration * Time.deltaTime;*/
+    }
+    */
+
+    public void MoveWithFlock()
+    {
+        lastMovement = lastPosition - transform.position;
+        lastPosition = transform.position;
+
+        var newPosition = transform.position;
+        var newSpeed = Vector3.zero;
+
+        var repelForce = Vector3.zero;
+        var inc = 0;
+        foreach (var anim in animals)
+        {
+            //Debug.Log("nombre d'ANIMALES : " + animals.Count);
+            var dist = Vector3.Distance(anim.transform.position, transform.position);
+            if (dist < repelDistance)
+            {
+                repelForce += (1f / (1f + dist)) * (transform.position - anim.transform.position);
+                //Debug.DrawLine(transform.position, anim.transform.position);
+                inc++;
+            }
+        }
+        repelForce /= Mathf.Max(1f, (float)inc);
+
+        var attractForce = flock.transform.position + 2f * Mathf.Cos(0.3f * Time.time + randomPhaseShift) * Vector3.up - transform.position;
+
+        newSpeed = inertiaFactor * lastMovement + (repelFactor * repelForce + attractFactor * attractForce) * Time.deltaTime;
+        newPosition += newSpeed * Time.deltaTime;
+
+        if (newSpeed.magnitude > Mathf.Epsilon) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newSpeed, Vector3.up), 1f);
+
+        transform.position = newPosition;
     }
 }
