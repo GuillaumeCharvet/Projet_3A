@@ -7,6 +7,8 @@ public class Parrot_TriggerFly2 : MonoBehaviour
     public bool BoolParrotFly;
     public GameObject Parot_TriggerZoneFly;
     public Animator animator;
+    private float alphaValue = 1f;
+    private float fadeSpeed = 1f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,4 +22,13 @@ public class Parrot_TriggerFly2 : MonoBehaviour
             animator.SetBool("BoolParrotFly", false);
     }
 
+    private IEnumerator DelayFadeOut()
+    {
+        yield return new WaitForSeconds(2f);
+        while (alphaValue > 0f)
+        {
+            alphaValue -= fadeSpeed * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

@@ -57,6 +57,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] public float jumpHorizontalBoost = 1f;
     public Vector3 currentGroundNormal;
     [SerializeField] private AnimationCurve plotGroundAngleInfluence = new AnimationCurve();
+    public float slopeLimitOnGround = 60f;
 
     [Header("CLIMB")]
     [SerializeField] public float climbSpeed = 2.5f;
@@ -111,6 +112,7 @@ public class StateMachineParameters : MonoBehaviour
 
     [SerializeField] private float currentHeightDiff = 0f;
     [SerializeField] private float currentHeightRef = 0f;
+    public float slopeLimitInWater = 90f;
 
     [Header("THROW")]
     [SerializeField] private float throwPower = 2f;
