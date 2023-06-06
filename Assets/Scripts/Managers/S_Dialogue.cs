@@ -431,7 +431,7 @@ public class S_Dialogue : MonoBehaviour
                 Debug.Log("index à 0");
                 dialogueCanva.SetActive(false);
                 //Time.timeScale = 1;
-                ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true ;
+                ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false ;
 
 
             }
