@@ -89,60 +89,111 @@ public class InputManager : Manager
     {
         if (updateManager.updateActivated)
         {
-            UseNullInput();
+            ReadInput();
         }
         else
         {
-            ReadInput();
+            UseNullInput();
         }
     }
 
     private void FixedUpdate()
     {
-        switch (currentModeInput)
+        if (updateManager.updateActivated)
         {
-            case ModeInput.Keyboard:
+            switch (currentModeInput)
+            {
+                case ModeInput.Keyboard:
 
-                if (isSpaceDown)
-                {
-                    isSpaceDownFixed = true;
+                    if (isSpaceDown)
+                    {
+                        isSpaceDownFixed = true;
+                        isSpaceDown = false;
+                        Debug.Log("FixedUpdate : isSpaceDownFixed = " + isSpaceDownFixed);
+                    }
+                    else
+                    {
+                        isSpaceDownFixed = false;
+                    }
+
+                    isSpaceJump = Input.GetKey(KeyCode.Space);
+
+                    break;
+
+                case ModeInput.Controller:
+
+                    if (isSpaceDown)
+                    {
+                        isSpaceDownFixed = true;
+                        isSpaceDown = false;
+                    }
+                    else
+                    {
+                        isSpaceDownFixed = false;
+                    }
+
+                    isSpaceJump = Input.GetButton("XboxA");
+
+                    break;
+
+                case ModeInput.Intern:
+
                     isSpaceDown = false;
-                    Debug.Log("FixedUpdate : isSpaceDownFixed = " + isSpaceDownFixed);
-                }
-                else
-                {
-                    isSpaceDownFixed = false;
-                }
 
-                isSpaceJump = Input.GetKey(KeyCode.Space);
+                    break;
 
-                break;
+                default:
 
-            case ModeInput.Controller:
+                    break;
+            }
+        }
+        else
+        {
+            switch (currentModeInput)
+            {
+                case ModeInput.Keyboard:
 
-                if (isSpaceDown)
-                {
-                    isSpaceDownFixed = true;
+                    if (isSpaceDown)
+                    {
+                        isSpaceDownFixed = false;
+                        isSpaceDown = false;
+                        Debug.Log("FixedUpdate : isSpaceDownFixed = " + isSpaceDownFixed);
+                    }
+                    else
+                    {
+                        isSpaceDownFixed = false;
+                    }
+
+                    isSpaceJump = Input.GetKey(KeyCode.Space);
+
+                    break;
+
+                case ModeInput.Controller:
+
+                    if (isSpaceDown)
+                    {
+                        isSpaceDownFixed = false;
+                        isSpaceDown = false;
+                    }
+                    else
+                    {
+                        isSpaceDownFixed = false;
+                    }
+
+                    isSpaceJump = Input.GetButton("XboxA");
+
+                    break;
+
+                case ModeInput.Intern:
+
                     isSpaceDown = false;
-                }
-                else
-                {
-                    isSpaceDownFixed = false;
-                }
 
-                isSpaceJump = Input.GetButton("XboxA");
+                    break;
 
-                break;
+                default:
 
-            case ModeInput.Intern:
-
-                isSpaceDown = false;
-
-                break;
-
-            default:
-
-                break;
+                    break;
+            }
         }
     }
 
