@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public enum ModeInput
@@ -12,6 +13,7 @@ public class InputManager : Manager
     public ModeInput currentModeInput;
 
     [SerializeField] private Transform trsfCams;
+    private UpdateManager updateManager;
 
     private float horizontalInput;
     private float verticalInput;
@@ -36,6 +38,7 @@ public class InputManager : Manager
     private void Awake()
     {
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+        updateManager = ManagerManager.Instance.GetComponent<UpdateManager>();
     }
 
     private void Start()
@@ -84,7 +87,14 @@ public class InputManager : Manager
 
     private void Update()
     {
-        ReadInput();
+        if (updateManager.updateActivated)
+        {
+            UseNullInput();
+        }
+        else
+        {
+            ReadInput();
+        }
     }
 
     private void FixedUpdate()
@@ -231,6 +241,50 @@ public class InputManager : Manager
 
                 horizontalInput = 0f;
                 verticalInput = 1f;
+
+                mouseXInput = 0f;
+                mouseYInput = 0f;
+
+                isSpaceDown = false;
+
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
+    public void UseNullInput()
+    {
+        switch (currentModeInput)
+        {
+            case ModeInput.Keyboard:
+
+                horizontalInput = 0f;
+                verticalInput = 0f;
+
+                mouseXInput = Input.GetAxis("Mouse X");
+                mouseYInput = Input.GetAxis("Mouse Y");
+
+                isSpaceDown = false;
+
+                break;
+
+            case ModeInput.Controller:
+
+                horizontalInput = 0f;
+                verticalInput = 0f;
+
+                mouseXInput = Input.GetAxis("HorizontalR");
+                mouseYInput = Input.GetAxis("VerticalR");
+
+                break;
+
+            case ModeInput.Intern:
+
+                horizontalInput = 0f;
+                verticalInput = 0f;
 
                 mouseXInput = 0f;
                 mouseYInput = 0f;
