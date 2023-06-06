@@ -8,7 +8,7 @@ public class UpdateManager : Manager
     private UnityAction updateActions;
     private UnityAction fixedUpdateActions;
 
-    public bool updateActivated, fixedUpdateActivated;
+    public bool updateActivated, fixedUpdateActivated = true;
 
     void Start()
     {
