@@ -10,7 +10,7 @@ public class UpdateManager : Manager
 
     public bool updateActivated, fixedUpdateActivated = true;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(CoroutineUpdate());
         StartCoroutine(CoroutineFixedUpdate());
@@ -20,14 +20,17 @@ public class UpdateManager : Manager
     {
         updateActions += action;
     }
+
     public void RemoveActionToUpdate(UnityAction action)
     {
         updateActions -= action;
     }
+
     public void AddActionToFixedUpdate(UnityAction action)
     {
         fixedUpdateActions += action;
     }
+
     public void RemoveActionToFixedUpdate(UnityAction action)
     {
         fixedUpdateActions += action;

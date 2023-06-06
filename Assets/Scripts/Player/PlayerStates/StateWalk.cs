@@ -10,18 +10,11 @@ public class StateWalk : StateBehaviourParent
 
     [SerializeField] public float speedUp = 0f;
     [SerializeField] public float speedDown = 0f;
-
-    private UpdateManager updateManager;
     /*
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
     public float speed;
     */
-
-    public void Awake()
-    {
-        updateManager = ManagerManager.Instance.GetComponent<UpdateManager>();
-    }
 
     public override void OnExitState()
     {
@@ -30,7 +23,7 @@ public class StateWalk : StateBehaviourParent
 
     public override void Update()
     {
-        if (updateManager.updateActivated) reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, true);
+        reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, true);
 
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedDown);
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_2", speedUp);
