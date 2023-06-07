@@ -281,6 +281,7 @@ public class S_rewardmanager : MonoBehaviour
             talksource.PlayOneShot(talkedSound);
             dialogueCanva.SetActive(true);
             dialogueActif = true;
+            ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
 
          /*               annulé  car changement de méthode 

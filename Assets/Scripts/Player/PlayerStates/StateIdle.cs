@@ -5,9 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "states/idle", fileName = "new_Idle")]
 public class StateIdle : StateBehaviourParent
 {
-
     [Header("RUN/JUMP")]
-
     [SerializeField] public float maxAcceleration = 50f;
 
     [SerializeField] public float speedUp = 0f;
@@ -26,7 +24,7 @@ public class StateIdle : StateBehaviourParent
     public override void Update()
     {
         reader.smp.Move(reader.smp.MaxSpeed, maxAcceleration, true);
-        
+
         reader.smp.UpdateIdleTransitionsParameters("speedThresholdReached_1", speedUp);
         reader.smp.UpdateCanClimbTopToBot(true);
 
