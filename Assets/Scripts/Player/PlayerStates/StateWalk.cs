@@ -5,14 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "states/walk", fileName = "new_Walk")]
 public class StateWalk : StateBehaviourParent
 {
-
     [Header("RUN/JUMP")]
-
     [SerializeField] public float maxAcceleration = 50f;
 
     [SerializeField] public float speedUp = 0f;
     [SerializeField] public float speedDown = 0f;
-
     /*
     [SerializeField] public float jumpVerticalBoost = 0.4f;
     [SerializeField] public float jumpHorizontalBoost = 1f;
@@ -41,6 +38,7 @@ public class StateWalk : StateBehaviourParent
 
         reader.smp.ResetPlayerCollider();
 
+        reader.transform.rotation = Quaternion.Euler(0f, reader.transform.rotation.eulerAngles.y, 0f);
         reader.smp.ResetStamina();
         base.OnEnterState();
     }

@@ -5,9 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "states/jump", fileName = "new_Jump")]
 public class StateJump : StateBehaviourParent
 {
-
     [Header("RUN/JUMP")]
-
     [SerializeField] public float maxAcceleration = 50f;
 
     [SerializeField] public float fallControl = 0f;

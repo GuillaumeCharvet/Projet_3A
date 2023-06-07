@@ -9,8 +9,7 @@ public class S_Tuto_Canvas : MonoBehaviour
     // TUTO CLIMB //
     public GameObject canvaTuto;
     public GameObject triggerTuto;
-    public GameObject playerMovement;
-    public GameObject cameraMovement;
+   
 
     private bool tutoOpen = false;
 
