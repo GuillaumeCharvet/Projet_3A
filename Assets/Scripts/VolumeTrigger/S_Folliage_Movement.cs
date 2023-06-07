@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class S_Tree_Dithering : MonoBehaviour
+public class S_Folliage_Movement : MonoBehaviour
 {
 
     public MeshRenderer meshrendererTree;
     public Material materialBase;
-    public Material materialDithered;
-    
+    public Material materialMovement;
+
 
 
 
@@ -17,8 +17,8 @@ public class S_Tree_Dithering : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-         {
-            meshrendererTree.material = materialDithered;
+        {
+            meshrendererTree.material = materialMovement;
         }
 
     }
@@ -29,4 +29,3 @@ public class S_Tree_Dithering : MonoBehaviour
             meshrendererTree.material = materialBase;
         }
     }
-}
