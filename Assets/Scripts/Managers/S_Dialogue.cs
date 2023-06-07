@@ -65,15 +65,7 @@ public class S_Dialogue : MonoBehaviour
 
     public AudioClip blablaSound;
 
-
-    // player movement //
-
-    public GameObject movementPlayer;
-
-
-
-
-    
+    //
 
     private int index;
     private bool dialogueIsActive = false;
@@ -431,7 +423,7 @@ public class S_Dialogue : MonoBehaviour
                 Debug.Log("index à 0");
                 dialogueCanva.SetActive(false);
                 //Time.timeScale = 1;
-                ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false ;
+                ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true ;
 
 
             }
