@@ -7,6 +7,7 @@ using UnityEngine.Audio;
 public class S_Intro_Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
+    public GameObject TriggerBoxIntro;
     public GameObject triggerBoxTecnho;
     public GameObject triggerBoxNature;
 
@@ -42,6 +43,14 @@ public class S_Intro_Dialogue : MonoBehaviour
                 textComponent.text = dialoguelines[index];
             }
         }
+
+        if (!dialoguebools[4])
+        {
+            triggerBoxNature.SetActive(true);
+            triggerBoxTecnho.SetActive(true);
+            TriggerBoxIntro.SetActive(false);
+
+        }
     }
 
     void StartDialogue()
@@ -53,8 +62,7 @@ public class S_Intro_Dialogue : MonoBehaviour
             if (index < dialoguelines.Length - 1)
             {
                 if (!dialoguebools[index])
-                {
-                    dialogueHBS[index + 1] = true;
+                {          
                     textComponent.text = string.Empty;
                     StartCoroutine(Typeline());
                     index++;
@@ -87,9 +95,9 @@ public class S_Intro_Dialogue : MonoBehaviour
             dialoguebools[index] = false;
             if (index < dialoguelines.Length - 1)
             {
-                if (dialoguebools[index + 1] && !dialogueHBS[index + 1])
+                if (dialoguebools[index + 1])
                 {
-                    dialogueHBS[index + 1] = true;
+                    dialoguebools[index] = false;
                     index++;
                     textComponent.text = string.Empty;
                     StartCoroutine(Typeline());

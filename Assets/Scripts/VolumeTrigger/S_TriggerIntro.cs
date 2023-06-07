@@ -39,7 +39,7 @@ public class S_TriggerIntro : MonoBehaviour
             talkCanva.SetActive(false);
             introCanva.SetActive(true);
             dialogueActif = true;
-            //ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
+            ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
     }
 }
