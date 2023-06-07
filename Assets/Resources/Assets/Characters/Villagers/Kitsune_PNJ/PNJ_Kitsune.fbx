@@ -9,10 +9,10 @@ FBXHeaderExtension:  {
 		Year: 2023
 		Month: 6
 		Day: 7
-		Hour: 10
-		Minute: 20
-		Second: 13
-		Millisecond: 375
+		Hour: 15
+		Minute: 39
+		Second: 23
+		Millisecond: 863
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.2"
 	OtherFlags:  {
@@ -37,13 +37,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2024"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "07/06/2023 08:20:13.374"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "07/06/2023 13:39:23.860"
 			P: "Original|FileName", "KString", "", "", "D:\EloiMICHEL\Rift\3DS\PNJ_Kitsune.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2024"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "07/06/2023 08:20:13.374"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "07/06/2023 13:39:23.860"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\e.michel\Documents\3ds Max 2024"
 			P: "Original|ApplicationNativeFile", "KString", "", "", "D:\EloiMICHEL\Rift\3DS\PNJ_Next_Gen.max"
 		}
@@ -80,7 +80,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2358347333232, "", "Scene" {
+	Document: 2358380891472, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -100,7 +100,7 @@ References:  {
 
 Definitions:  {
 	Version: 100
-	Count: 117
+	Count: 111
 	ObjectType: "GlobalSettings" {
 		Count: 1
 	}
@@ -206,7 +206,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Material" {
-		Count: 3
+		Count: 1
 		PropertyTemplate: "FbxSurfacePhong" {
 			Properties70:  {
 				P: "ShadingModel", "KString", "", "", "Phong"
@@ -254,34 +254,6 @@ Definitions:  {
 				P: "UVSet", "KString", "", "", "default"
 				P: "UseMaterial", "bool", "", "",0
 				P: "UseMipMap", "bool", "", "",0
-			}
-		}
-	}
-	ObjectType: "Implementation" {
-		Count: 2
-		PropertyTemplate: "FbxImplementation" {
-			Properties70:  {
-				P: "ShaderLanguage", "KString", "", "", "MentalRaySL"
-				P: "ShaderLanguageVersion", "KString", "", "", ""
-				P: "RenderAPI", "KString", "", "", "MentalRay"
-				P: "RenderAPIVersion", "KString", "", "", ""
-				P: "RootBindingName", "KString", "", "", ""
-				P: "Constants", "Compound", "", ""
-			}
-		}
-	}
-	ObjectType: "BindingTable" {
-		Count: 2
-		PropertyTemplate: "FbxBindingTable" {
-			Properties70:  {
-				P: "TargetName", "KString", "", "", ""
-				P: "TargetType", "KString", "", "", ""
-				P: "CodeAbsoluteURL", "KString", "XRefUrl", "", ""
-				P: "CodeRelativeURL", "KString", "XRefUrl", "", ""
-				P: "CodeTAG", "KString", "", "", "shader"
-				P: "DescAbsoluteURL", "KString", "XRefUrl", "", ""
-				P: "DescRelativeURL", "KString", "XRefUrl", "", ""
-				P: "DescTAG", "KString", "", "", "shader"
 			}
 		}
 	}
@@ -335,181 +307,181 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	NodeAttribute: 2358388102000, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141926944, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",39.0668487548828
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388102192, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141929824, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",47.4704523086548
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388098160, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141929056, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",38.9002561569214
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388104688, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141930208, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",37.3260078430176
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388101040, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141927136, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",37.3260078430176
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388105840, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141928480, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",37.5248608589172
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388099696, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141927328, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",97.4237985610962
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388101616, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141929632, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",74.5277872085571
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388106800, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141926560, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",29.8989353179932
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388099888, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141927904, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",29.8989353179932
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388104112, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141928096, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",32.2925314903259
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388101232, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141928288, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",31.8493070602417
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388106992, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141928672, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",30.4519419670105
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388097776, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141928864, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",30.4214806556702
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388099120, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356141929248, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",37.5239496231079
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388102576, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146199984, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",97.3821954727173
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388103344, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146201136, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",74.531699180603
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388100656, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146202096, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",30.4208798408508
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388106032, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146201712, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",30.4208798408508
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388107184, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146201328, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",30.4504199028015
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388097584, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146201520, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",31.849006652832
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388107376, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146201904, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",31.8696947097778
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388100464, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146202288, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",29.8988552093506
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388109104, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146202480, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",142.85027885437
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388105072, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146200368, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",158.298015594482
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388100080, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146200752, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",158.298015594482
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388101424, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146202672, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",142.850412368774
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388101808, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146202864, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",158.298696517944
 		}
 		TypeFlags: "Skeleton"
 	}
-	NodeAttribute: 2358388097968, "NodeAttribute::", "LimbNode" {
+	NodeAttribute: 2356146203056, "NodeAttribute::", "LimbNode" {
 		Properties70:  {
 			P: "Size", "double", "Number", "",158.298696517944
 		}
 		TypeFlags: "Skeleton"
 	}
-	Geometry: 2357445403792, "Geometry::", "Mesh" {
+	Geometry: 2358345495392, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0,0,0
 		}
@@ -1012,13 +984,10 @@ Objects:  {
 		LayerElementMaterial: 0 {
 			Version: 101
 			Name: ""
-			MappingInformationType: "ByPolygon"
+			MappingInformationType: "AllSame"
 			ReferenceInformationType: "IndexToDirect"
-			Materials: *3441 {
-				a: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+			Materials: *1 {
+				a: 0
 			} 
 		}
 		Layer: 0 {
@@ -1045,7 +1014,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2358384684496, "Model::Pelvis", "LimbNode" {
+	Model: 2358632953632, "Model::Pelvis", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "RotationOffset", "Vector3D", "Vector", "",1.42108603902555e-14,-4.27846718839032e-20,-1.41831262442229e-14
@@ -1062,7 +1031,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358384656000, "Model::Spine_1", "LimbNode" {
+	Model: 2358632955824, "Model::Spine_1", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1076,7 +1045,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358384658192, "Model::Spine_2", "LimbNode" {
+	Model: 2358632929520, "Model::Spine_2", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1089,7 +1058,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358384660384, "Model::Spine_3", "LimbNode" {
+	Model: 2358632936096, "Model::Spine_3", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1102,7 +1071,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387547840, "Model::Head", "LimbNode" {
+	Model: 2358632931712, "Model::Head", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1115,7 +1084,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387556608, "Model::Left_Shoulder", "LimbNode" {
+	Model: 2358632942672, "Model::Left_Shoulder", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1128,7 +1097,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387560992, "Model::Left_Arm_1", "LimbNode" {
+	Model: 2358632944864, "Model::Left_Arm_1", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1141,7 +1110,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387558800, "Model::Left_Arm_2", "LimbNode" {
+	Model: 2358632940480, "Model::Left_Arm_2", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1154,7 +1123,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387563184, "Model::Left_Hand", "LimbNode" {
+	Model: 2358632947056, "Model::Left_Hand", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1167,7 +1136,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387554416, "Model::Left_Thumb", "LimbNode" {
+	Model: 2358625950256, "Model::Left_Thumb", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1180,7 +1149,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387565376, "Model::Left_Index", "LimbNode" {
+	Model: 2358625952448, "Model::Left_Index", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1193,7 +1162,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387569760, "Model::Left_Middle", "LimbNode" {
+	Model: 2358625972176, "Model::Left_Middle", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1206,7 +1175,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387567568, "Model::Left_Ring", "LimbNode" {
+	Model: 2358625948064, "Model::Left_Ring", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1219,7 +1188,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387541264, "Model::Left_Little", "LimbNode" {
+	Model: 2358625963408, "Model::Left_Little", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1232,7 +1201,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387543456, "Model::Right_Shoulder", "LimbNode" {
+	Model: 2358625943680, "Model::Right_Shoulder", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1245,7 +1214,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387552224, "Model::Right_Arm_1", "LimbNode" {
+	Model: 2358625961216, "Model::Right_Arm_1", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1258,7 +1227,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387545648, "Model::Right_Arm_2", "LimbNode" {
+	Model: 2358625959024, "Model::Right_Arm_2", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1271,7 +1240,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358387550032, "Model::Right_Hand", "LimbNode" {
+	Model: 2358625965600, "Model::Right_Hand", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1285,7 +1254,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383471040, "Model::Right_Little", "LimbNode" {
+	Model: 2358625967792, "Model::Right_Little", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1298,7 +1267,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383460080, "Model::Right_Ring", "LimbNode" {
+	Model: 2358625945872, "Model::Right_Ring", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1311,7 +1280,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383462272, "Model::Right_Middle", "LimbNode" {
+	Model: 2358625954640, "Model::Right_Middle", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1325,7 +1294,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383473232, "Model::Right_Index", "LimbNode" {
+	Model: 2358625956832, "Model::Right_Index", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1338,7 +1307,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383464464, "Model::Right_Thumb", "LimbNode" {
+	Model: 2358625969984, "Model::Right_Thumb", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1351,7 +1320,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383482000, "Model::Left_Leg_1", "LimbNode" {
+	Model: 2358559061312, "Model::Left_Leg_1", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1365,7 +1334,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383466656, "Model::Left_Leg_2", "LimbNode" {
+	Model: 2358559059120, "Model::Left_Leg_2", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1378,7 +1347,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383457888, "Model::Left_Foot", "LimbNode" {
+	Model: 2358559043776, "Model::Left_Foot", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1391,7 +1360,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383475424, "Model::Right_Leg_1", "LimbNode" {
+	Model: 2358559045968, "Model::Right_Leg_1", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1405,7 +1374,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383477616, "Model::Right_Leg_2", "LimbNode" {
+	Model: 2358559050352, "Model::Right_Leg_2", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1418,7 +1387,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358383479808, "Model::Right_Foot", "LimbNode" {
+	Model: 2358559052544, "Model::Right_Foot", "LimbNode" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1431,12 +1400,13 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2358345472624, "Model::KItsune_Chara", "Mesh" {
+	Model: 2358549149664, "Model::Kitsune_Chara", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Freeze", "bool", "", "",1
 			P: "Lcl Scaling", "Lcl Scaling", "", "A",3.05526694,3.05526694,3.05526694
 			P: "UDP3DSMAX", "KString", "", "U", "MapChannel:1 = UVChannel_1&cr;&lf;"
 			P: "MaxHandle", "int", "Integer", "UH",495
@@ -1444,192 +1414,18 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Pose: 2356914659456, "Pose::BIND_POSES", "BindPose" {
+	Pose: 2358377607776, "Pose::BIND_POSES", "BindPose" {
 		Type: "BindPose"
 		Version: 100
-		NbPoseNodes: 30
+		NbPoseNodes: 1
 		PoseNode:  {
-			Node: 2358384684496
-			Matrix: *16 {
-				a: 9.23962008982926e-06,0.00498798412270844,2.53999500393867,0,-2.53999697208405,-0.00466431528329849,1.83993032169383e-05,0,0.00466433953028172,-2.53999091625214,0.00498795987572521,0,1.21116638183594e-06,1.33175307928468e-05,109.829536437988,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358384656000
-			Matrix: *16 {
-				a: 0.000157079017080832,0.194164883494377,2.53256843447685,0,-2.53999818325043,-0.00267317845020443,0.000362484304641839,0,0.00269306363770738,-2.53256646633148,0.194164561778307,0,0.00184917666018009,2.25264456868172,123.825096893311,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358384658192
-			Matrix: *16 {
-				a: 8.66130054782843e-05,0.108115694373846,2.53769832968712,0,-2.53959819555283,-0.0451074742898345,0.00200842803693376,0,0.0451520840078592,-2.53729697942734,0.108097015917301,0,0.00291441346053034,3.56937273025513,140.999688110352,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358384660384
-			Matrix: *16 {
-				a: -0.000599525067373179,-0.707819486260414,2.43938416957855,0,-2.53909450173378,0.0652869870513678,0.0183198519423604,0,-0.0678059292584658,-2.43850970745087,-0.707582778930664,0,0.00339148438768461,4.17019149541855,155.102131576538,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387547840
-			Matrix: *16 {
-				a: -6.92328251898289e-05,-0.0805734112858772,2.53872267365456,0,-2.53992596745491,-0.0193404252082109,-0.000683088377118111,0,0.0193523854762316,-2.53864818692207,-0.0805704590678215,0,0.000218555210158229,0.395894258022308,168.109622497559,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387556608
-			Matrix: *16 {
-				a: 2.53941288709641,-0.0150700843706727,-0.0524957216903567,0,0.0525260623544455,0.00498440207447857,2.53945194721222,0,-0.0149637891445309,-2.53995034217834,0.00529484034050256,0,5.99998260498047,0.0917849135398865,158.829423446655,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387560992
-			Matrix: *16 {
-				a: 1.93977955102921,0.364141336083412,-1.59882970452309,0,1.61587369203568,-0.0031972015905194,1.9597300350666,0,0.278939793109894,-2.51376023173332,-0.234097815006971,0,19.612999792099,0.0109987911581993,158.548006515503,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387558800
-			Matrix: *16 {
-				a: 1.94440605521202,-0.388942617177963,-1.58732801437378,0,1.62332584738731,0.174425161331892,1.94576225876808,0,-0.188944813162088,-2.50397658109665,0.382099829912186,0,46.6102508926392,5.07899806261063,136.296002349854,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387563184
-			Matrix: *16 {
-				a: 2.1339369404316,1.27172481643356e-05,-1.37764907360077,0,1.37746391654015,-0.0416222200170159,2.1336495912075,0,-0.0225644223764539,-2.53965829968452,-0.0349751827865839,0,67.3120056915283,0.937991740703583,119.395997085571,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387554416
-			Matrix: *16 {
-				a: 2.05902493715286,-0.224609026610851,-1.47022775530815,0,0.518364677429199,2.46180619001389,0.349865090847015,0,1.39402873635292,-0.583659414052963,2.04147604465485,0,73.5209968566895,-4.68300660848618,112.500012969971,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387565376
-			Matrix: *16 {
-				a: 1.95751572012901,0.109456720501184,-1.61485358715057,0,0.0654431802034378,2.52675937771797,0.25059668302536,0,1.61723564863205,-0.234735475182533,1.94449159383774,0,77.417992515564,-2.48900535345078,114.555904922485,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387569760
-			Matrix: *16 {
-				a: 1.84682586193085,0.0515179461240768,-1.74303783535957,0,0.0774092012643814,2.5339656662941,0.156913493275642,0,1.74208025693893,-0.167211435437202,1.84086858868599,0,77.9420060729981,0.097982981801033,114.939999694824,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387567568
-			Matrix: *16 {
-				a: 1.97047550320625,0.155260828360915,-1.59521785497665,0,-0.332343336045742,2.512687895298,-0.165965845435858,0,1.56792073845863,0.337477053999901,1.96960255503654,0,77.3530013275146,2.12898417830467,114.939999694824,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387541264
-			Matrix: *16 {
-				a: 1.85359597921371,0.252768834233284,-1.71810612678528,0,-1.57297099947929,-0.820503302812576,-1.81772819519043,0,-0.735896972417831,2.39049755811691,-0.442237874269485,0,76.9269953536987,4.02798511981964,114.940019073486,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387543456
-			Matrix: *16 {
-				a: -2.53945709466934,0.00158605091157369,-0.0524966111406684,0,0.0524933135509491,-0.00507334710564464,-2.53945240139961,0,-0.00169053751975298,-2.53999439835548,0.00503981471061707,0,-6.00001288414001,0.10177521944046,158.829404067993,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387552224
-			Matrix: *16 {
-				a: -1.94053077697754,0.357161005735397,-1.59949251532555,0,1.61268681049347,-0.0253231140226126,-1.96219263911247,0,-0.291859399527311,-2.51463605642319,-0.207420361489058,0,-19.6129368114471,0.110277342498302,158.547996826172,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387545648
-			Matrix: *16 {
-				a: -1.94450824737549,-0.388927780389786,-1.58720417261124,0,1.60796099066734,-0.0153721201699227,-1.96617071509361,0,0.291456781327724,-2.51000046849251,0.257981505095959,0,-46.6085068130493,5.07899866819382,136.295546951294,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358387550032
-			Matrix: *16 {
-				a: -2.13392210364342,-1.34363770484924e-05,-1.37767117738724,0,1.37767253994942,-1.51395797729492e-07,-2.1339233148098,0,1.156285405159e-05,-2.54000211954117,8.17537307739258e-06,0,-67.3124707794189,0.937975995540619,119.395997085571,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383471040
-			Matrix: *16 {
-				a: -1.85368288040161,0.252700233012438,-1.71802301049232,0,-1.07601898670197,-2.13952980399132,0.846286991238594,0,-1.36295444607735,1.34542250990868,1.66847192287445,0,-76.9269953536987,4.02809321641922,114.939641189575,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383460080
-			Matrix: *16 {
-				a: -1.98445160627365,0.142616809606552,-1.57899049639702,0,-0.481871780157089,-2.46428332805634,0.383032806515694,0,-1.51041546702385,0.598811294734478,1.95235176086426,0,-77.3527397155762,2.12864156961441,114.939641189575,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383462272
-			Matrix: *16 {
-				a: -1.86912827968597,0.0808717934787273,-1.71796865940094,0,-0.0281521999835968,-2.53828968167305,-0.088857524394989,0,-1.71964173436165,-0.0463470605015755,1.86876689791679,0,-77.9422192382813,0.098218629360199,114.939641189575,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383473232
-			Matrix: *16 {
-				a: -1.87240963220596,0.0758739721775055,-1.71461963295937,0,0.155940377861261,-2.51950191736221,-0.281780886650085,0,-1.70920011758804,-0.312987421154976,1.85264127731323,0,-77.4182444381714,-2.48894873142242,114.939650878906,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383464464
-			Matrix: *16 {
-				a: -2.05896180510521,-0.224614022672176,-1.47031329393387,0,0.275456629991531,-2.52502059698105,7.56978988647461e-07,0,-1.4616431593895,-0.159451568126678,2.07117884039879,0,-73.5211228179932,-4.68310895204544,112.499828872681,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383482000
-			Matrix: *16 {
-				a: 0.0646384121850133,-0.242541612833738,-2.527570707798,0,2.53369845271111,-0.160003292262554,0.0801487082242966,0,-0.16687251701951,-2.52332027077675,0.237866245657206,0,10.7199924659729,-0.000389038077846635,114.145522994995,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383466656
-			Matrix: *16 {
-				a: 0.0141858347412199,0.305385629981756,-2.52153864502907,0,2.53988297104836,0.019258037507534,0.0166220284998417,0,0.0211184624023736,-2.52149564862251,-0.305265402793884,0,12.039196100235,-4.94998280286789,62.5649989318848,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383457888
-			Matrix: *16 {
-				a: 0.0750625380128622,-2.45729656338692,-0.638461059331894,0,-0.037975293956697,-0.639751481413841,2.45782251238823,0,-2.53861715078354,-0.0630861132219434,-0.0556453645974398,0,12.3600159072876,1.95599767446518,5.54299983978271,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383475424
-			Matrix: *16 {
-				a: -0.0645549931004644,-0.242554349005222,-2.52756904244423,0,2.52796161174774,0.231268587112427,-0.0867582891881466,0,0.238421603292227,-2.51779220461845,0.235526726394892,0,-10.7199997329712,4.01851702918066e-06,114.145513305664,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383477616
-			Matrix: *16 {
-				a: -0.0142690444737673,0.305372950583696,-2.52153713107109,0,2.53954581260681,0.0472717860341072,-0.00864596444182098,0,0.0458886529505253,-2.52113245010376,-0.305584450513124,0,-12.0373781394958,-4.94985139131546,62.5649262619019,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358383479808
-			Matrix: *16 {
-				a: -0.0384213296324015,-2.47731774926186,-0.559481505155563,0,2.53909631848335,-0.0251715739257634,-0.0629105130210519,0,0.0558136173710227,-0.560233071744442,2.47681784033775,0,-12.3600619316101,1.9558898806572,5.54266555786133,1
-			} 
-		}
-		PoseNode:  {
-			Node: 2358345472624
+			Node: 2358549149664
 			Matrix: *16 {
 				a: 3.05526590824127,0,0,0,0,3.05526590824127,0,0,0,0,3.05526590824127,0,0,0,0,1
 			} 
 		}
 	}
-	Material: 2357445404272, "Material::Material #3", "" {
+	Material: 2358345487712, "Material::Material #2", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1651,277 +1447,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2357687977888, "Material::Material #31", "" {
-		Version: 102
-		ShadingModel: "unknown"
-		MultiLayer: 0
-		Properties70:  {
-			P: "ShadingModel", "KString", "", "", "unknown"
-			P: "AmbientColor", "ColorRGB", "Color", "",0.509803950786591,0.376470595598221,0.309803932905197
-			P: "DiffuseColor", "ColorRGB", "Color", "",0.509803950786591,0.376470595598221,0.309803932905197
-			P: "SpecularColor", "ColorRGB", "Color", "",0,0,0
-			P: "SpecularFactor", "double", "Number", "",0.200000047683716
-			P: "ShininessExponent", "double", "Number", "",2.00000023841858
-			P: "TransparencyFactor", "double", "Number", "",0
-			P: "EmissiveColor", "ColorRGB", "Color", "",0,0,0
-			P: "EmissiveFactor", "double", "Number", "",0
-			P: "3dsMax", "Compound", "", ""
-			P: "3dsMax|ClassIDa", "int", "Integer", "",1030429932
-			P: "3dsMax|ClassIDb", "int", "Integer", "",-559038463
-			P: "3dsMax|SuperClassID", "int", "Integer", "",3072
-			P: "3dsMax|Parameters", "Compound", "", ""
-			P: "3dsMax|ORIGINAL_MTL", "KString", "", "", "PHYSICAL_MTL"
-			P: "3dsMax|Parameters|material_mode", "Integer", "", "A",2
-			P: "3dsMax|Parameters|base_weight", "Float", "", "A",1
-			P: "3dsMax|Parameters|base_color", "ColorAndAlpha", "", "A",0.509803950786591,0.376470595598221,0.309803932905197,1
-			P: "3dsMax|Parameters|reflectivity", "Float", "", "A",0
-			P: "3dsMax|Parameters|roughness", "Float", "", "A",0.9
-			P: "3dsMax|Parameters|roughness_inv", "Bool", "", "A",0
-			P: "3dsMax|Parameters|metalness", "Float", "", "A",0
-			P: "3dsMax|Parameters|refl_color", "ColorAndAlpha", "", "A",0.899999976158142,0.899999976158142,0.899999976158142,1
-			P: "3dsMax|Parameters|diff_roughness", "Float", "", "A",0
-			P: "3dsMax|Parameters|brdf_mode", "Bool", "", "A",1
-			P: "3dsMax|Parameters|brdf_low", "Float", "", "A",0.05
-			P: "3dsMax|Parameters|brdf_high", "Float", "", "A",1
-			P: "3dsMax|Parameters|brdf_curve", "Float", "", "A",5
-			P: "3dsMax|Parameters|anisotropy", "Float", "", "A",0
-			P: "3dsMax|Parameters|anisoangle", "Float", "", "A",0.25
-			P: "3dsMax|Parameters|aniso_mode", "Integer", "", "A",0
-			P: "3dsMax|Parameters|aniso_channel", "Integer", "", "A",0
-			P: "3dsMax|Parameters|transparency", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|trans_depth", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_roughness", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_roughness_inv", "Bool", "", "A",0
-			P: "3dsMax|Parameters|trans_roughness_lock", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_ior", "Float", "", "A",1.52
-			P: "3dsMax|Parameters|thin_walled", "Bool", "", "A",0
-			P: "3dsMax|Parameters|dispersion", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_scatter_color", "ColorAndAlpha", "", "A",0,0,0,1
-			P: "3dsMax|Parameters|trans_scatter_aniso", "Float", "", "A",0
-			P: "3dsMax|Parameters|scattering", "Float", "", "A",0
-			P: "3dsMax|Parameters|sss_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|sss_depth", "Float", "", "A",10
-			P: "3dsMax|Parameters|sss_scale", "Float", "", "A",1
-			P: "3dsMax|Parameters|sss_scatter_color", "ColorAndAlpha", "", "A",100,50,25,1
-			P: "3dsMax|Parameters|emission", "Float", "", "A",1
-			P: "3dsMax|Parameters|emit_color", "ColorAndAlpha", "", "A",0,0,0,1
-			P: "3dsMax|Parameters|emit_luminance", "Float", "", "A",1500
-			P: "3dsMax|Parameters|emit_kelvin", "Float", "", "A",6500
-			P: "3dsMax|Parameters|coating", "Float", "", "A",0
-			P: "3dsMax|Parameters|coat_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|coat_roughness", "Float", "", "A",0
-			P: "3dsMax|Parameters|coat_roughness_inv", "Bool", "", "A",0
-			P: "3dsMax|Parameters|coat_affect_color", "Float", "", "A",0.5
-			P: "3dsMax|Parameters|coat_affect_roughness", "Float", "", "A",0.5
-			P: "3dsMax|Parameters|coat_ior", "Float", "", "A",1.52
-			P: "3dsMax|Parameters|coat_anisotropy", "Float", "", "A",0
-			P: "3dsMax|Parameters|coat_anisoangle", "Float", "", "A",0.25
-			P: "3dsMax|Parameters|sheen", "Float", "", "A",0
-			P: "3dsMax|Parameters|sheen_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|sheen_roughness", "Float", "", "A",0.3
-			P: "3dsMax|Parameters|thin_film", "Float", "", "A",0
-			P: "3dsMax|Parameters|thin_film_thickness", "Float", "", "A",0
-			P: "3dsMax|Parameters|thin_film_ior", "Float", "", "A",1.3
-			P: "3dsMax|Parameters|base_weight_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|base_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|reflectivity_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|refl_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|roughness_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|metalness_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|diff_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|anisotropy_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|aniso_angle_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|transparency_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|trans_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|trans_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|trans_ior_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|scattering_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sss_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sss_scale_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|emission_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|emit_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|displacement_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|cutout_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_aniso_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_aniso_angle_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sheen_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sheen_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sheen_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|thin_film_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|thin_film_ior_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|base_weight_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|base_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|reflectivity_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|refl_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|roughness_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|metalness_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|diff_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|anisotropy_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|aniso_angle_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|transparency_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_ior_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|scattering_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sss_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sss_scale_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|emission_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|emit_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_aniso_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_aniso_angle_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sheen_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sheen_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sheen_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|thin_film_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|thin_film_ior_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|displacement_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|cutout_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|displacement_map_amt", "Float", "", "A",1
-		}
-	}
-	Material: 2357687973568, "Material::Material #31", "" {
-		Version: 102
-		ShadingModel: "unknown"
-		MultiLayer: 0
-		Properties70:  {
-			P: "ShadingModel", "KString", "", "", "unknown"
-			P: "AmbientColor", "ColorRGB", "Color", "",0.509803950786591,0.376470595598221,0.309803932905197
-			P: "DiffuseColor", "ColorRGB", "Color", "",0.509803950786591,0.376470595598221,0.309803932905197
-			P: "SpecularColor", "ColorRGB", "Color", "",0,0,0
-			P: "SpecularFactor", "double", "Number", "",0.200000047683716
-			P: "ShininessExponent", "double", "Number", "",2.00000023841858
-			P: "TransparencyFactor", "double", "Number", "",0
-			P: "EmissiveColor", "ColorRGB", "Color", "",0,0,0
-			P: "EmissiveFactor", "double", "Number", "",0
-			P: "3dsMax", "Compound", "", ""
-			P: "3dsMax|ClassIDa", "int", "Integer", "",1030429932
-			P: "3dsMax|ClassIDb", "int", "Integer", "",-559038463
-			P: "3dsMax|SuperClassID", "int", "Integer", "",3072
-			P: "3dsMax|Parameters", "Compound", "", ""
-			P: "3dsMax|ORIGINAL_MTL", "KString", "", "", "PHYSICAL_MTL"
-			P: "3dsMax|Parameters|material_mode", "Integer", "", "A",2
-			P: "3dsMax|Parameters|base_weight", "Float", "", "A",1
-			P: "3dsMax|Parameters|base_color", "ColorAndAlpha", "", "A",0.509803950786591,0.376470595598221,0.309803932905197,1
-			P: "3dsMax|Parameters|reflectivity", "Float", "", "A",0
-			P: "3dsMax|Parameters|roughness", "Float", "", "A",0.9
-			P: "3dsMax|Parameters|roughness_inv", "Bool", "", "A",0
-			P: "3dsMax|Parameters|metalness", "Float", "", "A",0
-			P: "3dsMax|Parameters|refl_color", "ColorAndAlpha", "", "A",0.899999976158142,0.899999976158142,0.899999976158142,1
-			P: "3dsMax|Parameters|diff_roughness", "Float", "", "A",0
-			P: "3dsMax|Parameters|brdf_mode", "Bool", "", "A",1
-			P: "3dsMax|Parameters|brdf_low", "Float", "", "A",0.05
-			P: "3dsMax|Parameters|brdf_high", "Float", "", "A",1
-			P: "3dsMax|Parameters|brdf_curve", "Float", "", "A",5
-			P: "3dsMax|Parameters|anisotropy", "Float", "", "A",0
-			P: "3dsMax|Parameters|anisoangle", "Float", "", "A",0.25
-			P: "3dsMax|Parameters|aniso_mode", "Integer", "", "A",0
-			P: "3dsMax|Parameters|aniso_channel", "Integer", "", "A",0
-			P: "3dsMax|Parameters|transparency", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|trans_depth", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_roughness", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_roughness_inv", "Bool", "", "A",0
-			P: "3dsMax|Parameters|trans_roughness_lock", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_ior", "Float", "", "A",1.52
-			P: "3dsMax|Parameters|thin_walled", "Bool", "", "A",0
-			P: "3dsMax|Parameters|dispersion", "Float", "", "A",0
-			P: "3dsMax|Parameters|trans_scatter_color", "ColorAndAlpha", "", "A",0,0,0,1
-			P: "3dsMax|Parameters|trans_scatter_aniso", "Float", "", "A",0
-			P: "3dsMax|Parameters|scattering", "Float", "", "A",0
-			P: "3dsMax|Parameters|sss_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|sss_depth", "Float", "", "A",10
-			P: "3dsMax|Parameters|sss_scale", "Float", "", "A",1
-			P: "3dsMax|Parameters|sss_scatter_color", "ColorAndAlpha", "", "A",100,50,25,1
-			P: "3dsMax|Parameters|emission", "Float", "", "A",1
-			P: "3dsMax|Parameters|emit_color", "ColorAndAlpha", "", "A",0,0,0,1
-			P: "3dsMax|Parameters|emit_luminance", "Float", "", "A",1500
-			P: "3dsMax|Parameters|emit_kelvin", "Float", "", "A",6500
-			P: "3dsMax|Parameters|coating", "Float", "", "A",0
-			P: "3dsMax|Parameters|coat_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|coat_roughness", "Float", "", "A",0
-			P: "3dsMax|Parameters|coat_roughness_inv", "Bool", "", "A",0
-			P: "3dsMax|Parameters|coat_affect_color", "Float", "", "A",0.5
-			P: "3dsMax|Parameters|coat_affect_roughness", "Float", "", "A",0.5
-			P: "3dsMax|Parameters|coat_ior", "Float", "", "A",1.52
-			P: "3dsMax|Parameters|coat_anisotropy", "Float", "", "A",0
-			P: "3dsMax|Parameters|coat_anisoangle", "Float", "", "A",0.25
-			P: "3dsMax|Parameters|sheen", "Float", "", "A",0
-			P: "3dsMax|Parameters|sheen_color", "ColorAndAlpha", "", "A",1,1,1,1
-			P: "3dsMax|Parameters|sheen_roughness", "Float", "", "A",0.3
-			P: "3dsMax|Parameters|thin_film", "Float", "", "A",0
-			P: "3dsMax|Parameters|thin_film_thickness", "Float", "", "A",0
-			P: "3dsMax|Parameters|thin_film_ior", "Float", "", "A",1.3
-			P: "3dsMax|Parameters|base_weight_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|base_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|reflectivity_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|refl_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|roughness_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|metalness_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|diff_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|anisotropy_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|aniso_angle_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|transparency_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|trans_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|trans_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|trans_ior_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|scattering_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sss_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sss_scale_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|emission_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|emit_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|displacement_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|cutout_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_aniso_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|coat_aniso_angle_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sheen_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sheen_color_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|sheen_rough_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|thin_film_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|thin_film_ior_map", "Reference", "", "A"
-			P: "3dsMax|Parameters|base_weight_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|base_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|reflectivity_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|refl_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|roughness_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|metalness_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|diff_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|anisotropy_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|aniso_angle_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|transparency_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|trans_ior_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|scattering_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sss_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sss_scale_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|emission_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|emit_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_aniso_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|coat_aniso_angle_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sheen_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sheen_color_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|sheen_rough_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|thin_film_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|thin_film_ior_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|displacement_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|cutout_map_on", "Bool", "", "A",1
-			P: "3dsMax|Parameters|displacement_map_amt", "Float", "", "A",1
-		}
-	}
-	Deformer: 2356914654528, "Deformer::", "Skin" {
+	Deformer: 2358377606544, "Deformer::", "Skin" {
 		Version: 101
 		Link_DeformAcuracy: 50
 		SkinningType: "Blend"
@@ -1937,7 +1463,7 @@ Objects:  {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		} 
 	}
-	Deformer: 2358385031136, "SubDeformer::", "Cluster" {
+	Deformer: 2358385035552, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *24 {
@@ -1953,7 +1479,7 @@ Objects:  {
 			a: 8.66130054782816e-05,0.108115694373846,2.53769832968712,0,-2.53959819585745,-0.0451074571072496,0.00200842874797794,0,0.0451520717027015,-2.5372969780159,0.108097054186909,0,0.00291441346053034,3.56937273025513,140.999688110352,1
 		} 
 	}
-	Deformer: 2358385031872, "SubDeformer::", "Cluster" {
+	Deformer: 2357624308912, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *30 {
@@ -1969,7 +1495,7 @@ Objects:  {
 			a: 0.000157079017080816,0.194164883494377,2.53256843447685,0,-2.53999818325842,-0.00267317085558699,0.000362484311678051,0,0.00269305880644178,-2.53256646604766,0.194164565547251,0,0.00184917666018009,2.25264456868172,123.825096893311,1
 		} 
 	}
-	Deformer: 2357624308912, "SubDeformer::", "Cluster" {
+	Deformer: 2357624310384, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *61 {
@@ -1985,7 +1511,7 @@ Objects:  {
 			a: 9.23962008982895e-06,0.00498798412270815,2.53999500393867,0,-2.5399969720864,-0.00466431400321567,1.83993004593672e-05,0,0.00466433901452793,-2.53999091625455,0.00498795912816136,0,1.21116638183594e-06,1.33175307928468e-05,109.829536437988,1
 		} 
 	}
-	Deformer: 2357624310384, "SubDeformer::", "Cluster" {
+	Deformer: 2357922830224, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *109 {
@@ -2019,7 +1545,7 @@ Objects:  {
 			a: -6.92328251898296e-05,-0.080573411285877,2.53872267365456,0,-2.53992596717457,-0.0193404620064602,-0.000683088888826726,0,0.0193524009083135,-2.53864818488888,-0.0805705194239897,0,0.000218555210158229,0.395894258022308,168.109622497559,1
 		} 
 	}
-	Deformer: 2357922830224, "SubDeformer::", "Cluster" {
+	Deformer: 2356050585808, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *62 {
@@ -2035,7 +1561,7 @@ Objects:  {
 			a: -0.000599525067373155,-0.707819486260414,2.43938416957855,0,-2.53909450235144,0.0652869654750142,0.0183198432279561,0,-0.0678059460496287,-2.43850980465047,-0.707582442347023,0,0.00339148438768461,4.17019149541855,155.102131576538,1
 		} 
 	}
-	Deformer: 2356050585808, "SubDeformer::", "Cluster" {
+	Deformer: 2358619054128, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *150 {
@@ -2052,7 +1578,7 @@ Objects:  {
 			a: -0.0142690444737672,0.305372950583695,-2.52153713107109,0,2.53954579409775,0.0472727845936966,-0.00864594135728793,0,0.045889661505389,-2.52113253064114,-0.305583634609427,0,-12.0373781394958,-4.94985139131546,62.5649262619019,1
 		} 
 	}
-	Deformer: 2358386276448, "SubDeformer::", "Cluster" {
+	Deformer: 2358619055600, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *73 {
@@ -2068,14 +1594,14 @@ Objects:  {
 			a: -0.0384213296324012,-2.47731774926186,-0.559481505155564,0,2.53909631781926,-0.02517165656375,-0.0629105067590429,0,0.0558134903149685,-0.560234174359554,2.47681759379938,0,-12.3600619316101,1.9558898806572,5.54266555786133,1
 		} 
 	}
-	Deformer: 2358386274976, "SubDeformer::", "Cluster" {
+	Deformer: 2358619046032, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *32 {
 			a: 59,61,118,376,377,378,379,398,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,580,581,582,583,584,585
 		} 
 		Weights: *32 {
-			a: 0.0255665648728609,0.0923584699630737,0.5,0.979002177715302,0.538435757160187,0.62284791469574,0.982808768749237,0.649724304676056,0.695162713527679,0.994232535362244,0.43608295917511,1,1,1,1,1,1,0.967837035655975,1,1,1,1,1,1,1,0.97972697019577,0.792107343673706,0.899999976158142,0.899999976158142,0.792107343673706,1,1
+			a: 0.0255665648728609,0.0923584699630737,0.5,0.979002177715302,0.538435757160187,0.62284791469574,0.982808768749237,0.649724304676056,0.695162713527679,0.994232535362244,0.43608295917511,1,1,0.899999976158142,1,1,1,0.871053338050842,1,1,1,1,1,1,1,0.97972697019577,0.792107343673706,0.899999976158142,0.899999976158142,0.792107343673706,1,1
 		} 
 		Transform: *16 {
 			a: -0.885158176111526,-0.0133323380985672,-0.814365183531506,0,0.0382982430860898,-1.20205013324304,-0.0219481718900255,0,-0.813573911271399,-0.0420799876393259,0.884985880380513,0,8.02448623297153,1.28158088218639,-54.067710787027,1
@@ -2084,14 +1610,14 @@ Objects:  {
 			a: -1.86912827968597,0.0808717934787273,-1.71796865940094,0,-0.0281530155623804,-2.53828967265611,-0.0888575235728557,0,-1.71964176769083,-0.0463465210323366,1.86876688062647,0,-77.9422192382813,0.098218629360199,114.939641189575,1
 		} 
 	}
-	Deformer: 2358386277184, "SubDeformer::", "Cluster" {
+	Deformer: 2358619043824, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
-		Indexes: *30 {
-			a: 52,55,59,61,119,120,121,122,377,378,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,445,576,577,578,579
+		Indexes: *33 {
+			a: 52,53,54,55,59,61,119,120,121,122,377,378,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,436,445,576,577,578,579
 		} 
-		Weights: *30 {
-			a: 1,1,0.377969592809677,0.000595848076045513,1,1,1,1,0.461564272642136,0.37715208530426,1,1,1,1,1,1,1,1,1,1,1,1,0.350275725126266,1,0.304837256669998,0.000107775929791387,1,1,1,1
+		Weights: *33 {
+			a: 1,0.107142858207226,0.107142858207226,1,0.377969592809677,0.000595848076045513,0.899999976158142,0.899999976158142,0.792107343673706,1,0.461564272642136,0.37715208530426,1,1,1,1,1,1,1,1,1,1,1,1,0.350275725126266,0.792107343673706,0.304837256669998,0.107142858207226,0.000107775929791387,0.899999976158142,1,1,0.899999976158142
 		} 
 		Transform: *16 {
 			a: -0.886712380324088,0.0738476922213982,-0.809420327289298,0,0.0359314486087621,-1.1931519636848,-0.148220088566888,0,-0.811988162173999,-0.13344202103459,0.877349320821269,0,8.10775636202919,5.91936822346359,-53.6369149227644,1
@@ -2100,14 +1626,14 @@ Objects:  {
 			a: -1.87240963220596,0.0758739721775056,-1.71461963295937,0,0.155939404314446,-2.51950197598331,-0.281780901267218,0,-1.7092001455218,-0.312986699748687,1.85264137341735,0,-77.4182444381714,-2.48894873142242,114.939650878906,1
 		} 
 	}
-	Deformer: 2358386275712, "SubDeformer::", "Cluster" {
+	Deformer: 2358619040880, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
-		Indexes: *35 {
-			a: 53,54,59,60,86,87,88,89,90,91,92,93,94,95,368,370,382,383,384,433,434,435,436,437,438,439,440,441,442,443,444,445,574,575,592
+		Indexes: *36 {
+			a: 53,54,59,60,86,87,88,89,90,91,92,93,94,95,364,368,370,382,383,384,433,434,435,436,437,438,439,440,441,442,443,444,445,574,575,592
 		} 
-		Weights: *35 {
-			a: 1,1,0.000405979546485469,1,1,1,1,1,1,1,1,1,1,0.500000059604645,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.999892234802246,1,1,1
+		Weights: *36 {
+			a: 0.75,0.75,0.000405979546485469,0.75,1,1,1,1,0.899999976158142,1,1,1,1,0.500000059604645,0.100000001490116,0.100000001490116,0.100000001490116,0.75,0.75,0.75,1,1,1,0.75,0.75,0.84486722946167,0.84486722946167,0.75,0.84486722946167,1,1,0.899999976158142,0.999892234802246,0.899999976158142,0.899999976158142,0.899999976158142
 		} 
 		Transform: *16 {
 			a: -0.975057251262518,0.130446933557504,-0.692185337744516,0,-0.106369885540717,-1.1957658639064,-0.0755106880666179,0,-0.696292488439163,3.5848012176124e-07,0.980841251875438,0,2.01204749161334,1.30615893751986,-52.8884705451571,1
@@ -2116,14 +1642,14 @@ Objects:  {
 			a: -2.05896180510521,-0.224614022672176,-1.47031329393387,0,0.275456265457517,-2.52502063674835,7.56979048023874e-07,0,-1.46164298746843,-0.159451033810002,2.07117900285927,0,-73.5211228179932,-4.68310895204544,112.499828872681,1
 		} 
 	}
-	Deformer: 2358386283808, "SubDeformer::", "Cluster" {
+	Deformer: 2358619044560, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
-		Indexes: *97 {
-			a: 56,57,58,59,61,62,63,64,65,70,71,76,78,95,102,105,106,109,111,113,114,116,118,363,364,365,366,367,369,371,372,373,374,375,385,402,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,568,569,570,571,580,581,582,583,586,587,588,589
+		Indexes: *126 {
+			a: 53,54,56,57,58,59,60,61,62,63,64,65,70,71,76,78,90,95,102,105,106,109,111,113,114,116,118,119,120,121,363,364,365,366,367,368,369,370,371,372,373,374,375,382,383,384,385,399,402,405,409,419,420,436,437,438,439,440,441,444,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,568,569,570,571,574,575,576,579,580,581,582,583,586,587,588,589,592
 		} 
-		Weights: *97 {
-			a: 1,1,1,0.596057891845703,0.906994342803955,1,1,0.75,1,0.5,0.5,0.100000001490116,0.100000001490116,0.5,0.472687005996704,0.472687005996704,0.5,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.5,0.75,1,0.75,1,0.472687005996704,0.75,0.551318883895874,1,1,0.75,0.75,1,0.5,0.168873772025108,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.523752927780151,0.523752927780151,0.75,0.701878786087036,0.523752927780151,0.75,0.472687005996704,0.472687005996704,0.523752927780151,0.676874995231628,0.523752927780151,0.386890441179276,0.523752927780151,0.676874995231628,0.523752927780151,0.676874995231628,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.75,0.75,0.75,0.5,0.75,0.75,0.75,0.472687005996704,0.100000001490116,0.100000001490116,0.25,0.25,0.207892671227455,0.100000001490116,0.100000001490116,0.207892671227455,0.171033844351768,0.1000000461936,0.1000000461936,0.171033844351768
+		Weights: *126 {
+			a: 0.142857149243355,0.142857149243355,1,1,1,0.596057891845703,0.25,0.906994342803955,1,1,0.75,1,0.5,0.5,0.100000001490116,0.100000001490116,0.100000001490116,0.5,0.472687005996704,0.472687005996704,0.5,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.5,0.100000001490116,0.100000001490116,0.207892671227455,0.75,0.899999976158142,0.75,1,0.472687005996704,0.899999976158142,0.75,0.899999976158142,0.551318883895874,1,1,0.75,0.75,0.25,0.25,0.25,1,0.207892671227455,0.5,0.100000001490116,0.100000001490116,0.100000001490116,0.100000001490116,0.142857149243355,0.25,0.155132740736008,0.155132740736008,0.25,0.155132740736008,0.100000001490116,0.168873772025108,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.523752927780151,0.523752927780151,0.75,0.701878786087036,0.523752927780151,0.75,0.472687005996704,0.472687005996704,0.523752927780151,0.676874995231628,0.523752927780151,0.386890441179276,0.523752927780151,0.676874995231628,0.523752927780151,0.676874995231628,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.75,0.75,0.75,0.5,0.75,0.75,0.75,0.472687005996704,0.100000001490116,0.100000001490116,0.25,0.25,0.100000001490116,0.100000001490116,0.100000001490116,0.100000001490116,0.207892671227455,0.100000001490116,0.100000001490116,0.207892671227455,0.207892671227455,0.1000000461936,0.1000000461936,0.207892671227455,0.100000001490116
 		} 
 		Transform: *16 {
 			a: -1.01055521444899,0.652419236375707,5.07436878297949e-06,0,-6.36302556060636e-06,-5.00331980756226e-07,-1.20285959001589,0,-0.652419687545163,-1.01055451561228,3.87158225239733e-06,0,3.23158017469357,53.8650710600043,0.369242079805497,1
@@ -2132,14 +1658,14 @@ Objects:  {
 			a: -2.13392210364342,-1.34363770486598e-05,-1.37767117738724,0,1.37767213014007,-1.05651916325271e-06,-2.13392357938464,0,1.07152219353799e-05,-2.54000211954488,8.17537409079615e-06,0,-67.3124707794189,0.937975995540619,119.395997085571,1
 		} 
 	}
-	Deformer: 2358386280128, "SubDeformer::", "Cluster" {
+	Deformer: 2358619040144, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *79 {
 			a: 64,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,347,348,351,354,356,358,359,363,365,367,369,371,374,375,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494
 		} 
 		Weights: *79 {
-			a: 0.25,0.527312994003296,1,1,0.527312994003296,0.5,1,1,0.527312994003296,1,0.527312994003296,1,0.527312994003296,0.527312994003296,1,0.527312994003296,1,0.612168073654175,0.122987404465675,0.404838562011719,0.612168073654175,0.612168073654175,0.612168073654175,0.500463843345642,0.25,0.25,0.527312994003296,0.25,0.448681116104126,0.25,0.25,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.476247072219849,0.476247072219849,0.25,0.298121213912964,0.476247072219849,0.25,0.527312994003296,0.527312994003296,0.476247072219849,0.323125004768372,0.476247072219849,0.613109588623047,0.476247072219849,0.323125004768372,0.476247072219849,0.323125004768372,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.25,0.25,0.25,0.5,0.25,0.25,0.25,0.527312994003296
+			a: 0.25,0.527312994003296,1,1,0.527312994003296,0.5,1,1,0.527312994003296,1,0.527312994003296,1,0.527312994003296,0.527312994003296,1,0.527312994003296,1,0.612168073654175,0.326321929693222,0.404838562011719,0.612168073654175,0.612168073654175,0.612168073654175,0.500463843345642,0.25,0.25,0.527312994003296,0.25,0.448681116104126,0.25,0.25,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.476247072219849,0.476247072219849,0.25,0.298121213912964,0.476247072219849,0.25,0.527312994003296,0.527312994003296,0.476247072219849,0.323125004768372,0.476247072219849,0.613109588623047,0.476247072219849,0.323125004768372,0.476247072219849,0.323125004768372,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.25,0.25,0.25,0.5,0.25,0.25,0.25,0.527312994003296
 		} 
 		Transform: *16 {
 			a: -0.920856077819272,0.761477236525419,0.138024150283964,0,-0.184183590318059,-0.00727991843896261,-1.18865310331908,0,-0.751648449453416,-0.931113608188876,0.122171499993059,0,19.7894650685907,53.1655623578874,-1.36851078151929,1
@@ -2148,14 +1674,14 @@ Objects:  {
 			a: -1.94450824737549,-0.388927780389786,-1.58720417261124,0,1.60796091372157,-0.015372520337372,-1.96617077489223,0,0.291456510846094,-2.5100004990939,0.257981512942143,0,-46.6085068130493,5.07899866819382,136.295546951294,1
 		} 
 	}
-	Deformer: 2358386284544, "SubDeformer::", "Cluster" {
+	Deformer: 2358619041616, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *26 {
 			a: 68,69,70,380,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432,446,586,587,588,589,590,591
 		} 
 		Weights: *26 {
-			a: 0.355652749538422,0.352361619472504,0.227500915527344,0.344818443059921,0.398601233959198,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.330464601516724,0.82896614074707,0.899999976158142,0.899999976158142,0.82896614074707,1,1
+			a: 0.355652749538422,0.352361619472504,0.227500915527344,0.344818443059921,0.398601233959198,0.899999976158142,0.899999976158142,1,1,1,1,1,1,1,1,1,1,1,1,0.330464601516724,0.792107343673706,0.899999976158142,0.899999976158142,0.792107343673706,1,1
 		} 
 		Transform: *16 {
 			a: -0.939771303608002,-0.228198942475041,-0.715281967304661,0,0.0675386513113495,-1.16700231322719,0.283577504671542,0,-0.747758198029369,0.181391599178187,0.92456881233925,0,4.2907585627173,-11.7884237152853,-53.0894092761729,1
@@ -2164,14 +1690,14 @@ Objects:  {
 			a: -1.98445160627365,0.142616809606552,-1.57899049639702,0,-0.481872906620094,-2.4642830970554,0.383032875544637,0,-1.5104146294076,0.598812260346504,1.95235211271083,0,-77.3527397155762,2.12864156961441,114.939641189575,1
 		} 
 	}
-	Deformer: 2358386283072, "SubDeformer::", "Cluster" {
+	Deformer: 2358619054864, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *36 {
 			a: 66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,376,379,380,381,401,402,409,417,418,446,568,569,570,571,572,573
 		} 
 		Weights: *36 {
-			a: 1,1,0.644347310066223,0.647638440132141,0.272499114274979,0.5,1,1,1,1,0.899999976158142,1,0.899999976158142,1,1,1,1,1,1,1,0.0209978017956018,0.0171912349760532,0.655181527137756,1,0.0057674627751112,0.0639170482754707,0.0321629196405411,0.0202730223536491,0.601398766040802,0.500661611557007,0.899999976158142,0.899999976158142,0.75,0.75,1,1
+			a: 1,1,0.644347310066223,0.647638440132141,0.272499114274979,0.5,1,1,1,1,0.899999976158142,1,0.899999976158142,1,1,1,1,1,1,1,0.0209978017956018,0.0171912349760532,0.655181527137756,1,0.0057674627751112,0.0639170482754707,0.0289466269314289,0.0202730223536491,0.601398766040802,0.500661611557007,0.899999976158142,0.899999976158142,0.75,0.75,1,1
 		} 
 		Transform: *16 {
 			a: -0.877843248256277,-0.509567289915838,-0.645449726754476,0,0.119670519552242,-1.01320980287896,0.637147661486628,0,-0.81359919544753,0.400773333212996,0.790132881151964,0,8.34719886088293,-26.5714744856856,-46.8164122049228,1
@@ -2180,7 +1706,7 @@ Objects:  {
 			a: -1.85368288040161,0.252700233012438,-1.71802301049232,0,-1.0760201054451,-2.1395292447282,0.846286982695958,0,-1.36295395563858,1.34542302762397,1.66847190603247,0,-76.9269953536987,4.02809321641922,114.939641189575,1
 		} 
 	}
-	Deformer: 2358386281600, "SubDeformer::", "Cluster" {
+	Deformer: 2358619053392, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *22 {
@@ -2196,14 +1722,14 @@ Objects:  {
 			a: -2.53945709466934,0.0015860509115737,-0.0524966111406684,0,0.0524933452610265,-0.00507367784538604,-2.53945240008335,0,-0.00169057143466885,-2.53999439833292,0.00503981470800468,0,-6.00001288414001,0.10177521944046,158.829404067993,1
 		} 
 	}
-	Deformer: 2358386290432, "SubDeformer::", "Cluster" {
+	Deformer: 2358619050448, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *88 {
 			a: 185,186,187,190,192,194,196,197,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567
 		} 
 		Weights: *88 {
-			a: 0.75,0.75,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.387831926345825,0.877012610435486,1,1,0.595161437988281,1,1,0.387831926345825,1,0.387831926345825,1,0.387831926345825,0.499536126852036,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			a: 0.75,0.75,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.387831926345825,0.673678040504456,1,1,0.595161437988281,1,1,0.387831926345825,1,0.387831926345825,1,0.387831926345825,0.499536126852036,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 		} 
 		Transform: *16 {
 			a: -0.918971656448234,0.763715446085448,-0.138215145568438,0,0.169139724529695,-0.0119923753748895,-1.19084912143919,0,-0.757467134107857,-0.929230066781204,-0.0982274843845539,0,33.4021700665803,53.1238837556784,4.25307977528382,1
@@ -2212,7 +1738,7 @@ Objects:  {
 			a: -1.94053077697754,0.357161005735397,-1.59949251532555,0,1.61268665012878,-0.0253234942013385,-1.96219276600654,0,-0.291859630638809,-2.51463602849295,-0.207420374902834,0,-19.6129368114471,0.110277342498302,158.547996826172,1
 		} 
 	}
-	Deformer: 2358386288224, "SubDeformer::", "Cluster" {
+	Deformer: 2358619045296, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *99 {
@@ -2228,7 +1754,7 @@ Objects:  {
 			a: -0.0645549931004644,-0.242554349005222,-2.52756904244423,0,2.52796166000601,0.231268051694734,-0.086758310282354,0,0.238420870010088,-2.51779226869939,0.235526783660309,0,-10.7199997329712,4.01851702918066e-06,114.145513305664,1
 		} 
 	}
-	Deformer: 2358386287488, "SubDeformer::", "Cluster" {
+	Deformer: 2358619047504, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *22 {
@@ -2244,7 +1770,7 @@ Objects:  {
 			a: 2.53941288709641,-0.0150700843706727,-0.0524957216903567,0,0.0525261086430885,0.00498435001738782,2.53945194635696,0,-0.0149638169041958,-2.53995034201481,0.00529484033871957,0,5.99998260498047,0.0917849135398865,158.829423446655,1
 		} 
 	}
-	Deformer: 2358386282336, "SubDeformer::", "Cluster" {
+	Deformer: 2358619046768, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *150 {
@@ -2261,7 +1787,7 @@ Objects:  {
 			a: 0.0141858347412198,0.305385629981756,-2.52153864502907,0,2.53988294542921,0.0192615919818253,0.0166218246190074,0,0.0211198845665706,-2.52149609001191,-0.305261658499679,0,12.039196100235,-4.94998280286789,62.5649989318848,1
 		} 
 	}
-	Deformer: 2358386285280, "SubDeformer::", "Cluster" {
+	Deformer: 2358619051920, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *73 {
@@ -2277,14 +1803,14 @@ Objects:  {
 			a: 0.0750625380128622,-2.45729656338692,-0.638461059331894,0,-0.0379753199112744,-0.639757340740427,2.45782098684405,0,-2.53861708705891,-0.0630887079447463,-0.0556453300589575,0,12.3600159072876,1.95599767446518,5.54299983978271,1
 		} 
 	}
-	Deformer: 2358386280864, "SubDeformer::", "Cluster" {
+	Deformer: 2358619052656, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *32 {
 			a: 666,667,725,991,992,993,994,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032,1201,1202,1203,1204,1205,1206
 		} 
 		Weights: *32 {
-			a: 0.0255665648728609,0.0923584699630737,0.5,0.979002177715302,0.982808768749237,0.62284791469574,0.538435757160187,0.649724304676056,0.695162713527679,0.994232535362244,0.43608295917511,1,1,1,1,1,1,0.967837035655975,1,1,1,1,1,1,1,0.97972697019577,0.792107343673706,0.899999976158142,0.792107343673706,0.899999976158142,1,1
+			a: 0.0255665648728609,0.0923584699630737,0.5,0.979002177715302,0.982808768749237,0.62284791469574,0.538435757160187,0.649724304676056,0.695162713527679,0.994232535362244,0.43608295917511,1,1,0.899999976158142,1,1,1,0.871053338050842,1,1,1,1,1,1,1,0.97972697019577,0.792107343673706,0.899999976158142,0.792107343673706,0.899999976158142,1,1
 		} 
 		Transform: *16 {
 			a: 0.874595980993583,0.036658519789535,0.82499181501577,0,0.0243972047164502,1.20000366880726,-0.0791862720809222,0,-0.825445385485034,0.0743091309541219,0.871774940811939,0,8.74114966910683,-3.76920056870709,-53.8400173733638,1
@@ -2293,14 +1819,14 @@ Objects:  {
 			a: 1.84682586193085,0.0515179461240768,-1.74303783535957,0,0.0774092886591211,2.53396566266222,0.156913508812163,0,1.74207997667694,-0.167212348667035,1.84086877095644,0,77.9420060729981,0.097982981801033,114.939999694824,1
 		} 
 	}
-	Deformer: 2358386286016, "SubDeformer::", "Cluster" {
+	Deformer: 2358619042352, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
-		Indexes: *30 {
-			a: 659,660,666,667,726,727,728,729,993,994,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1060,1197,1198,1199,1200
+		Indexes: *33 {
+			a: 659,660,661,662,666,667,726,727,728,729,993,994,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1051,1060,1197,1198,1199,1200
 		} 
-		Weights: *30 {
-			a: 1,1,0.377969592809677,0.000595848076045513,1,1,1,1,0.37715208530426,0.461564272642136,1,1,1,1,1,1,1,1,1,1,1,1,1,0.350275725126266,0.304837256669998,0.000107775929791387,1,1,1,1
+		Weights: *33 {
+			a: 1,1,0.107142858207226,0.107142858207226,0.377969592809677,0.000595848076045513,0.899999976158142,0.899999976158142,1,0.792107343673706,0.37715208530426,0.461564272642136,1,1,1,1,1,1,1,1,1,1,1,1,0.792107343673706,0.350275725126266,0.304837256669998,0.107142858207226,0.000107775929791387,0.899999976158142,1,1,0.899999976158142
 		} 
 		Transform: *16 {
 			a: 0.927015068782474,0.0309918125147706,0.765869531403409,0,0.051835103156884,1.19659129383155,-0.111163105175512,0,-0.764741551637374,0.118674485737236,0.920847629896071,0,5.226069727356,-4.26014143083377,-54.0238740946314,1
@@ -2309,14 +1835,14 @@ Objects:  {
 			a: 1.95751572012901,0.109456720501184,-1.61485358715057,0,0.0654432746408436,2.52675937032526,0.250596732903612,0,1.61723515797193,-0.234735649595225,1.94449198086537,0,77.417992515564,-2.48900535345078,114.555904922485,1
 		} 
 	}
-	Deformer: 2358386286752, "SubDeformer::", "Cluster" {
+	Deformer: 2358619048240, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
-		Indexes: *35 {
-			a: 661,662,666,668,693,694,695,696,697,698,699,700,701,702,982,984,997,998,999,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1195,1196,1213
+		Indexes: *36 {
+			a: 661,662,666,668,693,694,695,696,697,698,699,700,701,702,978,982,984,997,998,999,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1195,1196,1213
 		} 
-		Weights: *35 {
-			a: 1,1,0.000405979546485469,1,1,1,1,1,1,1,1,1,1,0.500000059604645,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.999892234802246,1,1,1
+		Weights: *36 {
+			a: 0.75,0.75,0.000405979546485469,0.75,1,1,1,1,0.899999976158142,1,1,1,1,0.500000059604645,0.100000001490116,0.100000001490116,0.100000001490116,0.75,0.75,0.75,1,1,1,0.75,0.75,0.84486722946167,0.84486722946167,0.75,0.84486722946167,1,1,0.899999976158142,0.999892234802246,0.899999976158142,0.899999976158142,0.899999976158142
 		} 
 		Transform: *16 {
 			a: 0.975086211068347,0.245480479027855,0.660166303649727,0,-0.106367417304118,1.16583109545394,-0.276401932557471,0,-0.696251310736075,0.165684697136571,0.966776232985749,0,2.00992388076053,-10.2210106476009,-51.9080238268155,1
@@ -2325,14 +1851,14 @@ Objects:  {
 			a: 2.05902493715286,-0.224609026610851,-1.47022775530815,0,0.518364433077847,2.46180623914675,0.349865107160427,0,1.39402863997582,-0.583659311297144,2.04147613984422,0,73.5209968566895,-4.68300660848618,112.500012969971,1
 		} 
 	}
-	Deformer: 2358386288960, "SubDeformer::", "Cluster" {
+	Deformer: 2358619043088, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
-		Indexes: *97 {
-			a: 663,664,665,666,667,669,670,671,672,677,678,684,685,702,709,710,714,715,717,719,721,724,725,978,979,980,981,983,985,986,987,988,989,990,1000,1017,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1189,1190,1191,1192,1201,1202,1203,1204,1207,1208,1209,1210
+		Indexes: *126 {
+			a: 661,662,663,664,665,666,667,668,669,670,671,672,677,678,684,685,697,702,709,710,714,715,717,719,721,724,725,726,727,729,978,979,980,981,982,983,984,985,986,987,988,989,990,997,998,999,1000,1013,1017,1020,1024,1034,1035,1051,1052,1053,1054,1055,1056,1059,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1189,1190,1191,1192,1195,1196,1197,1200,1201,1202,1203,1204,1207,1208,1209,1210,1213
 		} 
-		Weights: *97 {
-			a: 1,1,1,0.596057891845703,0.906994342803955,1,0.75,1,1,0.5,0.5,0.100000001490116,0.100000001490116,0.5,0.472687005996704,0.472687005996704,0.5,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.5,1,0.75,0.75,1,0.472687005996704,0.75,0.551318883895874,1,1,0.75,0.75,1,0.5,0.168873772025108,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.523752927780151,0.701878786087036,0.75,0.523752927780151,0.523752927780151,0.75,0.472687005996704,0.472687005996704,0.676874995231628,0.523752927780151,0.523752927780151,0.386890441179276,0.523752927780151,0.676874995231628,0.676874995231628,0.523752927780151,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.75,0.75,0.75,0.5,0.75,0.75,0.75,0.472687005996704,0.100000001490116,0.25,0.25,0.100000001490116,0.207892671227455,0.100000001490116,0.207892671227455,0.100000001490116,0.171033844351768,0.1000000461936,0.171033844351768,0.1000000461936
+		Weights: *126 {
+			a: 0.142857149243355,0.142857149243355,1,1,1,0.596057891845703,0.906994342803955,0.25,1,0.75,1,1,0.5,0.5,0.100000001490116,0.100000001490116,0.100000001490116,0.5,0.472687005996704,0.472687005996704,0.5,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.5,0.100000001490116,0.100000001490116,0.207892671227455,0.899999976158142,0.75,0.75,1,0.899999976158142,0.472687005996704,0.899999976158142,0.75,0.551318883895874,1,1,0.75,0.75,0.25,0.25,0.25,1,0.207892671227455,0.5,0.100000001490116,0.100000001490116,0.100000001490116,0.100000001490116,0.142857149243355,0.25,0.155132740736008,0.155132740736008,0.25,0.155132740736008,0.100000001490116,0.168873772025108,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.523752927780151,0.701878786087036,0.75,0.523752927780151,0.523752927780151,0.75,0.472687005996704,0.472687005996704,0.676874995231628,0.523752927780151,0.523752927780151,0.386890441179276,0.523752927780151,0.676874995231628,0.676874995231628,0.523752927780151,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.472687005996704,0.75,0.75,0.75,0.5,0.75,0.75,0.75,0.472687005996704,0.100000001490116,0.25,0.25,0.100000001490116,0.100000001490116,0.100000001490116,0.100000001490116,0.100000001490116,0.207892671227455,0.100000001490116,0.207892671227455,0.100000001490116,0.207892671227455,0.1000000461936,0.207892671227455,0.1000000461936,0.100000001490116
 		} 
 		Transform: *16 {
 			a: 1.01056186186835,0.652321660676412,-0.010685814303939,0,6.02246755248328e-06,-0.0197109845858325,-1.20269939137133,0,-0.652408975373761,1.01042643207626,-0.0165631069229808,0,3.23116513327,-53.8517650758221,1.25192846373458,1
@@ -2341,14 +1867,14 @@ Objects:  {
 			a: 2.1339369404316,1.27172481643356e-05,-1.37764907360077,0,1.3774638413236,-0.041622362372142,2.13364963698959,0,-0.0225645054554695,-2.53965829893604,-0.0349751835370522,0,67.3120056915283,0.937991740703583,119.395997085571,1
 		} 
 	}
-	Deformer: 2358386289696, "SubDeformer::", "Cluster" {
+	Deformer: 2358619051184, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *79 {
 			a: 670,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,962,965,967,969,971,973,974,979,980,983,985,986,989,990,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109
 		} 
 		Weights: *79 {
-			a: 0.25,0.527312994003296,0.527312994003296,1,1,1,0.5,0.527312994003296,1,0.527312994003296,1,0.527312994003296,1,0.527312994003296,1,1,0.527312994003296,0.612168073654175,0.122987404465675,0.404838562011719,0.612168073654175,0.612168073654175,0.612168073654175,0.500463843345642,0.25,0.25,0.527312994003296,0.25,0.448681116104126,0.25,0.25,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.476247072219849,0.298121213912964,0.25,0.476247072219849,0.476247072219849,0.25,0.527312994003296,0.527312994003296,0.323125004768372,0.476247072219849,0.476247072219849,0.613109588623047,0.476247072219849,0.323125004768372,0.323125004768372,0.476247072219849,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.25,0.25,0.25,0.5,0.25,0.25,0.25,0.527312994003296
+			a: 0.25,0.527312994003296,0.527312994003296,1,1,1,0.5,0.527312994003296,1,0.527312994003296,1,0.527312994003296,1,0.527312994003296,1,1,0.527312994003296,0.612168073654175,0.326321929693222,0.404838562011719,0.612168073654175,0.612168073654175,0.612168073654175,0.500463843345642,0.25,0.25,0.527312994003296,0.25,0.448681116104126,0.25,0.25,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.476247072219849,0.298121213912964,0.25,0.476247072219849,0.476247072219849,0.25,0.527312994003296,0.527312994003296,0.323125004768372,0.476247072219849,0.476247072219849,0.613109588623047,0.476247072219849,0.323125004768372,0.323125004768372,0.476247072219849,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.527312994003296,0.25,0.25,0.25,0.5,0.25,0.25,0.25,0.527312994003296
 		} 
 		Transform: *16 {
 			a: 0.920806646137815,0.7687535707051,-0.0894780657741651,0,-0.184190409150239,0.0826020069856881,-1.18580124273065,0,-0.751706250511928,0.921448902696223,0.180949963271396,0,19.7923953702986,-52.9712106593502,-4.73591489062279,1
@@ -2357,14 +1883,14 @@ Objects:  {
 			a: 1.94440605521202,-0.388942617177963,-1.58732801437378,0,1.62332575995673,0.174425161552103,1.94576233169061,0,-0.188944802067983,-2.50397657974857,0.382099844232377,0,46.6102508926392,5.07899806261063,136.296002349854,1
 		} 
 	}
-	Deformer: 2358386277920, "SubDeformer::", "Cluster" {
+	Deformer: 2358619048976, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *26 {
 			a: 674,675,677,995,1033,1034,1035,1036,1037,1038,1039,1040,1041,1042,1043,1044,1045,1046,1047,1061,1207,1208,1209,1210,1211,1212
 		} 
 		Weights: *26 {
-			a: 0.352361619472504,0.355652749538422,0.227500915527344,0.344818443059921,0.398601233959198,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.330464601516724,0.82896614074707,0.899999976158142,0.82896614074707,0.899999976158142,1,1
+			a: 0.352361619472504,0.355652749538422,0.227500915527344,0.344818443059921,0.398601233959198,0.899999976158142,0.899999976158142,1,1,1,1,1,1,1,1,1,1,1,1,0.330464601516724,0.792107343673706,0.899999976158142,0.792107343673706,0.899999976158142,1,1
 		} 
 		Transform: *16 {
 			a: 0.933152545942514,-0.157386797571959,0.742515557352434,0,0.0735264341192709,1.18992701220852,0.15981798160854,0,-0.755442836149082,-0.0785960206926964,0.932739176710002,0,4.74325739614023,6.11234260273294,-54.000241710289,1
@@ -2373,14 +1899,14 @@ Objects:  {
 			a: 1.97047550320625,0.155260828360915,-1.59521785497665,0,-0.332342995744944,2.51268793860806,-0.165965871176072,0,1.56792038144279,0.337476929882212,1.96960286050899,0,77.3530013275146,2.12898417830467,114.939999694824,1
 		} 
 	}
-	Deformer: 2358386278656, "SubDeformer::", "Cluster" {
+	Deformer: 2358619049712, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *36 {
 			a: 673,674,675,676,677,678,679,680,681,682,683,684,685,686,687,688,689,690,691,692,991,992,995,996,1016,1017,1024,1032,1033,1061,1189,1190,1191,1192,1193,1194
 		} 
 		Weights: *36 {
-			a: 1,0.647638440132141,0.644347310066223,1,0.272499114274979,0.5,1,1,1,1,1,0.899999976158142,0.899999976158142,1,1,1,1,1,1,1,0.0209978017956018,0.0171912349760532,0.655181527137756,1,0.0057674627751112,0.0639170482754707,0.0321629196405411,0.0202730223536491,0.601398766040802,0.500661611557007,0.899999976158142,0.75,0.75,0.899999976158142,1,1
+			a: 1,0.647638440132141,0.644347310066223,1,0.272499114274979,0.5,1,1,1,1,1,0.899999976158142,0.899999976158142,1,1,1,1,1,1,1,0.0209978017956018,0.0171912349760532,0.655181527137756,1,0.0057674627751112,0.0639170482754707,0.0289466269314289,0.0202730223536491,0.601398766040802,0.500661611557007,0.899999976158142,0.75,0.75,0.899999976158142,1,1
 		} 
 		Transform: *16 {
 			a: 0.877802352248837,-0.744907389504093,-0.348496600789426,0,0.119703041953778,-0.388563635981223,1.13206168309615,0,-0.813638795302636,-0.860816509705996,-0.209429429571852,0,8.34978030471963,51.6520939974006,15.1609361660049,1
@@ -2389,14 +1915,14 @@ Objects:  {
 			a: 1.85359597921371,0.252768834233284,-1.71810612678528,0,-1.57297076013546,-0.820503657853733,-1.81772824204472,0,-0.735896574855457,2.39049767839467,-0.442237885668738,0,76.9269953536987,4.02798511981964,114.940019073486,1
 		} 
 	}
-	Deformer: 2358386279392, "SubDeformer::", "Cluster" {
+	Deformer: 2358386930176, "SubDeformer::", "Cluster" {
 		Version: 100
 		UserData: "", ""
 		Indexes: *88 {
 			a: 794,795,796,799,801,803,805,806,922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948,949,950,951,952,953,954,955,956,957,958,959,960,961,962,963,964,965,966,967,968,969,970,971,972,973,974,975,976,977,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188
 		} 
 		Weights: *88 {
-			a: 0.75,0.75,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.387831926345825,1,1,0.877012610435486,1,0.595161437988281,1,0.387831926345825,1,0.387831926345825,1,0.387831926345825,0.499536126852036,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			a: 0.75,0.75,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.387831926345825,1,1,0.673678040504456,1,0.595161437988281,1,0.387831926345825,1,0.387831926345825,1,0.387831926345825,0.499536126852036,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 		} 
 		Transform: *16 {
 			a: 0.918615892489623,0.765224757479851,0.132096677125394,0,0.172445378270508,-0.00151413005648093,-1.19043436325036,0,-0.757153242068218,0.928063805020144,-0.110861041676553,0,33.3936325746117,-53.0726317874694,4.90925465948568,1
@@ -2405,377 +1931,123 @@ Objects:  {
 			a: 1.93977955102921,0.364141336083412,-1.59882970452309,0,1.61587372644247,-0.00319728674846072,1.95973000655793,0,0.278939675897199,-2.51376024505698,-0.234097811601493,0,19.612999792099,0.0109987911581993,158.548006515503,1
 		} 
 	}
-	Video: 2357445398512, "Video::Map #1", "Clip" {
+	Video: 2358345479072, "Video::Map #0", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "D:\EloiMICHEL\Rift\Textures\Owl_Perso82.png"
-			P: "RelPath", "KString", "XRefUrl", "", "..\Textures\Owl_Perso82.png"
+			P: "Path", "KString", "XRefUrl", "", "D:\EloiMICHEL\Rift\Personaje.png"
+			P: "RelPath", "KString", "XRefUrl", "", "..\Personaje.png"
 		}
 		UseMipMap: 0
-		Filename: "D:\EloiMICHEL\Rift\Textures\Owl_Perso82.png"
-		RelativeFilename: "..\Textures\Owl_Perso82.png"
+		Filename: "D:\EloiMICHEL\Rift\Personaje.png"
+		RelativeFilename: "..\Personaje.png"
 	}
-	Texture: 2357445397072, "Texture::Map #1", "" {
+	Texture: 2358345497792, "Texture::Map #0", "" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::Map #1"
+		TextureName: "Texture::Map #0"
 		Properties70:  {
+			P: "Translation", "Vector", "", "A",1,2.98023223876953e-08,0
+			P: "Rotation", "Vector", "", "A",0,0,90.0000025044782
 			P: "UVSet", "KString", "", "", "UVChannel_1"
 			P: "UseMaterial", "bool", "", "",1
 		}
-		Media: "Video::Map #1"
-		FileName: "D:\EloiMICHEL\Rift\Textures\Owl_Perso82.png"
-		RelativeFilename: "..\Textures\Owl_Perso82.png"
+		Media: "Video::Map #0"
+		FileName: "D:\EloiMICHEL\Rift\Personaje.png"
+		RelativeFilename: "..\Personaje.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
-		Texture_Alpha_Source: "None"
+		Texture_Alpha_Source: "Alpha_Black"
 		Cropping: 0,0,0,0
 	}
-	Implementation: 2357874969648, "Implementation::Material #31_Implementation", "" {
-		Version: 100
-		Properties70:  {
-			P: "ShaderLanguage", "KString", "", "", "StandardSSL"
-			P: "ShaderLanguageVersion", "KString", "", "", "1.0.1"
-			P: "RenderAPI", "KString", "", "", "OSL"
-			P: "RootBindingName", "KString", "", "", "root"
-		}
-	}
-	Implementation: 2357874971440, "Implementation::Material #31_Implementation", "" {
-		Version: 100
-		Properties70:  {
-			P: "ShaderLanguage", "KString", "", "", "StandardSSL"
-			P: "ShaderLanguageVersion", "KString", "", "", "1.0.1"
-			P: "RenderAPI", "KString", "", "", "OSL"
-			P: "RootBindingName", "KString", "", "", "root"
-		}
-	}
-	BindingTable: 2358383976672, "BindingTable::root 9", "" {
-		Version: 100
-		Properties70:  {
-			P: "TargetName", "KString", "", "", "root"
-			P: "TargetType", "KString", "", "", "shader"
-		}
-		Entry: "3dsMax|Parameters|material_mode", "FbxPropertyEntry", "material_mode", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_weight", "FbxPropertyEntry", "base", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_color", "FbxPropertyEntry", "base_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|reflectivity", "FbxPropertyEntry", "specular", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness", "FbxPropertyEntry", "specular_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness_inv", "FbxPropertyEntry", "roughness_inv", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|metalness", "FbxPropertyEntry", "metalness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|refl_color", "FbxPropertyEntry", "specular_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|diff_roughness", "FbxPropertyEntry", "diffuse_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_mode", "FbxPropertyEntry", "brdf_mode", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_low", "FbxPropertyEntry", "brdf_low", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_high", "FbxPropertyEntry", "brdf_high", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_curve", "FbxPropertyEntry", "brdf_curve", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisotropy", "FbxPropertyEntry", "specular_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisoangle", "FbxPropertyEntry", "specular_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_mode", "FbxPropertyEntry", "aniso_mode", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_channel", "FbxPropertyEntry", "aniso_channel", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|transparency", "FbxPropertyEntry", "transmission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_color", "FbxPropertyEntry", "transmission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_depth", "FbxPropertyEntry", "transmission_depth", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_roughness", "FbxPropertyEntry", "transmission_extra_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_roughness_inv", "FbxPropertyEntry", "trans_roughness_inv", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_roughness_lock", "FbxPropertyEntry", "trans_roughness_lock", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_ior", "FbxPropertyEntry", "specular_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_walled", "FbxPropertyEntry", "thin_walled", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|dispersion", "FbxPropertyEntry", "transmisison_dispersion", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_scatter_color", "FbxPropertyEntry", "transmission_scatter", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_scatter_aniso", "FbxPropertyEntry", "transmission_scatter_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|scattering", "FbxPropertyEntry", "subsurface", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_color", "FbxPropertyEntry", "subsurface_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_depth", "FbxPropertyEntry", "sss_depth", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scale", "FbxPropertyEntry", "subsurface_scale", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scatter_color", "FbxPropertyEntry", "subsurface_radius", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emission", "FbxPropertyEntry", "emission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_color", "FbxPropertyEntry", "emission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_luminance", "FbxPropertyEntry", "emit_luminance", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_kelvin", "FbxPropertyEntry", "emit_kelvin", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coating", "FbxPropertyEntry", "coat", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_color", "FbxPropertyEntry", "coat_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_roughness", "FbxPropertyEntry", "coat_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_roughness_inv", "FbxPropertyEntry", "coat_roughness_inv", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_affect_color", "FbxPropertyEntry", "coat_affect_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_affect_roughness", "FbxPropertyEntry", "coat_affect_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_ior", "FbxPropertyEntry", "coat_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_anisotropy", "FbxPropertyEntry", "coat_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_anisoangle", "FbxPropertyEntry", "coat_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen", "FbxPropertyEntry", "sheen", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_color", "FbxPropertyEntry", "sheen_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_roughness", "FbxPropertyEntry", "sheen_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film", "FbxPropertyEntry", "thin_film", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_thickness", "FbxPropertyEntry", "thin_film_thickness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_ior", "FbxPropertyEntry", "thin_film_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_weight_map", "FbxPropertyEntry", "base", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_color_map", "FbxPropertyEntry", "base_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|reflectivity_map", "FbxPropertyEntry", "specular", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|refl_color_map", "FbxPropertyEntry", "specular_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness_map", "FbxPropertyEntry", "specular_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|metalness_map", "FbxPropertyEntry", "metalness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|diff_rough_map", "FbxPropertyEntry", "diffuse_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisotropy_map", "FbxPropertyEntry", "specular_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_angle_map", "FbxPropertyEntry", "specular_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|transparency_map", "FbxPropertyEntry", "transmission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_color_map", "FbxPropertyEntry", "transmission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_rough_map", "FbxPropertyEntry", "transmission_extra_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_ior_map", "FbxPropertyEntry", "specular_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|scattering_map", "FbxPropertyEntry", "subsurface", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_color_map", "FbxPropertyEntry", "subsurface_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scale_map", "FbxPropertyEntry", "subsurface_scale", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emission_map", "FbxPropertyEntry", "emission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_color_map", "FbxPropertyEntry", "emission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_map", "FbxPropertyEntry", "coat", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_color_map", "FbxPropertyEntry", "coat_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_rough_map", "FbxPropertyEntry", "coat_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|displacement_map", "FbxPropertyEntry", "displacement_map", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|cutout_map", "FbxPropertyEntry", "opacity", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_map", "FbxPropertyEntry", "coat_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_angle_map", "FbxPropertyEntry", "coat_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_map", "FbxPropertyEntry", "sheen", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_color_map", "FbxPropertyEntry", "sheen_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_rough_map", "FbxPropertyEntry", "sheen_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_map", "FbxPropertyEntry", "thin_film_thickness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_ior_map", "FbxPropertyEntry", "thin_film_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_weight_map_on", "FbxPropertyEntry", "base_weight_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_color_map_on", "FbxPropertyEntry", "base_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|reflectivity_map_on", "FbxPropertyEntry", "reflectivity_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|refl_color_map_on", "FbxPropertyEntry", "refl_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness_map_on", "FbxPropertyEntry", "roughness_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|metalness_map_on", "FbxPropertyEntry", "metalness_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|diff_rough_map_on", "FbxPropertyEntry", "diff_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisotropy_map_on", "FbxPropertyEntry", "anisotropy_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_angle_map_on", "FbxPropertyEntry", "aniso_angle_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|transparency_map_on", "FbxPropertyEntry", "transparency_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_color_map_on", "FbxPropertyEntry", "trans_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_rough_map_on", "FbxPropertyEntry", "trans_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_ior_map_on", "FbxPropertyEntry", "trans_ior_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|scattering_map_on", "FbxPropertyEntry", "scattering_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_color_map_on", "FbxPropertyEntry", "sss_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scale_map_on", "FbxPropertyEntry", "sss_scale_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emission_map_on", "FbxPropertyEntry", "emission_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_color_map_on", "FbxPropertyEntry", "emit_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_map_on", "FbxPropertyEntry", "coat_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_color_map_on", "FbxPropertyEntry", "coat_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_rough_map_on", "FbxPropertyEntry", "coat_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_map_on", "FbxPropertyEntry", "coat_aniso_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_angle_map_on", "FbxPropertyEntry", "coat_aniso_angle_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_map_on", "FbxPropertyEntry", "sheen_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_color_map_on", "FbxPropertyEntry", "sheen_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_rough_map_on", "FbxPropertyEntry", "sheen_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_map_on", "FbxPropertyEntry", "thin_film_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_ior_map_on", "FbxPropertyEntry", "thin_film_ior_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|displacement_map_on", "FbxPropertyEntry", "displacement_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|cutout_map_on", "FbxPropertyEntry", "cutout_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|displacement_map_amt", "FbxPropertyEntry", "displacement_map_amt", "FbxSemanticEntry"
-	}
-	BindingTable: 2358383980416, "BindingTable::root 10", "" {
-		Version: 100
-		Properties70:  {
-			P: "TargetName", "KString", "", "", "root"
-			P: "TargetType", "KString", "", "", "shader"
-		}
-		Entry: "3dsMax|Parameters|material_mode", "FbxPropertyEntry", "material_mode", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_weight", "FbxPropertyEntry", "base", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_color", "FbxPropertyEntry", "base_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|reflectivity", "FbxPropertyEntry", "specular", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness", "FbxPropertyEntry", "specular_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness_inv", "FbxPropertyEntry", "roughness_inv", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|metalness", "FbxPropertyEntry", "metalness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|refl_color", "FbxPropertyEntry", "specular_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|diff_roughness", "FbxPropertyEntry", "diffuse_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_mode", "FbxPropertyEntry", "brdf_mode", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_low", "FbxPropertyEntry", "brdf_low", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_high", "FbxPropertyEntry", "brdf_high", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|brdf_curve", "FbxPropertyEntry", "brdf_curve", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisotropy", "FbxPropertyEntry", "specular_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisoangle", "FbxPropertyEntry", "specular_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_mode", "FbxPropertyEntry", "aniso_mode", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_channel", "FbxPropertyEntry", "aniso_channel", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|transparency", "FbxPropertyEntry", "transmission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_color", "FbxPropertyEntry", "transmission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_depth", "FbxPropertyEntry", "transmission_depth", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_roughness", "FbxPropertyEntry", "transmission_extra_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_roughness_inv", "FbxPropertyEntry", "trans_roughness_inv", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_roughness_lock", "FbxPropertyEntry", "trans_roughness_lock", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_ior", "FbxPropertyEntry", "specular_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_walled", "FbxPropertyEntry", "thin_walled", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|dispersion", "FbxPropertyEntry", "transmisison_dispersion", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_scatter_color", "FbxPropertyEntry", "transmission_scatter", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_scatter_aniso", "FbxPropertyEntry", "transmission_scatter_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|scattering", "FbxPropertyEntry", "subsurface", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_color", "FbxPropertyEntry", "subsurface_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_depth", "FbxPropertyEntry", "sss_depth", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scale", "FbxPropertyEntry", "subsurface_scale", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scatter_color", "FbxPropertyEntry", "subsurface_radius", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emission", "FbxPropertyEntry", "emission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_color", "FbxPropertyEntry", "emission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_luminance", "FbxPropertyEntry", "emit_luminance", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_kelvin", "FbxPropertyEntry", "emit_kelvin", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coating", "FbxPropertyEntry", "coat", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_color", "FbxPropertyEntry", "coat_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_roughness", "FbxPropertyEntry", "coat_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_roughness_inv", "FbxPropertyEntry", "coat_roughness_inv", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_affect_color", "FbxPropertyEntry", "coat_affect_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_affect_roughness", "FbxPropertyEntry", "coat_affect_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_ior", "FbxPropertyEntry", "coat_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_anisotropy", "FbxPropertyEntry", "coat_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_anisoangle", "FbxPropertyEntry", "coat_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen", "FbxPropertyEntry", "sheen", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_color", "FbxPropertyEntry", "sheen_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_roughness", "FbxPropertyEntry", "sheen_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film", "FbxPropertyEntry", "thin_film", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_thickness", "FbxPropertyEntry", "thin_film_thickness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_ior", "FbxPropertyEntry", "thin_film_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_weight_map", "FbxPropertyEntry", "base", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_color_map", "FbxPropertyEntry", "base_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|reflectivity_map", "FbxPropertyEntry", "specular", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|refl_color_map", "FbxPropertyEntry", "specular_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness_map", "FbxPropertyEntry", "specular_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|metalness_map", "FbxPropertyEntry", "metalness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|diff_rough_map", "FbxPropertyEntry", "diffuse_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisotropy_map", "FbxPropertyEntry", "specular_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_angle_map", "FbxPropertyEntry", "specular_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|transparency_map", "FbxPropertyEntry", "transmission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_color_map", "FbxPropertyEntry", "transmission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_rough_map", "FbxPropertyEntry", "transmission_extra_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_ior_map", "FbxPropertyEntry", "specular_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|scattering_map", "FbxPropertyEntry", "subsurface", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_color_map", "FbxPropertyEntry", "subsurface_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scale_map", "FbxPropertyEntry", "subsurface_scale", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emission_map", "FbxPropertyEntry", "emission", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_color_map", "FbxPropertyEntry", "emission_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_map", "FbxPropertyEntry", "coat", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_color_map", "FbxPropertyEntry", "coat_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_rough_map", "FbxPropertyEntry", "coat_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|displacement_map", "FbxPropertyEntry", "displacement_map", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|cutout_map", "FbxPropertyEntry", "opacity", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_map", "FbxPropertyEntry", "coat_anisotropy", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_angle_map", "FbxPropertyEntry", "coat_rotation", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_map", "FbxPropertyEntry", "sheen", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_color_map", "FbxPropertyEntry", "sheen_color", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_rough_map", "FbxPropertyEntry", "sheen_roughness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_map", "FbxPropertyEntry", "thin_film_thickness", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_ior_map", "FbxPropertyEntry", "thin_film_IOR", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_weight_map_on", "FbxPropertyEntry", "base_weight_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|base_color_map_on", "FbxPropertyEntry", "base_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|reflectivity_map_on", "FbxPropertyEntry", "reflectivity_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|refl_color_map_on", "FbxPropertyEntry", "refl_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|roughness_map_on", "FbxPropertyEntry", "roughness_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|metalness_map_on", "FbxPropertyEntry", "metalness_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|diff_rough_map_on", "FbxPropertyEntry", "diff_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|anisotropy_map_on", "FbxPropertyEntry", "anisotropy_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|aniso_angle_map_on", "FbxPropertyEntry", "aniso_angle_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|transparency_map_on", "FbxPropertyEntry", "transparency_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_color_map_on", "FbxPropertyEntry", "trans_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_rough_map_on", "FbxPropertyEntry", "trans_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|trans_ior_map_on", "FbxPropertyEntry", "trans_ior_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|scattering_map_on", "FbxPropertyEntry", "scattering_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_color_map_on", "FbxPropertyEntry", "sss_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sss_scale_map_on", "FbxPropertyEntry", "sss_scale_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emission_map_on", "FbxPropertyEntry", "emission_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|emit_color_map_on", "FbxPropertyEntry", "emit_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_map_on", "FbxPropertyEntry", "coat_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_color_map_on", "FbxPropertyEntry", "coat_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_rough_map_on", "FbxPropertyEntry", "coat_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_map_on", "FbxPropertyEntry", "coat_aniso_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|coat_aniso_angle_map_on", "FbxPropertyEntry", "coat_aniso_angle_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_map_on", "FbxPropertyEntry", "sheen_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_color_map_on", "FbxPropertyEntry", "sheen_color_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|sheen_rough_map_on", "FbxPropertyEntry", "sheen_rough_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_map_on", "FbxPropertyEntry", "thin_film_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|thin_film_ior_map_on", "FbxPropertyEntry", "thin_film_ior_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|displacement_map_on", "FbxPropertyEntry", "displacement_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|cutout_map_on", "FbxPropertyEntry", "cutout_map_on", "FbxSemanticEntry"
-		Entry: "3dsMax|Parameters|displacement_map_amt", "FbxPropertyEntry", "displacement_map_amt", "FbxSemanticEntry"
-	}
-	CollectionExclusive: 2358388105648, "DisplayLayer::Corps_Base", "DisplayLayer" {
+	CollectionExclusive: 2358333499248, "DisplayLayer::Corps_Base", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.337254901960784,0.882352941176471,0.556862745098039
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388102384, "DisplayLayer::Perso_Finis", "DisplayLayer" {
+	CollectionExclusive: 2358333502320, "DisplayLayer::Perso_Finis", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.101960784313725,0.101960784313725,0.694117647058824
 		}
 	}
-	CollectionExclusive: 2358388104880, "DisplayLayer::Save_Perso", "DisplayLayer" {
+	CollectionExclusive: 2358333499440, "DisplayLayer::Save_Perso", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.603921568627451,0.843137254901961,0.898039215686275
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388107568, "DisplayLayer::SaveBagAcces", "DisplayLayer" {
+	CollectionExclusive: 2358333500976, "DisplayLayer::SaveBagAcces", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.898039215686275,0.650980392156863,0.843137254901961
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388102768, "DisplayLayer::SaveSac", "DisplayLayer" {
+	CollectionExclusive: 2358333502512, "DisplayLayer::SaveSac", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.576470588235294,0.694117647058824,0.101960784313725
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388104304, "DisplayLayer::SavePErso2", "DisplayLayer" {
+	CollectionExclusive: 2358333499824, "DisplayLayer::SavePErso2", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.223529411764706,0.0274509803921569,0.525490196078431
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388103536, "DisplayLayer::Old", "DisplayLayer" {
+	CollectionExclusive: 2358333500016, "DisplayLayer::Old", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.0980392156862745,0.694117647058824,0.337254901960784
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388105456, "DisplayLayer::Bones", "DisplayLayer" {
+	CollectionExclusive: 2358333500208, "DisplayLayer::Bones", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.694117647058824,0.341176470588235,0.101960784313725
+			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388098352, "DisplayLayer::Tout_Bouger", "DisplayLayer" {
+	CollectionExclusive: 2358333500592, "DisplayLayer::Tout_Bouger", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.341176470588235,0.694117647058824,0.101960784313725
+			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388105264, "DisplayLayer::Perso_2", "DisplayLayer" {
+	CollectionExclusive: 2358333501168, "DisplayLayer::Perso_2", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.105882352941176,0.105882352941176,0.694117647058824
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388107760, "DisplayLayer::PersoSave", "DisplayLayer" {
+	CollectionExclusive: 2358378944912, "DisplayLayer::PersoSave", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.0274509803921569,0.431372549019608,0.525490196078431
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388102960, "DisplayLayer::Village", "DisplayLayer" {
+	CollectionExclusive: 2358378945872, "DisplayLayer::Village", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.772549019607843,0.337254901960784
 		}
 	}
-	CollectionExclusive: 2358388104496, "DisplayLayer::MASKS", "DisplayLayer" {
+	CollectionExclusive: 2358378944144, "DisplayLayer::MASKS", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.556862745098039,0.337254901960784
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388103728, "DisplayLayer::SAveToucn", "DisplayLayer" {
+	CollectionExclusive: 2358378945104, "DisplayLayer::SAveToucn", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.525490196078431,0.0235294117647059,0.0235294117647059
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388107952, "DisplayLayer::SAVES_Avancées", "DisplayLayer" {
+	CollectionExclusive: 2358378946256, "DisplayLayer::SAVES_Avancées", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.717647058823529,0.894117647058824,0.6
 			P: "Show", "bool", "", "",0
 		}
 	}
-	CollectionExclusive: 2358388108144, "DisplayLayer::Mask_Kitsune", "DisplayLayer" {
+	CollectionExclusive: 2358378942608, "DisplayLayer::Mask_Kitsune", "DisplayLayer" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.882352941176471,0.341176470588235,0.776470588235294
 		}
@@ -2788,482 +2060,458 @@ Objects:  {
 Connections:  {
 	
 	;Model::Pelvis, Model::RootNode
-	C: "OO",2358384684496,0
+	C: "OO",2358632953632,0
 	
-	;Model::KItsune_Chara, Model::RootNode
-	C: "OO",2358345472624,0
+	;Model::Kitsune_Chara, Model::RootNode
+	C: "OO",2358549149664,0
 	
 	;Model::Spine_1, Model::Pelvis
-	C: "OO",2358384656000,2358384684496
+	C: "OO",2358632955824,2358632953632
 	
 	;Model::Left_Leg_1, Model::Pelvis
-	C: "OO",2358383482000,2358384684496
+	C: "OO",2358559061312,2358632953632
 	
 	;Model::Right_Leg_1, Model::Pelvis
-	C: "OO",2358383475424,2358384684496
+	C: "OO",2358559045968,2358632953632
 	
 	;NodeAttribute::, Model::Pelvis
-	C: "OO",2358388102000,2358384684496
+	C: "OO",2356141926944,2358632953632
 	
 	;Model::Spine_2, Model::Spine_1
-	C: "OO",2358384658192,2358384656000
+	C: "OO",2358632929520,2358632955824
 	
 	;NodeAttribute::, Model::Spine_1
-	C: "OO",2358388102192,2358384656000
+	C: "OO",2356141929824,2358632955824
 	
 	;Model::Spine_3, Model::Spine_2
-	C: "OO",2358384660384,2358384658192
+	C: "OO",2358632936096,2358632929520
 	
 	;NodeAttribute::, Model::Spine_2
-	C: "OO",2358388098160,2358384658192
+	C: "OO",2356141929056,2358632929520
 	
 	;Model::Head, Model::Spine_3
-	C: "OO",2358387547840,2358384660384
+	C: "OO",2358632931712,2358632936096
 	
 	;Model::Left_Shoulder, Model::Spine_3
-	C: "OO",2358387556608,2358384660384
+	C: "OO",2358632942672,2358632936096
 	
 	;Model::Right_Shoulder, Model::Spine_3
-	C: "OO",2358387543456,2358384660384
+	C: "OO",2358625943680,2358632936096
 	
 	;NodeAttribute::, Model::Spine_3
-	C: "OO",2358388104688,2358384660384
+	C: "OO",2356141930208,2358632936096
 	
 	;NodeAttribute::, Model::Head
-	C: "OO",2358388101040,2358387547840
+	C: "OO",2356141927136,2358632931712
 	
 	;Model::Left_Arm_1, Model::Left_Shoulder
-	C: "OO",2358387560992,2358387556608
+	C: "OO",2358632944864,2358632942672
 	
 	;NodeAttribute::, Model::Left_Shoulder
-	C: "OO",2358388105840,2358387556608
+	C: "OO",2356141928480,2358632942672
 	
 	;Model::Left_Arm_2, Model::Left_Arm_1
-	C: "OO",2358387558800,2358387560992
+	C: "OO",2358632940480,2358632944864
 	
 	;NodeAttribute::, Model::Left_Arm_1
-	C: "OO",2358388099696,2358387560992
+	C: "OO",2356141927328,2358632944864
 	
 	;Model::Left_Hand, Model::Left_Arm_2
-	C: "OO",2358387563184,2358387558800
+	C: "OO",2358632947056,2358632940480
 	
 	;NodeAttribute::, Model::Left_Arm_2
-	C: "OO",2358388101616,2358387558800
+	C: "OO",2356141929632,2358632940480
 	
 	;Model::Left_Thumb, Model::Left_Hand
-	C: "OO",2358387554416,2358387563184
+	C: "OO",2358625950256,2358632947056
 	
 	;Model::Left_Index, Model::Left_Hand
-	C: "OO",2358387565376,2358387563184
+	C: "OO",2358625952448,2358632947056
 	
 	;Model::Left_Middle, Model::Left_Hand
-	C: "OO",2358387569760,2358387563184
+	C: "OO",2358625972176,2358632947056
 	
 	;Model::Left_Ring, Model::Left_Hand
-	C: "OO",2358387567568,2358387563184
+	C: "OO",2358625948064,2358632947056
 	
 	;Model::Left_Little, Model::Left_Hand
-	C: "OO",2358387541264,2358387563184
+	C: "OO",2358625963408,2358632947056
 	
 	;NodeAttribute::, Model::Left_Hand
-	C: "OO",2358388106800,2358387563184
+	C: "OO",2356141926560,2358632947056
 	
 	;NodeAttribute::, Model::Left_Thumb
-	C: "OO",2358388099888,2358387554416
+	C: "OO",2356141927904,2358625950256
 	
 	;NodeAttribute::, Model::Left_Index
-	C: "OO",2358388104112,2358387565376
+	C: "OO",2356141928096,2358625952448
 	
 	;NodeAttribute::, Model::Left_Middle
-	C: "OO",2358388101232,2358387569760
+	C: "OO",2356141928288,2358625972176
 	
 	;NodeAttribute::, Model::Left_Ring
-	C: "OO",2358388106992,2358387567568
+	C: "OO",2356141928672,2358625948064
 	
 	;NodeAttribute::, Model::Left_Little
-	C: "OO",2358388097776,2358387541264
+	C: "OO",2356141928864,2358625963408
 	
 	;Model::Right_Arm_1, Model::Right_Shoulder
-	C: "OO",2358387552224,2358387543456
+	C: "OO",2358625961216,2358625943680
 	
 	;NodeAttribute::, Model::Right_Shoulder
-	C: "OO",2358388099120,2358387543456
+	C: "OO",2356141929248,2358625943680
 	
 	;Model::Right_Arm_2, Model::Right_Arm_1
-	C: "OO",2358387545648,2358387552224
+	C: "OO",2358625959024,2358625961216
 	
 	;NodeAttribute::, Model::Right_Arm_1
-	C: "OO",2358388102576,2358387552224
+	C: "OO",2356146199984,2358625961216
 	
 	;Model::Right_Hand, Model::Right_Arm_2
-	C: "OO",2358387550032,2358387545648
+	C: "OO",2358625965600,2358625959024
 	
 	;NodeAttribute::, Model::Right_Arm_2
-	C: "OO",2358388103344,2358387545648
+	C: "OO",2356146201136,2358625959024
 	
 	;Model::Right_Little, Model::Right_Hand
-	C: "OO",2358383471040,2358387550032
+	C: "OO",2358625967792,2358625965600
 	
 	;Model::Right_Ring, Model::Right_Hand
-	C: "OO",2358383460080,2358387550032
+	C: "OO",2358625945872,2358625965600
 	
 	;Model::Right_Middle, Model::Right_Hand
-	C: "OO",2358383462272,2358387550032
+	C: "OO",2358625954640,2358625965600
 	
 	;Model::Right_Index, Model::Right_Hand
-	C: "OO",2358383473232,2358387550032
+	C: "OO",2358625956832,2358625965600
 	
 	;Model::Right_Thumb, Model::Right_Hand
-	C: "OO",2358383464464,2358387550032
+	C: "OO",2358625969984,2358625965600
 	
 	;NodeAttribute::, Model::Right_Hand
-	C: "OO",2358388100656,2358387550032
+	C: "OO",2356146202096,2358625965600
 	
 	;NodeAttribute::, Model::Right_Little
-	C: "OO",2358388106032,2358383471040
+	C: "OO",2356146201712,2358625967792
 	
 	;NodeAttribute::, Model::Right_Ring
-	C: "OO",2358388107184,2358383460080
+	C: "OO",2356146201328,2358625945872
 	
 	;NodeAttribute::, Model::Right_Middle
-	C: "OO",2358388097584,2358383462272
+	C: "OO",2356146201520,2358625954640
 	
 	;NodeAttribute::, Model::Right_Index
-	C: "OO",2358388107376,2358383473232
+	C: "OO",2356146201904,2358625956832
 	
 	;NodeAttribute::, Model::Right_Thumb
-	C: "OO",2358388100464,2358383464464
+	C: "OO",2356146202288,2358625969984
 	
 	;Model::Left_Leg_2, Model::Left_Leg_1
-	C: "OO",2358383466656,2358383482000
+	C: "OO",2358559059120,2358559061312
 	
 	;NodeAttribute::, Model::Left_Leg_1
-	C: "OO",2358388109104,2358383482000
+	C: "OO",2356146202480,2358559061312
 	
 	;Model::Left_Foot, Model::Left_Leg_2
-	C: "OO",2358383457888,2358383466656
+	C: "OO",2358559043776,2358559059120
 	
 	;NodeAttribute::, Model::Left_Leg_2
-	C: "OO",2358388105072,2358383466656
+	C: "OO",2356146200368,2358559059120
 	
 	;NodeAttribute::, Model::Left_Foot
-	C: "OO",2358388100080,2358383457888
+	C: "OO",2356146200752,2358559043776
 	
 	;Model::Right_Leg_2, Model::Right_Leg_1
-	C: "OO",2358383477616,2358383475424
+	C: "OO",2358559050352,2358559045968
 	
 	;NodeAttribute::, Model::Right_Leg_1
-	C: "OO",2358388101424,2358383475424
+	C: "OO",2356146202672,2358559045968
 	
 	;Model::Right_Foot, Model::Right_Leg_2
-	C: "OO",2358383479808,2358383477616
+	C: "OO",2358559052544,2358559050352
 	
 	;NodeAttribute::, Model::Right_Leg_2
-	C: "OO",2358388101808,2358383477616
+	C: "OO",2356146202864,2358559050352
 	
 	;NodeAttribute::, Model::Right_Foot
-	C: "OO",2358388097968,2358383479808
+	C: "OO",2356146203056,2358559052544
 	
-	;Geometry::, Model::KItsune_Chara
-	C: "OO",2357445403792,2358345472624
+	;Geometry::, Model::Kitsune_Chara
+	C: "OO",2358345495392,2358549149664
 	
-	;Material::Material #3, Model::KItsune_Chara
-	C: "OO",2357445404272,2358345472624
-	
-	;Material::Material #31, Model::KItsune_Chara
-	C: "OO",2357687977888,2358345472624
-	
-	;Material::Material #3, Model::KItsune_Chara
-	C: "OO",2357445404272,2358345472624
-	
-	;Material::Material #31, Model::KItsune_Chara
-	C: "OO",2357687977888,2358345472624
-	
-	;Material::Material #31, Model::KItsune_Chara
-	C: "OO",2357687973568,2358345472624
+	;Material::Material #2, Model::Kitsune_Chara
+	C: "OO",2358345487712,2358549149664
 	
 	;Deformer::, Geometry::
-	C: "OO",2356914654528,2357445403792
+	C: "OO",2358377606544,2358345495392
 	
-	;Texture::Map #1, Material::Material #3
-	C: "OP",2357445397072,2357445404272, "DiffuseColor"
+	;Texture::Map #0, Material::Material #2
+	C: "OP",2358345497792,2358345487712, "DiffuseColor"
 	
-	;Video::Map #1, Texture::Map #1
-	C: "OO",2357445398512,2357445397072
+	;Video::Map #0, Texture::Map #0
+	C: "OO",2358345479072,2358345497792
 	
-	;Material::Material #31, Implementation::Material #31_Implementation
-	C: "OO",2357687977888,2357874969648
-	
-	;BindingTable::root 9, Implementation::Material #31_Implementation
-	C: "OO",2358383976672,2357874969648
-	
-	;Material::Material #31, Implementation::Material #31_Implementation
-	C: "OO",2357687973568,2357874971440
-	
-	;BindingTable::root 10, Implementation::Material #31_Implementation
-	C: "OO",2358383980416,2357874971440
-	
-	;Model::KItsune_Chara, DisplayLayer::Perso_Finis
-	C: "OO",2358345472624,2358388102384
+	;Model::Kitsune_Chara, DisplayLayer::Perso_Finis
+	C: "OO",2358549149664,2358333502320
 	
 	;Model::Right_Foot, DisplayLayer::Bones
-	C: "OO",2358383479808,2358388105456
+	C: "OO",2358559052544,2358333500208
 	
 	;Model::Right_Leg_2, DisplayLayer::Bones
-	C: "OO",2358383477616,2358388105456
+	C: "OO",2358559050352,2358333500208
 	
 	;Model::Right_Leg_1, DisplayLayer::Bones
-	C: "OO",2358383475424,2358388105456
+	C: "OO",2358559045968,2358333500208
 	
 	;Model::Left_Foot, DisplayLayer::Bones
-	C: "OO",2358383457888,2358388105456
+	C: "OO",2358559043776,2358333500208
 	
 	;Model::Left_Leg_2, DisplayLayer::Bones
-	C: "OO",2358383466656,2358388105456
+	C: "OO",2358559059120,2358333500208
 	
 	;Model::Left_Leg_1, DisplayLayer::Bones
-	C: "OO",2358383482000,2358388105456
+	C: "OO",2358559061312,2358333500208
 	
 	;Model::Right_Thumb, DisplayLayer::Bones
-	C: "OO",2358383464464,2358388105456
+	C: "OO",2358625969984,2358333500208
 	
 	;Model::Right_Index, DisplayLayer::Bones
-	C: "OO",2358383473232,2358388105456
+	C: "OO",2358625956832,2358333500208
 	
 	;Model::Right_Middle, DisplayLayer::Bones
-	C: "OO",2358383462272,2358388105456
+	C: "OO",2358625954640,2358333500208
 	
 	;Model::Right_Ring, DisplayLayer::Bones
-	C: "OO",2358383460080,2358388105456
+	C: "OO",2358625945872,2358333500208
 	
 	;Model::Right_Little, DisplayLayer::Bones
-	C: "OO",2358383471040,2358388105456
+	C: "OO",2358625967792,2358333500208
 	
 	;Model::Right_Hand, DisplayLayer::Bones
-	C: "OO",2358387550032,2358388105456
+	C: "OO",2358625965600,2358333500208
 	
 	;Model::Right_Arm_2, DisplayLayer::Bones
-	C: "OO",2358387545648,2358388105456
+	C: "OO",2358625959024,2358333500208
 	
 	;Model::Right_Arm_1, DisplayLayer::Bones
-	C: "OO",2358387552224,2358388105456
+	C: "OO",2358625961216,2358333500208
 	
 	;Model::Right_Shoulder, DisplayLayer::Bones
-	C: "OO",2358387543456,2358388105456
+	C: "OO",2358625943680,2358333500208
 	
 	;Model::Left_Little, DisplayLayer::Bones
-	C: "OO",2358387541264,2358388105456
+	C: "OO",2358625963408,2358333500208
 	
 	;Model::Left_Ring, DisplayLayer::Bones
-	C: "OO",2358387567568,2358388105456
+	C: "OO",2358625948064,2358333500208
 	
 	;Model::Left_Middle, DisplayLayer::Bones
-	C: "OO",2358387569760,2358388105456
+	C: "OO",2358625972176,2358333500208
 	
 	;Model::Left_Index, DisplayLayer::Bones
-	C: "OO",2358387565376,2358388105456
+	C: "OO",2358625952448,2358333500208
 	
 	;Model::Left_Thumb, DisplayLayer::Bones
-	C: "OO",2358387554416,2358388105456
+	C: "OO",2358625950256,2358333500208
 	
 	;Model::Left_Hand, DisplayLayer::Bones
-	C: "OO",2358387563184,2358388105456
+	C: "OO",2358632947056,2358333500208
 	
 	;Model::Left_Arm_2, DisplayLayer::Bones
-	C: "OO",2358387558800,2358388105456
+	C: "OO",2358632940480,2358333500208
 	
 	;Model::Left_Arm_1, DisplayLayer::Bones
-	C: "OO",2358387560992,2358388105456
+	C: "OO",2358632944864,2358333500208
 	
 	;Model::Left_Shoulder, DisplayLayer::Bones
-	C: "OO",2358387556608,2358388105456
+	C: "OO",2358632942672,2358333500208
 	
 	;Model::Head, DisplayLayer::Bones
-	C: "OO",2358387547840,2358388105456
+	C: "OO",2358632931712,2358333500208
 	
 	;Model::Spine_3, DisplayLayer::Bones
-	C: "OO",2358384660384,2358388105456
+	C: "OO",2358632936096,2358333500208
 	
 	;Model::Spine_2, DisplayLayer::Bones
-	C: "OO",2358384658192,2358388105456
+	C: "OO",2358632929520,2358333500208
 	
 	;Model::Spine_1, DisplayLayer::Bones
-	C: "OO",2358384656000,2358388105456
+	C: "OO",2358632955824,2358333500208
 	
 	;Model::Pelvis, DisplayLayer::Tout_Bouger
-	C: "OO",2358384684496,2358388098352
+	C: "OO",2358632953632,2358333500592
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358385031136,2356914654528
+	C: "OO",2358385035552,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358385031872,2356914654528
+	C: "OO",2357624308912,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2357624308912,2356914654528
+	C: "OO",2357624310384,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2357624310384,2356914654528
+	C: "OO",2357922830224,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2357922839792,2356914654528
+	C: "OO",2357922839792,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2357922830224,2356914654528
+	C: "OO",2356050585808,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2356050585808,2356914654528
+	C: "OO",2358619054128,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386276448,2356914654528
+	C: "OO",2358619055600,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386274976,2356914654528
+	C: "OO",2358619046032,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386277184,2356914654528
+	C: "OO",2358619043824,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386275712,2356914654528
+	C: "OO",2358619040880,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386283808,2356914654528
+	C: "OO",2358619044560,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386280128,2356914654528
+	C: "OO",2358619040144,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386284544,2356914654528
+	C: "OO",2358619041616,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386283072,2356914654528
+	C: "OO",2358619054864,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386281600,2356914654528
+	C: "OO",2358619053392,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386290432,2356914654528
+	C: "OO",2358619050448,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386288224,2356914654528
+	C: "OO",2358619045296,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386287488,2356914654528
+	C: "OO",2358619047504,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386282336,2356914654528
+	C: "OO",2358619046768,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386285280,2356914654528
+	C: "OO",2358619051920,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386280864,2356914654528
+	C: "OO",2358619052656,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386286016,2356914654528
+	C: "OO",2358619042352,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386286752,2356914654528
+	C: "OO",2358619048240,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386288960,2356914654528
+	C: "OO",2358619043088,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386289696,2356914654528
+	C: "OO",2358619051184,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386277920,2356914654528
+	C: "OO",2358619048976,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386278656,2356914654528
+	C: "OO",2358619049712,2358377606544
 	
 	;SubDeformer::, Deformer::
-	C: "OO",2358386279392,2356914654528
+	C: "OO",2358386930176,2358377606544
 	
 	;Model::Spine_2, SubDeformer::
-	C: "OO",2358384658192,2358385031136
+	C: "OO",2358632929520,2358385035552
 	
 	;Model::Spine_1, SubDeformer::
-	C: "OO",2358384656000,2358385031872
+	C: "OO",2358632955824,2357624308912
 	
 	;Model::Pelvis, SubDeformer::
-	C: "OO",2358384684496,2357624308912
+	C: "OO",2358632953632,2357624310384
 	
 	;Model::Left_Leg_1, SubDeformer::
-	C: "OO",2358383482000,2357624310384
+	C: "OO",2358559061312,2357922830224
 	
 	;Model::Head, SubDeformer::
-	C: "OO",2358387547840,2357922839792
+	C: "OO",2358632931712,2357922839792
 	
 	;Model::Spine_3, SubDeformer::
-	C: "OO",2358384660384,2357922830224
+	C: "OO",2358632936096,2356050585808
 	
 	;Model::Right_Leg_2, SubDeformer::
-	C: "OO",2358383477616,2356050585808
+	C: "OO",2358559050352,2358619054128
 	
 	;Model::Right_Foot, SubDeformer::
-	C: "OO",2358383479808,2358386276448
+	C: "OO",2358559052544,2358619055600
 	
 	;Model::Right_Middle, SubDeformer::
-	C: "OO",2358383462272,2358386274976
+	C: "OO",2358625954640,2358619046032
 	
 	;Model::Right_Index, SubDeformer::
-	C: "OO",2358383473232,2358386277184
+	C: "OO",2358625956832,2358619043824
 	
 	;Model::Right_Thumb, SubDeformer::
-	C: "OO",2358383464464,2358386275712
+	C: "OO",2358625969984,2358619040880
 	
 	;Model::Right_Hand, SubDeformer::
-	C: "OO",2358387550032,2358386283808
+	C: "OO",2358625965600,2358619044560
 	
 	;Model::Right_Arm_2, SubDeformer::
-	C: "OO",2358387545648,2358386280128
+	C: "OO",2358625959024,2358619040144
 	
 	;Model::Right_Ring, SubDeformer::
-	C: "OO",2358383460080,2358386284544
+	C: "OO",2358625945872,2358619041616
 	
 	;Model::Right_Little, SubDeformer::
-	C: "OO",2358383471040,2358386283072
+	C: "OO",2358625967792,2358619054864
 	
 	;Model::Right_Shoulder, SubDeformer::
-	C: "OO",2358387543456,2358386281600
+	C: "OO",2358625943680,2358619053392
 	
 	;Model::Right_Arm_1, SubDeformer::
-	C: "OO",2358387552224,2358386290432
+	C: "OO",2358625961216,2358619050448
 	
 	;Model::Right_Leg_1, SubDeformer::
-	C: "OO",2358383475424,2358386288224
+	C: "OO",2358559045968,2358619045296
 	
 	;Model::Left_Shoulder, SubDeformer::
-	C: "OO",2358387556608,2358386287488
+	C: "OO",2358632942672,2358619047504
 	
 	;Model::Left_Leg_2, SubDeformer::
-	C: "OO",2358383466656,2358386282336
+	C: "OO",2358559059120,2358619046768
 	
 	;Model::Left_Foot, SubDeformer::
-	C: "OO",2358383457888,2358386285280
+	C: "OO",2358559043776,2358619051920
 	
 	;Model::Left_Middle, SubDeformer::
-	C: "OO",2358387569760,2358386280864
+	C: "OO",2358625972176,2358619052656
 	
 	;Model::Left_Index, SubDeformer::
-	C: "OO",2358387565376,2358386286016
+	C: "OO",2358625952448,2358619042352
 	
 	;Model::Left_Thumb, SubDeformer::
-	C: "OO",2358387554416,2358386286752
+	C: "OO",2358625950256,2358619048240
 	
 	;Model::Left_Hand, SubDeformer::
-	C: "OO",2358387563184,2358386288960
+	C: "OO",2358632947056,2358619043088
 	
 	;Model::Left_Arm_2, SubDeformer::
-	C: "OO",2358387558800,2358386289696
+	C: "OO",2358632940480,2358619051184
 	
 	;Model::Left_Ring, SubDeformer::
-	C: "OO",2358387567568,2358386277920
+	C: "OO",2358625948064,2358619048976
 	
 	;Model::Left_Little, SubDeformer::
-	C: "OO",2358387541264,2358386278656
+	C: "OO",2358625963408,2358619049712
 	
 	;Model::Left_Arm_1, SubDeformer::
-	C: "OO",2358387560992,2358386279392
+	C: "OO",2358632944864,2358386930176
 }
