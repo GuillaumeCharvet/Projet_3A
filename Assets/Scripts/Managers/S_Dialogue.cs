@@ -191,29 +191,7 @@ public class S_Dialogue : MonoBehaviour
         }
 
 
-
-        //// desactivation de phrases ///////////
-        /*
-        var orNTM = false;
-        for (int i = 1; i < 9; i++)
-        {
-            orNTM = orNTM || dialoguebools[i];
-        }
-
-        if (orNTM)
-        {
-            dialoguebools[0] = false;
-            
-        }
-        if (!orNTM)
-        {
-            dialoguebools[0] = true ;
-
-        }
-        */
-
-
-        // affichage dalogues dans le carnet //
+    // affichage dalogues dans le carnet //
 
         // ile  //
         if (dialogueHBS[2])
@@ -296,24 +274,14 @@ public class S_Dialogue : MonoBehaviour
         {
             if (textComponentTechno.text == dialoguelines[index])
             {
-                NextLine();
-
-                
+                NextLine();              
             }
             else
             {
                 StopAllCoroutines();
-                textComponentTechno.text = dialoguelines[index];
-               
-                
-                
+                textComponentTechno.text = dialoguelines[index];  
             }
         }
-
-       
-
-
-        
     }
 
 
@@ -425,7 +393,7 @@ public class S_Dialogue : MonoBehaviour
                 //Time.timeScale = 1;
                 ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true ;
 
-
+                
             }
         }        
     }
