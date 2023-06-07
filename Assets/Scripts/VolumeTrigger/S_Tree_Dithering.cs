@@ -8,6 +8,7 @@ public class S_Tree_Dithering : MonoBehaviour
     public MeshRenderer meshrendererTree;
     public Material materialBase;
     public Material materialDithered;
+    
 
 
 
