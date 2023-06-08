@@ -32,7 +32,7 @@ public class StateMachineParameters : MonoBehaviour
     public float epsilonCheckGrounded = 0.001f;
 
     // PARAMETERS FOR CHECKIFCLIMBINGTOPTOBOT
-    private float grabToClimbDistance = 0.9f;
+    private float grabToClimbDistance = 1f;
 
     private float grabToHangDistance = 1.8f;
     public float distanceToGrabbedWall = 0f;
