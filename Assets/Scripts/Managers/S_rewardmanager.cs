@@ -132,7 +132,7 @@ public class S_rewardmanager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            
+            Debug.Log("est rentré dans le collider");
             talkCanva.SetActive(true);
             isIn = true; 
         }      
@@ -140,25 +140,14 @@ public class S_rewardmanager : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && !dialogueActif)
+        if (other.CompareTag("Player"))
         {
-           
+            Debug.Log("sort du collider");
             talkCanva.SetActive(false);
             dialogueActif = false;
             isIn = false;
         }
-
-        if (other.CompareTag("Player") && dialogueActif)
-        {
-            
-            dialogueCanva.SetActive(false);
-            
-            
-        }
-
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -292,6 +281,7 @@ public class S_rewardmanager : MonoBehaviour
             talksource.PlayOneShot(talkedSound);
             dialogueCanva.SetActive(true);
             dialogueActif = true;
+            ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
 
          /*               annulé  car changement de méthode 

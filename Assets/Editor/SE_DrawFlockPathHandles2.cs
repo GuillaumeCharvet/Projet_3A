@@ -10,6 +10,8 @@ public class SE_DrawFlockPathHandles2 : Editor
     private FlockBehaviour2 flock;
     private GUIStyle style = new GUIStyle();
 
+    private bool toggleDisplayControlPointsHandles = false;
+
     public void OnEnable()
     {
         flock = (FlockBehaviour2)target;
@@ -24,16 +26,31 @@ public class SE_DrawFlockPathHandles2 : Editor
         if (GUILayout.Button("Add point", GUILayout.Width(150), GUILayout.Height(40)))
         {
             flock.AddPoint();
+            SceneView.RepaintAll();
         }
 
         if (GUILayout.Button("Remove point", GUILayout.Width(150), GUILayout.Height(40)))
         {
             flock.RemovePoint();
+            SceneView.RepaintAll();
         }
 
         if (GUILayout.Button("Reset control points", GUILayout.Width(150), GUILayout.Height(40)))
         {
             flock.ResetControlPoints();
+            SceneView.RepaintAll();
+        }
+
+        if (GUILayout.Button("Recenter points", GUILayout.Width(150), GUILayout.Height(40)))
+        {
+            flock.RecenterPathPoints();
+            SceneView.RepaintAll();
+        }
+
+        if (GUILayout.Button("Display/Hide control points handles", GUILayout.Width(300), GUILayout.Height(40)))
+        {
+            toggleDisplayControlPointsHandles = !toggleDisplayControlPointsHandles;
+            SceneView.RepaintAll();
         }
     }
 
@@ -62,23 +79,26 @@ public class SE_DrawFlockPathHandles2 : Editor
             positions[i] = Handles.PositionHandle(positions[i], Quaternion.identity);
         }
 
-        Handles.color = Color.yellow;
-        for (int i = 1; i < positions.Count + 1; i++)
+        if (toggleDisplayControlPointsHandles)
         {
-            var previousPoint = positions[i - 1];
-            var currentPoint1 = controlPoints1[i - 1];
-            var currentPoint2 = controlPoints2[i - 1];
-            var nextPoint = positions[i % positions.Count];
+            Handles.color = Color.yellow;
+            for (int i = 1; i < positions.Count + 1; i++)
+            {
+                var previousPoint = positions[i - 1];
+                var currentPoint1 = controlPoints1[i - 1];
+                var currentPoint2 = controlPoints2[i - 1];
+                var nextPoint = positions[i % positions.Count];
 
-            Handles.DrawDottedLine(previousPoint, currentPoint1, 4f);
-            Handles.DrawBezier(previousPoint, nextPoint, currentPoint1, currentPoint2, Color.yellow, null, 3f);
-            Handles.DrawDottedLine(currentPoint2, nextPoint, 4f);
-        }
+                Handles.DrawDottedLine(previousPoint, currentPoint1, 4f);
+                Handles.DrawBezier(previousPoint, nextPoint, currentPoint1, currentPoint2, Color.yellow, null, 3f);
+                Handles.DrawDottedLine(currentPoint2, nextPoint, 4f);
+            }
 
-        for (int i = 0; i < positions.Count; i++)
-        {
-            controlPoints1[i] = Handles.PositionHandle(controlPoints1[i], Quaternion.identity);
-            controlPoints2[i] = Handles.PositionHandle(controlPoints2[i], Quaternion.identity);
+            for (int i = 0; i < positions.Count; i++)
+            {
+                controlPoints1[i] = Handles.PositionHandle(controlPoints1[i], Quaternion.identity);
+                controlPoints2[i] = Handles.PositionHandle(controlPoints2[i], Quaternion.identity);
+            }
         }
 
         if (GUI.changed)

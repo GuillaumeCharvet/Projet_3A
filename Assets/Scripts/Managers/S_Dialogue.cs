@@ -65,10 +65,7 @@ public class S_Dialogue : MonoBehaviour
 
     public AudioClip blablaSound;
 
-
-
-
-    
+    //
 
     private int index;
     private bool dialogueIsActive = false;
@@ -194,29 +191,7 @@ public class S_Dialogue : MonoBehaviour
         }
 
 
-
-        //// desactivation de phrases ///////////
-        /*
-        var orNTM = false;
-        for (int i = 1; i < 9; i++)
-        {
-            orNTM = orNTM || dialoguebools[i];
-        }
-
-        if (orNTM)
-        {
-            dialoguebools[0] = false;
-            
-        }
-        if (!orNTM)
-        {
-            dialoguebools[0] = true ;
-
-        }
-        */
-
-
-        // affichage dalogues dans le carnet //
+    // affichage dalogues dans le carnet //
 
         // ile  //
         if (dialogueHBS[2])
@@ -299,24 +274,14 @@ public class S_Dialogue : MonoBehaviour
         {
             if (textComponentTechno.text == dialoguelines[index])
             {
-                NextLine();
-
-                
+                NextLine();              
             }
             else
             {
                 StopAllCoroutines();
-                textComponentTechno.text = dialoguelines[index];
-               
-                
-                
+                textComponentTechno.text = dialoguelines[index];  
             }
         }
-
-       
-
-
-        
     }
 
 
@@ -365,14 +330,14 @@ public class S_Dialogue : MonoBehaviour
     IEnumerator Typeline()
     {
         Debug.Log("attend 1 second mon djo");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         Debug.Log("c'est bon ça fait 1 sec");
         foreach (char c in dialoguelines[index].ToCharArray())
         {
             //dialoguebools[index] = false;
             
             textComponentTechno.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
             Debug.Log("le premier message apparait");
             
             
@@ -425,7 +390,10 @@ public class S_Dialogue : MonoBehaviour
                 index = 0;
                 Debug.Log("index à 0");
                 dialogueCanva.SetActive(false);
+                //Time.timeScale = 1;
+                ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true ;
 
+                
             }
         }        
     }
