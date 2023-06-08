@@ -10,10 +10,16 @@ public class Parrot_TriggerFly2 : MonoBehaviour
     private float alphaValue = 1f;
     private float fadeSpeed = 1f;
 
+    private SkinnedMeshRenderer _renderer;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
+        {
             animator.SetBool("BoolParrotFly", true);
+            _renderer = transform.parent.GetComponentInChildren<SkinnedMeshRenderer>();
+            //StartCoroutine(DelayFadeOut());
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -28,6 +34,9 @@ public class Parrot_TriggerFly2 : MonoBehaviour
         while (alphaValue > 0f)
         {
             alphaValue -= fadeSpeed * Time.deltaTime;
+            Color objectColor = _renderer.materials[0].color;
+            _renderer.materials[0].color = new Color(objectColor.r, objectColor.g, objectColor.b, alphaValue);
+
             yield return new WaitForEndOfFrame();
         }
     }
