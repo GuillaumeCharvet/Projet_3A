@@ -44,6 +44,7 @@ public class StateClimb : StateBehaviourParent
         rgbd.isKinematic = true;
         rgbd.useGravity = false;
         */
+        reader.cc.Move(Vector3.zero);
 
         reader.smp.SetPlayerColliderToClimb();
 
