@@ -13,7 +13,7 @@ public class S_Enable_Lights : MonoBehaviour
     public GameObject gameObject2;
     public GameObject gameObject3;
     public GameObject gameObject4;
-    public GameObject gameObject5;
+    
 
 
 
@@ -28,7 +28,7 @@ public class S_Enable_Lights : MonoBehaviour
             gameObject2.SetActive(true); 
             gameObject3.SetActive(true);
             gameObject4.SetActive(true);
-            gameObject5.SetActive(true);
+           
         }
     }
     private void OnTriggerExit(Collider other)
@@ -39,7 +39,7 @@ public class S_Enable_Lights : MonoBehaviour
             gameObject2.SetActive(false);
             gameObject3.SetActive(false);
             gameObject4.SetActive(false);
-            gameObject5.SetActive(false);
+          
         }
     }
 }
