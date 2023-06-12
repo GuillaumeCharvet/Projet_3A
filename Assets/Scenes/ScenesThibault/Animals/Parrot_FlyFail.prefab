@@ -285,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8d43902725433274088336da5e4a8b4f,
         type: 3}
       propertyPath: m_Name
-      value: Parrot_FlySucces
+      value: Parrot_FlyFail
       objectReference: {fileID: 0}
     - target: {fileID: 2521447078710927022, guid: 8d43902725433274088336da5e4a8b4f,
         type: 3}
@@ -392,6 +392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parrot
       objectReference: {fileID: 0}
+    - target: {fileID: 7843532673676124023, guid: 8d43902725433274088336da5e4a8b4f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 945ca71a92f59c14899b323afc3e2633, type: 2}
     - target: {fileID: 7916625290824975033, guid: 8d43902725433274088336da5e4a8b4f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
