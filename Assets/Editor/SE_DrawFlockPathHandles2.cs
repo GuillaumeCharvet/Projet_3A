@@ -11,6 +11,7 @@ public class SE_DrawFlockPathHandles2 : Editor
     private GUIStyle style = new GUIStyle();
 
     private bool toggleDisplayControlPointsHandles = false;
+    private bool toggleDisplayPathPointsHandles = false;
 
     public void OnEnable()
     {
@@ -22,6 +23,10 @@ public class SE_DrawFlockPathHandles2 : Editor
     public override void OnInspectorGUI()
     {
         base.DrawDefaultInspector();
+
+        GUILayout.BeginHorizontal();
+
+        GUILayout.BeginVertical();
 
         if (GUILayout.Button("Add point", GUILayout.Width(150), GUILayout.Height(40)))
         {
@@ -47,11 +52,30 @@ public class SE_DrawFlockPathHandles2 : Editor
             SceneView.RepaintAll();
         }
 
+        GUILayout.EndVertical();
+
+        GUILayout.BeginVertical();
         if (GUILayout.Button("Display/Hide control points handles", GUILayout.Width(300), GUILayout.Height(40)))
         {
             toggleDisplayControlPointsHandles = !toggleDisplayControlPointsHandles;
             SceneView.RepaintAll();
         }
+
+        if (GUILayout.Button("Display/Hide path points handles", GUILayout.Width(300), GUILayout.Height(40)))
+        {
+            toggleDisplayPathPointsHandles = !toggleDisplayPathPointsHandles;
+            SceneView.RepaintAll();
+        }
+
+        if (GUILayout.Button("Rotate starting position", GUILayout.Width(300), GUILayout.Height(40)))
+        {
+            flock.RotateStartingPpoint();
+            SceneView.RepaintAll();
+        }
+
+        GUILayout.EndVertical();
+
+        GUILayout.EndHorizontal();
     }
 
     public void OnSceneGUI()
@@ -73,10 +97,13 @@ public class SE_DrawFlockPathHandles2 : Editor
             Handles.Label(positions[i % positions.Count] + Vector3.right, (i % positions.Count).ToString(), style);
         }
 
-        for (int i = 0; i < positions.Count; i++)
+        if (toggleDisplayPathPointsHandles)
         {
-            Handles.color = Color.red;
-            positions[i] = Handles.PositionHandle(positions[i], Quaternion.identity);
+            for (int i = 0; i < positions.Count; i++)
+            {
+                Handles.color = Color.red;
+                positions[i] = Handles.PositionHandle(positions[i], Quaternion.identity);
+            }
         }
 
         if (toggleDisplayControlPointsHandles)

@@ -9,8 +9,9 @@ public class FlockBehaviour2 : MonoBehaviour
     [SerializeField] private GameObject leaderPrefab;
     [SerializeField] private GameObject animalPrefab;
     [SerializeField] private Transform kidsRoom;
+    [SerializeField] public Transform dadsRoom;
     [SerializeField] private int numberOfAnimals;
-    private float flockSpread = 1f;
+    public float repelDistance = 3f;
     private List<FlockAnimal2> animals = new List<FlockAnimal2>();
     [SerializeField] public List<Vector3> positions = new List<Vector3>();
     [SerializeField] public List<Vector3> controlPoints1 = new List<Vector3>();
@@ -32,12 +33,8 @@ public class FlockBehaviour2 : MonoBehaviour
             var animal = Instantiate(animalPrefab, transform.position, Quaternion.identity, kidsRoom).GetComponent<FlockAnimal2>();
             animal.flock = this;
             animal.transform.localScale *= Random.Range(0.7f, 1.3f);
-
+            animal.repelDistance = repelDistance;
             animals.Add(animal);
-            for (int j = 0; j < positions.Count; j++)
-            {
-                animal.positionsDelta.Add(positions[j] + new Vector3(flockSpread * Random.Range(-1f, 1f), 0.1f * flockSpread * Random.Range(-1f, 1f), flockSpread * Random.Range(-1f, 1f)));
-            }
         }
         for (int i = 0; i < numberOfAnimals; i++)
         {
@@ -45,6 +42,7 @@ public class FlockBehaviour2 : MonoBehaviour
         }
 
         kidsRoom.gameObject.SetActive(false);
+        dadsRoom = GetComponentsInChildren<Transform>().Skip(1).First();
     }
 
     private void Update()
@@ -54,7 +52,7 @@ public class FlockBehaviour2 : MonoBehaviour
 
     public void Move()
     {
-        var previousPos = transform.position;
+        var previousPos = dadsRoom.transform.position;
         var distance = smoothSpeed * Time.deltaTime;
         var normalizedDistance = smoothSpeed * Time.deltaTime / referenceDistance;
         currentPosition += normalizedDistance;
@@ -70,18 +68,18 @@ public class FlockBehaviour2 : MonoBehaviour
         currentPosition += distance;
         t = currentPosition;
 
-        transform.position = (1f - t) * (1f - t) * (1f - t) * positions[currentIndex] + 3f * (1f - t) * (1f - t) * t * controlPoints1[currentIndex] + 3f * (1f - t) * t * t * controlPoints2[currentIndex] + t * t * t * positions[(currentIndex + 1) % positions.Count];
+        dadsRoom.transform.position = (1f - t) * (1f - t) * (1f - t) * positions[currentIndex] + 3f * (1f - t) * (1f - t) * t * controlPoints1[currentIndex] + 3f * (1f - t) * t * t * controlPoints2[currentIndex] + t * t * t * positions[(currentIndex + 1) % positions.Count];
 
         if (currentPosition >= 1f)
         {
             currentPosition -= 1f;
             currentIndex = (currentIndex + 1) % positions.Count;
         }
-        lastMovement = transform.position - previousPos;
+        lastMovement = dadsRoom.transform.position - previousPos;
         var velocityMag = lastMovement.magnitude / Time.deltaTime;
         velocityCurve.AddKey(Time.time, velocityMag);
         //if (debug) Debug.Log(velocityMag / Time.deltaTime);
-        if (velocityMag > Mathf.Epsilon) transform.rotation = Quaternion.LookRotation(lastMovement, Vector3.up);
+        if (velocityMag > Mathf.Epsilon) dadsRoom.transform.rotation = Quaternion.LookRotation(lastMovement, Vector3.up);
 
         foreach (var animal in animals)
         {
@@ -128,6 +126,21 @@ public class FlockBehaviour2 : MonoBehaviour
             controlPoints1[i] -= meanPosition;
             controlPoints2[i] -= meanPosition;
         }
+    }
+
+    public void RotateStartingPpoint()
+    {
+        var firstItem = positions[0];
+        positions.RemoveAt(0);
+        positions.Add(firstItem);
+
+        firstItem = controlPoints1[0];
+        controlPoints1.RemoveAt(0);
+        controlPoints1.Add(firstItem);
+
+        firstItem = controlPoints2[0];
+        controlPoints2.RemoveAt(0);
+        controlPoints2.Add(firstItem);
     }
 
     public void OnTriggerEnter(Collider other)
