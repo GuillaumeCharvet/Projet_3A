@@ -60,7 +60,7 @@ public class S_Start_dialogue : MonoBehaviour
         index = 0;
         bool nextBoolFound1 = false;
 
-        int iterations = 0;
+        
 
         while (!nextBoolFound1)
         {
