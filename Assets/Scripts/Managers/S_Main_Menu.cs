@@ -15,24 +15,31 @@ public class S_Main_Menu : MonoBehaviour
     public GameObject menuControls;
     public GameObject credits;
 
+    public GameObject manette;
+    public GameObject keyboard;
+
+    public bool menuIsActive = false;
+
 
     //[SerializeField] public CinemachineVirtualCamera cam11;
 
     void Start()
     {
-        menuMainCanva.SetActive(true);
+        
+        
+
         //cam11.Priority = 101;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+
+         
+
     }
-
-
     /// Dépliage de canva //////
     public void playGame()
     {
@@ -61,11 +68,37 @@ public class S_Main_Menu : MonoBehaviour
         menuControls.SetActive(true);
     }
 
+
+
+
+    /// Return to ancien canva ////
+    
     public void fromMainOptionsToMainMenu()
     {
-       
+
         menuMainOptions.SetActive(false);
         menuMainCanva.SetActive(true);
     }
-    /// Return to ancien canva ////
+
+
+    /// change info ///
+    
+    public void activePad()
+    {
+        if (keyboard.activeInHierarchy)
+        {
+            keyboard.SetActive(false);
+        }
+        manette.SetActive(true);
+    }
+
+    public void activeKeyboard()
+    {
+        if (manette.activeInHierarchy)
+        {
+            manette.SetActive(false);
+        }
+        keyboard.SetActive(true);
+    }
+
 }
