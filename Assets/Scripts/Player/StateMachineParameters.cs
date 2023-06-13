@@ -186,6 +186,8 @@ public class StateMachineParameters : MonoBehaviour
         //Debug.Log("smp !CheckIsGrounded():  " + !CheckIsGrounded());
         //Debug.Log("smp inputManager.IsSpaceDownFixed:  " + inputManager.IsSpaceDownFixed);
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
+        if (!CheckIsGrounded() && inputManager.IsSpaceDownFixed && currentModeMovement != ModeMovement.Glide) animator.SetTrigger("GliderTrigger");
+        if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide) animator.SetTrigger("GliderOffTrigger");
     }
 
     /*
@@ -278,12 +280,13 @@ public class StateMachineParameters : MonoBehaviour
 
         if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
-            Debug.Log("TOP RAY HIT");
+            //Debug.Log("TOP RAY HIT");
             Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
+            Debug.Log("KOI KE JE TOUCHE : " + hitTop.transform.name);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
-                Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
+                //Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
                 if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                 {
@@ -300,7 +303,7 @@ public class StateMachineParameters : MonoBehaviour
             }
             else
             {
-                Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
+                //Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
             }
         }
         else
@@ -314,17 +317,17 @@ public class StateMachineParameters : MonoBehaviour
 
             if (Physics.Raycast(transform.position + 1.5f * transform.up, transform.forward, out hitMid, 5f, layerMaskClimb))
             {
-                Debug.Log("MID RAY HIT");
+                //Debug.Log("MID RAY HIT");
                 Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * hitMid.distance, Color.red);
 
                 if (hitMid.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
-                    Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
+                    //Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                     var normalHit = hitMid.normal;
                     if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                     {
                         distanceToGrabbedWall = hitMid.distance;
-                        Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
+                        //Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
 
                         if (normalHit != currentNormalToClimb && updateCurrentNormal)
                         {
@@ -338,7 +341,7 @@ public class StateMachineParameters : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("MID RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
+                    //Debug.Log("MID RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                 }
             }
             else
@@ -1147,7 +1150,7 @@ public class StateMachineParameters : MonoBehaviour
 
     public void UpdateStartGlide()
     {
-        animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
+        //animator.SetBool("PlayerStartGlide", inputManager.IsSpaceJump);
     }
 
     public void UpdateTimeChargingThrow()
