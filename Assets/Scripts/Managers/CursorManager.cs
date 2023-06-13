@@ -2,14 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CursorManagement : Manager
+public class CursorManager : Manager
 {
+
+    public GameObject menuMainCanva;
     //float mouseVertical = 0f, mouseHorizontal = 0f;
 
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        if (menuMainCanva.activeInHierarchy)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
     /*void OnGUI()
     {

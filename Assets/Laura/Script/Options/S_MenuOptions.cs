@@ -6,26 +6,25 @@ public class S_MenuOptions : MonoBehaviour
 
     {
         [SerializeField] private GameObject OptionsHolder;
-        [SerializeField] private GameObject MenuHolder;
-        [SerializeField] private GameObject ProfilHolder;
+        [SerializeField] private GameObject MainMenuHolder;
+        
          public void ActivateMenuOptions()
          {
             OptionsHolder.SetActive(true);
-            MenuHolder.SetActive(false);
-            ProfilHolder.SetActive(false);
+            MainMenuHolder.SetActive(false);
+ 
          }
 
-        public void ActivateMenu()
+        public void ActivateMainMenu()
         {
             OptionsHolder.SetActive(false);
-            MenuHolder.SetActive(true);
-            ProfilHolder.SetActive(false);
+            MainMenuHolder.SetActive(true);
+  
         }
 
         public void ActivateProfilMenu()
         {
-            OptionsHolder.SetActive(false);
-            MenuHolder.SetActive(false);
-            ProfilHolder.SetActive(true);
+            OptionsHolder.SetActive(false);   
         }
+
 }

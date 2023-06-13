@@ -543,15 +543,9 @@ public class StateMachineParameters : MonoBehaviour
 
         // Check Input to determine direction
         Vector2 playerInput;
-        if (true)
-        {
-            playerInput.x = inputManager.HorizontalInput;
-            playerInput.y = inputManager.VerticalInput;
-        }
-        else
-        {
-            playerInput = Vector2.zero;
-        }
+
+        playerInput.x = inputManager.HorizontalInput;
+        playerInput.y = inputManager.VerticalInput;
 
         // Clamp it to disallow strafe walking
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
