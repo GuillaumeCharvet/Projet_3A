@@ -2,19 +2,21 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Intro_manager : MonoBehaviour
 {
-
     [SerializeField] public CinemachineVirtualCamera cam1, cam2, cam3;
 
     public S_Start_dialogue dialogue;
     public GameObject TechnoCharacter;
+    public Animator animator;
+    private bool firstCheckUp = true;
 
     private void Start()
     {
-          cam1.Priority = 101;
-          StartCoroutine(DelayedStart());
-         ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
+        cam1.Priority = 101;
+        StartCoroutine(DelayedStart());
+        ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
     }
 
     private void Update()
@@ -24,10 +26,12 @@ public class Intro_manager : MonoBehaviour
             cam2.Priority = 0;
             cam3.Priority = 101;
         }
-        if (dialogue.dialogueHBS[3])
+        if (!dialogue.dialoguebools[3])
         {
+            if (firstCheckUp) animator.SetTrigger("CheckUp");
             cam3.Priority = 0;
             cam2.Priority = 101;
+            firstCheckUp = false;
         }
         if (dialogue.dialogueHBS[6])
         {
@@ -37,17 +41,16 @@ public class Intro_manager : MonoBehaviour
         }
     }
 
-
-
-    IEnumerator DelayedStart()
+    private IEnumerator DelayedStart()
     {
-        yield return new WaitForSecondsRealtime(4);
+        yield return new WaitForSecondsRealtime(3f);
+        animator.SetTrigger("CheckUp");
+        yield return new WaitForSecondsRealtime(0.75f);
 
         cam1.Priority = 0;
         cam2.Priority = 101;
 
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(3f);
         dialogue.StartDialogue();
     }
 }
-
