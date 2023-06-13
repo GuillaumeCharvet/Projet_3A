@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
+using Cinemachine;
 
 
 public class S_Dialogue : MonoBehaviour
 {
+    [SerializeField] public CinemachineVirtualCamera camDialogueParent;
+
     public TextMeshProUGUI textComponentTechno;
     public string[] dialoguelines;
     public bool[] dialoguebools;
@@ -287,6 +290,7 @@ public class S_Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
+        camDialogueParent.Priority = 101;
         index = 0;
         var nextBoolFound = false;
         while (!nextBoolFound)
@@ -391,6 +395,7 @@ public class S_Dialogue : MonoBehaviour
                 Debug.Log("index à 0");
                 dialogueCanva.SetActive(false);
                 //Time.timeScale = 1;
+                camDialogueParent.Priority = 0;
                 ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true ;
 
                 

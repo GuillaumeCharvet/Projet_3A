@@ -8,7 +8,7 @@ public class FlockAnimal2 : MonoBehaviour
     public FlockBehaviour2 flock;
     private Vector3 lastPosition;
     private Vector3 lastMovement = Vector3.zero;
-    public List<Vector3> positionsDelta = new List<Vector3>();
+
     public bool debug = false;
 
     public AnimationCurve velocityCurve = new AnimationCurve();
@@ -20,7 +20,7 @@ public class FlockAnimal2 : MonoBehaviour
     // FLOCK
 
     private float inertiaFactor = 1f;
-    private float repelDistance = 3f;
+    public float repelDistance = 3f;
     private float repelFactor = 200f;
     private float attractFactor = 20f;
 
@@ -107,7 +107,7 @@ public class FlockAnimal2 : MonoBehaviour
         }
         repelForce /= Mathf.Max(1f, (float)inc);
 
-        var attractForce = flock.transform.position + 2f * Mathf.Cos(0.3f * Time.time + randomPhaseShift) * Vector3.up - transform.position;
+        var attractForce = flock.dadsRoom.transform.position + 2f * Mathf.Cos(0.3f * Time.time + randomPhaseShift) * Vector3.up - transform.position;
 
         newSpeed = inertiaFactor * lastMovement + (repelFactor * repelForce + attractFactor * attractForce) * Time.deltaTime;
         newPosition += newSpeed * Time.deltaTime;

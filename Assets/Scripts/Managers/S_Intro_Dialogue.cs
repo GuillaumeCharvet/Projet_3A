@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
+using Cinemachine;
 
 public class S_Intro_Dialogue : MonoBehaviour
 {
+    [SerializeField] public CinemachineVirtualCamera cam5, cam6, cam7, cam8;
+
     public TextMeshProUGUI textComponent;
     public GameObject TriggerBoxIntro;
     public GameObject triggerBoxTecnho;
-    public GameObject triggerBoxNature;
+    
 
     public GameObject canvaIntro;
+    public GameObject tutoMapBox;
     public float textSpeed;
 
     private int index;
@@ -30,6 +34,7 @@ public class S_Intro_Dialogue : MonoBehaviour
             textComponent.text = string.Empty;
             StartDialogue();
             //dialogueIsActive = true;
+
         }
         if (Input.GetMouseButtonDown(0) && dialogueIsActive)
         {
@@ -44,9 +49,33 @@ public class S_Intro_Dialogue : MonoBehaviour
             }
         }
 
-        if (!dialoguebools[4])
+        if (!dialoguebools[6])
         {
-            triggerBoxNature.SetActive(true);
+            cam6.Priority = 101;
+        }
+        if (!dialoguebools[7])
+        {
+            cam6.Priority = 0;
+            cam7.Priority = 101;
+        }
+        if (!dialoguebools[8])
+        {
+            cam7.Priority = 0;
+        }
+        if (!dialoguebools[9])
+        {
+            
+            cam8.Priority = 101;
+        }
+        if (!dialoguebools[10])
+        {
+            cam8.Priority = 0;
+           
+        }
+
+        if (!dialoguebools[12])
+        {
+           
             triggerBoxTecnho.SetActive(true);
             TriggerBoxIntro.SetActive(false);
 
@@ -55,6 +84,7 @@ public class S_Intro_Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
+        cam5.Priority = 101;
         index = 0;
         var nextBoolFound1 = false;
         while (!nextBoolFound1)
@@ -115,6 +145,8 @@ public class S_Intro_Dialogue : MonoBehaviour
                 dialogueIsActive = false; 
                 canvaIntro.SetActive(false);
                 ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true;
+                cam5.Priority = 0;
+                tutoMapBox.SetActive(true);
             }
         }
     }
