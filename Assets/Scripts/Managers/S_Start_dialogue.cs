@@ -9,6 +9,7 @@ public class S_Start_dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public Intro_manager managerIntro;
+    public GameObject tutoMove;
 
 
     public GameObject startCanva;
@@ -123,6 +124,7 @@ public class S_Start_dialogue : MonoBehaviour
                 startCanva.SetActive(false);
                 ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true;
                 isFinished = true;
+                tutoMove.SetActive(true);
             }
         }
     }

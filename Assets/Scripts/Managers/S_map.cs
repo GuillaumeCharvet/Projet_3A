@@ -12,6 +12,10 @@ public class S_map : MonoBehaviour
 
     public S_rewardmanager s_RewardmanagerNature;
 
+
+    public GameObject tutoFermer;
+    private bool firstActive = false;
+
     // canvas fonds //////
 
     public GameObject canvaMap;
@@ -135,8 +139,15 @@ public class S_map : MonoBehaviour
             carnetIsOpen = true;
             owl.PlayOneShot(bookOpen);
             Debug.Log("Hop on ouvre le carnet");
+            
 
             keyIUp = false;
+
+            if (!firstActive)
+            {
+                tutoFermer.SetActive(true);
+                firstActive = true;
+            }
 
             Debug.Log("******* I : KEY DOWN - OPEN INVENTORY ******* " + keyIUp);
             /*if (s_Rewardmanager.p1hbs)
@@ -152,6 +163,7 @@ public class S_map : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.Semicolon))
         {
+
             keyIUp = true;
             Debug.Log("******* I : KEY UP ******* " + keyIUp);
         }
@@ -242,6 +254,10 @@ public class S_map : MonoBehaviour
             carnetIsOpen = false;
             depthVolume.SetActive(false);
             Time.timeScale = 1;
+            if (tutoFermer.activeInHierarchy)
+            {
+                tutoFermer.SetActive(false);
+            }
         }
 
         // ajout d'informations Double page 1 ////
