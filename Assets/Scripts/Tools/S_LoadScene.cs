@@ -15,5 +15,10 @@ public class S_LoadScene : MonoBehaviour
         SceneManager.LoadScene("Scene_Ocean", LoadSceneMode.Additive);
         SceneManager.LoadScene("Scene_Assets_Léo", LoadSceneMode.Additive);
         SceneManager.LoadScene("Scene_Vignes_Signals", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scene_Thibault2", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scene_ThibaultIle2", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scene_Pierre_Rocks", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Scene_Pierre_Rock_Island1", LoadSceneMode.Additive);
+
     }
 }

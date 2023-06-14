@@ -6,31 +6,39 @@ using UnityEngine;
 public class Intro_manager : MonoBehaviour
 {
     [SerializeField] public CinemachineVirtualCamera cam1, cam2, cam3;
+    public S_Main_Menu menu;
 
     public S_Start_dialogue dialogue;
     public GameObject TechnoCharacter;
     public Animator animator;
     private bool firstCheckUp = true;
+    public bool firstActive = true;
 
-    private void Start()
-    {
-        cam1.Priority = 101;
-        StartCoroutine(DelayedStart());
-        ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
-    }
+  
 
     private void Update()
     {
+
+        if(menu.playStart && firstActive)
+        {
+            menu.playStart = false;
+            firstActive = false;
+            Debug.Log("play intro");
+            cam1.Priority = 99;
+            StartCoroutine(DelayedStart());
+            ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
+
+        }
         if (dialogue.dialogueHBS[1])
         {
             cam2.Priority = 0;
-            cam3.Priority = 101;
+            cam3.Priority = 99;
         }
         if (!dialogue.dialoguebools[3])
         {
             if (firstCheckUp) animator.SetTrigger("CheckUp");
             cam3.Priority = 0;
-            cam2.Priority = 101;
+            cam2.Priority = 99;
             firstCheckUp = false;
         }
         if (dialogue.dialogueHBS[6])
@@ -48,7 +56,7 @@ public class Intro_manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.75f);
 
         cam1.Priority = 0;
-        cam2.Priority = 101;
+        cam2.Priority = 99;
 
         yield return new WaitForSecondsRealtime(3f);
         dialogue.StartDialogue();
