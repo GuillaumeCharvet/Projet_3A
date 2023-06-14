@@ -9,7 +9,9 @@ public class S_FPSDisplay : MonoBehaviour
     private float time;
     private int frameCount;
 
-    void Update()
+    //TODO virer ça
+
+    private void Update()
     {
         if (S_Debugger.instance.toogle)
             return;
@@ -25,6 +27,6 @@ public class S_FPSDisplay : MonoBehaviour
 
             time -= pollingTime;
             frameCount = 0;
-        }        
+        }
     }
 }

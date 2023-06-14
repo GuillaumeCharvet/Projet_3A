@@ -161,18 +161,6 @@ public class StateMachineParameters : MonoBehaviour
         UpdateTimeChargingThrow();
         animator.SetFloat("ThrowCharge", timeChargingThrow);
 
-        /*
-        //animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
-
-        //Debug.Log("ForwardSpeed : " + (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude);
-
-        */
-
-        // Plot evolution of the forward speed
-        var forwardSpeed = (characterController.velocity.x * Vector3.right + characterController.velocity.z * Vector3.forward).magnitude;
-        var listLength = plotGroundAngleInfluence.keys.Length;
-        if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != forwardSpeed) plotGroundAngleInfluence.AddKey(Time.time, forwardSpeed);
-
         // Deblock capacity to dive in glider
         CheckBlockGliderDive();
     }
@@ -710,7 +698,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            if (currentClimbStamina > 0f)
+            if (true)
             {
                 //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) , maxPlayerRotation * Time.deltaTime);
                 //transform.rotation = Quaternion.FromToRotation(transform.forward, -currentNormalToClimb) * transform.rotation;
@@ -901,39 +889,6 @@ public class StateMachineParameters : MonoBehaviour
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
-
-        //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
-
-        /*
-        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
-        Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
-
-        //Debug.Log("transformDirection : " + transformDirection);
-
-        Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
-        playerParameters.moveDirection = new Vector3(flatMovement.x, playerParameters.moveDirection.y, flatMovement.z);
-
-        if (animator.GetBool("PlayerJumped"))
-            playerParameters.moveDirection.y = playerParameters.jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
-            playerParameters.moveDirection.y = 0f;
-        else
-            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
-
-        if (playerParameters.isInWaterNextFixedUpdate)
-        {
-            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
-            playerParameters.moveDirection.y *= 0.99f;
-        }
-        else playerParameters.moveDirection.y *= 0.999f;
-
-        //Debug.Log("playerParameters.moveDirection : " + playerParameters.moveDirection);
-
-        playerParameters.characterController.Move(playerParameters.moveDirection);
-
-        // Horizontal player rotation
-        animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
-        */
     }
 
     public void ClimbHanging(float maxClimbSpeed, float maxClimbAcceleration)
