@@ -6,6 +6,11 @@ public class CursorManager : Manager
 {
 
     public GameObject menuMainCanva;
+    public GameObject menuMainOption;
+    public GameObject menuControls;
+    public GameObject menuCredit;
+    
+
     //float mouseVertical = 0f, mouseHorizontal = 0f;
 
     void Start()
@@ -16,10 +21,21 @@ public class CursorManager : Manager
 
     private void Update()
     {
-        if (menuMainCanva.activeInHierarchy)
+        if (menuMainCanva.activeInHierarchy ||
+            menuMainOption.activeInHierarchy ||
+            menuControls.activeInHierarchy ||
+            menuCredit.activeInHierarchy)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+        }
+        if (!menuMainCanva.activeInHierarchy && 
+            !menuMainOption.activeInHierarchy && 
+            !menuControls.activeInHierarchy &&
+            !menuCredit.activeInHierarchy)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
     /*void OnGUI()
