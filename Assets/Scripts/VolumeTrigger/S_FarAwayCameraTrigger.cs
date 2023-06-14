@@ -18,19 +18,16 @@ public class S_FarAwayCameraTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             cam.Priority = 1000;
-            cam.m_Orbits[0].m_Radius *= dezoomAmplify;
-            cam.m_Orbits[1].m_Radius *= dezoomAmplify;
-            cam.m_Orbits[2].m_Radius *= dezoomAmplify;
-            cam.m_Orbits[0].m_Height *= dezoomAmplify;
-            cam.m_Orbits[1].m_Height *= dezoomAmplify;
+            cam.m_Orbits[0].m_Radius = dezoomAmplify * 10f;
+            cam.m_Orbits[1].m_Radius = dezoomAmplify * 45f;
+            cam.m_Orbits[2].m_Radius = dezoomAmplify * 15f;
+            cam.m_Orbits[0].m_Height = dezoomAmplify * 15f;
+            cam.m_Orbits[1].m_Height = dezoomAmplify * 30f;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            cam.Priority = 0;
-        }
+        if (other.CompareTag("Player")) cam.Priority = 0;
     }
 }
