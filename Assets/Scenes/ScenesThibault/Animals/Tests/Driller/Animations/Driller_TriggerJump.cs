@@ -12,6 +12,11 @@ public class Driller_TriggerJump : MonoBehaviour
     private Quaternion targetRotation;
     private Vector3 targetRotationEuler = Vector3.zero, targetRotationEuler2 = Vector3.zero;
 
+    private void Start()
+    {
+        animator.Play("Base Layer.A_Driller_Idle_1_V2", 0, Random.Range(0f, 1f));
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

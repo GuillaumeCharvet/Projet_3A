@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5443196498130797078}
-  - component: {fileID: -4200335273065217089}
+  - component: {fileID: 8791583455375892454}
   m_Layer: 0
   m_Name: P_SmallBirdClean
   m_TagString: Untagged
@@ -31,9 +31,9 @@ Transform:
   m_Children:
   - {fileID: 1705599991416313810}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4200335273065217089
+--- !u!114 &8791583455375892454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,6 +126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6999653456862184036, guid: 7e3697c34a206184ea8b530533e2e6cd,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999653456862184036, guid: 7e3697c34a206184ea8b530533e2e6cd,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 945ca71a92f59c14899b323afc3e2633, type: 2}
@@ -160,7 +165,7 @@ Animator:
   m_GameObject: {fileID: 2080753786073582952}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6ab39d4232663d2479cc76f33936f609, type: 2}
+  m_Controller: {fileID: 9100000, guid: cd0fec28db199194791527d113864542, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

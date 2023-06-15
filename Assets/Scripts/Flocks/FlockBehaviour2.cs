@@ -21,10 +21,10 @@ public class FlockBehaviour2 : MonoBehaviour
     private float currentPosition = 0f;
     [SerializeField] private float smoothSpeed = 0.050f;
     private float referenceDistance = 100f;
-    private Vector3 lastMovement = Vector3.zero;
+    public Vector3 lastMovement = Vector3.zero;
     public AnimationCurve velocityCurve = new AnimationCurve();
 
-    private bool moveAnimals = false;
+    private bool moveAnimals = true;
 
     private void Start()
     {
@@ -41,7 +41,7 @@ public class FlockBehaviour2 : MonoBehaviour
             animals[i].animals = animals;
         }
 
-        kidsRoom.gameObject.SetActive(false);
+        //kidsRoom.gameObject.SetActive(false);
         dadsRoom = GetComponentsInChildren<Transform>().Skip(1).First();
     }
 
