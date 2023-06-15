@@ -168,82 +168,18 @@ public class StateMachineParameters : MonoBehaviour
     private void FixedUpdate()
     {
         animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
-        //animator.SetBool("PlayerStartGlide", !(characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed);
+
         animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
 
-        //Debug.Log("smp !CheckIsGrounded():  " + !CheckIsGrounded());
-        //Debug.Log("smp inputManager.IsSpaceDownFixed:  " + inputManager.IsSpaceDownFixed);
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
         if (!CheckIsGrounded() && inputManager.IsSpaceDownFixed && currentModeMovement != ModeMovement.Glide) animator.SetTrigger("GliderTrigger");
         if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide) animator.SetTrigger("GliderOffTrigger");
     }
 
-    /*
-    private void OnDrawGizmos()
-    {
-        var cc = GetComponent<CharacterController>();
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position + (cc.radius - 0.05f) * transform.up, cc.radius + epsilonCheckGrounded);
-        Gizmos.DrawSphere(transform.position + ((characterControlerHeightResetValue - 0.1f) / 2f) * transform.up, cc.radius + epsilonCheckGrounded);
-        Gizmos.DrawSphere(transform.position + (characterControlerHeightResetValue - (cc.radius + 0.05f)) * transform.up, cc.radius + epsilonCheckGrounded);
-    }
-    */
-
     #region CLIMB CHECKS
 
     public bool CheckIsGrounded()
     {
-        // VERSION 1
-        /*
-        //if(characterController.isGrounded) { Debug.Log("mais pourquoi :(((((((((((((((((((((((((((((((((((((((((("); }
-        var r = radius;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + 0f * transform.up, -transform.up, out hit, Mathf.Infinity, layerMask))
-        {
-            //Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.yellow);
-
-            var angleSolToVertical = Vector3.Angle(Vector3.up, hit.normal);
-            var distAB = r * (Mathf.Min(1f / Mathf.Cos(2f * Mathf.PI * angleSolToVertical / 360f), 3f) - 1f);
-
-            //Debug.Log("**************************************************************");
-            //Debug.Log("RAYCAST HIT, hit.distance = " + hit.distance + " distanceDefiningGroundedState + distAB + epsilonCheckGrounded : " + (distanceDefiningGroundedState + distAB + epsilonCheckGrounded));
-
-            if (hit.distance < distanceDefiningGroundedState + distAB + epsilonCheckGrounded)
-            {
-                //Debug.Log("distance to ground = " + hit.distance + ", distance AB : " + distAB);
-                return true;
-            }
-        }
-        else
-        {
-            //Debug.Log("**************************************************************");
-            //Debug.Log("RAYCAST DOESNT HIT");
-        }
-        return false;
-        */
-
-        // VERSION 2
-        /*
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.position + (characterController.radius - 0.05f) * transform.up, characterController.radius, Vector3.zero, out hit, characterController.radius + epsilonCheckGrounded, layerMask))
-        {
-            Debug.Log("SPHERECAST 1");
-            return true;
-        }
-        else if(Physics.SphereCast(transform.position + ((characterController.height - 0.1f) / 2f) * transform.up, characterController.radius, Vector3.zero, out hit, characterController.radius + epsilonCheckGrounded, layerMask))
-        {
-            Debug.Log("SPHERECAST 2");
-            return true;
-        }
-        else if (Physics.SphereCast(transform.position + (characterController.height - (characterController.radius + 0.05f)) * transform.up, characterController.radius, Vector3.zero, out hit, characterController.radius + epsilonCheckGrounded, layerMask))
-        {
-            Debug.Log("SPHERECAST 3");
-            return true;
-        }
-        Debug.Log("SPHERECAST 4");
-        return false;
-        */
-        // VERSION 3
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMaskIsGrounded))
         {
@@ -686,7 +622,7 @@ public class StateMachineParameters : MonoBehaviour
 
     public void Climb(float maxClimbSpeed, float maxClimbAcceleration)
     {
-        if (inputManager.IsSpaceDownFixed && inputManager.VerticalInput > -0.1f)
+        if (inputManager.IsSpaceDownFixed && inputManager.VerticalInput > -0.1f && inputManager.VerticalInput < 0.1f)
         {
             Debug.Log("DECOLLE DU MUR WESH");
             transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
@@ -696,7 +632,7 @@ public class StateMachineParameters : MonoBehaviour
             Vector3 displacement = velocity * Time.deltaTime;
             characterController.Move(displacement);
         }
-        else
+        else if (!inputManager.IsSpaceDownFixed)
         {
             if (true)
             {
@@ -718,11 +654,23 @@ public class StateMachineParameters : MonoBehaviour
                 transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
 
                 Vector3 velocity = characterController.velocity;
+                Vector3 projectToForward = Vector3.Project(velocity, transform.forward);
+                velocity -= projectToForward;
 
                 Vector2 playerInput;
                 playerInput.x = inputManager.HorizontalInput;
                 playerInput.y = inputManager.VerticalInput;
                 playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+                /*
+                RaycastHit hit;
+                if (Physics.SphereCast(transform.position, 0.19f, transform.forward, out hit, grabToClimbDistance))
+                {
+                    if (Vector3.Distance(hit.point, transform.position) < distanceToGrabbedWallLimit - 0.19f)
+                    {
+                    }
+                }
+                */
 
                 float normalToWallVelocity;
                 if (distanceToGrabbedWall < grabToClimbDistance && currentModeMovement == ModeMovement.Climb)
@@ -746,7 +694,7 @@ public class StateMachineParameters : MonoBehaviour
 
                 Vector3 displacement = velocity * Time.deltaTime + normalToWallVelocity * transform.forward;
 
-                currentClimbStamina -= displacement.magnitude;
+                //currentClimbStamina -= displacement.magnitude;
 
                 /*if (GetComponent<Rigidbody>() != null)
                 {
