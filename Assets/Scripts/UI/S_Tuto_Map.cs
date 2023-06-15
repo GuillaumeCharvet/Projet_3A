@@ -21,7 +21,7 @@ public class S_Tuto_Map : MonoBehaviour
     }
     private void Update()
     {
-        if (tutoOpen && Input.GetKeyDown(KeyCode.I))
+        if (tutoOpen && Input.GetKeyDown(KeyCode.M))
         {
             canvaTuto.SetActive(false);
             triggerTuto.SetActive(false);
