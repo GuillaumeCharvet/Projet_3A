@@ -21,8 +21,8 @@ public class S_FarAwayCameraTrigger : MonoBehaviour
             cam.m_Orbits[0].m_Radius = dezoomAmplify * 10f;
             cam.m_Orbits[1].m_Radius = dezoomAmplify * 45f;
             cam.m_Orbits[2].m_Radius = dezoomAmplify * 15f;
-            cam.m_Orbits[0].m_Height = dezoomAmplify * 15f;
-            cam.m_Orbits[1].m_Height = dezoomAmplify * 30f;
+            cam.m_Orbits[0].m_Height = dezoomAmplify * 30f;
+            cam.m_Orbits[1].m_Height = dezoomAmplify * 15f;
         }
     }
 

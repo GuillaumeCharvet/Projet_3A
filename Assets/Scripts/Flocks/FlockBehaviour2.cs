@@ -24,7 +24,7 @@ public class FlockBehaviour2 : MonoBehaviour
     private Vector3 lastMovement = Vector3.zero;
     public AnimationCurve velocityCurve = new AnimationCurve();
 
-    private bool moveAnimals = true;
+    private bool moveAnimals = false;
 
     private void Start()
     {

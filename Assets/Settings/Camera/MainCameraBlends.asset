@@ -16,8 +16,8 @@ MonoBehaviour:
   - m_From: CinemachineStateDriven
     m_To: FreeLook Camera
     m_Blend:
-      m_Style: 1
-      m_Time: 4
+      m_Style: 2
+      m_Time: 5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_To: CinemachineStateDriven
     m_Blend:
       m_Style: 1
-      m_Time: 2
+      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -46,7 +46,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CinemachineStateDriven
+  - m_From: '**ANY CAMERA**'
     m_To: Virtual Camera_Menu
     m_Blend:
       m_Style: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: Virtual Camera_Menu
-    m_To: Virtual Camera_Intro1
+    m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 0
       m_Time: 2
