@@ -33,6 +33,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: b6785532f736ecc4285c8a3558c90290, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3e22ed37d03d407ba25c4e9f7305a804_Texture_1:
+        m_Texture: {fileID: 2800000, guid: bf30f7113e5a7964fac92c595e494ca8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_630bd6a485c14ca5beb910e575e379b2_Texture_1:
         m_Texture: {fileID: 2800000, guid: bf30f7113e5a7964fac92c595e494ca8, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -43,6 +47,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_cb6a62e6b9d54843a90c0bbe4d0b31a9_Texture_1:
         m_Texture: {fileID: 2800000, guid: 1cbc6af8821a5ed499fa09d1f6106580, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d8140c57889544b9bfc3d02150fac887_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f6aee2d81b340144f9bf1f19f935e510, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -67,7 +75,7 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _Edge1: 687.84
-    - _Edge2: 708.8
+    - _Edge2: 751.59
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -77,7 +85,8 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 1, g: 0.4406382, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &858984496807364649
 MonoBehaviour:
