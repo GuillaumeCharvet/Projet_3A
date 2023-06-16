@@ -98,6 +98,8 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float maxGliderSpeed = 50f;
     [SerializeField] private float accelerationMaxGlider = 30f;
     [SerializeField] private float gliderDescentFactor = 0.1f;
+    private bool preventGliderOn = false;
+    private float preventGliderDelay = 0.2f;
 
     private bool initialGlideDiveBlock = false;
 
@@ -172,8 +174,8 @@ public class StateMachineParameters : MonoBehaviour
         animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
 
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
-        if (!CheckIsGrounded() && inputManager.IsSpaceDownFixed && currentModeMovement != ModeMovement.Glide) animator.SetTrigger("GliderTrigger");
-        if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide) animator.SetTrigger("GliderOffTrigger");
+        if (!CheckIsGrounded() && inputManager.IsSpaceDownFixed && currentModeMovement != ModeMovement.Glide && !preventGliderOn) animator.SetTrigger("GliderTrigger");
+        if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide && !preventGliderOn) animator.SetTrigger("GliderOffTrigger");
     }
 
     #region CLIMB CHECKS
@@ -510,8 +512,13 @@ public class StateMachineParameters : MonoBehaviour
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
         // Apply gravity if not grounded
-        if (animator.GetBool("PlayerJumped"))
+
+        //if (animator.GetBool("PlayerJumped"))
+        if ((characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceDownFixed)
+        {
+            StartCoroutine(DelayGliderOn());
             velocity.y += jumpVerticalBoost;
+        }
         else if (playerParameters.characterController.isGrounded)
             velocity.y = 0f;
         else
@@ -624,6 +631,7 @@ public class StateMachineParameters : MonoBehaviour
     {
         if (inputManager.IsSpaceDownFixed && inputManager.VerticalInput > -0.1f && inputManager.VerticalInput < 0.1f)
         {
+            StartCoroutine(DelayGliderOn());
             Debug.Log("DECOLLE DU MUR WESH");
             transform.rotation = Quaternion.LookRotation(-transform.forward, transform.up);
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
@@ -742,9 +750,7 @@ public class StateMachineParameters : MonoBehaviour
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
         // Apply gravity if not grounded
-        if (animator.GetBool("PlayerJumped"))
-            velocity.y += jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
+        if (playerParameters.characterController.isGrounded)
             velocity.y = 0f;
         else
             velocity.y -= gravity * Time.deltaTime;
@@ -824,9 +830,7 @@ public class StateMachineParameters : MonoBehaviour
             velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
             // Apply gravity if not grounded
-            if (animator.GetBool("PlayerJumped"))
-                velocity.y += jumpVerticalBoost;
-            else if (playerParameters.characterController.isGrounded)
+            if (playerParameters.characterController.isGrounded)
                 velocity.y = 0f;
             else
                 velocity.y -= gravity * Time.deltaTime;
@@ -955,6 +959,13 @@ public class StateMachineParameters : MonoBehaviour
     private void CheckBlockGliderDive()
     {
         if (inputManager.VerticalInput < 0.1f) initialGlideDiveBlock = false;
+    }
+
+    public IEnumerator DelayGliderOn()
+    {
+        preventGliderOn = true;
+        yield return new WaitForSeconds(preventGliderDelay);
+        preventGliderOn = false;
     }
 
     public IEnumerator WaitBeforeThrow()
