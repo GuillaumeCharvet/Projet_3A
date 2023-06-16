@@ -47,6 +47,7 @@ public class StateGlide : StateBehaviourParent
 
         //reader.smp.gliderTransform.gameObject.SetActive(true);
 
+        reader.smp.StartCoroutine(reader.smp.DelayGliderOn());
         reader.smp.SetPlayerColliderToClimb();
 
         reader.smp.InitialGlideDiveBlock = true;
