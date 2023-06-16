@@ -46,20 +46,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distance: 0
-    - _FoamAmount: 0
+    - _Distance: 0.84
+    - _FoamAmount: 0.58
     - _FoamScale: -2.9
     - _FoamSpeed: 0.1
-    - _FoamTiling: 0
-    - _HeightFrequency: 20
-    - _NormalStrenght: 10
+    - _FoamTiling: 10
+    - _HeightFrequency: 0
+    - _NormalStrenght: 8.23
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefractionStrenght: 10
     - _TilingFoam: 68.1
-    - _WaterSpeed: 0.1
+    - _WaterSpeed: 0.05
     - _WaveFreq: 0
-    - _WavesAmplitude: 0.1
+    - _WavesAmplitude: 0
     - _WavesSpeed: 1
     m_Colors:
     - _DeepColor: {r: 0.1788003, g: 0.48638234, b: 0.7735849, a: 1}
@@ -69,7 +69,7 @@ Material:
     - _SpeedTrait: {r: 0, g: 1, b: 0, a: 0}
     - _SurfaceColor: {r: 0.14978641, g: 0.9133197, b: 0.9622642, a: 0}
     - _TilingTrait: {r: 1, g: 1, b: 0, a: 0}
-    - _WaterTiling: {r: 10, g: 10, b: 0, a: 0}
+    - _WaterTiling: {r: 5, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3441476824889386067
 MonoBehaviour:

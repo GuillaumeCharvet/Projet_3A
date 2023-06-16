@@ -24,65 +24,18 @@ public class FlockAnimal2 : MonoBehaviour
     private float repelFactor = 200f;
     private float attractFactor = 20f;
 
-    private float randomPhaseShift;
+    private float randomPhaseShift, randomSpeedShift, randomGaussianDelay;
 
     public void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         lastPosition = transform.position;
 
         anim.Play("Base Layer.MovePlease", 0, Random.Range(0f, 1f));
         randomPhaseShift = Random.Range(0f, 2f * Mathf.PI);
+        randomSpeedShift = Random.Range(-2f, 2f);
+        randomGaussianDelay = Mathf.Abs(RandomGaussian(-3f, 3f));
     }
-
-    /*
-    public void Move()
-    {
-        var previousPos = transform.position;
-        var distance = speed * Time.deltaTime;
-        currentPosition += distance;
-        transform.position = Vector3.MoveTowards(transform.position, positionsDelta[(currentIndex + 1) % positionsDelta.Count], distance);
-        if (currentPosition >= Vector3.Distance(positionsDelta[currentIndex], positionsDelta[(currentIndex + 1) % positionsDelta.Count]))
-        {
-            currentPosition = 0f;
-            currentIndex = (currentIndex + 1) % positionsDelta.Count;
-        }
-        lastMovement = transform.position - previousPos;
-        if (lastMovement.magnitude > Mathf.Epsilon) transform.rotation = Quaternion.LookRotation(lastMovement, Vector3.up);
-    }
-
-    public void MoveSmooth()
-    {
-        var previousPos = transform.position;
-        var distance = smoothSpeed * Time.deltaTime;
-        var normalizedDistance = smoothSpeed * Time.deltaTime / referenceDistance;
-        currentPosition += normalizedDistance;
-        float t = currentPosition;
-        var potentialPos = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints1[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
-
-        var potentialDist = (potentialPos - previousPos).magnitude;
-        var quotient = (targetSmoothSpeed * Time.deltaTime) / potentialDist;
-        //Debug.Log("QUOTIENT = " + quotient);
-
-        currentPosition -= normalizedDistance;
-        normalizedDistance *= quotient;
-        currentPosition += distance;
-        t = currentPosition;
-
-        transform.position = (1f - t) * (1f - t) * positionsDelta[currentIndex] + 2f * (1f - t) * t * flock.controlPoints1[currentIndex] + t * t * positionsDelta[(currentIndex + 1) % positionsDelta.Count];
-
-        if (currentPosition >= 1f)
-        {
-            currentPosition -= 1f;
-            currentIndex = (currentIndex + 1) % positionsDelta.Count;
-        }
-        lastMovement = transform.position - previousPos;
-        var velocityMag = lastMovement.magnitude / Time.deltaTime;
-        velocityCurve.AddKey(Time.time, velocityMag);
-        if (debug) Debug.Log(velocityMag / Time.deltaTime);
-        if (velocityMag > Mathf.Epsilon) transform.rotation = Quaternion.LookRotation(lastMovement, Vector3.up);
-    }
-    */
 
     public void MoveWithFlock()
     {
@@ -107,7 +60,8 @@ public class FlockAnimal2 : MonoBehaviour
         }
         repelForce /= Mathf.Max(1f, (float)inc);
 
-        var attractForce = flock.dadsRoom.transform.position + 2f * Mathf.Cos(0.3f * Time.time + randomPhaseShift) * Vector3.up - transform.position;
+        var targetPosition = flock.dadsRoom.transform.position + randomSpeedShift * Mathf.Cos(0.3f * Time.time + randomPhaseShift) * Vector3.up - 2f * randomGaussianDelay * flock.lastMovement.normalized;
+        var attractForce = targetPosition - transform.position;
 
         newSpeed = inertiaFactor * lastMovement + (repelFactor * repelForce + attractFactor * attractForce) * Time.deltaTime;
         newPosition += newSpeed * Time.deltaTime;
@@ -115,5 +69,27 @@ public class FlockAnimal2 : MonoBehaviour
         if (newSpeed.magnitude > Mathf.Epsilon) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newSpeed, Vector3.up), 1f);
 
         transform.position = newPosition;
+    }
+
+    public static float RandomGaussian(float minValue = 0.0f, float maxValue = 1.0f)
+    {
+        float u, v, S;
+
+        do
+        {
+            u = 2.0f * Random.value - 1.0f;
+            v = 2.0f * Random.value - 1.0f;
+            S = u * u + v * v;
+        }
+        while (S >= 1.0f);
+
+        // Standard Normal Distribution
+        float std = u * Mathf.Sqrt(-2.0f * Mathf.Log(S) / S);
+
+        // Normal Distribution centered between the min and max value
+        // and clamped following the "three-sigma rule"
+        float mean = (minValue + maxValue) / 2.0f;
+        float sigma = (maxValue - mean) / 3.0f;
+        return Mathf.Clamp(std * sigma + mean, minValue, maxValue);
     }
 }

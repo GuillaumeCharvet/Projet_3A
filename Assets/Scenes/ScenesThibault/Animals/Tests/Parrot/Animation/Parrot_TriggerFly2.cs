@@ -12,6 +12,11 @@ public class Parrot_TriggerFly2 : MonoBehaviour
 
     private SkinnedMeshRenderer _renderer;
 
+    private void Start()
+    {
+        animator.Play("Base Layer.A_Parrot_Idle", 0, Random.Range(0f, 1f));
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
