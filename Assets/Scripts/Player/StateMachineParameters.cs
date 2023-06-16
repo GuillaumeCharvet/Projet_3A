@@ -99,6 +99,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float accelerationMaxGlider = 30f;
     [SerializeField] private float gliderDescentFactor = 0.1f;
     private bool preventGliderOn = false;
+    private bool preventGliderOff = false;
     private float preventGliderDelay = 0.2f;
 
     private bool initialGlideDiveBlock = false;
@@ -175,7 +176,7 @@ public class StateMachineParameters : MonoBehaviour
 
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
         if (!CheckIsGrounded() && inputManager.IsSpaceDownFixed && currentModeMovement != ModeMovement.Glide && !preventGliderOn) animator.SetTrigger("GliderTrigger");
-        if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide && !preventGliderOn) animator.SetTrigger("GliderOffTrigger");
+        if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide && !preventGliderOff) animator.SetTrigger("GliderOffTrigger");
     }
 
     #region CLIMB CHECKS
@@ -966,6 +967,13 @@ public class StateMachineParameters : MonoBehaviour
         preventGliderOn = true;
         yield return new WaitForSeconds(preventGliderDelay);
         preventGliderOn = false;
+    }
+
+    public IEnumerator DelayGliderOff()
+    {
+        preventGliderOff = true;
+        yield return new WaitForSeconds(preventGliderDelay);
+        preventGliderOff = false;
     }
 
     public IEnumerator WaitBeforeThrow()
