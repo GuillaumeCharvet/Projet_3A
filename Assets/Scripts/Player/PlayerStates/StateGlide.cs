@@ -20,6 +20,7 @@ public class StateGlide : StateBehaviourParent
     {
         //reader.smp.gliderTransform.gameObject.SetActive(false);
 
+        reader.smp.StartCoroutine(reader.smp.DelayGliderOn());
         var anim = reader.GetComponent<Animator>();
         Debug.Log("EXIT GLIDE STATE :" + " PlayerJumped = " + anim.GetBool("PlayerJumped")
                                         + " IsInWater = " + anim.GetBool("IsInWater")
@@ -47,7 +48,7 @@ public class StateGlide : StateBehaviourParent
 
         //reader.smp.gliderTransform.gameObject.SetActive(true);
 
-        reader.smp.StartCoroutine(reader.smp.DelayGliderOn());
+        reader.smp.StartCoroutine(reader.smp.DelayGliderOff());
         reader.smp.SetPlayerColliderToClimb();
 
         reader.smp.InitialGlideDiveBlock = true;

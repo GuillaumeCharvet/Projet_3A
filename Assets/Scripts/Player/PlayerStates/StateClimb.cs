@@ -16,6 +16,8 @@ public class StateClimb : StateBehaviourParent
         Destroy(reader.gameObject.GetComponent<Rigidbody>());
         reader.GetComponent<CharacterController>().enabled = true;
         */
+
+        reader.smp.StartCoroutine(reader.smp.DelayGliderOn());
         reader.cc.Move(Vector3.zero);
 
         base.OnExitState();
