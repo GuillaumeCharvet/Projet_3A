@@ -71,6 +71,7 @@ public class StateMachineParameters : MonoBehaviour
     public float characterControlerHeightResetValue = 1.8f;
     public bool isDuringFirst2SecondsOfClimbing = false;
     private float wallJumpVelocity = 16f;
+    private float topRay = 2.5f, midRay = 1.5f, botRay = 0.25f;
 
     [Header("GRAB LEDGE")]
     [SerializeField] private float grabLedgeDistance = 3.2f;
@@ -205,10 +206,10 @@ public class StateMachineParameters : MonoBehaviour
         {
         }*/
 
-        if (Physics.Raycast(transform.position + 2.5f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
+        if (Physics.Raycast(transform.position + topRay * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * hitTop.distance, Color.red);
+            Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * hitTop.distance, Color.red);
             Debug.Log("KOI KE JE TOUCHE : " + hitTop.transform.name);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
@@ -235,17 +236,17 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(transform.position + 2.5f * transform.up, transform.forward * 5f, Color.yellow);
+            Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * 5f, Color.yellow);
         }
 
         if (!middleOfClimbing)
         {
             RaycastHit hitMid;
 
-            if (Physics.Raycast(transform.position + 1.5f * transform.up, transform.forward, out hitMid, 5f, layerMaskClimb))
+            if (Physics.Raycast(transform.position + midRay * transform.up, transform.forward, out hitMid, 5f, layerMaskClimb))
             {
                 //Debug.Log("MID RAY HIT");
-                Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * hitMid.distance, Color.red);
+                Debug.DrawRay(transform.position + midRay * transform.up, transform.forward * hitMid.distance, Color.red);
 
                 if (hitMid.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
@@ -273,7 +274,7 @@ public class StateMachineParameters : MonoBehaviour
             }
             else
             {
-                Debug.DrawRay(transform.position + 1.5f * transform.up, transform.forward * 5f, Color.yellow);
+                Debug.DrawRay(transform.position + midRay * transform.up, transform.forward * 5f, Color.yellow);
             }
 
             /*
@@ -326,16 +327,16 @@ public class StateMachineParameters : MonoBehaviour
         {
         }*/
 
-        if (Physics.Raycast(transform.position + 2.35f * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
+        if (Physics.Raycast(transform.position + topRay * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
             //Debug.Log("TOP RAY HIT");
-            Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * hitTop.distance, Color.blue);
+            Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * hitTop.distance, Color.blue);
 
             if (hitTop.distance <= grabLedgeDistance + correctiveGrabDistance)
             {
                 //Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
-                if (Vector3.Angle(normalHit, Vector3.up) > 35f)
+                if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                 {
                     distanceToGrabbedWall = hitTop.distance;
                     if (normalHit != currentNormalToClimb)
@@ -355,7 +356,7 @@ public class StateMachineParameters : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(transform.position + 2.35f * transform.up, transform.forward * 5f, Color.yellow);
+            //Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -394,9 +395,9 @@ public class StateMachineParameters : MonoBehaviour
         if (currentModeMovement == ModeMovement.Climb) correctiveGrabDistance = 1f;
 
         RaycastHit hitBot;
-        Debug.DrawRay(transform.position + 0.0f * transform.up, transform.forward * 10, Color.red);
+        Debug.DrawRay(transform.position + botRay * transform.up, transform.forward * 10, Color.red);
 
-        if (Physics.Raycast(transform.position + 0.0f * transform.up, transform.forward, out hitBot, 5f, layerMaskClimb))
+        if (Physics.Raycast(transform.position + botRay * transform.up, transform.forward, out hitBot, 5f, layerMaskClimb))
         {
             //Debug.Log("BOT RAY HIT");
 
