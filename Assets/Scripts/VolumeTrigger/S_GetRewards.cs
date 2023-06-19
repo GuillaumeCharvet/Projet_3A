@@ -6,9 +6,9 @@ using UnityEngine.Audio;
 
 public class S_GetRewards : MonoBehaviour
 {
-   [SerializeField]
-    // TUTO CLIMB //
+    [SerializeField]
     public GameObject pickableObject;
+
     public GameObject buttonGet;
     private bool pickable = false;
     private bool picked = false;
@@ -18,35 +18,33 @@ public class S_GetRewards : MonoBehaviour
 
     public AudioClip getSound;
 
-
-
     // Start is called before the first frame update
-   
-        void OnTriggerEnter(Collider other )
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !picked)
         {
-            if (other.CompareTag("Player") && !picked)
-            {
             Debug.Log("est rentré dans le collider");
             buttonGet.SetActive(true);
-                pickable = true;
+            pickable = true;
             popupSource.PlayOneShot(popupSound);
-            }
         }
+    }
 
-        void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && !picked)
         {
-            if (other.CompareTag("Player") && !picked)
-            {
-                Debug.Log("sort du collider");
-                buttonGet.SetActive(false);
-                pickable = false;            
-            }
+            Debug.Log("sort du collider");
+            buttonGet.SetActive(false);
+            pickable = false;
         }
+    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(pickable && Input.GetKeyDown(KeyCode.F))
+        if (pickable && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxB")))
         {
             popupSource.PlayOneShot(getSound);
             Debug.Log("le son se joue");
@@ -54,7 +52,6 @@ public class S_GetRewards : MonoBehaviour
             buttonGet.SetActive(false);
             picked = true;
             pickable = false;
-            
         }
     }
 }

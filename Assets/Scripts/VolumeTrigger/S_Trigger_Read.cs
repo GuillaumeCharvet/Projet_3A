@@ -12,13 +12,13 @@ public class S_Trigger_Read : MonoBehaviour
     public GameObject canvaRead;
     public GameObject canvaLecture;
     public GameObject textShow;
-  
-    void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             canvaRead.SetActive(true);
-            readIsOuvert = true;      
+            readIsOuvert = true;
         }
     }
 
@@ -32,9 +32,9 @@ public class S_Trigger_Read : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (readIsOuvert && Input.GetKeyDown(KeyCode.F))
+        if (readIsOuvert && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxB")))
         {
             canvaRead.SetActive(false);
             readIsOuvert = false;
@@ -43,8 +43,8 @@ public class S_Trigger_Read : MonoBehaviour
             textShow.SetActive(true);
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
-        if (lectureIsOuvert && Input.GetMouseButtonDown(0))
-        {      
+        if (lectureIsOuvert && (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxA")))
+        {
             canvaLecture.SetActive(false);
             lectureIsOuvert = false;
             textShow.SetActive(false);
