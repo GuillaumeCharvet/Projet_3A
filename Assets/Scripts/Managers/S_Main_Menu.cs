@@ -20,7 +20,11 @@ public class S_Main_Menu : MonoBehaviour
 
     public bool menuIsActive = false;
     public bool playStart = false;
-    
+
+    public bool mainOptionIsActived = false;
+    public bool controlOptionIsActived = false;
+    public bool CreditIsActived = false;
+
 
     private bool menuIsOpen = true;
     public GameObject plateformeWait;
@@ -87,9 +91,52 @@ public class S_Main_Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // echap dans les menu
+        if (mainOptionIsActived && Input.GetKeyDown(KeyCode.Escape))
+        {
+            fromMainOptionsToMainMenu();
+        }
+        if (controlOptionIsActived && Input.GetKeyDown(KeyCode.Escape))
+        {
+            fromControlsToOptions();
+        }
+        if (CreditIsActived && Input.GetKeyDown(KeyCode.Escape))
+        {
+            fromCreditToMainOptions();
+        }
+
+        if(menuMainOptions.activeInHierarchy)
+        {
+            mainOptionIsActived = true;
+        }
+        if (!menuMainOptions.activeInHierarchy)
+        {
+            mainOptionIsActived = false;
+            Debug.Log("mainOption pas ac-ttif");
+        }
+
+        if (menuControls.activeInHierarchy)
+        {
+            controlOptionIsActived = true;
+        }
+        if (!menuControls.activeInHierarchy)
+        {
+            controlOptionIsActived = false;        
+        }
+
+        if (credits.activeInHierarchy)
+        {
+            CreditIsActived = true;
+        }
+        if (!credits.activeInHierarchy)
+        {
+            CreditIsActived = false;        
+        }
+
+
 
         /// condition canva /// 
-        
+
         // dialogue intro
         if (dialogueIntro.activeInHierarchy)
         {
@@ -550,6 +597,7 @@ public class S_Main_Menu : MonoBehaviour
     {
         menuMainOptions.SetActive(false);
         credits.SetActive(true);
+
     }
 
     
@@ -577,7 +625,7 @@ public class S_Main_Menu : MonoBehaviour
             manette.SetActive(false);
         }
         menuControls.SetActive(false);
-        menuMainOptions.SetActive(true); ;
+        menuMainOptions.SetActive(true); 
 
     }
 
