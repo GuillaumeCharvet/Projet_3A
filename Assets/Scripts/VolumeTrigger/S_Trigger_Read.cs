@@ -8,6 +8,7 @@ public class S_Trigger_Read : MonoBehaviour
 
     public bool readIsOuvert = false;
     public bool lectureIsOuvert = false;
+    public bool hasBeenRead = false;
 
     public GameObject canvaRead;
     public GameObject canvaLecture;
@@ -41,6 +42,7 @@ public class S_Trigger_Read : MonoBehaviour
             canvaLecture.SetActive(true);
             lectureIsOuvert = true;
             textShow.SetActive(true);
+            hasBeenRead = true;
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
         if (lectureIsOuvert && (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxA")))

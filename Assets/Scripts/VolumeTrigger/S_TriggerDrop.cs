@@ -45,7 +45,7 @@ public class S_TriggerDrop : MonoBehaviour
             || (other.CompareTag("Player") && stele5 && !allHBS)
             || (other.CompareTag("Player") && stele6) && !allHBS)
         {
-            Debug.Log("oui mon gras tu as des stèles");
+           
             canvaDrop.SetActive(true);
             isIn = true;
            

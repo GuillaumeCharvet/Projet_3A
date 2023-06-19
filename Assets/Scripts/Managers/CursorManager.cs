@@ -9,8 +9,6 @@ public class CursorManager : Manager
     public GameObject menuMainOption;
     public GameObject menuControls;
     public GameObject menuCredit;
-    
-
     //float mouseVertical = 0f, mouseHorizontal = 0f;
 
     void Start()
