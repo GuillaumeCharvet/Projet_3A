@@ -11,10 +11,8 @@ public class S_Trigger_Read : MonoBehaviour
 
     public GameObject canvaRead;
     public GameObject canvaLecture;
-    public float textSpeed;
-
-    private int index;
-
+    public GameObject textShow;
+  
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -42,12 +40,14 @@ public class S_Trigger_Read : MonoBehaviour
             readIsOuvert = false;
             canvaLecture.SetActive(true);
             lectureIsOuvert = true;
+            textShow.SetActive(true);
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
         if (lectureIsOuvert && Input.GetMouseButtonDown(0))
         {      
             canvaLecture.SetActive(false);
             lectureIsOuvert = false;
+            textShow.SetActive(false);
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true; ;
         }
     }
