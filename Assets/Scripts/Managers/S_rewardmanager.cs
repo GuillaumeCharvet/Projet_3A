@@ -152,6 +152,23 @@ public class S_rewardmanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // cheatcode
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Ile1_reward_1.SetActive(false);
+            Ile1_reward_2.SetActive(false);
+            Ile1_reward_3.SetActive(false);
+            Ile1_reward_4.SetActive(false);
+            Ile1_reward_5.SetActive(false);
+            Ile1_reward_6.SetActive(false);
+
+            Ile3_reward_1.SetActive(false);
+            Ile3_reward_2.SetActive(false);
+            Ile3_reward_3.SetActive(false);
+            Ile3_reward_4.SetActive(false);
+            Ile3_reward_5.SetActive(false);
+            Ile3_reward_6.SetActive(false);
+        }
         //stèles présentent dans la scène //
 
 
@@ -253,6 +270,7 @@ public class S_rewardmanager : MonoBehaviour
         }
 
 
+       
 
 
 
