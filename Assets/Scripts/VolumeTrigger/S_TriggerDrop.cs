@@ -56,6 +56,19 @@ public class S_TriggerDrop : MonoBehaviour
 
     private void Update()
     {
+
+
+        //cheatcode 
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            EnvStele_1.SetActive(false);
+            EnvStele_2.SetActive(false);
+            EnvStele_3.SetActive(false);
+            EnvStele_4.SetActive(false);
+            EnvStele_5.SetActive(false);
+            EnvStele_6.SetActive(false);
+        }
         if (!EnvStele_1.activeInHierarchy)
         {
             stele1 = true;
