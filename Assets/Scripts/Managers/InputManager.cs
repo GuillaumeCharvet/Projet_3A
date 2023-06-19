@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,7 @@ public class InputManager : Manager
     public ModeInput currentModeInput;
 
     [SerializeField] private Transform trsfCams;
+    [SerializeField] private Transform trsfCams2;
     private UpdateManager updateManager;
 
     private float horizontalInput;
@@ -47,7 +49,8 @@ public class InputManager : Manager
         {
             case ModeInput.Keyboard:
 
-                Transform[] allChildren = trsfCams.GetComponentsInChildren<Transform>();
+                List<Transform> allChildren = trsfCams.GetComponentsInChildren<Transform>().ToList();
+                allChildren.Add(trsfCams2);
                 foreach (Transform child in allChildren)
                 {
                     var cineFree = child.GetComponent<CinemachineFreeLook>();
@@ -62,7 +65,8 @@ public class InputManager : Manager
 
             case ModeInput.Controller:
 
-                Transform[] allChildren2 = trsfCams.GetComponentsInChildren<Transform>();
+                List<Transform> allChildren2 = trsfCams.GetComponentsInChildren<Transform>().ToList();
+                allChildren2.Add(trsfCams2);
                 foreach (Transform child in allChildren2)
                 {
                     var cineFree = child.GetComponent<CinemachineFreeLook>();
@@ -87,6 +91,40 @@ public class InputManager : Manager
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (currentModeInput == ModeInput.Keyboard)
+            {
+                currentModeInput = ModeInput.Controller;
+                List<Transform> allChildren2 = trsfCams.GetComponentsInChildren<Transform>().ToList();
+                allChildren2.Add(trsfCams2);
+                foreach (Transform child in allChildren2)
+                {
+                    var cineFree = child.GetComponent<CinemachineFreeLook>();
+                    if (cineFree != null)
+                    {
+                        child.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "HorizontalR";
+                        child.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "VerticalR";
+                    }
+                }
+            }
+            else if (currentModeInput == ModeInput.Controller)
+            {
+                currentModeInput = ModeInput.Keyboard;
+                List<Transform> allChildren = trsfCams.GetComponentsInChildren<Transform>().ToList();
+                allChildren.Add(trsfCams2);
+                foreach (Transform child in allChildren)
+                {
+                    var cineFree = child.GetComponent<CinemachineFreeLook>();
+                    if (cineFree != null)
+                    {
+                        child.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Mouse Y";
+                        child.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Mouse X";
+                    }
+                }
+            }
+        }
+
         if (updateManager.updateActivated)
         {
             ReadInput();

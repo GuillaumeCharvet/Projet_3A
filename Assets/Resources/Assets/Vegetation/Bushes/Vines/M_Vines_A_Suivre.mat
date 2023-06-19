@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Vines_A_Suivre
-  m_Shader: {fileID: -6465566751694194690, guid: f98e3b5e2033f1942b63d886e5722078,
+  m_Shader: {fileID: -6465566751694194690, guid: 02abde8cdaec1b743ab5338d935230a7,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -95,7 +95,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
-    - _AlphaClipThresh: 0.3
+    - _AlphaClipThresh: 0.4
     - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -115,7 +115,7 @@ Material:
     - _GlossyReflections: 0
     - _MaxDistance: 2
     - _Metallic: 0
-    - _MinDistance: 0
+    - _MinDistance: 0.2
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Parallax: 0.005

@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+
 public class S_TriggerIntro : MonoBehaviour
 {
-
     private bool isIn = false;
     private bool dialogueActif;
 
     public GameObject introCanva;
     public GameObject talkCanva;
 
-
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -23,7 +21,7 @@ public class S_TriggerIntro : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -32,9 +30,10 @@ public class S_TriggerIntro : MonoBehaviour
             isIn = false;
         }
     }
-    void Update()
+
+    private void Update()
     {
-        if (isIn && Input.GetKeyDown(KeyCode.F))
+        if (isIn && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxB")))
         {
             talkCanva.SetActive(false);
             introCanva.SetActive(true);
