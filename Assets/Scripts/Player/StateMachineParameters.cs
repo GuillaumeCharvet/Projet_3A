@@ -176,6 +176,7 @@ public class StateMachineParameters : MonoBehaviour
         animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
 
         animator.SetBool("PlayerStartGlide", !CheckIsGrounded() && inputManager.IsSpaceDownFixed);
+
         if (!CheckIsGrounded() && inputManager.IsSpaceDownFixed && currentModeMovement != ModeMovement.Glide && !preventGliderOn) animator.SetTrigger("GliderTrigger");
         if (inputManager.IsSpaceDownFixed && currentModeMovement == ModeMovement.Glide && !preventGliderOff) animator.SetTrigger("GliderOffTrigger");
     }
@@ -578,15 +579,8 @@ public class StateMachineParameters : MonoBehaviour
 
         // Check Input to determine direction
         Vector2 playerInput;
-        if (true)
-        {
-            playerInput.x = inputManager.HorizontalInput;
-            playerInput.y = inputManager.VerticalInput;
-        }
-        else
-        {
-            playerInput = Vector2.zero;
-        }
+        playerInput.x = inputManager.HorizontalInput;
+        playerInput.y = inputManager.VerticalInput;
 
         // Clamp it to disallow strafe walking
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
@@ -625,6 +619,8 @@ public class StateMachineParameters : MonoBehaviour
         }
         else velocity.y *= 0.999f;
 
+        Debug.Log("bug PLOUF, past_velocity : " + characterController.velocity);
+        Debug.Log("bug PLOUF, velocity : " + velocity);
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
     }

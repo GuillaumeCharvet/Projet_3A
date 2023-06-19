@@ -29,7 +29,7 @@ public class StateSwim : StateBehaviourParent
     protected override void OnEnterState()
     {
         reader.smp.currentModeMovement = ModeMovement.Swim;
-        reader.cc.slopeLimit = reader.smp.slopeLimitInWater;
+        //reader.cc.slopeLimit = reader.smp.slopeLimitInWater;
 
         reader.smp.ResetPlayerCollider();
 
