@@ -189,10 +189,8 @@ public class StateMachineParameters : MonoBehaviour
         if (Physics.SphereCast(transform.position + (characterControlerHeightResetValue - (characterController.radius + 0.05f)) * transform.up, characterController.radius + epsilonCheckGrounded, -transform.up, out hit, (characterControlerHeightResetValue - 0.1f), layerMaskIsGrounded))
         {
             currentGroundNormal = hit.normal;
-            //Debug.Log("SPHERECAST 1");
             return true;
         }
-        //Debug.Log("SPHERECAST 2");
         return false;
     }
 
@@ -203,15 +201,9 @@ public class StateMachineParameters : MonoBehaviour
 
         RaycastHit hitTop;
 
-        /*if (Physics.SphereCast(player.transform.position, grabToClimbDistance, player.transform.forward, out hitTop, 10f, layerMask))
-        {
-        }*/
-
         if (Physics.Raycast(transform.position + topRay * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
-            //Debug.Log("TOP RAY HIT");
             Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * hitTop.distance, Color.red);
-            Debug.Log("KOI KE JE TOUCHE : " + hitTop.transform.name);
 
             if (hitTop.distance <= grabToClimbDistance + correctiveGrabDistance)
             {
@@ -223,16 +215,9 @@ public class StateMachineParameters : MonoBehaviour
                     if (normalHit != currentNormalToClimb && updateCurrentNormal)
                     {
                         currentNormalToClimb = normalHit;
-                        //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
-                        //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
-                        //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
                     }
                     return true;
                 }
-            }
-            else
-            {
-                //Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
             }
         }
         else
@@ -246,31 +231,21 @@ public class StateMachineParameters : MonoBehaviour
 
             if (Physics.Raycast(transform.position + midRay * transform.up, transform.forward, out hitMid, 5f, layerMaskClimb))
             {
-                //Debug.Log("MID RAY HIT");
                 Debug.DrawRay(transform.position + midRay * transform.up, transform.forward * hitMid.distance, Color.red);
 
                 if (hitMid.distance <= grabToClimbDistance + correctiveGrabDistance)
                 {
-                    //Debug.Log("MID RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                     var normalHit = hitMid.normal;
                     if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                     {
                         distanceToGrabbedWall = hitMid.distance;
-                        //Debug.Log("new distance to grabbed wall = " + distanceToGrabbedWall);
 
                         if (normalHit != currentNormalToClimb && updateCurrentNormal)
                         {
                             currentNormalToClimb = normalHit;
-                            //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
-                            //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
-                            //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
                         }
                         return true;
                     }
-                }
-                else
-                {
-                    //Debug.Log("MID RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitMid.distance));
                 }
             }
             else
@@ -324,18 +299,12 @@ public class StateMachineParameters : MonoBehaviour
 
         RaycastHit hitTop;
 
-        /*if (Physics.SphereCast(player.transform.position, grabToClimbDistance, player.transform.forward, out hitTop, 10f, layerMask))
-        {
-        }*/
-
         if (Physics.Raycast(transform.position + topRay * transform.up, transform.forward, out hitTop, 5f, layerMaskClimb))
         {
-            //Debug.Log("TOP RAY HIT");
             Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * hitTop.distance, Color.blue);
 
             if (hitTop.distance <= grabLedgeDistance + correctiveGrabDistance)
             {
-                //Debug.Log("TOP RAY CLOSE ENOUGH : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
                 var normalHit = hitTop.normal;
                 if (Vector3.Angle(normalHit, Vector3.up) > 40f)
                 {
@@ -343,21 +312,10 @@ public class StateMachineParameters : MonoBehaviour
                     if (normalHit != currentNormalToClimb)
                     {
                         currentNormalToClimb = normalHit;
-                        //Debug.Log("normal frér : x " + -currentNormalToClimb.x + ", y " + -currentNormalToClimb.y + ", z " + -currentNormalToClimb.z);
-                        //playerRotation.StartRecenterPlayer(-currentNormalToClimb, playerRotationSpeed);
-                        //cameraManager.StartRecenterCamera(cameraManager.MidRelativePosition, cameraManager.DefaultEulerAngle);
                     }
                     return true;
                 }
             }
-            else
-            {
-                //Debug.Log("TOP RAY TOO FAR : " + (grabToClimbDistance + correctiveGrabDistance - hitTop.distance));
-            }
-        }
-        else
-        {
-            //Debug.DrawRay(transform.position + topRay * transform.up, transform.forward * 5f, Color.yellow);
         }
         return false;
     }
@@ -365,27 +323,12 @@ public class StateMachineParameters : MonoBehaviour
     public bool CheckIfClimbingUp()
     {
         RaycastHit hit;
-        //if (Physics.Raycast(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
         if (Physics.Raycast(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up, out hit, Mathf.Infinity, layerMaskClimb))
         {
-            //Debug.Log($"hit distance = {hit.distance}");
-            //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * hit.distance, Color.green, 0f);
-            //Debug.DrawRay(transform.position + 0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * hit.distance, Color.green, 0f);
-            //if (hit.distance > 2f * grabToClimbDistance) return true;
             if (hit.distance <= grabToHangDistance)
             {
                 return true;
-                /*
-                if (Physics.Raycast(transform.position + 1.0f * transform.up + 0.25f * Vector3.forward, Vector3.up, out hit, Mathf.Infinity, layerMask))
-                {
-                    return true;
-                }*/
             }
-        }
-        else
-        {
-            //Debug.DrawRay(player.transform.position + 1.0f * Vector3.up + 0.25f * Vector3.forward, player.transform.TransformDirection(Vector3.up) * 10f, Color.green, 0f);
-            //Debug.DrawRay(transform.position + 1.0f * transform.up /*+ 0.25f * Vector3.forward*/, Vector3.up * 10f, Color.green, 0f);
         }
         return false;
     }
@@ -504,12 +447,6 @@ public class StateMachineParameters : MonoBehaviour
         var groundAngleInfluence = Vector3.Dot(Vector3.ProjectOnPlane(currentGroundNormal, transform.right), new Vector3(playerInputNormalized.x, 0f, playerInputNormalized.z));
         desiredVelocity *= (1f + influenceOfSlopeOnSpeed * (groundAngleInfluence - 0.3f));
 
-        /*
-        var listLength = plotGroundAngleInfluence.keys.Length;
-        if (listLength == 0 || plotGroundAngleInfluence.keys[listLength - 1].value != groundAngleInfluence) plotGroundAngleInfluence.AddKey(Time.time, groundAngleInfluence);
-        //plotGroundAngleInfluence.AddKey(Time.time, Mathf.PerlinNoise(0f, Time.time));
-        */
-
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
@@ -532,39 +469,6 @@ public class StateMachineParameters : MonoBehaviour
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
-
-        //Vector3 newPosition = transform.localPosition + transform.TransformDirection(displacement);
-
-        /*
-        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical);
-        Vector3 transformDirection = (animator.GetBool("PlayerJumped") ? playerParameters.jumpHorizontalBoost : 1f) * animator.transform.TransformDirection(inputDirection);
-
-        //Debug.Log("transformDirection : " + transformDirection);
-
-        Vector3 flatMovement = playerParameters.moveSpeed * Time.deltaTime * transformDirection;
-        playerParameters.moveDirection = new Vector3(flatMovement.x, playerParameters.moveDirection.y, flatMovement.z);
-
-        if (animator.GetBool("PlayerJumped"))
-            playerParameters.moveDirection.y = playerParameters.jumpVerticalBoost;
-        else if (playerParameters.characterController.isGrounded)
-            playerParameters.moveDirection.y = 0f;
-        else
-            playerParameters.moveDirection.y -= playerParameters.gravity * Time.deltaTime;
-
-        if (playerParameters.isInWaterNextFixedUpdate)
-        {
-            playerParameters.moveDirection.y += playerParameters.forceOfWater * Time.deltaTime;
-            playerParameters.moveDirection.y *= 0.99f;
-        }
-        else playerParameters.moveDirection.y *= 0.999f;
-
-        //Debug.Log("playerParameters.moveDirection : " + playerParameters.moveDirection);
-
-        playerParameters.characterController.Move(playerParameters.moveDirection);
-
-        // Horizontal player rotation
-        animator.transform.localRotation = Quaternion.Euler(animator.transform.rotation.eulerAngles + playerParameters.sensitivityH * inputManager.MouseXInput * Time.deltaTime * 100f * Vector3.up);
-        */
     }
 
     public void Swim(float maxSpeed, float maxAcceleration, bool onGround)
@@ -619,8 +523,6 @@ public class StateMachineParameters : MonoBehaviour
         }
         else velocity.y *= 0.999f;
 
-        Debug.Log("bug PLOUF, past_velocity : " + characterController.velocity);
-        Debug.Log("bug PLOUF, velocity : " + velocity);
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
     }
