@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class S_TriggerDrop : MonoBehaviour
 {
-
     public GameObject EnvStele_1;
     public GameObject EnvStele_2;
     public GameObject EnvStele_3;
@@ -32,11 +31,7 @@ public class S_TriggerDrop : MonoBehaviour
     private bool isIn = false;
     public bool stoneFinished = false;
 
-
-    
-
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if ((other.CompareTag("Player") && stele1 && !allHBS)
             || (other.CompareTag("Player") && stele2 && !allHBS)
@@ -45,14 +40,12 @@ public class S_TriggerDrop : MonoBehaviour
             || (other.CompareTag("Player") && stele5 && !allHBS)
             || (other.CompareTag("Player") && stele6) && !allHBS)
         {
-           
             canvaDrop.SetActive(true);
             isIn = true;
-           
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && isIn)
         {
@@ -60,9 +53,8 @@ public class S_TriggerDrop : MonoBehaviour
             isIn = false;
         }
     }
-   
-    
-    void Update()
+
+    private void Update()
     {
         if (!EnvStele_1.activeInHierarchy)
         {
@@ -89,7 +81,7 @@ public class S_TriggerDrop : MonoBehaviour
             stele6 = true;
         }
 
-        if (isIn && Input.GetKeyDown(KeyCode.F))
+        if (isIn && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxX")))
         {
             canvaDrop.SetActive(false);
 
@@ -128,5 +120,5 @@ public class S_TriggerDrop : MonoBehaviour
             stoneFinished = true;
             allHBS = true;
         }
-    }   
+    }
 }

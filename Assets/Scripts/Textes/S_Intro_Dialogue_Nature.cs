@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
 using Cinemachine;
+
 public class S_Intro_Dialogue_Nature : MonoBehaviour
 {
     [SerializeField] public CinemachineVirtualCamera cam9, cam10;
@@ -12,12 +13,10 @@ public class S_Intro_Dialogue_Nature : MonoBehaviour
     public GameObject TriggerBoxIntro;
     public GameObject triggerBoxNature;
 
-
     public GameObject canvaIntro;
     public float textSpeed;
 
     private int index;
-
 
     public string[] dialoguelines;
     public bool[] dialoguebools;
@@ -25,17 +24,15 @@ public class S_Intro_Dialogue_Nature : MonoBehaviour
     private bool dialogueIsActive = false;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (canvaIntro.activeInHierarchy && !dialogueIsActive)
         {
             dialogueIsActive = true;
             textComponent.text = string.Empty;
             StartDialogue();
-       
-
         }
-        if (Input.GetMouseButtonDown(0) && dialogueIsActive)
+        if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxX")) && dialogueIsActive)
         {
             if (textComponent.text == dialoguelines[index])
             {
@@ -50,28 +47,21 @@ public class S_Intro_Dialogue_Nature : MonoBehaviour
 
         if (!dialoguebools[2])
         {
-
             cam10.Priority = 101;
-
         }
         if (!dialoguebools[3])
         {
-
             cam10.Priority = 0;
-            
-
         }
 
         if (!dialoguebools[8])
         {
-            
             triggerBoxNature.SetActive(true);
             TriggerBoxIntro.SetActive(false);
-
         }
     }
 
-    void StartDialogue()
+    private void StartDialogue()
     {
         cam9.Priority = 101;
         index = 0;
@@ -94,7 +84,8 @@ public class S_Intro_Dialogue_Nature : MonoBehaviour
         }
         StartCoroutine(Typeline());
     }
-    IEnumerator Typeline()
+
+    private IEnumerator Typeline()
     {
         yield return new WaitForSecondsRealtime(1);
         foreach (char c in dialoguelines[index].ToCharArray())
@@ -104,7 +95,7 @@ public class S_Intro_Dialogue_Nature : MonoBehaviour
         }
     }
 
-    void NextLine()
+    private void NextLine()
     {
         dialogueHBS[index] = true;
         bool nextLineFound2 = false;
