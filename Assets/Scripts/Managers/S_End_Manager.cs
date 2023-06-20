@@ -16,118 +16,144 @@ public class S_End_Manager : MonoBehaviour
     public S_Trigger_Read stele4;
     public S_Trigger_Read stele5;
 
+    private bool isActive = false;
 
-    public TextMeshProUGUI textComponent;
-    public string[] dialoguelines;
-    public bool[] dialoguebools;
-    public bool[] dialogueHBS; // dialogue has been said
-    public float textSpeed;
-
-    private int index;
+    public GameObject readCanva;
+    public GameObject daronne;
 
     public GameObject pop_Up_Canva;
+    public float textSpeed;
 
+    public TextMeshProUGUI textComponent;
+    private int index;
+    public bool isFinished = false;
 
-
-    public string[] lines;
-    public bool[] bools;
-    public bool[] dialogueHBS2;
+    public string[] dialoguelines;
+    public bool[] dialoguebools;
+    public bool[] dialogueHBS;
     private bool dialogueIsActive = false;
+
+
 
     // Update is called once per frame
     void Update()
     {
-      if (stele1.hasBeenRead && 
+      if (!readCanva.activeInHierarchy &&
+          stele1.hasBeenRead && 
           stele2.hasBeenRead && 
           stele3.hasBeenRead && 
           stele4.hasBeenRead &&
-          stele5.hasBeenRead )
+          stele5.hasBeenRead &&
+          !isActive
+          )
         {
+            isActive = true;
+            daronne.SetActive(true);
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
             cam_End.Priority = 101;
-            dialogue();
+            pop_Up_Canva.SetActive(true);
+            StartDialogue();
         }
-        
 
-    }
-    void dialogue()
-    {
-        index = 0;
-        var nextBoolFound = false;
-        while (!nextBoolFound)
+
+        if (Input.GetMouseButtonDown(0) && dialogueIsActive)
         {
-            if (index < dialoguebools.Length - 1)
+            if (textComponent.text == dialoguelines[index])
+            {
+                NextLine();
+            }
+            else
+            {
+                StopAllCoroutines();
+                textComponent.text = dialoguelines[index];
+            }
+        }
+
+        /*
+        if (!dialoguebools[6])
+        {
+            triggerBoxNature.SetActive(true);
+            triggerBoxTecnho.SetActive(true);
+            TriggerBoxIntro.SetActive(false);
+
+        }
+        */
+    }
+
+    public void StartDialogue()
+    {
+        pop_Up_Canva.SetActive(true);
+
+        dialogueIsActive = true;
+        textComponent.text = string.Empty;
+
+        index = 0;
+        bool nextBoolFound1 = false;
+
+
+
+        while (!nextBoolFound1)
+        {
+            if (index < dialoguelines.Length - 1)
             {
                 if (!dialoguebools[index])
                 {
+                    textComponent.text = string.Empty;
+                    StartCoroutine(Typeline());
                     index++;
                 }
                 else
                 {
-                    nextBoolFound = true;
+                    nextBoolFound1 = true;
                 }
             }
-        }
- 
-        StartCoroutine(Typeline());
 
+
+        }
+        StartCoroutine(Typeline());
     }
     IEnumerator Typeline()
     {
-       
         yield return new WaitForSecondsRealtime(1);
-        
         foreach (char c in dialoguelines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSecondsRealtime(textSpeed);
-         
         }
     }
- 
+
     void NextLine()
     {
-        //index = 0;
-        //dialoguebools[index] = false;
         dialogueHBS[index] = true;
-        bool nextLineFound = false;
-        while (!nextLineFound)
+        bool nextLineFound2 = false;
+        while (!nextLineFound2)
         {
+            //index = 0;
             dialoguebools[index] = false;
             if (index < dialoguelines.Length - 1)
             {
-                Debug.Log("ducoup le bool passe faux là");
-                if (dialoguebools[index + 1] && !dialogueHBS[index + 1])
+                if (dialoguebools[index + 1])
                 {
-                    dialogueHBS[index + 1] = true;
+                    dialoguebools[index] = false;
                     index++;
-
                     textComponent.text = string.Empty;
                     StartCoroutine(Typeline());
-                    nextLineFound = true;                
+                    nextLineFound2 = true;
                 }
                 else
-                {                
+                {
                     index++;
                 }
             }
             else
             {
                 textComponent.text = string.Empty;
-                nextLineFound = true;
+                nextLineFound2 = true;
                 dialogueIsActive = false;
-                bools[0] = true;
-                index = 0;
-                Debug.Log("index à 0");
                 pop_Up_Canva.SetActive(false);
-                cam_End.Priority = 0;
-
                 ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true;
-
-                
-
-
-
+                isFinished = true;
+                cam_End.Priority = 0;
             }
         }
     }

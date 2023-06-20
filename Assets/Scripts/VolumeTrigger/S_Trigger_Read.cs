@@ -42,7 +42,7 @@ public class S_Trigger_Read : MonoBehaviour
             canvaLecture.SetActive(true);
             lectureIsOuvert = true;
             textShow.SetActive(true);
-            hasBeenRead = true;
+           
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
         }
         if (lectureIsOuvert && (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxA")))
@@ -50,6 +50,7 @@ public class S_Trigger_Read : MonoBehaviour
             canvaLecture.SetActive(false);
             lectureIsOuvert = false;
             textShow.SetActive(false);
+            hasBeenRead = true;
             ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = true; ;
         }
     }
