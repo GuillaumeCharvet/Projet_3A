@@ -395,6 +395,7 @@ public class S_Dialogue : MonoBehaviour
                     dialogueHBS[5] ||
                     dialogueHBS[6])
                 {
+                    ManagerManager.Instance.GetComponent<UpdateManager>().updateActivated = false;
                     carnetPage1.SetActive(true);
                 }
                 

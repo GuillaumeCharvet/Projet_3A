@@ -54,7 +54,7 @@ public class S_Intro_Dialogue_Nature : MonoBehaviour
             cam10.Priority = 0;
         }
 
-        if (!dialoguebools[8])
+        if (!dialoguebools[9])
         {
             triggerBoxNature.SetActive(true);
             TriggerBoxIntro.SetActive(false);
