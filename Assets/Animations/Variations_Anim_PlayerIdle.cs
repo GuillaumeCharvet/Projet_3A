@@ -12,7 +12,7 @@ public class Variations_Anim_PlayerIdle : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(8);
             anim.SetInteger("VarIdleTrigIndex", Random.Range(0, 3));
             anim.SetTrigger("VarIdleTrig");
         }
