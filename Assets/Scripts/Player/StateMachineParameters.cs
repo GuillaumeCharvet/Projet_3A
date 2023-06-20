@@ -43,6 +43,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] public float airControl = 0.2f;
 
     [SerializeField] public float gravity = 1.2f;
+    public float timeInAir = 0f;
 
     [Header("RUN/JUMP")]
     [SerializeField] private float influenceOfSlopeOnSpeed = 0.5f;
@@ -167,11 +168,14 @@ public class StateMachineParameters : MonoBehaviour
 
         // Deblock capacity to dive in glider
         CheckBlockGliderDive();
+
+        UpdateTimeInAir();
+        animator.SetFloat("TimeInAir", timeInAir);
     }
 
     private void FixedUpdate()
     {
-        animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded()) && inputManager.IsSpaceJump);
+        animator.SetBool("PlayerJumped", (characterController.isGrounded || CheckIsGrounded() || currentModeMovement == ModeMovement.Climb) && inputManager.IsSpaceJump);
 
         animatorGlider.SetBool("IsInGlideState", currentModeMovement == ModeMovement.Glide);
 
@@ -464,9 +468,6 @@ public class StateMachineParameters : MonoBehaviour
         else
             velocity.y -= gravity * Time.deltaTime;
 
-        // Apply appropriate friction force depending if in water or not
-        velocity.y *= 0.999f;
-
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
     }
@@ -519,9 +520,8 @@ public class StateMachineParameters : MonoBehaviour
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
-            velocity.y *= 0.96f;
+            velocity.y *= 0.9f;
         }
-        else velocity.y *= 0.999f;
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);
@@ -983,6 +983,18 @@ public class StateMachineParameters : MonoBehaviour
         else
         {
             timeChargingThrow = 0f;
+        }
+    }
+
+    public void UpdateTimeInAir()
+    {
+        if (!characterController.isGrounded && !CheckIsGrounded() && currentModeMovement != ModeMovement.Climb && currentModeMovement != ModeMovement.Climb)
+        {
+            timeInAir += Time.deltaTime;
+        }
+        else
+        {
+            timeInAir = 0f;
         }
     }
 

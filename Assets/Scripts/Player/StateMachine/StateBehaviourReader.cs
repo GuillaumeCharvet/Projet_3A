@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StateBehaviourReader : MonoBehaviour
 {
-
     public MovementParameters mp;
     public StateMachineParameters smp;
     public CharacterController cc;
+    public S_Main_Menu menuPause;
 
     private StateBehaviourParent currentState;
 
@@ -16,15 +16,17 @@ public class StateBehaviourReader : MonoBehaviour
     public List<GameObject> gliderParts;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        currentState?.Update();
+        if (!menuPause.pause)
+        {
+            currentState?.Update();
+        }
     }
 
     public void ChangeState(StateBehaviourParent newState)

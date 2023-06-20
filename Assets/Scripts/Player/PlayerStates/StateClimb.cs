@@ -18,7 +18,7 @@ public class StateClimb : StateBehaviourParent
         */
 
         reader.smp.StartCoroutine(reader.smp.DelayGliderOn());
-        reader.cc.Move(Vector3.zero);
+        //reader.cc.Move(Vector3.zero);
 
         base.OnExitState();
     }
