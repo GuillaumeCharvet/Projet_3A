@@ -9,24 +9,63 @@ public class S_Unload : MonoBehaviour
     public GameObject package3;
     public GameObject package4;
     public GameObject package5;
+    private MeshRenderer[] renderer1, renderer2, renderer3, renderer4, renderer5;
 
+    public void Start()
+    {
+        renderer1 = package1.GetComponentsInChildren<MeshRenderer>();
+        renderer2 = package2.GetComponentsInChildren<MeshRenderer>();
+        renderer3 = package3.GetComponentsInChildren<MeshRenderer>();
+        renderer4 = package4.GetComponentsInChildren<MeshRenderer>();
+        renderer5 = package5.GetComponentsInChildren<MeshRenderer>();
+    }
     // Start is called before the first frame update
     public void OnTriggerEnter(Collider other)
     {
-        package1.SetActive(false);
-        package2.SetActive(false);
-        package3.SetActive(false);
-        package4.SetActive(false);
-        package5.SetActive(false);
+        foreach (var item in renderer1)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in renderer2)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in renderer3)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in renderer4)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in renderer5)
+        {
+            item.enabled = false;
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        package1.SetActive(true);
-        package2.SetActive(true);
-        package3.SetActive(true);
-        package4.SetActive(true);
-        package5.SetActive(true);
+        foreach (var item in renderer1)
+        {
+            item.enabled = true;
+        }
+        foreach (var item in renderer2)
+        {
+            item.enabled = true;
+        }
+        foreach (var item in renderer3)
+        {
+            item.enabled = true;
+        }
+        foreach (var item in renderer4)
+        {
+            item.enabled = true;
+        }
+        foreach (var item in renderer5)
+        {
+            item.enabled = true; 
+        }
     }
     // Update is called once per frame
     void Update()

@@ -19,4 +19,12 @@ public class S_Tuto_Canvas : MonoBehaviour
             tutoOpen = true;
             }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            triggerTuto.SetActive(false);
+        }
+    }
 }

@@ -10,6 +10,7 @@ public class S_Tuto_Map : MonoBehaviour
 
     public GameObject triggerTuto;
     private bool tutoOpen = false;
+    private bool hasBeenSaid = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,10 +23,11 @@ public class S_Tuto_Map : MonoBehaviour
 
     private void Update()
     {
-        if (tutoOpen && (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("XboxMenu")))
+        if ( !hasBeenSaid && tutoOpen && (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("XboxMenu")))
         {
             canvaTuto.SetActive(false);
             triggerTuto.SetActive(false);
+            hasBeenSaid = true;
         }
     }
 }
