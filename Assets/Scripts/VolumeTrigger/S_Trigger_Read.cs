@@ -35,7 +35,7 @@ public class S_Trigger_Read : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (readIsOuvert && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxB")))
+        if (readIsOuvert && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxX")))
         {
             canvaRead.SetActive(false);
             readIsOuvert = false;

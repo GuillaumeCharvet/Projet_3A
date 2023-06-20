@@ -44,7 +44,7 @@ public class S_GetRewards : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (pickable && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxB")))
+        if (pickable && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxX")))
         {
             popupSource.PlayOneShot(getSound);
             Debug.Log("le son se joue");

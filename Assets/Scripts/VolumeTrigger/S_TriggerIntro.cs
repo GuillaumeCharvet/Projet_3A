@@ -33,7 +33,7 @@ public class S_TriggerIntro : MonoBehaviour
 
     private void Update()
     {
-        if (isIn && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxB")))
+        if (isIn && (Input.GetKeyDown(KeyCode.F) || Input.GetButtonDown("XboxX")))
         {
             talkCanva.SetActive(false);
             introCanva.SetActive(true);
