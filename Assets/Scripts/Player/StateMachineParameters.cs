@@ -44,6 +44,7 @@ public class StateMachineParameters : MonoBehaviour
 
     [SerializeField] public float gravity = 1.2f;
     public float timeInAir = 0f;
+    public float timeInAirBefore = 0f;
 
     [Header("RUN/JUMP")]
     [SerializeField] private float influenceOfSlopeOnSpeed = 0.5f;
@@ -102,7 +103,7 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float gliderDescentFactor = 0.1f;
     private bool preventGliderOn = false;
     private bool preventGliderOff = false;
-    private float preventGliderDelay = 0.2f;
+    private float preventGliderDelay = 0.5f;
 
     private bool initialGlideDiveBlock = false;
 
@@ -169,8 +170,9 @@ public class StateMachineParameters : MonoBehaviour
         // Deblock capacity to dive in glider
         CheckBlockGliderDive();
 
+        timeInAirBefore = timeInAir;
         UpdateTimeInAir();
-        animator.SetFloat("TimeInAir", timeInAir);
+        animator.SetFloat("TimeInAir", timeInAirBefore);
     }
 
     private void FixedUpdate()
@@ -520,6 +522,7 @@ public class StateMachineParameters : MonoBehaviour
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
+            velocity.y = Mathf.Clamp(velocity.y, 0f, 20f);
             velocity.y *= 0.9f;
         }
 
