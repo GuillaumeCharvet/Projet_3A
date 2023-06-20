@@ -14,20 +14,25 @@ public class S_Tuto_Map : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasBeenSaid)
         {
             canvaTuto.SetActive(true);
             tutoOpen = true;
         }
     }
 
-    private void Update()
+    private void OnTriggerExit(Collider other)
     {
-        if ( !hasBeenSaid && tutoOpen && (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("XboxMenu")))
+        
+    }
+    void Update()
+    {
+        if ( !hasBeenSaid && tutoOpen && (Input.GetKeyDown(KeyCode.M) || !hasBeenSaid && tutoOpen &&  Input.GetButtonDown("XboxMenu")))
         {
             canvaTuto.SetActive(false);
             triggerTuto.SetActive(false);
             hasBeenSaid = true;
+            tutoOpen = false;
         }
     }
 }

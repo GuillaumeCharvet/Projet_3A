@@ -15,7 +15,8 @@ public class S_map : MonoBehaviour
 
     public GameObject tutoFermer;
     private bool firstActive = false;
-
+    public GameObject triggerdeMort;
+    public GameObject tutomap;
     // canvas fonds //////
 
     public GameObject canvaMap;
@@ -146,6 +147,8 @@ public class S_map : MonoBehaviour
             if (!firstActive)
             {
                 tutoFermer.SetActive(true);
+                triggerdeMort.SetActive(false);
+                tutomap.SetActive(false);
                 firstActive = true;
             }
 
