@@ -477,11 +477,12 @@ public class StateMachineParameters : MonoBehaviour
     public void Swim(float maxSpeed, float maxAcceleration, bool onGround)
     {
         Vector3 velocity = characterController.velocity;
+        Vector3 previousVelocity = velocity;
 
         if (isInWaterNextFixedUpdate)
         {
-            velocity.x *= 0.98f;
-            velocity.z *= 0.98f;
+            velocity.x *= 0.99f;
+            velocity.z *= 0.99f;
         }
 
         // Check Input to determine direction
@@ -504,7 +505,7 @@ public class StateMachineParameters : MonoBehaviour
 
         // Give the movement inertia by changing the velocity from its previous value to its desired value
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
-        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * maxSpeed;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * 15f;
 
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
@@ -522,9 +523,11 @@ public class StateMachineParameters : MonoBehaviour
         if (isInWaterNextFixedUpdate)
         {
             velocity.y += forceOfWater;
-            velocity.y = Mathf.Clamp(velocity.y, 0f, 20f);
-            velocity.y *= 0.9f;
+            velocity.y = Mathf.Clamp(velocity.y, -20f, 20f);
+            velocity.y *= 0.92f;
         }
+
+        if ((previousVelocity - previousVelocity.y * Vector3.up).sqrMagnitude > 0.0001f) transform.rotation = Quaternion.LookRotation(previousVelocity - previousVelocity.y * Vector3.up, Vector3.up);
 
         // Move the player through its character controller
         characterController.Move(velocity * Time.deltaTime);

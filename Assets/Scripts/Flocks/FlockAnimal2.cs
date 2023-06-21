@@ -91,4 +91,9 @@ public class FlockAnimal2 : MonoBehaviour
         float sigma = (maxValue - mean) / 3.0f;
         return Mathf.Clamp(std * sigma + mean, minValue, maxValue);
     }
+
+    public void OnEnable()
+    {
+        anim.Play("Base Layer.MovePlease", 0, Random.Range(0f, 1f));
+    }
 }
