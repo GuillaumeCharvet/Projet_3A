@@ -66,7 +66,7 @@ public class FlockAnimal2 : MonoBehaviour
         newSpeed = inertiaFactor * lastMovement + (repelFactor * repelForce + attractFactor * attractForce) * Time.deltaTime;
         newPosition += newSpeed * Time.deltaTime;
 
-        if (newSpeed.magnitude > Mathf.Epsilon) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newSpeed, Vector3.up), 0.3f);
+        if (newSpeed.magnitude > Mathf.Epsilon) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newSpeed, Vector3.up), 3f);
         transform.position = newPosition;
     }
 

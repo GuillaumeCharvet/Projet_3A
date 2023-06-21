@@ -505,7 +505,7 @@ public class StateMachineParameters : MonoBehaviour
 
         // Give the movement inertia by changing the velocity from its previous value to its desired value
         Vector3 targetDirection = playerInput.magnitude * transform.forward;
-        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * 15f;
+        Vector3 desiredVelocity = new Vector3(targetDirection.x, 0f, targetDirection.z) * 17f;
 
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);

@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CursorManager : Manager
 {
-
     public GameObject menuMainCanva;
     public GameObject menuMainOption;
     public GameObject menuControls;
     public GameObject menuCredit;
+    public Texture2D cursorTex;
     //float mouseVertical = 0f, mouseHorizontal = 0f;
 
-    void Start()
+    private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.SetCursor(cursorTex, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     private void Update()
@@ -27,8 +28,8 @@ public class CursorManager : Manager
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        if (!menuMainCanva.activeInHierarchy && 
-            !menuMainOption.activeInHierarchy && 
+        if (!menuMainCanva.activeInHierarchy &&
+            !menuMainOption.activeInHierarchy &&
             !menuControls.activeInHierarchy &&
             !menuCredit.activeInHierarchy)
         {
@@ -36,6 +37,7 @@ public class CursorManager : Manager
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+
     /*void OnGUI()
     {
         //Press this button to lock the Cursor
@@ -70,12 +72,9 @@ public class CursorManager : Manager
             mouseVertical -= Input.GetAxis("Mouse Y") * Time.deltaTime * 100f;
             mouseHorizontal += Input.GetAxis("Mouse X") * Time.deltaTime * 100f;
 
-
-
             camRotation = Quaternion.Euler(mouseVertical, mouseHorizontal, 0f);
 
             playerRigs.transform.rotation = camRotation;
-
         }
     }*/
 }
