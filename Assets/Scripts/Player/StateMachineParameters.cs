@@ -103,7 +103,9 @@ public class StateMachineParameters : MonoBehaviour
     [SerializeField] private float gliderDescentFactor = 0.1f;
     private bool preventGliderOn = false;
     private bool preventGliderOff = false;
-    private float preventGliderDelay = 0.5f;
+    private float preventGliderDelay = 0.3f;
+
+    private bool verticalInputNull = false;
 
     private bool initialGlideDiveBlock = false;
 
@@ -425,8 +427,8 @@ public class StateMachineParameters : MonoBehaviour
         // Check Input to determine direction
         Vector2 playerInput;
 
-        playerInput.x = inputManager.HorizontalInput;
-        playerInput.y = inputManager.VerticalInput;
+        playerInput.x = verticalInputNull ? 0f : inputManager.HorizontalInput;
+        playerInput.y = verticalInputNull ? 0f : inputManager.VerticalInput;
 
         // Clamp it to disallow strafe walking
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
@@ -572,8 +574,8 @@ public class StateMachineParameters : MonoBehaviour
                 velocity -= projectToForward;
 
                 Vector2 playerInput;
-                playerInput.x = inputManager.HorizontalInput;
-                playerInput.y = inputManager.VerticalInput;
+                playerInput.x = verticalInputNull ? 0f : inputManager.HorizontalInput;
+                playerInput.y = verticalInputNull ? 0f : inputManager.VerticalInput;
                 playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
                 /*
@@ -866,6 +868,12 @@ public class StateMachineParameters : MonoBehaviour
     {
         if (inputManager.VerticalInput < 0.1f) initialGlideDiveBlock = false;
     }
+    public IEnumerator BlockInputAfterGlider()
+    {
+        verticalInputNull = true;
+        yield return new WaitForSeconds(0.25f);
+        verticalInputNull = false;
+    }
 
     public IEnumerator DelayGliderOn()
     {
@@ -877,7 +885,7 @@ public class StateMachineParameters : MonoBehaviour
     public IEnumerator DelayGliderOff()
     {
         preventGliderOff = true;
-        yield return new WaitForSeconds(preventGliderDelay);
+        yield return new WaitForSeconds(1.1f);
         preventGliderOff = false;
     }
 
